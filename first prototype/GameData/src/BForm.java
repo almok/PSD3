@@ -31,5 +31,50 @@ public class BForm {
 		this.price = price;
 		this.penalty = penalty;
 		revenue = price - penalty;
-	}	
+	}
+
+	// get methods
+	public int getOrderNo(){
+		return orderNo;
+	}
+	
+	public String getChassisType(){
+		return chassisType;
+	}
+	
+	public String getProductCode(){
+		return productCode;
+	}
+	
+	public float getPrice(){
+		return price;
+	}
+	
+	public float getPenalty(){
+		return penalty;
+	}
+	
+	public float getRevenue(){
+		return revenue;
+	}
+	
+	public float getReceiptTime(){
+		return receiptTime;
+	}
+	
+	public float getScheDelTime(){
+		return scheDelTime;
+	}
+	
+	public float getScheLeadTime(){
+		return scheLeadTime;
+	}
+	
+	public float getActDelTime(){
+		return actDelTime;
+	}
+	
+	public float getDelTime(){
+		return delTime;
+	}
 }
