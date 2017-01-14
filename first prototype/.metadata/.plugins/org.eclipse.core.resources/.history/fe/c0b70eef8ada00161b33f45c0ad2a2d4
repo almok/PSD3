@@ -1,0 +1,16 @@
+
+public class BForm {
+	// fields
+	private int orderNo;
+	private String chassisType, productCode;
+	private float receiptTime, actDelTime, scheDelTime, scheLeadTime, 
+		penalty, price, revenue;
+	
+	
+
+	public BForm(float price, float penalty){
+		this.price = price;
+		this.penalty = penalty;
+		this.revenua
+	}
+}
