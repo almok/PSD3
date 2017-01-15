@@ -58,7 +58,7 @@ public class VForm {
 	}
 	
 	public void setTotExpenditure(){
-		totExpenditure = empSalary + agenSalary + materials + investment + consFee;
+		totExpenditure = 
 	}
 	
 	public void setProfit(){
