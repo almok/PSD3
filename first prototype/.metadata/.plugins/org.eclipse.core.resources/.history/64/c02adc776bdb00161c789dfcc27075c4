@@ -30,18 +30,6 @@ public class VForm {
 		profit = 0;
 	}
 	
-	// set all the values before outputting
-	public void analyzeData(){
-		setTotRevenue();
-		setEmpSalary();
-		setAgenSalary();
-		setMaterials();
-		setInvestment();
-		setConsFee();
-		setTotExpenditure();
-		setProfit();
-	}
-	
 	// setter methods
 	public void setTotRevenue(){
 		for (int i = 0; i < game.bForms.size(); i++){
@@ -77,36 +65,4 @@ public class VForm {
 		profit = totRevenue - totExpenditure;
 	}
 	
-	// getter methods
-	public float getTotRevenue(){
-		return totRevenue;
-	}
-	
-	public float getEmpSalary(){
-		return empSalary;
-	}
-	
-	public float getAgenSalary(){
-		return agenSalary;
-	}
-	
-	public float getMaterials(){
-		return materials;
-	}
-	
-	public float etInvestment(){
-		return investment;
-	}
-
-	public float getConsFee(){
-		return consFee;
-	}
-	
-	public float getTotExpenditure(){
-		return totExpenditure;
-	}
-	
-	public float getProfit(){
-		return profit;
-	}
 }
