@@ -1,0 +1,7 @@
+
+public class VForm {
+
+	// fields
+	float totRevenue;	// from B forms
+	
+}
