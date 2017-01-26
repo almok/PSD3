@@ -3,6 +3,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,8 +14,10 @@ public class FormTMenu {
 	
 	public static Scene display(){
 		VBox vBox = new VBox();
+		vBox.getStyleClass().add("vbox");
 		
 		HBox top = new HBox();
+		top.getStyleClass().add("hbox");
 		Button backButton = new Button("Back");
 		backButton.setOnAction(e -> {
 			
@@ -59,13 +62,13 @@ public class FormTMenu {
 				ComboBox<String> comboBoxM = new ComboBox<String>(optionsM);
 				ComboBox<String> comboBox = new ComboBox<String>(options);
 				nLineHBox.getChildren().addAll(
-						new Text("       " + rowCounter + "             ") , 
+						new Label("       " + rowCounter + "             ") , 
 						new TextField() , 
-						new Text("       ") , 
+						new Label("       ") , 
 						new TextField() , 
-						new Text("                 ") , 
+						new Label("                 ") , 
 						comboBoxM ,
-						new Text("                                  ") , 
+						new Label("                                  ") , 
 						comboBox);
 
 
@@ -106,13 +109,13 @@ public class FormTMenu {
 				ComboBox<String> comboBoxM = new ComboBox<String>(optionsM);
 				ComboBox<String> comboBox = new ComboBox<String>(options);
 				nLineHBox.getChildren().addAll(
-						new Text("       " + rowCounter + "           ") , 
+						new Label("       " + rowCounter + "           ") , 
 						new TextField() , 
-						new Text("       ") , 
+						new Label("       ") , 
 						new TextField() , 
-						new Text("                 ") , 
+						new Label("                 ") , 
 						comboBoxM ,
-						new Text("                                  ") , 
+						new Label("                                  ") , 
 						comboBox);
 				
 				vBox.getChildren().add(nLineHBox);
@@ -138,12 +141,13 @@ public class FormTMenu {
 		
 		HBox firstLineHBox = new HBox();
 		
+		
 		firstLineHBox.getChildren().addAll(
-				new Text("\n\n\n       N") , 
-				new Text("\n\n\n                            Name                           ") , 
-				new Text("\n\n\n                Depart.") ,
-				new Text("\n\n\n                                   Multis killed           ") ,
-				new Text("\n\n\n                            Time                            "));
+				new Label("\n\n\n       N") , 
+				new Label("\n\n\n                            Name                           ") , 
+				new Label("\n\n\n                Depart.") ,
+				new Label("\n\n\n                                   Multi skilled           ") ,
+				new Label("\n\n\n                            Time                            "));
 		
 		vBox.getChildren().add(firstLineHBox);
 		
@@ -179,13 +183,13 @@ public class FormTMenu {
 		ComboBox<String> comboBoxM = new ComboBox<String>(optionsM);
 		ComboBox<String> comboBox = new ComboBox<String>(options);
 		zeroLineHBox.getChildren().addAll(
-				new Text("       1             ") , 
+				new Label("       1             ") , 
 				new TextField() , 
-				new Text("       ") , 
+				new Label("       ") , 
 				new TextField() , 
-				new Text("                 ") , 
+				new Label("                 ") , 
 				comboBoxM ,
-				new Text("                                  ") , 
+				new Label("                                  ") , 
 				comboBox);
 		
 		vBox.getChildren().add(zeroLineHBox);
@@ -197,11 +201,11 @@ public class FormTMenu {
 		HBox fifthLineHBox = new HBox();
 		
 		HBox fifthLineLefftHBox= new HBox();
-		fifthLineLefftHBox.getChildren().add(new Text("          Scheduled lead time (D):    "));
+		fifthLineLefftHBox.getChildren().add(new Label("          Scheduled lead time (D):    "));
 		fifthLineLefftHBox.getChildren().add(new TextField());
 
 		HBox fifthLineRightHBox = new HBox();
-		fifthLineRightHBox.getChildren().add(new Text("          Schedule and Actual Time Difference:   "));
+		fifthLineRightHBox.getChildren().add(new Label("          Schedule and Actual Time Difference:   "));
 		fifthLineRightHBox.getChildren().add(new TextField());
 
 		fifthLineHBox.getChildren().addAll(fifthLineLefftHBox ,fifthLineRightHBox);
@@ -211,11 +215,11 @@ public class FormTMenu {
 		HBox sixthLineHBox = new HBox();
 		
 		HBox sixthLineLefftHBox= new HBox();
-		sixthLineLefftHBox.getChildren().add(new Text("          Scheduled delivery time:    "));
+		sixthLineLefftHBox.getChildren().add(new Label("          Scheduled delivery time:    "));
 		sixthLineLefftHBox.getChildren().add(new TextField());
 
 		HBox sixthLineRightHBox = new HBox();
-		sixthLineRightHBox.getChildren().add(new Text("          Penalty (b):                                             "));
+		sixthLineRightHBox.getChildren().add(new Label("          Penalty (b):                                             "));
 		sixthLineRightHBox.getChildren().add(new TextField()); 
 
 		sixthLineHBox.getChildren().addAll(sixthLineLefftHBox ,sixthLineRightHBox);
@@ -225,16 +229,16 @@ public class FormTMenu {
 		HBox seventhLineHBox = new HBox();
 		
 		HBox seventhLineLefftHBox= new HBox();
-		seventhLineLefftHBox.getChildren().add(new Text("          Contract price (a):               "));
+		seventhLineLefftHBox.getChildren().add(new Label("          Contract price (a):               "));
 		seventhLineLefftHBox.getChildren().add(new TextField());
 
 		HBox seventhLineRightHBox = new HBox();
-		seventhLineRightHBox.getChildren().add(new Text("          Revenue (a-b):                                        "));
+		seventhLineRightHBox.getChildren().add(new Label("          Revenue (a-b):                                        "));
 		seventhLineRightHBox.getChildren().add(new TextField());
 
 		seventhLineHBox.getChildren().addAll(seventhLineLefftHBox ,seventhLineRightHBox);
 
-		return new Scene(vBox, 800 , 700);
+		return new Scene(vBox,1600 , 1000);
 	}
 
 }
