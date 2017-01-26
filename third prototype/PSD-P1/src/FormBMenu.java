@@ -10,7 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -42,7 +45,10 @@ public class FormBMenu implements Initializable{
 		int rev = 0;
 		int revSum = 0;
 		for (int i = 0; i < formCounter - 1; i++) {
-			rev = (Integer.parseInt(field7.get(i)) - 30 * (Integer.parseInt("1") - Integer.parseInt(field6.get(i))));
+			int f7 = this.isInteger(field7.get(i));
+			int f8 = this.isInteger(field8.get(i));
+			int f6 = this.isInteger(field6.get(i));
+			rev = (f7 - 30 * (f8 - f6));
 			revSum += rev;
 			revenues.set(i, rev);
 		}
@@ -50,6 +56,16 @@ public class FormBMenu implements Initializable{
 		return revSum + "";
 	}
 
+	private int isInteger(String s) {
+	    try { 
+	        return Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return 0; 
+	    } catch(NullPointerException e) {
+	        return 0;
+	    }
+	}
+	
 	private void displayValues(int c){
 		fieldOne.setText(field1.get(c));
 		fieldTwo.setText(field2.get(c));
@@ -108,9 +124,12 @@ public class FormBMenu implements Initializable{
 	}
 	
 	Main a;
-	
-	public Scene display(Main a){
+	TextField rev;
+	public Scene display(Main a , TextField rev){
 		this.a = a;
+		this.rev = rev;
+		
+		
 		if (this.scene == null){
 			BorderPane bPane = new BorderPane();
 			VBox left = new VBox();
@@ -175,9 +194,19 @@ public class FormBMenu implements Initializable{
 		
 		backButton.setOnAction(event -> {
 			saveFields();
-			System.out.println(calculateRevenues());
-			//this.a.rev.setText("11");
+			String c = calculateRevenues();
+//			this.a.rev.setText("101");
+			//Main.rev.setText("55");
+			Alert alert = new Alert(AlertType.INFORMATION, "Revenue value:  " + c, ButtonType.YES);
+			alert.showAndWait();
+
+			if (alert.getResult() == ButtonType.YES) {
+			    //do stuff
+			}
+			
 			Main.window.setScene(Main.mainScene);
+			
+			
         });
 		
 		newButton.setOnAction(event -> {

@@ -15,15 +15,16 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 	static Scene formOScene;
 	static Scene formTScene;
 		//static Stage window;
-		Button revenueButton;
-		Button goodsHistoryButton;
-		Button employmentAgencyButton;
-		static Stage window;
+	Button revenueButton;
+	Button goodsHistoryButton;
+	Button employmentAgencyButton;
+	static Stage window;
+	TextField  rev = new TextField();
+		
 		public static void main(String[] args){
 			launch(args);
 		}
 		
-		TextField rev = new TextField();
 
 		@Override
 		public void start(Stage arg0) throws Exception {
@@ -82,17 +83,17 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 			layout.getChildren().addAll(l1 , l2 , l3 , l4 , l5 , l6 , l7);
 			Scene scene = new Scene(layout , 800 , 700);
 			arg0.setScene(scene);
-			Main.mainScene = scene;
+			this.mainScene = scene;
 			arg0.show();
+			
 		}
-
+		
 		@Override
 		public void handle(ActionEvent event) {
 			if (event.getSource() == revenueButton){
-//				if (formBScene == null){
-//					formBScene= FormBMenu.display(this);
-//				}
-				Main.window.setScene(formB.display(this));
+
+				System.out.println(this.rev.getText());
+				Main.window.setScene(formB.display(this , rev));
 			} else if (event.getSource() == goodsHistoryButton){
 				if (formOScene == null){
 					formOScene = FormOMenu.display();
