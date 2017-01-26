@@ -22,6 +22,8 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 		public static void main(String[] args){
 			launch(args);
 		}
+		
+		TextField rev = new TextField();
 
 		@Override
 		public void start(Stage arg0) throws Exception {
@@ -33,7 +35,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
 			HBox l0 = new HBox();
 			l0.getChildren().add(new Text("     α: Revenues ∑ Form B                                                             "));
-			l0.getChildren().add(new TextField());
+			l0.getChildren().add(rev);
 			revenueButton = new Button("Edit");
 			revenueButton.setOnAction(this);
 			l0.getChildren().add(revenueButton);
