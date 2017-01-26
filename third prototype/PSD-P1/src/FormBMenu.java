@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,24 +35,37 @@ public class FormBMenu implements Initializable{
 	private ArrayList<String> field9 = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> field10 = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> field11 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<TextField> textFields = new ArrayList<TextField>();
 	
-	private void displayValues(){
-		textFields.get(0).setText(fieldOne.getText());
-		textFields.get(1).setText(fieldTwo.getText());
-		textFields.get(2).setText(fieldThree.getText());
-		textFields.get(3).setText(fieldFour.getText());
-		textFields.get(4).setText(fieldFive.getText());
-		textFields.get(5).setText(fieldSix.getText());
-		textFields.get(6).setText(fieldSeven.getText());
-		textFields.get(7).setText(fieldEight.getText());
-		textFields.get(8).setText(fieldNine.getText());
-		textFields.get(9).setText(fieldTen.getText());
-		textFields.get(10).setText(fieldEleven.getText());
+	private ArrayList<Integer> revenues = new ArrayList<Integer>(Collections.nCopies(20, 0));
+	
+	private String calculateRevenues(){
+		int rev = 0;
+		int revSum = 0;
+		for (int i = 0; i < formCounter - 1; i++) {
+			rev = (Integer.parseInt(field7.get(i)) - 30 * (Integer.parseInt("1") - Integer.parseInt(field6.get(i))));
+			revSum += rev;
+			revenues.set(i, rev);
+		}
+
+		return revSum + "";
+	}
+
+	private void displayValues(int c){
+		fieldOne.setText(field1.get(c));
+		fieldTwo.setText(field2.get(c));
+		fieldThree.setText(field3.get(c));
+		fieldFour.setText(field4.get(c));
+		fieldFive.setText(field5.get(c));
+		fieldSix.setText(field6.get(c));
+		fieldSeven.setText(field7.get(c));
+		fieldEight.setText(field8.get(c));
+		fieldNine.setText(field9.get(c));
+		fieldTen.setText(field10.get(c));
+		fieldEleven.setText(field11.get(c));
+		
 	}
 	
 	private void saveFields(int c){
-		System.out.println(c);
 		field1.set(c, fieldOne.getText());
 		field2.set(c, fieldTwo.getText());
 		field3.set(c, fieldThree.getText());
@@ -79,24 +91,26 @@ public class FormBMenu implements Initializable{
 			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
-				saveFields(c);
+				saveFields(currentForm - 1);
 				currentForm = c;
-				displayValues();
+				displayValues(c -1);
 			});
 		} else if (formCounter >= 10 && formCounter <= 20){ 
 			Button formButton = new Button("Form " + formCounter);
 			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
-				saveFields(currentForm);
+				saveFields(currentForm - 1);
 				currentForm = c;
-				displayValues();
+				displayValues(c -1);
 			});
 		}
 	}
 	
+	Main a;
 	
-	public Scene display(Application a){
+	public Scene display(Main a){
+		this.a = a;
 		if (this.scene == null){
 			BorderPane bPane = new BorderPane();
 			VBox left = new VBox();
@@ -159,20 +173,10 @@ public class FormBMenu implements Initializable{
 		addFormButtons(leftVBox);
 		addFormButtons(leftVBox);
 		
-		textFields.add(fieldOne);
-		textFields.add(fieldTwo);
-		textFields.add(fieldThree);
-		textFields.add(fieldFour);
-		textFields.add(fieldFive);
-		textFields.add(fieldSix);
-		textFields.add(fieldSeven);
-		textFields.add(fieldEight);
-		textFields.add(fieldNine);
-		textFields.add(fieldTen);
-		textFields.add(fieldEleven);
-		
 		backButton.setOnAction(event -> {
 			saveFields();
+			System.out.println(calculateRevenues());
+			//this.a.rev.setText("11");
 			Main.window.setScene(Main.mainScene);
         });
 		

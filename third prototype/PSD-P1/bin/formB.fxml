@@ -55,7 +55,7 @@
        		</VBox>
     		<VBox>
     		
-    			 <TextField fx:id="fieldEight" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldEight" promptText="0" prefWidth="150"/>
     			 <TextField fx:id="fieldNine" promptText="" prefWidth="150"/>
     			 <TextField fx:id="fieldTen" promptText="" prefWidth="150"/>
     			 <TextField fx:id="fieldEleven" promptText="" prefWidth="150"/>

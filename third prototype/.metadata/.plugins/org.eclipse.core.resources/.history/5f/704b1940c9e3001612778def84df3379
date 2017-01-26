@@ -34,14 +34,14 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
 
 			HBox l0 = new HBox();
-
+<<<<<<< HEAD
 			l0.getStyleClass().add("hbox");
 			l0.getChildren().add(new Label("     α: Revenues ∑ Form B                                                             "));
-			//l0.getChildren().add(new TextField());
-
-			//l0.getChildren().add(new Text("     α: Revenues ∑ Form B                                                             "));
+			l0.getChildren().add(new TextField());
+=======
+			l0.getChildren().add(new Text("     α: Revenues ∑ Form B                                                             "));
 			l0.getChildren().add(rev);
-
+>>>>>>> 44320e181f09629ae0ef8e0da70f429502073392
 			revenueButton = new Button("Edit");
 			revenueButton.setOnAction(this);
 			l0.getChildren().add(revenueButton);
