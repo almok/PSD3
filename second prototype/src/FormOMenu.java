@@ -142,7 +142,7 @@ public class FormOMenu {
 
 		seventhLineHBox.getChildren().addAll(seventhLineLefftHBox ,seventhLineRightHBox);
 
-		return new Scene(vBox, 800 , 700);
+		return new Scene(vBox, 1600 , 1000);
 	}
 
 }
