@@ -1,10 +1,13 @@
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -19,7 +22,9 @@ import javafx.stage.Stage;
 
 
 public class FormOMenu implements Initializable {
-		
+	
+	@FXML
+	public Button button;
 	
 	@FXML
 	private TableView<OrderHistory> historyTable;
@@ -40,9 +45,28 @@ public class FormOMenu implements Initializable {
 	public void updateOrderHistory(Order order){
 		orders.add(new OrderHistory(order));
 	}
-
+	
+	// padaryt redirection
+	@FXML
+	public void goToFormV() throws IOException{
+	/*
+		Stage stage = new Stage();
+		Parent parent = FXMLLoader.load(getClass().getResource("formV.fxml"));
+		Scene scene = new Scene(parent);
+		stage.setTitle("Form V");
+		stage.setScene(scene);
+		stage.show();
+	*/
+		}
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		updateOrderHistory(new Order("aa", "dd"));
+		updateOrderHistory(new Order("vva", "dsssd"));
+		updateOrderHistory(new Order("aaddd", "dfdddd"));
+		
 		orderNoColumn.setCellValueFactory(new PropertyValueFactory<>("orderNo"));
 		productCodeColumn.setCellValueFactory(new PropertyValueFactory<>("productCode"));
 		kitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("kitPrice"));
