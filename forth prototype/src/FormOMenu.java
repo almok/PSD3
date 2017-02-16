@@ -1,12 +1,58 @@
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class FormOMenu {
-	private static int rowCounter = 2;
+
+
+public class FormOMenu implements Initializable {
+		
+	
+	@FXML
+	private TableView<OrderHistory> historyTable;
+	
+	@FXML
+	private TableColumn<OrderHistory, String> orderNoColumn;
+	
+	@FXML
+	private TableColumn<OrderHistory, String> productCodeColumn;
+	
+	@FXML
+	private TableColumn<OrderHistory, Double> kitPriceColumn;
+	
+	ObservableList<OrderHistory> orders = FXCollections.observableArrayList();
+	
+	
+	// add new orders to the table
+	public void updateOrderHistory(Order order){
+		orders.add(new OrderHistory(order));
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		orderNoColumn.setCellValueFactory(new PropertyValueFactory<>("orderNo"));
+		productCodeColumn.setCellValueFactory(new PropertyValueFactory<>("productCode"));
+		kitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("kitPrice"));
+		
+		historyTable.setItems(orders);
+		
+	}
+	
+		
+	/*private static int rowCounter = 2;
 	
 	public static Scene display(){
 		VBox vBox = new VBox();
@@ -143,6 +189,6 @@ public class FormOMenu {
 		seventhLineHBox.getChildren().addAll(seventhLineLefftHBox ,seventhLineRightHBox);
 
 		return new Scene(vBox, 800 , 700);
-	}
+	}*/
 
 }
