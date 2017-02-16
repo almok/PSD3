@@ -1,10 +1,12 @@
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +43,18 @@ public class FormBMenu implements Initializable{
 	
 	private ArrayList<Integer> revenues = new ArrayList<Integer>(Collections.nCopies(20, 0));
 	
+	
+	private void calculateTimeDif(){
+		String timeDif;
+	
+			int Actual = Integer.parseInt(fieldEight.getText());
+			int scheduled = Integer.parseInt(fieldSix.getText());
+			timeDif = String.valueOf(Actual - scheduled);
+			fieldNine.setText(timeDif);
+			saveFields();
+		
+	}
+	
 	private String calculateRevenues(){
 		int rev = 0;
 		int revSum = 0;
@@ -50,6 +64,7 @@ public class FormBMenu implements Initializable{
 			int f6 = this.isInteger(field6.get(i));
 			rev = (f7 - 30 * (f8 - f6));
 			revSum += rev;
+			Main.setRevenue(revSum);
 			revenues.set(i, rev);
 		}
 
@@ -194,16 +209,7 @@ public class FormBMenu implements Initializable{
 		
 		backButton.setOnAction(event -> {
 			saveFields();
-			String c = calculateRevenues();
-//			this.a.rev.setText("101");
-			//Main.rev.setText("55");
-			Alert alert = new Alert(AlertType.INFORMATION, "Revenue value:  " + c, ButtonType.YES);
-			alert.showAndWait();
-
-			if (alert.getResult() == ButtonType.YES) {
-			    //do stuff
-			}
-			
+			calculateRevenues();
 			Main.window.setScene(Main.mainScene);
 			
 			
@@ -214,7 +220,13 @@ public class FormBMenu implements Initializable{
 			addFormButtons(leftVBox);
         });
 		
-
+		
+		fieldEight.textProperty().addListener((observable, oldValue, newValue) -> {
+		    saveFields();
+		    calculateTimeDif();
+		});
+		
+		
 	
 	}
 

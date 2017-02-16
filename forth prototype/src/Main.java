@@ -19,11 +19,18 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 	Button goodsHistoryButton;
 	Button employmentAgencyButton;
 	static Stage window;
-	TextField  rev = new TextField();
+	static TextField  rev = new TextField();
 		
 		public static void main(String[] args){
 			launch(args);
 		}
+		
+		public static void setRevenue(int revenue)
+		{
+			
+			rev.setText(String.valueOf(revenue));
+		}
+
 		
 
 		@Override
@@ -40,8 +47,9 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 			l0.getChildren().add(new Label("     α: Revenues ∑ Form B                                                             "));
 			//l0.getChildren().add(new TextField());
 
-			//l0.getChildren().add(new Text("     α: Revenues ∑ Form B                                                             "));
+			//l0.getChildren().add(new Text("     α: Revenues ∑ Form B                                                             ");
 			l0.getChildren().add(rev);
+			
 
 			revenueButton = new Button("Edit");
 			revenueButton.setOnAction(this);
@@ -102,12 +110,12 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 			layout.getChildren().addAll(l1 , l2 , l3 , l4 , l5 , l6 , l7);
 			Scene scene = new Scene(layout , 800 , 700);
 			arg0.setScene(scene);
-<<<<<<< HEAD
+
 			this.mainScene = scene;
-=======
+
 			Main.mainScene = scene;
 			mainScene.getStylesheets().add("Styling.css");
->>>>>>> eecabcc1dc3c9b931e014cfa8b2b9ddebd7c3372
+
 			arg0.show();
 			
 		}
