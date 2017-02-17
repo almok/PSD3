@@ -27,6 +27,9 @@ public class FormOMenu implements Initializable {
 	public Button button;
 	
 	@FXML
+	public TextField totalKitPrice;
+	
+	@FXML
 	private TableView<OrderHistory> historyTable;
 	
 	@FXML
@@ -59,6 +62,16 @@ public class FormOMenu implements Initializable {
 	*/
 		}
 	
+	public double calcTotalKitPrice(){
+		
+		double sum = 0;
+		for(OrderHistory order : orders){
+			sum+= order.getKitPrice();
+		}
+	
+		return sum;
+	}
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -68,10 +81,26 @@ public class FormOMenu implements Initializable {
 		updateOrderHistory(new Order("aaddd", "dfdddd"));
 		
 		orderNoColumn.setCellValueFactory(new PropertyValueFactory<>("orderNo"));
+		orderNoColumn.setStyle("-fx-alignment: CENTER");
+		
 		productCodeColumn.setCellValueFactory(new PropertyValueFactory<>("productCode"));
+		productCodeColumn.setStyle("-fx-alignment: CENTER");
+		
 		kitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("kitPrice"));
+		kitPriceColumn.setStyle("-fx-alignment: CENTER");
 		
 		historyTable.setItems(orders);
+		
+		double sum = 0;
+		int i = 0;
+		for(OrderHistory order : orders){
+			sum+= order.getKitPrice();
+			i++;
+		}
+		sum = sum/i;
+		
+		totalKitPrice.setText(Double.toString(calcTotalKitPrice()));
+		totalKitPrice.setStyle("-fx-alignment: CENTER");
 		
 	}
 	
