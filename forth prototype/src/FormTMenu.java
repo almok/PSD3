@@ -13,19 +13,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
 public class FormTMenu implements Initializable {
 	
 	@FXML
-	public Button backButton;
-	
-	@FXML
-	public TextField totalKitPrice;
+	public Button addButton, backButton, deleteButton;
 	
 	@FXML
 	private TableView<EmployeeLine> employeeTable;
@@ -38,68 +37,53 @@ public class FormTMenu implements Initializable {
 	
 	@FXML
 	private TableColumn<EmployeeLine, CheckBox> skill;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button1;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button2;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button3;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button4;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button5;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button6;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button7;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button8;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button9;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button10;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button11;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button12;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button13;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button14;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button15;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button16;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button17;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button18;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button19;
-	@FXML
-	private TableColumn<EmployeeLine, Button> button20;
 	
+	@FXML
+	private TableColumn<EmployeeLine, Button> button1, button2, button3, button4, button5, 
+		button6, button7, button8, button9, button10, button11, button12, button13, 
+		button14, button15, button16, button17, button18, button19, button20;
+		
 	
 	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
 	
-	// Redirects to settings
-		@FXML
-		public void goToFormV() throws IOException{
+	// redirects to settings
+	@FXML
+	public void goToSettings() throws IOException{
+	
+		Stage stage = (Stage) backButton.getScene().getWindow();
+		Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml")); // currently takes to formO for testing
+		Scene scene = new Scene(parent);
+		stage.setScene(scene);
+		stage.setTitle("Settings");
+		stage.setScene(scene);
+		stage.show();
+		}
+	
+	// creates new employee
+	@FXML
+	public void createNewEmployee(){
+		EmployeeLine emp = new EmployeeLine(new AVNEmployee());
+		employees.add(emp);
+	}
+	
+	@FXML
+	public void deleteEmployee(){
+		ObservableList<EmployeeLine> allEmployees;
+		ObservableList<EmployeeLine> selectedEmployees;
 		
-			Stage stage = (Stage) backButton.getScene().getWindow();
-			Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml")); // currently takes to formO for testing
-			Scene scene = new Scene(parent);
-			stage.setScene(scene);
-			stage.setTitle("Settings");
-			stage.setScene(scene);
-			stage.show();
-			}
+		allEmployees = employeeTable.getItems();
+		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
+		
+		//shorthand to remove selected
+		selectedEmployees.forEach(allEmployees::remove);
+		
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		EmployeeLine em = new EmployeeLine();
-		employees.add(em);
+		EmployeeLine em = new EmployeeLine(new AVNEmployee());
+		//employees.add(em);
 		
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));
 		department.setCellValueFactory(new PropertyValueFactory<>("department"));

@@ -3,15 +3,14 @@ public class AVNEmployee {
 	
 	private String name;
 	private String department;
-	private int startTime;
-	private int stopTime;
+	private int time1, time2, totTime;
 	
 	
 	public AVNEmployee () {
 		name = "";
 		department = "";
-		startTime = 0;
-		stopTime = 0;
+		time1 = 0;
+		time2 = 0;
 	}
 	
 	// getters and setters
@@ -23,12 +22,16 @@ public class AVNEmployee {
 		return department;
 	}
 
-	public int getStartTime() {
-		return startTime;
+	public int getTime1() {
+		return time1;
 	}
 
-	public int getStopTime() {
-		return stopTime;
+	public int getTime2() {
+		return time2;
+	}
+	
+	public int getTotTime() {
+		return totTime;
 	}
 
 	public void setName(String name) {
@@ -39,12 +42,15 @@ public class AVNEmployee {
 		this.department = department;
 	}
 
-	public void setStartTime(int startTime) {
-		this.startTime = startTime;
+	public void setTime1(int time1) {
+		this.time1 = time1;
 	}
 
-	public void setStopTime(int stopTime) {
-		this.stopTime = stopTime;
+	public void setTime2(int time2) {
+		this.time2 = time2;
 	}
 	
+	public void setTotTime(int totTime) {
+		this.totTime = totTime;
+	}
 }

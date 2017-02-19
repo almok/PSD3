@@ -1,4 +1,6 @@
-import javafx.geometry.Insets;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
@@ -12,10 +14,13 @@ public class EmployeeLine {
 	private Button button1, button2, button3, button4, button5, button6, button7, 
 		button8, button9, button10, button11, button12, button13, button14, 
 		button15, button16, button17, button18, button19, button20;
+	private ArrayList<Button> buttons;
 	
 	
 	
-	public EmployeeLine() {
+	public EmployeeLine(AVNEmployee emp) {
+		
+		buttons = new ArrayList<>();
 		
 		name = new TextField();
 		department = new MenuButton();
@@ -61,7 +66,61 @@ public class EmployeeLine {
 		button19.setText("19");
 		button20 = new Button();
 		button20.setText("20");
+		
+		button1.setOnAction(e -> setTime(emp, button1));
+		button2.setOnAction(e -> setTime(emp, button2));
+		button3.setOnAction(e -> setTime(emp, button3));
+		button4.setOnAction(e -> setTime(emp, button4));
+		button5.setOnAction(e -> setTime(emp, button5));
+		button6.setOnAction(e -> setTime(emp, button6));
+		button7.setOnAction(e -> setTime(emp, button7));
+		button8.setOnAction(e -> setTime(emp, button8));
+		button9.setOnAction(e -> setTime(emp, button9));
+		button10.setOnAction(e -> setTime(emp, button10));
+		button11.setOnAction(e -> setTime(emp, button11));
+		button12.setOnAction(e -> setTime(emp, button12));
+		button13.setOnAction(e -> setTime(emp, button13));
+		button14.setOnAction(e -> setTime(emp, button14));
+		button15.setOnAction(e -> setTime(emp, button15));
+		button16.setOnAction(e -> setTime(emp, button16));
+		button17.setOnAction(e -> setTime(emp, button17));
+		button18.setOnAction(e -> setTime(emp, button18));
+		button19.setOnAction(e -> setTime(emp, button19));
+		button20.setOnAction(e -> setTime(emp, button20));
+		
+		buttons.addAll(Arrays.asList(button1, button2, button3, button4, button5, button6, button7,
+				button8, button9, button10, button11, button12, button13, button14, button15, 
+				button16, button17, button18, button19, button20));
 	}
+	
+	// set and and calculated employment time
+	public void setTime(AVNEmployee emp, Button b){
+		// if nothing is selected
+		if (emp.getTime1() == 0){
+			emp.setTime1(Integer.parseInt(b.getText()));
+			b.setStyle("-fx-background-color: green");
+		}
+		// if second selection is the same as first one
+		else if(emp.getTime2() == 0 && emp.getTime1() == Integer.parseInt(b.getText())){
+			emp.setTime1(0);
+			b.setStyle("");
+		}
+		// if one time is selected and second is different
+		else if(emp.getTime2() == 0 && emp.getTime1() != Integer.parseInt(b.getText())){
+			emp.setTime2(Integer.parseInt(b.getText()));
+			b.setStyle("-fx-background-color: green");
+		}
+		// if two selections are made
+		else{
+			for(Button but:buttons){
+				but.setStyle("");
+			}
+			emp.setTime1(Integer.parseInt(b.getText()));
+			b.setStyle("-fx-background-color: green");
+			emp.setTime2(0);
+		}
+	}
+	
 
 	// getter and setter
 	public TextField getName() {
@@ -247,9 +306,6 @@ public class EmployeeLine {
 	public void setButton20(Button button20) {
 		this.button20 = button20;
 	}
-	
-	
-	
 	
 	
 }
