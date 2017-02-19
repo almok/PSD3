@@ -1,11 +1,12 @@
 
-import java.awt.event.ActionEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,13 +21,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class FormBMenu implements Initializable{
 	//private static Button backButton;
 	//private static ArrayList<Button> formButtons = new ArrayList<Button>();
 	private int formCounter = 1;
 	private int currentForm = 1;
-	private Scene scene;
+	public Scene scene;
 	
 	
 	private ArrayList<String> field1 = new ArrayList<String>(Collections.nCopies(20, ""));
@@ -64,7 +66,7 @@ public class FormBMenu implements Initializable{
 			int f6 = this.isInteger(field6.get(i));
 			rev = (f7 - 30 * (f8 - f6));
 			revSum += rev;
-			Main.setRevenue(revSum);
+			FormVcontroller.setRevenue(revSum);
 			revenues.set(i, rev);
 		}
 
@@ -138,11 +140,11 @@ public class FormBMenu implements Initializable{
 		}
 	}
 	
-	Main a;
-	TextField rev;
-	public Scene display(Main a , TextField rev){
+	FormVcontroller a;
+	
+	public Scene display(FormVcontroller a){
 		this.a = a;
-		this.rev = rev;
+		
 		
 		
 		if (this.scene == null){
@@ -200,20 +202,17 @@ public class FormBMenu implements Initializable{
 	@FXML
 	private static Button form3;
 	
+	
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		
 		addFormButtons(leftVBox);
 		addFormButtons(leftVBox);
 		addFormButtons(leftVBox);
 		
-		backButton.setOnAction(event -> {
-			saveFields();
-			calculateRevenues();
-			Main.window.setScene(Main.mainScene);
-			
-			
-        });
+	
 		
 		newButton.setOnAction(event -> {
 			saveFields();
@@ -228,6 +227,17 @@ public class FormBMenu implements Initializable{
 		
 		
 	
+	}
+	@FXML
+	private void handleButtonAction(ActionEvent event) throws IOException
+	{
+		Main.window = (Stage) backButton.getScene().getWindow();
+		
+		Main.root = FXMLLoader.load(getClass().getResource("formV.fxml"));
+		
+		Scene scene = new Scene (Main.root);
+		Main.window.setScene(scene);
+		Main.window.show();
 	}
 
 	

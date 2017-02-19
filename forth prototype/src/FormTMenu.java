@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 public class FormTMenu {
 	private static int rowCounter = 2;
 	
-	public static Scene display(){
+	public Scene display(){
 		VBox vBox = new VBox();
 		
 		HBox top = new HBox();
