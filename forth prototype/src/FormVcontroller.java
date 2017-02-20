@@ -30,6 +30,7 @@ public class FormVcontroller implements Initializable{
 	FormBMenu formB = new FormBMenu();
 	FormTMenu formT = new FormTMenu();
 	FormOMenu formO = new FormOMenu();
+	FormSMenu formS = new FormSMenu();
 	
 	@FXML
 	private Button Rev;
@@ -37,6 +38,8 @@ public class FormVcontroller implements Initializable{
 	private Button formTButton;
 	@FXML
 	private Button formOButton;
+	@FXML
+	private Button formSButton;
 	@FXML
 	public static TextField Revenues;
 	@FXML
@@ -96,6 +99,14 @@ public class FormVcontroller implements Initializable{
 			formOButton.setOnAction(e -> {
 				try{
 					formO.display(formOButton);
+				}catch(IOException e1){
+					e1.printStackTrace();
+				}
+			});
+			
+			formSButton.setOnAction(e -> {
+				try{
+					formS.display(formSButton);
 				}catch(IOException e1){
 					e1.printStackTrace();
 				}
