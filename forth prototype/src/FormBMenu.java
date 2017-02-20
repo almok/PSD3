@@ -31,6 +31,7 @@ public class FormBMenu implements Initializable{
 	public Scene scene;
 	
 	
+	
 	private ArrayList<String> field1 = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> field2 = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> field3 = new ArrayList<String>(Collections.nCopies(20, ""));
@@ -57,7 +58,7 @@ public class FormBMenu implements Initializable{
 		
 	}
 	
-	private String calculateRevenues(){
+	public String calculateRevenues(){
 		int rev = 0;
 		int revSum = 0;
 		for (int i = 0; i < formCounter - 1; i++) {
@@ -66,10 +67,10 @@ public class FormBMenu implements Initializable{
 			int f6 = this.isInteger(field6.get(i));
 			rev = (f7 - 30 * (f8 - f6));
 			revSum += rev;
-			FormVcontroller.setRevenue(revSum);
+			
 			revenues.set(i, rev);
 		}
-
+		FormVcontroller.setRevenue(revSum);
 		return revSum + "";
 	}
 
@@ -140,32 +141,7 @@ public class FormBMenu implements Initializable{
 		}
 	}
 	
-	FormVcontroller a;
-	
-	public Scene display(FormVcontroller a){
-		this.a = a;
-		
-		
-		
-		if (this.scene == null){
-			BorderPane bPane = new BorderPane();
-			VBox left = new VBox();
-			HBox center = new HBox();
-			bPane.setLeft(left);
-			bPane.setCenter(center);
 
-			try {
-				Parent root = FXMLLoader.load(a.getClass().getResource("formB.fxml"));
-				this.scene = new Scene(root, 800 , 700);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}	
-			
-		}
-		this.scene.getStylesheets().add("Styling.css");
-		return this.scene;
-
-	}
 
 	@FXML
 	private Button backButton;
@@ -212,7 +188,7 @@ public class FormBMenu implements Initializable{
 		addFormButtons(leftVBox);
 		addFormButtons(leftVBox);
 		
-	
+		
 		
 		newButton.setOnAction(event -> {
 			saveFields();
@@ -225,20 +201,32 @@ public class FormBMenu implements Initializable{
 		    calculateTimeDif();
 		});
 		
+		backButton.setOnAction(e -> {
+			FormVcontroller formV = new FormVcontroller();
+			try{
+				formV.display(backButton);
+			}catch(IOException e1){
+				e1.printStackTrace();
+			}
+		});
+		
+		
 		
 	
 	}
-	@FXML
-	private void handleButtonAction(ActionEvent event) throws IOException
-	{
-		Main.window = (Stage) backButton.getScene().getWindow();
+	
+	// display this form
+			public void display(Button button) throws IOException{
+				Parent parent = FXMLLoader.load(getClass().getResource("formB.fxml"));
+				Scene scene = new Scene(parent);
+				Stage stage = (Stage) button.getScene().getWindow();
+				stage.hide();
+				stage.setScene(scene);
+				stage.show();
+				scene.getStylesheets().add("Styling.css");
+			}
 		
-		Main.root = FXMLLoader.load(getClass().getResource("formV.fxml"));
-		
-		Scene scene = new Scene (Main.root);
-		Main.window.setScene(scene);
-		Main.window.show();
-	}
+	
 
 	
 }

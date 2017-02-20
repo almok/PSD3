@@ -70,6 +70,7 @@ public class FormOMenu implements Initializable {
 			stage.hide();
 			stage.setScene(scene);
 			stage.show();
+			scene.getStylesheets().add("Styling.css");
 		}
 	
 	@Override

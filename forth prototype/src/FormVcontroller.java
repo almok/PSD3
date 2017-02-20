@@ -23,7 +23,7 @@ import javafx.application.Application;
 
 
 
-public class FormVcontroller {
+public class FormVcontroller implements Initializable{
 	
 	public Scene formVScene;
 	static Stage window;
@@ -38,7 +38,7 @@ public class FormVcontroller {
 	@FXML
 	private Button formOButton;
 	@FXML
-	private static TextField Revenues;
+	public static TextField Revenues;
 	@FXML
 	private TextField Employees;
 	@FXML
@@ -54,42 +54,52 @@ public class FormVcontroller {
 	@FXML
 	private TextField ProfitLoss;
 	
-	public static void setRevenue(int revenue)
-	{
-		
-		Revenues.setText(String.valueOf(revenue));
-	}
-	
-	@FXML public void handleRevenueButtonAction(ActionEvent event){
-		System.out.println("Button clicked");
-		Main.window.setScene(formB.display(this));
-	}
 
-	@FXML public void handleFormTButton(ActionEvent event){
-		Main.window.setScene(formT.display(this));
-	}
-	@FXML public void handleFormOButton(ActionEvent event){
-		Main.window.setScene(formO.display(this));
-	}
+	// display this form
+				public void display(Button button) throws IOException{
+					Parent parent = FXMLLoader.load(getClass().getResource("formV.fxml"));
+					Scene scene = new Scene(parent);
+					Stage stage = (Stage) button.getScene().getWindow();
+					stage.hide();
+					stage.setScene(scene);
+					stage.show();
+					scene.getStylesheets().add("Styling.css");
+				}
 		
-		
-
-		FormBMenu a;
-		public Scene display(FormBMenu a)
+	    public static void setRevenue(int revenue)
 		{
-			if (this.formVScene == null){
-				GridPane gPane = new GridPane();
 			
-				try {
-					Parent root = FXMLLoader.load(a.getClass().getResource("formV.fxml"));
-					this.formVScene = new Scene(root, 800 , 700);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}	
-			}
-			this.formVScene.getStylesheets().add("Styling.css");
-			return this.formVScene;
+		    Revenues = new TextField(); 
+			System.out.println(String.valueOf(revenue));
+			Revenues.setText(String.valueOf(revenue));
+		}
 		
+		@Override
+		public void initialize(URL location, ResourceBundle resources) {
+			
+			Rev.setOnAction(e -> {
+				try{
+					formB.display(Rev);
+				}catch(IOException e1){
+					e1.printStackTrace();
+				}
+			});
+			
+			formTButton.setOnAction(e -> {
+				try{
+					formT.display(formTButton);
+				}catch(IOException e1){
+					e1.printStackTrace();
+				}
+			});
+			
+			formOButton.setOnAction(e -> {
+				try{
+					formO.display(formOButton);
+				}catch(IOException e1){
+					e1.printStackTrace();
+				}
+			});
 		}
 	
 }		

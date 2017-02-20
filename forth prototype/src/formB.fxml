@@ -12,7 +12,7 @@
 	
  	<top>
  		<HBox fx:id = "topHBox">
-	        <Button fx:id = "backButton" text="Back" onAction = "#handleButtonAction" />
+	        <Button fx:id = "backButton" text="Back" />
 	        <Button fx:id = "newButton" text="New"/>
        		<Button fx:id = "deleteButton" text="Delete"/>
        		<Button fx:id = "clearButton" text="Clear"/>
