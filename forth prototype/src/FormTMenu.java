@@ -13,12 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 
 public class FormTMenu implements Initializable {
@@ -46,18 +44,22 @@ public class FormTMenu implements Initializable {
 	
 	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
 	
-	// redirects to settings
-	@FXML
-	public void goToSettings() throws IOException{
+	// displays this form
+	public void display() {
 	
 		Stage stage = (Stage) backButton.getScene().getWindow();
-		Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml")); // currently takes to formO for testing
-		Scene scene = new Scene(parent);
-		stage.setScene(scene);
-		stage.setTitle("Settings");
-		stage.setScene(scene);
-		stage.show();
-		}
+		Parent parent;
+		try {
+			parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
+			Scene scene = new Scene(parent);
+			stage.setScene(scene);
+			stage.setTitle("AVN Employee List");
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+			}
+	}
 	
 	// creates new employee
 	@FXML
@@ -82,7 +84,8 @@ public class FormTMenu implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		EmployeeLine em = new EmployeeLine(new AVNEmployee());
+		// here goes the code for loading employee list
+		//EmployeeLine em = new EmployeeLine(new AVNEmployee());
 		//employees.add(em);
 		
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -111,6 +114,9 @@ public class FormTMenu implements Initializable {
 		button20.setCellValueFactory(new PropertyValueFactory<>("button20"));
 		
 		employeeTable.setItems(employees);
+		
+		skill.setStyle("-fx-alignment: CENTER");
+		//backButton.setOnAction(e -> FormOMenu.display());
 
 	}
 }

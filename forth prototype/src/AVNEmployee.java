@@ -7,7 +7,7 @@ public class AVNEmployee {
 	
 	
 	public AVNEmployee () {
-		name = "";
+		name = "ms";
 		department = "";
 		time1 = 0;
 		time2 = 0;
