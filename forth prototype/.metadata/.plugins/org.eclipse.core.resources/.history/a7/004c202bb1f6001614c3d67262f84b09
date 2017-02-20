@@ -1,0 +1,108 @@
+import javafx.animation.*;
+import javafx.animation.*;
+import javafx.application.Application;
+import javafx.beans.*;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
+import javafx.event.*;
+import javafx.geometry.Pos;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class CountDownTimer extends Application {
+  @Override public void start(final Stage stage) throws Exception {
+    final CountDown countdown = new CountDown(10);
+    final CountDownLabel countdownLabel  = new CountDownLabel(countdown);
+
+    final Button countdownButton = new Button("  Start  ");
+    final Button stopButton = new Button("  Stop   ");
+    countdownButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override public void handle(ActionEvent t) {
+        countdownButton.setText("Restart");
+        countdown.start();
+      }
+    });
+    stopButton.setOnAction(new EventHandler<ActionEvent>() {
+    	@Override public void handle(ActionEvent t){
+    		countdown.stop();
+    	}
+    });
+
+    VBox layout = new VBox(10);
+    layout.getChildren().addAll(countdownLabel, countdownButton, stopButton);
+    layout.setAlignment(Pos.BASELINE_RIGHT);
+    layout.setStyle("-fx-background-color: cornsilk; -fx-padding: 20; -fx-font-size: 20;");
+
+    stage.setScene(new Scene(layout));
+    stage.show();
+  }
+
+  public static void main(String[] args) throws Exception {
+    launch(args);
+  }
+}
+
+class CountDownLabel extends Label {
+  public CountDownLabel(final CountDown countdown) {
+    textProperty().bind(Bindings.format("%3d : %3d",countdown.cycleCountProperty(), countdown.timeLeftProperty()));
+  }
+}
+
+class CountDown {
+  private final ReadOnlyIntegerWrapper secondsLeft;
+  private final ReadOnlyDoubleWrapper secondsDouble;
+  private final Timeline timeline;
+  private final ReadOnlyIntegerWrapper minsLeft;
+  private final ReadOnlyDoubleWrapper minsDouble;
+
+  public ReadOnlyIntegerProperty timeLeftProperty() {
+    return secondsLeft.getReadOnlyProperty();
+  }
+  public int cycleCountProperty(){
+	  return timeline.getCycleCount();
+  }
+
+  public CountDown(final int time) {
+    secondsLeft = new ReadOnlyIntegerWrapper(60);
+    secondsDouble = new ReadOnlyDoubleWrapper(60);
+    minsLeft = new ReadOnlyIntegerWrapper(time);
+    minsDouble = new ReadOnlyDoubleWrapper(time);
+    
+
+    timeline = new Timeline(
+      new KeyFrame(
+        Duration.ZERO,          
+        new KeyValue(secondsDouble, 59)
+      ),
+      new KeyFrame(
+        Duration.seconds(59), 
+        new KeyValue(secondsDouble, 0)
+      ),
+      new KeyFrame(
+    	Duration.ZERO,
+    	new KeyValue(minsDouble, time)
+      ),
+      new KeyFrame(
+    	Duration.minutes(time),
+    	new KeyValue(minsDouble, 0)
+      )
+    );
+    
+
+    secondsDouble.addListener(new InvalidationListener() {
+      @Override public void invalidated(Observable o) {
+        secondsLeft.set((int) Math.ceil(secondsDouble.get()));
+      }
+    });
+  }
+
+  public void start() {
+    timeline.playFromStart();
+  }
+  public void stop() {
+	timeline.pause();
+  }
+}
