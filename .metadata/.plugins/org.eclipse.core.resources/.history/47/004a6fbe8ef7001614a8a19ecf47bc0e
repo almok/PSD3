@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.textfield.*?>
+<?import javafx.geometry.Insets?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:controller="FormVcontroller" 
+    xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10">
+      <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+      
+      
+      	
+      		<Label text="α: Revenue ∑ Form B :" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+      		<TextField fx:id="Revenues" promptText="" prefWidth="150"  GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+      		<Button fx:id = "Rev" text="Form B" GridPane.columnIndex="4" GridPane.rowIndex="0" GridPane.columnSpan="2" onAction = "#handleRevenueButtonAction" />
+      		
+      	
+      		<Label text="Expenditures" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+      	
+      		<Label text="Salary" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+      
+      		<Label text="Employees (No of QPQ employees x time x salary)" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
+      		<TextField fx:id="Employees" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.columnSpan="2" />
+      		<Button fx:id = "formSbutton" text="Form S" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.columnSpan="2" onAction = "#handleFormSButton" />
+      
+      		<Label text="Employment Agency (AYN) (Form T)" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
+      		<TextField fx:id="Employment" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.columnSpan="2" />
+            <Button fx:id = "formTbutton" text="Form S" GridPane.columnIndex="4" GridPane.rowIndex="5" GridPane.columnSpan="2" onAction = "#handleFormTButton" />
+            
+            
+      		<Label text="Materials (Form O)" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+      		<TextField fx:id="Materials" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
+  			<Button fx:id = "formObutton" text="Form O" GridPane.columnIndex="4" GridPane.rowIndex="6" GridPane.columnSpan="2" onAction = "#handleFormOButton" />
+            
+  			    	
+      		<Label text= "Investments (Form R)" GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" />
+      		<TextField fx:id="Investments" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="7" GridPane.columnSpan="2" />
+      	
+      		<Label text="Consultant Fees (WSWK) (Form R)" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2"/>
+      		<TextField fx:id="Consultant" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.columnSpan="2" />
+      
+      		<Label text="Total expenditures (∑ β)" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" />
+      		<TextField fx:id="Exp" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="9" GridPane.columnSpan="2"/>
+      	
+      		<Label text="Profit/Loss (α – β)" GridPane.columnIndex="0" GridPane.rowIndex="10" GridPane.columnSpan="2" />
+      		<TextField fx:id="ProfitLoss" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="11" GridPane.columnSpan="2" />
+      	 
+	 </GridPane>      		
+
+      		
+      		
+      		
+      		
+      		
+      		
+

@@ -31,6 +31,7 @@
       
       		<Label text="Employees (No of QPQ employees x time x salary)" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2"/>
       		<TextField fx:id="Employees" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.columnSpan="2" />
+      		<Button fx:id = "formSButton" text="Form S" GridPane.columnIndex="4" GridPane.rowIndex="4" GridPane.columnSpan="2" />
       
       		<Label text="Employment Agency (AYN) (Form T)" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="2"/>
       		<TextField fx:id="Employment" promptText="" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.columnSpan="2" />
