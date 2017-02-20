@@ -66,10 +66,10 @@ public class FormVcontroller {
 	}
 
 	@FXML public void handleFormTButton(ActionEvent event){
-		Main.window.setScene(formT.display());
+		Main.window.setScene(formT.display(this));
 	}
 	@FXML public void handleFormOButton(ActionEvent event){
-		Main.window.setScene(formO.display());
+		Main.window.setScene(formO.display(this));
 	}
 		
 		
