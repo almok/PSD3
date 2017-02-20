@@ -16,9 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 
 
@@ -44,36 +42,11 @@ public class FormTMenu implements Initializable {
 		button6, button7, button8, button9, button10, button11, button12, button13, 
 		button14, button15, button16, button17, button18, button19, button20;
 	
-	public Scene scene;
+	//FormVcontroller formV = new FormVcontroller();
+	FormOMenu formO;
 	
 	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
-	
-	
-	FormVcontroller a;
-	public Scene display(FormVcontroller a){
-		this.a = a;
-		if (this.scene == null){
-			BorderPane bPane = new BorderPane();
-			VBox left = new VBox();
-			HBox center = new HBox();
-			bPane.setLeft(left);
-			bPane.setCenter(center);
 
-			try {
-				Parent root = FXMLLoader.load(a.getClass().getResource("formT.fxml"));
-				this.scene = new Scene(root, 800 , 700);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}	
-			
-		}
-		this.scene.getStylesheets().add("Styling.css");
-		return this.scene;
-
-	}
-	
-
-	
 	// creates new employee
 	@FXML
 	public void createNewEmployee(){
@@ -94,12 +67,29 @@ public class FormTMenu implements Initializable {
 		
 	}
 	
+	// display this form
+	public void display(Button button) throws IOException{
+		Parent parent = FXMLLoader.load(getClass().getResource("formT.fxml"));
+		Scene scene = new Scene(parent);
+		Stage stage = (Stage) button.getScene().getWindow();
+		stage.hide();
+		stage.setScene(scene);
+		stage.show();
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+	
+		FormOMenu formO = new FormOMenu();
 		
-		// here goes the code for loading employee list
-		//EmployeeLine em = new EmployeeLine(new AVNEmployee());
-		//employees.add(em);
+		backButton.setOnAction(e -> {
+		
+			try {
+				formO.display(backButton);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				}
+		});
 		
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));				name.setStyle("-fx-alignment: CENTER");
 		department.setCellValueFactory(new PropertyValueFactory<>("department"));

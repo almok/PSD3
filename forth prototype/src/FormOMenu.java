@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,8 +23,6 @@ import javafx.stage.Stage;
 
 
 public class FormOMenu implements Initializable {
-	
-	FormTMenu formT;
 	
 	@FXML
 	public Button backButton;
@@ -45,61 +44,14 @@ public class FormOMenu implements Initializable {
 	
 	ObservableList<OrderHistory> orders = FXCollections.observableArrayList();
 	
-	public Scene Oscene;
+	FormTMenu formT;
+	FormVcontroller formV;
 	
-	
-	
-	FormVcontroller a;
-	public Scene display(FormVcontroller a){
-		
-		this.a = a;
-		
-		if (this.Oscene == null){
-			BorderPane bPane = new BorderPane();
-			VBox left = new VBox();
-			HBox center = new HBox();
-			bPane.setLeft(left);
-			bPane.setCenter(center);
 
-			try {
-				Parent root = FXMLLoader.load(a.getClass().getResource("formO.fxml"));
-				this.Oscene = new Scene(root, 800 , 700);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}	
-			
-		}
-		this.Oscene.getStylesheets().add("Styling.css");
-		return this.Oscene;
-
-	}
-	
-	
-	
-	
 	// add new orders to the table
 	public void updateOrderHistory(Order order){
 		orders.add(new OrderHistory(order));
 	}
-	
-	/*displays this form
-		public void display() {
-		
-			Stage stage = (Stage) backButton.getScene().getWindow();
-			Parent parent;
-			try {
-				parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
-				Scene scene = new Scene(parent);
-				stage.setScene(scene);
-				stage.setTitle("Order History");
-				stage.setScene(scene);
-				stage.show();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				}
-		}
-	*/
 	
 	public double calcTotalKitPrice(){
 		
@@ -110,11 +62,28 @@ public class FormOMenu implements Initializable {
 		return sum;
 	}
 	
+	// display this form
+		public void display(Button button) throws IOException{
+			Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
+			Scene scene = new Scene(parent);
+			Stage stage = (Stage) button.getScene().getWindow();
+			stage.hide();
+			stage.setScene(scene);
+			stage.show();
+		}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		formT = new FormTMenu();
+		
+		backButton.setOnAction(e -> {
+			try {
+				formT.display(backButton);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				}
+		});
 		
 		updateOrderHistory(new Order("aa", "dd"));
 		updateOrderHistory(new Order("vva", "dsssd"));
@@ -133,11 +102,11 @@ public class FormOMenu implements Initializable {
 		// add orders into a table
 		historyTable.setItems(orders);
 		
-		//backButton.setOnAction(e -> formT.display(a));
-		
 		// set total kit price
 		totalKitPrice.setText(Double.toString(calcTotalKitPrice()));
 		totalKitPrice.setStyle("-fx-alignment: CENTER");
+		
+		
 		
 	}
 }
