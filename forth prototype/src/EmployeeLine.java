@@ -15,7 +15,8 @@ public class EmployeeLine {
 		button8, button9, button10, button11, button12, button13, button14, 
 		button15, button16, button17, button18, button19, button20;
 	private ArrayList<Button> buttons;
-	private ArrayList<String> departments = new ArrayList<>(Arrays.asList("Sales", "Production", "Quality Control"));
+	private ArrayList<String> departments = new ArrayList<>(Arrays.asList("Sales", "Production\nPlanning", "Goods Receipt", 
+				"Floor Control", "Production", "Ledger", "Quality\nAssurance", "Finance", "Manager"));
 	
 	// constructor
 	public EmployeeLine(AVNEmployee emp) {
@@ -67,10 +68,18 @@ public class EmployeeLine {
 		button20 = new Button();
 		button20.setText("20");
 		
-		//name.setOnInputMethodTextChanged(e -> {emp.setName(name.getText()); System.out.println(emp.getName());});
+		// add change listener to the name text box
+		name.textProperty().addListener((observable, oldValue, newValue) -> {emp.setName(newValue);});
+		
 		// check this link http://code.makery.ch/blog/javafx-2-event-handlers-and-change-listeners/
+		
 		// set department choices
 		department.getItems().addAll(departments);
+		department.setOnAction(e -> {emp.setDepartment(department.getSelectionModel().getSelectedItem());});
+		department.setVisibleRowCount(departments.size() - 1);
+		
+		// set multi skilled option
+		skill.setOnAction(e -> {emp.setMultiSkilled(skill.isSelected());});
 		
 		// set button functions 
 		button1.setOnAction(e -> setTime(emp, button1));

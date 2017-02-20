@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 
 public class FormOMenu implements Initializable {
 	
+	FormTMenu formT;
+	
 	@FXML
 	public Button backButton;
 	
@@ -45,12 +47,12 @@ public class FormOMenu implements Initializable {
 	
 	public Scene Oscene;
 	
+	
+	
 	FormVcontroller a;
 	public Scene display(FormVcontroller a){
 		
 		this.a = a;
-		
-		
 		
 		if (this.Oscene == null){
 			BorderPane bPane = new BorderPane();
@@ -80,7 +82,7 @@ public class FormOMenu implements Initializable {
 		orders.add(new OrderHistory(order));
 	}
 	
-	// displays this form
+	/*displays this form
 		public void display() {
 		
 			Stage stage = (Stage) backButton.getScene().getWindow();
@@ -97,6 +99,7 @@ public class FormOMenu implements Initializable {
 				e.printStackTrace();
 				}
 		}
+	*/
 	
 	public double calcTotalKitPrice(){
 		
@@ -110,6 +113,8 @@ public class FormOMenu implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		formT = new FormTMenu();
 		
 		updateOrderHistory(new Order("aa", "dd"));
 		updateOrderHistory(new Order("vva", "dsssd"));
@@ -127,6 +132,8 @@ public class FormOMenu implements Initializable {
 		
 		// add orders into a table
 		historyTable.setItems(orders);
+		
+		//backButton.setOnAction(e -> formT.display(a));
 		
 		// set total kit price
 		totalKitPrice.setText(Double.toString(calcTotalKitPrice()));
