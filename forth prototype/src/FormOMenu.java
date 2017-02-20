@@ -43,15 +43,16 @@ public class FormOMenu implements Initializable {
 	
 	ObservableList<OrderHistory> orders = FXCollections.observableArrayList();
 	
-	public Scene scene;
+	public Scene Oscene;
 	
 	FormVcontroller a;
 	public Scene display(FormVcontroller a){
+		
 		this.a = a;
 		
 		
 		
-		if (this.scene == null){
+		if (this.Oscene == null){
 			BorderPane bPane = new BorderPane();
 			VBox left = new VBox();
 			HBox center = new HBox();
@@ -60,14 +61,14 @@ public class FormOMenu implements Initializable {
 
 			try {
 				Parent root = FXMLLoader.load(a.getClass().getResource("formO.fxml"));
-				this.scene = new Scene(root, 800 , 700);
+				this.Oscene = new Scene(root, 800 , 700);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}	
 			
 		}
-		this.scene.getStylesheets().add("Styling.css");
-		return this.scene;
+		this.Oscene.getStylesheets().add("Styling.css");
+		return this.Oscene;
 
 	}
 	
@@ -79,17 +80,22 @@ public class FormOMenu implements Initializable {
 		orders.add(new OrderHistory(order));
 	}
 	
-	// Redirects to formV
-	@FXML
-	public void goToFormV() throws IOException{
-	
-		Stage stage = (Stage) backButton.getScene().getWindow();
-		Parent parent = FXMLLoader.load(getClass().getResource("formT.fxml")); // currently takes to formT for testing
-		Scene scene = new Scene(parent);
-		stage.setScene(scene);
-		stage.setTitle("Form V");
-		stage.setScene(scene);
-		stage.show();
+	// displays this form
+		public void display() {
+		
+			Stage stage = (Stage) backButton.getScene().getWindow();
+			Parent parent;
+			try {
+				parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
+				Scene scene = new Scene(parent);
+				stage.setScene(scene);
+				stage.setTitle("Order History");
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
 		}
 	
 	public double calcTotalKitPrice(){

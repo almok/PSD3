@@ -3,28 +3,28 @@ import java.util.Arrays;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class EmployeeLine {
 
 	private TextField name;
-	private MenuButton department;
+	private ComboBox<String> department;
 	private CheckBox skill;
 	private Button button1, button2, button3, button4, button5, button6, button7, 
 		button8, button9, button10, button11, button12, button13, button14, 
 		button15, button16, button17, button18, button19, button20;
 	private ArrayList<Button> buttons;
+	private ArrayList<String> departments = new ArrayList<>(Arrays.asList("Sales", "Production", "Quality Control"));
 	
-	
-	
+	// constructor
 	public EmployeeLine(AVNEmployee emp) {
 		
 		buttons = new ArrayList<>();
 		
 		name = new TextField();
-		department = new MenuButton();
-		department.setText("Choose");
+		department = new ComboBox<>();
+		department.setPromptText("Choose");
 		skill = new CheckBox();
 		button1 = new Button();
 		button1.setText("1");
@@ -67,6 +67,12 @@ public class EmployeeLine {
 		button20 = new Button();
 		button20.setText("20");
 		
+		//name.setOnInputMethodTextChanged(e -> {emp.setName(name.getText()); System.out.println(emp.getName());});
+		// check this link http://code.makery.ch/blog/javafx-2-event-handlers-and-change-listeners/
+		// set department choices
+		department.getItems().addAll(departments);
+		
+		// set button functions 
 		button1.setOnAction(e -> setTime(emp, button1));
 		button2.setOnAction(e -> setTime(emp, button2));
 		button3.setOnAction(e -> setTime(emp, button3));
@@ -88,6 +94,7 @@ public class EmployeeLine {
 		button19.setOnAction(e -> setTime(emp, button19));
 		button20.setOnAction(e -> setTime(emp, button20));
 		
+		// hold buttons in a collection
 		buttons.addAll(Arrays.asList(button1, button2, button3, button4, button5, button6, button7,
 				button8, button9, button10, button11, button12, button13, button14, button15, 
 				button16, button17, button18, button19, button20));
@@ -107,8 +114,24 @@ public class EmployeeLine {
 		}
 		// if one time is selected and second is different
 		else if(emp.getTime2() == 0 && emp.getTime1() != Integer.parseInt(b.getText())){
+			
 			emp.setTime2(Integer.parseInt(b.getText()));
-			b.setStyle("-fx-background-color: green");
+			
+			// set time worked and change button colors
+			if (emp.getTime1() < emp.getTime2()){
+				emp.setTotTime(emp.getTime2() - emp.getTime1());
+				for(Button but:buttons){
+					if (Integer.parseInt(but.getText()) > emp.getTime1() && Integer.parseInt(but.getText()) <= emp.getTime2() )
+					but.setStyle("-fx-background-color: green");
+				}
+			}
+			else{
+				emp.setTotTime(emp.getTime1() - emp.getTime2());
+				for(Button but:buttons){
+					if (Integer.parseInt(but.getText()) < emp.getTime1() && Integer.parseInt(but.getText()) >= emp.getTime2() )
+					but.setStyle("-fx-background-color: green");
+				}
+			}
 		}
 		// if two selections are made
 		else{
@@ -127,7 +150,7 @@ public class EmployeeLine {
 		return name;
 	}
 
-	public MenuButton getDepartment() {
+	public ComboBox<String> getDepartment() {
 		return department;
 	}
 
@@ -219,7 +242,7 @@ public class EmployeeLine {
 		this.name = name;
 	}
 
-	public void setDepartment(MenuButton department) {
+	public void setDepartment(ComboBox<String> department) {
 		this.department = department;
 	}
 

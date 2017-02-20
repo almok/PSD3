@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -23,7 +22,6 @@ import javafx.scene.text.Text;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 
 
@@ -53,6 +51,7 @@ public class FormTMenu implements Initializable {
 	
 	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
 	
+
 	FormVcontroller a;
 	public Scene display(FormVcontroller a){
 		this.a = a;
@@ -79,17 +78,7 @@ public class FormTMenu implements Initializable {
 
 	}
 	// redirects to settings
-	@FXML
-	public void goToSettings() throws IOException{
-	
-		Stage stage = (Stage) backButton.getScene().getWindow();
-		Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml")); // currently takes to formO for testing
-		Scene scene = new Scene(parent);
-		stage.setScene(scene);
-		stage.setTitle("Settings");
-		stage.setScene(scene);
-		stage.show();
-		}
+
 	
 	// creates new employee
 	@FXML
@@ -114,7 +103,8 @@ public class FormTMenu implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		EmployeeLine em = new EmployeeLine(new AVNEmployee());
+		// here goes the code for loading employee list
+		//EmployeeLine em = new EmployeeLine(new AVNEmployee());
 		//employees.add(em);
 		
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -143,6 +133,9 @@ public class FormTMenu implements Initializable {
 		button20.setCellValueFactory(new PropertyValueFactory<>("button20"));
 		
 		employeeTable.setItems(employees);
+		
+		skill.setStyle("-fx-alignment: CENTER");
+		//backButton.setOnAction(e -> FormOMenu.display());
 
 	}
 }
