@@ -78,8 +78,8 @@ public class FormTMenu implements Initializable {
 			listToSave.add(empl.getEmployee());
 		}
 		emps.setEmployees(listToSave);
-		emps.toFile("AVN Employee List Default.csv");
-		emps.toFile("AVN Employee List.csv");
+		emps.toFile("AYN Employee List Default.csv");
+		emps.toFile("AYN Employee List.csv");
 	}
 	
 	
@@ -90,7 +90,7 @@ public class FormTMenu implements Initializable {
 		Stage stage = (Stage) button.getScene().getWindow();
 		scene.getStylesheets().add("Styling.css");	
 		stage.setScene(scene);
-		stage.setTitle("AVN Employee List");
+		stage.setTitle("AYN Employee List");
 		
 	}
 	
@@ -99,9 +99,9 @@ public class FormTMenu implements Initializable {
 
 		// load existing employees
 		emps = new AYNEmployeeList();
-		//emps.getEmployees().add(new AVNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
+		//emps.getEmployees().add(new AYNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
 		
-		emps.loadList("AVN Employee List Default.csv");
+		emps.loadList("AYN Employee List Default.csv");
 		for (AYNEmployee emp: emps.getEmployees()){
 			employees.add(new EmployeeLine(emp));
 		}
