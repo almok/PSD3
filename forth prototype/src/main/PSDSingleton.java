@@ -314,4 +314,18 @@ public class PSDSingleton {
 		return this.formSData;
 	}
 	
+	
+	// Form S data
+		public void setFormBData(ArrayList<String[]> formSData){
+			this.formSData = new ArrayList<>();
+			this.formSData = formSData;
+		}
+		
+		public ArrayList<String[]> getFormBData(){
+			if (this.formSData == null){
+				this.formSData = new ArrayList<>();
+			}
+			return this.formSData;
+		}
+		
 }

@@ -16,7 +16,7 @@ public class Main extends Application{
 	static Stage thestage;
 	FormVcontroller a;
 	static BorderPane root;
-	public static ArrayList<Order> orders = new ArrayList<Order>();
+	
 	@Override
 	public void start(Stage stage) throws Exception{
 		

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.PSDSingleton;
 
 public class FormBMenu implements Initializable{
 	//private static Button backButton;
@@ -45,6 +48,7 @@ public class FormBMenu implements Initializable{
 	private ArrayList<String> field11 = new ArrayList<String>(Collections.nCopies(20, ""));
 	
 	private ArrayList<Integer> revenues = new ArrayList<Integer>(Collections.nCopies(20, 0));
+	
 	
 	
 	private void calculateTimeDif(){
@@ -101,12 +105,12 @@ public class FormBMenu implements Initializable{
 	//save orders
 	private void saveOrders(int formCounter){
 	int c = 0;
-	Main.orders.clear();
+	orders.clear();
 	for(int i = 0; i < formCounter ; i++){
 		Order order = new Order(null, null, null, null, null, null);
 		
 		order.setContractPrice(field7.get(i));
-		Main.orders.add(order);
+		orders.add(order);
 		c++;
 	}
 	
@@ -114,7 +118,7 @@ public class FormBMenu implements Initializable{
 	}
 	private void displayOrders(){
 		int j = 0;
-		for(Order order: Main.orders)
+		for(Order order: orders)
 		{
 			//field1.set(j, order.get);
 			//field2.set(j, fieldTwo.getText());
@@ -215,11 +219,28 @@ public class FormBMenu implements Initializable{
 	@FXML
 	private static Button form3;
 	
+	ObservableList<orderList> orders = FXCollections.observableArrayList();
+	public void createNewOrder(){
+		orderList order = new orderList(new Order(null, null, null, null, null, null));
+		orders.add(order);
+	}
 	
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		ArrayList<String []> arr = PSDSingleton.getInstance().getFormBData();
+		for(int i = 0; i < orders.size(); i++){
+			String orderNum = orders.get(i).getOrderNumber();
+			
+			if(orderNum != ""){
+				String[] _order = new String[1];
+				_order[0] = orderNum;
+				formBData.add(_order);
+			}
+		}
+		PSDSingleton.getInstance().setFormBData(formBData);
 		
 		
 		//re-populate forms
