@@ -26,7 +26,6 @@ public class FormTMenu implements Initializable {
 	
 	@FXML private BorderPane FormTMenu;
 	
-	
 	@FXML
 	private Button addButton, backButton, deleteButton, saveButton;
 	
@@ -48,7 +47,7 @@ public class FormTMenu implements Initializable {
 		button14, button15, button16, button17, button18, button19, button20;
 	
 	private AVNEmployeeList emps;
-	//FormVcontroller formV;
+	FormVcontroller formV;
 	FormOMenu formO;
 	
 	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
@@ -88,11 +87,11 @@ public class FormTMenu implements Initializable {
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("formT.fxml"));
 		Scene scene = new Scene(parent);
-		Stage stage = (Stage) button.getScene().getWindow();	
-		stage.hide();
+		Stage stage = (Stage) button.getScene().getWindow();
+		scene.getStylesheets().add("Styling.css");	
 		stage.setScene(scene);
-		stage.show();
-		scene.getStylesheets().add("Styling.css");
+		stage.setTitle("AVN Employee List");
+		
 	}
 	
 	@Override
@@ -108,12 +107,12 @@ public class FormTMenu implements Initializable {
 		}
 		
 	
-		FormOMenu formO = new FormOMenu();
+		formV = new FormVcontroller();
 		
 		backButton.setOnAction(e -> {
 		
 			try {
-				formO.display(backButton);
+				formV.display(backButton);
 				// save employees
 				saveEmployees();
 				

@@ -67,20 +67,20 @@ public class FormOMenu implements Initializable {
 			Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
 			Scene scene = new Scene(parent);
 			Stage stage = (Stage) button.getScene().getWindow();
-			stage.hide();
-			stage.setScene(scene);
-			stage.show();
 			scene.getStylesheets().add("Styling.css");
+			stage.setScene(scene);
+			stage.setTitle("Order History");
+			
 		}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		formT = new FormTMenu();
+		formV = new FormVcontroller();
 		
 		backButton.setOnAction(e -> {
 			try {
-				formT.display(backButton);
+				formV.display(backButton);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 				}
