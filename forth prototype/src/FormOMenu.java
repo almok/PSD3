@@ -90,9 +90,9 @@ public class FormOMenu implements Initializable {
 		//
 		//
 		//
-		updateOrderHistory(new Order(null, "aa", "dd", null, null, null));
-		updateOrderHistory(new Order(null, "vva", "dsssd", null, null, null));
-		updateOrderHistory(new Order(null, "aaddd", "dfdddd", null, null, null));
+		updateOrderHistory(new Order("talk to me", "aa", "dd", null, null, null));
+		updateOrderHistory(new Order(" shake that ass", "vva", "dsssd", null, null, null));
+		updateOrderHistory(new Order("order 1", "aaddd", "dfdddd", null, null, null));
 		//
 		//
 		

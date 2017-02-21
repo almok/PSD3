@@ -18,15 +18,16 @@ public class Main extends Application{
 	static BorderPane root;
 	public static ArrayList<Order> orders = new ArrayList<Order>();
 	@Override
-	public void start(Stage arg0) throws Exception{
+	public void start(Stage stage) throws Exception{
 		
-		arg0.setTitle("QpQ");
-		Main.window = arg0;
+		stage.setTitle("QpQ");
+		Main.window = stage;
 		root = (BorderPane)FXMLLoader.load(getClass().getResource("formV.fxml"));
-        Scene scene = new Scene(root, 300, 275);
-		arg0.setScene(scene);
-        arg0.show();
+        Scene scene = new Scene(root, 700, 500);
         scene.getStylesheets().add("Styling.css");
+		stage.setScene(scene);
+        stage.show();
+        
 	}
 	
 	public static void main(String[] args){
