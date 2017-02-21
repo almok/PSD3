@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 public class FormBMenu implements Initializable{
 	//private static Button backButton;
-	//private static ArrayList<Button> formButtons = new ArrayList<Button>();
+	
 	private int formCounter = 1;
 	private int currentForm = 1;
 	public Scene scene;
@@ -98,7 +98,40 @@ public class FormBMenu implements Initializable{
 		fieldEleven.setText(field11.get(c));
 		
 	}
+	//save orders
+	private void saveOrders(int formCounter){
+	int c = 0;
+	Main.orders.clear();
+	for(int i = 0; i < formCounter ; i++){
+		Order order = new Order(null, null, null, null, null, null);
+		
+		order.setContractPrice(field7.get(i));
+		Main.orders.add(order);
+		c++;
+	}
 	
+
+	}
+	private void displayOrders(){
+		int j = 0;
+		for(Order order: Main.orders)
+		{
+			//field1.set(j, order.get);
+			//field2.set(j, fieldTwo.getText());
+			//field3.set(j, fieldThree.getText());
+			//field4.set(j, fieldFour.getText());
+			//field5.set(j, fieldFive.getText());
+			field6.set(j, order.getScheduleTime());
+			field7.set(j, order.getContractPrice());
+			field8.set(j, order.getActualTime());
+			//field9.set(j, fieldNine.getText());
+			//field10.set(j, fieldTen.getText());
+			//field11.set(j, fieldEleven.getText());
+			j++;
+			addFormButtons(leftVBox);
+		}
+		
+	}
 	private void saveFields(int c){
 		field1.set(c, fieldOne.getText());
 		field2.set(c, fieldTwo.getText());
@@ -121,19 +154,23 @@ public class FormBMenu implements Initializable{
 	private void addFormButtons(VBox left){
 		int c = formCounter;
 		if (formCounter > 0 && formCounter < 10){ 
-			Button formButton = new Button(" Form " + formCounter + " ");
+			Button formButton = new Button(" Order " + formCounter + " ");
+			//Order order = new Order(Integer.toString(c), null, null, null, null, null);
 			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
+				
 				saveFields(currentForm - 1);
 				currentForm = c;
 				displayValues(c -1);
 			});
 		} else if (formCounter >= 10 && formCounter <= 20){ 
-			Button formButton = new Button("Form " + formCounter);
+			Button formButton = new Button("Order " + formCounter);
+			//Order order = new Order(Integer.toString(c), null, null, null, null, null);
 			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
+				
 				saveFields(currentForm - 1);
 				currentForm = c;
 				displayValues(c -1);
@@ -184,11 +221,9 @@ public class FormBMenu implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		addFormButtons(leftVBox);
-		addFormButtons(leftVBox);
-		addFormButtons(leftVBox);
 		
-		
+		//re-populate forms
+		displayOrders();		
 		
 		newButton.setOnAction(event -> {
 			saveFields();
@@ -203,6 +238,8 @@ public class FormBMenu implements Initializable{
 		
 		backButton.setOnAction(e -> {
 			FormVcontroller formV = new FormVcontroller();
+			saveOrders(formCounter );
+			
 			try{
 				formV.display(backButton);
 			}catch(IOException e1){
@@ -215,8 +252,11 @@ public class FormBMenu implements Initializable{
 	
 	}
 	
-	// display this form
+	
+
+			// display this form
 			public void display(Button button) throws IOException{
+				
 				Parent parent = FXMLLoader.load(getClass().getResource("formB.fxml"));
 				Scene scene = new Scene(parent);
 				Stage stage = (Stage) button.getScene().getWindow();

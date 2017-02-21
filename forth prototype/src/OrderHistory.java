@@ -1,21 +1,21 @@
 
 public class OrderHistory {
 
-	private String orderNo;
+	private String orderNumber;
 	private String productCode;
 	private Double kitPrice;
 	
 	
 	public OrderHistory(Order order) {
 		
-		orderNo = order.getOrderNo();
+		orderNumber = order.getOrderNumber();
 		productCode = order.getProductCode();
 		kitPrice = calcKitPrice(order);
 	}
 
 	// getter and setter
-	public String getOrderNo() {
-		return orderNo;
+	public String getOrderNumber() {
+		return orderNumber;
 	}
 
 
@@ -29,8 +29,8 @@ public class OrderHistory {
 	}
 
 
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 

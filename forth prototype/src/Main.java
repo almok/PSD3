@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +16,7 @@ public class Main extends Application{
 	static Stage thestage;
 	FormVcontroller a;
 	static BorderPane root;
+	public static ArrayList<Order> orders = new ArrayList<Order>();
 	@Override
 	public void start(Stage arg0) throws Exception{
 		
