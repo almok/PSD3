@@ -113,8 +113,6 @@ public class FormSMenu implements Initializable {
 			
 			FormVcontroller formV = new FormVcontroller();
 			try{
-				//countEmployees(employees);
-				System.out.println(countEmployees(employees));
 				FormVcontroller.setEmployeeWage(countEmployees(employees));
 				formV.display(backButton);
 			}catch(IOException e1){

@@ -17,33 +17,27 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StartScreen extends Application implements Initializable, EventHandler<ActionEvent> {
-	
-	@FXML 
-	private Button startButton;
-	@FXML
-	private Button settingsButton;
-	@FXML
-	private Button reportButton;
-	@FXML
-	private Button roundButton;
-	@FXML
-	private VBox leftVBox;
-	@FXML
-	private HBox rightBox;
-	@FXML
-	private AnchorPane aPane;
+public class StartScreen extends Application implements Initializable, EventHandler<ActionEvent>{
+	@FXML private Button startButton;
+	@FXML private Button settingsButton;
+	@FXML private Button reportButton;
+	@FXML private Button financeButton;
+	@FXML private VBox leftVBox;
+	@FXML private Label rightLabel;
+	@FXML private AnchorPane aPane;
 	
 	public static void main(String[] args){
 		launch(args);
 	}
 	
-	CountDownTimer countDownTimer = new CountDownTimer();
+	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
+	
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == startButton){
 			addRoundButton(leftVBox);
-			countDownTimer.display(startButton);
+			//CountDownTimer countDown = new CountDownTimer();
+			//countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("SettingsScene.fxml"));
@@ -63,89 +57,39 @@ public class StartScreen extends Application implements Initializable, EventHand
 		} 
 	}
 	
-	
 	private int roundCounter;
-	FormVController formVMenu = new FormVController();
 	public void addRoundButton(VBox left){
-		
 		Button roundButton = new Button(" Round " + roundCounter + " ");
 		roundCounter++;
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
 			try {
-				formV.display(roundButton);
-			 } catch (IOException e) {
-			 	e.printStackTrace();
+				FormVcontroller formVMenu = new FormVcontroller();
+				formVMenu.display(roundButton);
+			 } catch (Exception e1) {
+			 	e1.printStackTrace();
 			 }
 		});
 	}
-}	
-//	public void display(Button button) throws IOException{
-//		Parent parent = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
-//		Scene scene = new Scene(parent);
-//		Stage stage = (Stage) button.getScene().getWindow();
-//		stage.hide();
-//		stage.setScene(scene);
-//		stage.show();
-//		scene.getStyleSheets().add("Styling.css");
 
-	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1){
+		 assert startButton != null : "fx:id=\"startButton\" was not injected";
+		 assert settingsButton != null : "fx:id=\"settingsButton\" was not injected";
+		 assert reportButton != null : "fx:id=\"reportButton\" was not injected";
 
+		startButton.setOnAction(this);
+		settingsButton.setOnAction(this);
+		reportButton.setOnAction(this);
+	}
 
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
 
-	
-//	public void initialize(URL arg0, ResourceBundle arg1){
-//		
-//		// Start Button
-//		CountDownTimer countDownTimer = new CountDownTimer();
-//		startButton.setOnAction(event -> {
-//			addRoundButton(leftVBox);
-//			countDownTimer.display(startButton);
-////			new CountDownTimer(30000,1000){
-////				Public void onTick(long millisUntilFinished){
-////					rightBox.setText("seconds remaining")
-////				}
-////			}
-//		});
-//		
-//		// Setting Button
-//		SettingsMenu settingsMenu  = new SettingsMenu();
-//		settingsButton.setOnAction(event -> {
-//			
-//			try {
-//				settingsMenu.display(settingsButton);
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//			
-//		});
-//		
-//
-//		// Report Button
-//		reportButton.setOnAction(event -> {
-//			//produce report from financials of rounds available
-//		});
-//		
-//
-//		
-//
-//		// Finance Button
-////		FormVController formV = new FormVController() // or is this form B???
-////		        	 roundsButton.setOnAction(event ->{
-////		        		 
-////		        		try{
-////		    				formV.display(financeButton); //display method may need to be adjusted to account for round selected
-////		    			} catch (IOException e1) {
-////		    				e1.printStackTrace();
-////		    			}
-//		        		 
-//		        	 
-//		        		 //Go to finance page with round selected [Form V]
-//		        		 //rounds.getSelectedToggle().getUserData().toString()
-//		        	// });
-//
-//		     } 
-//		});
-//		
-//			
-//		}
+		Scene scene = new Scene(root, 800, 700);
+        primaryStage.setTitle("FXML Welcome");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+	}
+}
