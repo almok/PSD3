@@ -21,7 +21,7 @@
       
       	
       		<Label text="α: Revenue ∑ Form B :" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-      		<Label fx:id="Revenues" prefWidth="150"  GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+      		<Label fx:id="Revenues" promptText="" prefWidth="150"  GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
       		<Button fx:id = "Rev" text="Form B" GridPane.columnIndex="4" GridPane.rowIndex="0" GridPane.columnSpan="2"  />
       		
       	
