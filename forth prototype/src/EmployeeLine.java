@@ -18,10 +18,10 @@ public class EmployeeLine {
 	private ArrayList<Button> buttons;
 	private ArrayList<String> departments = new ArrayList<>(Arrays.asList("Sales", "Production\nPlanning", "Goods Receipt", 
 				"Floor Control", "Production", "Ledger", "Quality\nAssurance", "Finance", "Manager"));
-	AVNEmployee emp;
+	AYNEmployee emp;
 	
 	// constructor
-	public EmployeeLine(AVNEmployee emp) {
+	public EmployeeLine(AYNEmployee emp) {
 		this.emp = emp;
 		
 		buttons = new ArrayList<>();
@@ -133,7 +133,7 @@ public class EmployeeLine {
 	}
 	
 	// set and and calculated employment time
-	public void setTime(AVNEmployee emp, Button b){
+	public void setTime(AYNEmployee emp, Button b){
 		// if nothing is selected
 		if (emp.getTime1() == 0){
 			emp.setTime1(Integer.parseInt(b.getText()));
@@ -168,7 +168,7 @@ public class EmployeeLine {
 	}	
 
 	// getter and setter
-	public AVNEmployee getEmployee(){
+	public AYNEmployee getEmployee(){
 		return emp;
 	}
 	public TextField getName() {

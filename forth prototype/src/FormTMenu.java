@@ -46,7 +46,7 @@ public class FormTMenu implements Initializable {
 		button6, button7, button8, button9, button10, button11, button12, button13, 
 		button14, button15, button16, button17, button18, button19, button20;
 	
-	private AVNEmployeeList emps;
+	private AYNEmployeeList emps;
 	FormVcontroller formV;
 	FormOMenu formO;
 	
@@ -55,7 +55,7 @@ public class FormTMenu implements Initializable {
 	// creates new employee
 	@FXML
 	public void createNewEmployee(){
-		EmployeeLine emp = new EmployeeLine(new AVNEmployee());
+		EmployeeLine emp = new EmployeeLine(new AYNEmployee());
 		employees.add(emp);
 	}
 	
@@ -73,7 +73,7 @@ public class FormTMenu implements Initializable {
 	
 	@FXML
 	public void saveEmployees(){
-		ArrayList<AVNEmployee> listToSave = new ArrayList<>();
+		ArrayList<AYNEmployee> listToSave = new ArrayList<>();
 		for(EmployeeLine empl : employeeTable.getItems()){
 			listToSave.add(empl.getEmployee());
 		}
@@ -98,11 +98,11 @@ public class FormTMenu implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		// load existing employees
-		emps = new AVNEmployeeList();
+		emps = new AYNEmployeeList();
 		//emps.getEmployees().add(new AVNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
 		
 		emps.loadList("AVN Employee List Default.csv");
-		for (AVNEmployee emp: emps.getEmployees()){
+		for (AYNEmployee emp: emps.getEmployees()){
 			employees.add(new EmployeeLine(emp));
 		}
 		
