@@ -43,7 +43,7 @@ public class FormVcontroller implements Initializable{
 	@FXML
 	public static TextField Revenues;
 	@FXML
-	public static TextField Employees;
+	private TextField Employees;
 	@FXML
 	private TextField Employment;
 	@FXML
@@ -76,15 +76,6 @@ public class FormVcontroller implements Initializable{
 			System.out.println(String.valueOf(revenue));
 			Revenues.setText(String.valueOf(revenue));
 		}
-	    
-	    public static void setEmployeeWage(int count)
-		{
-			
-		    Employees = new TextField(); 
-			System.out.println(String.valueOf(count));
-			Employees.setText(String.valueOf(count));
-		}
-		
 		
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {

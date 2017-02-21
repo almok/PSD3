@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -17,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import main.PSDSingleton;
 
 
 
@@ -82,35 +80,8 @@ public class FormSMenu implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		// on initialize
-		// simulate creating new employee if there is data in the table
-		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
-		for (int i = 0; i < arr.size() ; i ++){
-
-			EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
-			employees.add(emp);	
-			
-		}
-		
+	
 		backButton.setOnAction(e -> {
-			
-			ArrayList<String[]> formSData = new ArrayList<>();
-			for (int i = 0;i<employees.size();i++){
-				String name = employees.get(i).getNameAsString();
-				String department = employees.get(i).getDepartmentName();
-				
-				if (name != "" && department != null){
-					String[] person = new String[2];
-					person[0] = name;
-					person[1] = department;
-					formSData.add(person);
-				}
-			} 
-			
-			PSDSingleton.getInstance().setFormSData(formSData);
-			
-			
 			FormVcontroller formV = new FormVcontroller();
 			try{
 				//countEmployees(employees);

@@ -19,7 +19,6 @@ public class PSDSingleton {
 	private ArrayList<String[]> formDData;
 	private ArrayList<String[]> formPData;
 	private ArrayList<String[]> formRData;
-	private ArrayList<String[]> formSData;
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
@@ -299,19 +298,6 @@ public class PSDSingleton {
 			this.createHashFormR();
 		}
 		return formRDataHashMap.get(position);
-	}
-	
-	// Form S data
-	public void setFormSData(ArrayList<String[]> formSData){
-		this.formSData = new ArrayList<>();
-		this.formSData = formSData;
-	}
-	
-	public ArrayList<String[]> getFormSData(){
-		if (this.formSData == null){
-			this.formSData = new ArrayList<>();
-		}
-		return this.formSData;
 	}
 	
 }

@@ -35,10 +35,8 @@ public class EmployeeList {
 	// constructor
 	public EmployeeList(Employee emp , String nameP , String departmentP) {
 		
-		name = new TextField(nameP);
+		name = new TextField();
 		department = new ComboBox<>();
-		department.getSelectionModel().select(departmentP);
-//		department.setOnAction(e -> {emp.setDepartment(department.getSelectionModel().getSelectedItem());});
 		department.setPromptText("Choose");
 		department.setMinWidth(190);
 		

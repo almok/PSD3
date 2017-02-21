@@ -32,29 +32,6 @@ public class EmployeeList {
 		
 	}
 	
-	// constructor
-	public EmployeeList(Employee emp , String nameP , String departmentP) {
-		
-		name = new TextField(nameP);
-		department = new ComboBox<>();
-		department.getSelectionModel().select(departmentP);
-//		department.setOnAction(e -> {emp.setDepartment(department.getSelectionModel().getSelectedItem());});
-		department.setPromptText("Choose");
-		department.setMinWidth(190);
-		
-		
-		// add change listener to the name text box
-		name.textProperty().addListener((observable, oldValue, newValue) -> {emp.setName(newValue);});
-		
-		// check this link http://code.makery.ch/blog/javafx-2-event-handlers-and-change-listeners/
-		
-		// set department choices
-		department.getItems().addAll(departments);
-		department.setOnAction(e -> {emp.setDepartment(department.getSelectionModel().getSelectedItem());});
-		department.setVisibleRowCount(departments.size() - 1);
-		
-	}
-	
 	// getter and setter
 	public TextField getName() {
 		return name;
@@ -64,6 +41,9 @@ public class EmployeeList {
 		return name.getText();
 	}
 	
+	public Float getWage(){
+		
+	}
 
 	public ComboBox<String> getDepartment() {
 		return department;
