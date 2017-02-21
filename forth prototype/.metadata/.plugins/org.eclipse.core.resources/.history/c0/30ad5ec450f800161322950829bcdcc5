@@ -30,14 +30,12 @@ public class StartScreen extends Application implements Initializable, EventHand
 		launch(args);
 	}
 	
-	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
-	
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == startButton){
 			addRoundButton(leftVBox);
-			//CountDownTimer countDown = new CountDownTimer();
-			//countdown.display(startButton);
+			CountDownTimer countDown = new CountDownTimer();
+			countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
 			try {
 				Parent root = FXMLLoader.load(getClass().getResource("SettingsScene.fxml"));
@@ -59,15 +57,16 @@ public class StartScreen extends Application implements Initializable, EventHand
 	
 	private int roundCounter;
 	public void addRoundButton(VBox left){
+		
 		Button roundButton = new Button(" Round " + roundCounter + " ");
 		roundCounter++;
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
 			try {
-				FormVcontroller formVMenu = new FormVcontroller();
+				FormVController formVMenu = new FormVControler();
 				formVMenu.display(roundButton);
-			 } catch (Exception e1) {
-			 	e1.printStackTrace();
+			 } catch (IOException e) {
+			 	e.printStackTrace();
 			 }
 		});
 	}

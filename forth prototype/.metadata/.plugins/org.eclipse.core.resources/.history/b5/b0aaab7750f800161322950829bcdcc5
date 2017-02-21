@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class CountDownTimer extends Initializable {
-  //@Override public void start(final Stage stage) throws Exception {
+  @Override public void start(final Stage stage) throws Exception {
     final CountDown countdown = new CountDown(10);
     final CountDownLabel countdownLabel  = new CountDownLabel(countdown);
 
@@ -31,7 +31,6 @@ public class CountDownTimer extends Initializable {
     		countdown.stop();
     	}
     });
-
    
     public void display(Button button) throws IOException{
         VBox layout = new VBox(10);
@@ -41,7 +40,7 @@ public class CountDownTimer extends Initializable {
         stage.setScene(new Scene(layout));
         stage.show();
     }
-  
+  }
 }
 
 class CountDownLabel extends Label {
