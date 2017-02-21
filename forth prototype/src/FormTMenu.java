@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -16,14 +17,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
 
 public class FormTMenu implements Initializable {
 	
+	@FXML private BorderPane FormTMenu;
+	
+	
 	@FXML
-	private Button addButton, backButton, deleteButton;
+	private Button addButton, backButton, deleteButton, saveButton;
 	
 	@FXML
 	private TableView<EmployeeLine> employeeTable;
@@ -42,7 +47,8 @@ public class FormTMenu implements Initializable {
 		button6, button7, button8, button9, button10, button11, button12, button13, 
 		button14, button15, button16, button17, button18, button19, button20;
 	
-	//FormVcontroller formV = new FormVcontroller();
+	private AVNEmployeeList emps;
+	//FormVcontroller formV;
 	FormOMenu formO;
 	
 	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
@@ -64,14 +70,25 @@ public class FormTMenu implements Initializable {
 		
 		//shorthand to remove selected
 		selectedEmployees.forEach(allEmployees::remove);
-		
 	}
+	
+	@FXML
+	public void saveEmployees(){
+		ArrayList<AVNEmployee> listToSave = new ArrayList<>();
+		for(EmployeeLine empl : employeeTable.getItems()){
+			listToSave.add(empl.getEmployee());
+		}
+		emps.setEmployees(listToSave);
+		emps.toFile("AVN Employee List Default.csv");
+		emps.toFile("AVN Employee List.csv");
+	}
+	
 	
 	// display this form
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("formT.fxml"));
 		Scene scene = new Scene(parent);
-		Stage stage = (Stage) button.getScene().getWindow();
+		Stage stage = (Stage) button.getScene().getWindow();	
 		stage.hide();
 		stage.setScene(scene);
 		stage.show();
@@ -80,6 +97,16 @@ public class FormTMenu implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		// load existing employees
+		emps = new AVNEmployeeList();
+		//emps.getEmployees().add(new AVNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
+		
+		emps.loadList("AVN Employee List Default.csv");
+		for (AVNEmployee emp: emps.getEmployees()){
+			employees.add(new EmployeeLine(emp));
+		}
+		
 	
 		FormOMenu formO = new FormOMenu();
 		
@@ -87,6 +114,9 @@ public class FormTMenu implements Initializable {
 		
 			try {
 				formO.display(backButton);
+				// save employees
+				saveEmployees();
+				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 				}
@@ -95,7 +125,6 @@ public class FormTMenu implements Initializable {
 		name.setCellValueFactory(new PropertyValueFactory<>("name"));				name.setStyle("-fx-alignment: CENTER");
 		department.setCellValueFactory(new PropertyValueFactory<>("department"));
 		skill.setCellValueFactory(new PropertyValueFactory<>("skill"));				skill.setStyle("-fx-alignment: CENTER");
-
 		
 		button1.setCellValueFactory(new PropertyValueFactory<>("button1"));			button1.setStyle("-fx-alignment: CENTER");
 		button2.setCellValueFactory(new PropertyValueFactory<>("button2"));			button2.setStyle("-fx-alignment: CENTER");

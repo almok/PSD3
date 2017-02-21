@@ -8,11 +8,22 @@ public class AVNEmployee {
 	private float wage;
 	
 	
+	public AVNEmployee(String name, String department, boolean multiSkilled, int time1, int time2, int totTime, float wage) {
+		this.name = name;
+		this.department = department;
+		this.multiSkilled = multiSkilled;
+		this.time1 = time1;
+		this.time2 = time2;
+		this.totTime = totTime;
+		this.wage = wage;
+	}
+
 	public AVNEmployee () {
 		name = "";
 		department = "";
 		time1 = 0;
 		time2 = 0;
+		multiSkilled = false;
 	}
 	
 	// getters and setters
@@ -70,5 +81,30 @@ public class AVNEmployee {
 	
 	public void setWage(float wage) {
 		this.wage = wage;
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder s = new StringBuilder();
+		
+		// convert to appropriate string output
+		String department = "";
+		for (int i = 0, n = getDepartment().length(); i < n; i++) {
+		    if(getDepartment().charAt(i) == '\n'){
+		    	department += ' ';
+		    }
+		    else{
+		    	department += getDepartment().charAt(i);
+		    }
+		}
+		s.append(getName());			s.append(",");
+		s.append(department);			s.append(",");
+		s.append(getMultiSkilled());	s.append(",");
+		s.append(getTime1());			s.append(",");
+		s.append(getTime2());			s.append(",");
+		s.append(getTotTime());			s.append(",");
+		s.append(getWage());
+		return s.toString();
+		
 	}
 }

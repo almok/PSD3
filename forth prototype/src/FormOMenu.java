@@ -4,7 +4,6 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,8 +15,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -25,10 +22,13 @@ import javafx.stage.Stage;
 public class FormOMenu implements Initializable {
 	
 	@FXML
-	public Button backButton;
+	private BorderPane formOMenu;
 	
 	@FXML
-	public TextField totalKitPrice;
+	private Button backButton;
+	
+	@FXML
+	private TextField totalKitPrice;
 	
 	@FXML
 	private TableView<OrderHistory> historyTable;
@@ -63,7 +63,7 @@ public class FormOMenu implements Initializable {
 	}
 	
 	// display this form
-		public void display(Button button) throws IOException{
+	public void display(Button button) throws IOException{
 			Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
 			Scene scene = new Scene(parent);
 			Stage stage = (Stage) button.getScene().getWindow();
@@ -86,11 +86,17 @@ public class FormOMenu implements Initializable {
 				}
 		});
 		
+		// iterate through orders and add them using updateOrderHistory()
+		//
+		//
+		//
 		updateOrderHistory(new Order("aa", "dd"));
 		updateOrderHistory(new Order("vva", "dsssd"));
 		updateOrderHistory(new Order("aaddd", "dfdddd"));
+		//
+		//
 		
-		// attach values to colums
+		// attach values to columns
 		orderNoColumn.setCellValueFactory(new PropertyValueFactory<>("orderNo"));
 		orderNoColumn.setStyle("-fx-alignment: CENTER");
 		

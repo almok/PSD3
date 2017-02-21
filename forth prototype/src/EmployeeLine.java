@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.lang.Math;
 import java.util.Arrays;
 
 import javafx.scene.control.Button;
@@ -17,16 +18,25 @@ public class EmployeeLine {
 	private ArrayList<Button> buttons;
 	private ArrayList<String> departments = new ArrayList<>(Arrays.asList("Sales", "Production\nPlanning", "Goods Receipt", 
 				"Floor Control", "Production", "Ledger", "Quality\nAssurance", "Finance", "Manager"));
+	AVNEmployee emp;
 	
 	// constructor
 	public EmployeeLine(AVNEmployee emp) {
+		this.emp = emp;
 		
 		buttons = new ArrayList<>();
 		
 		name = new TextField();
+		name.setText(emp.getName());
+		
 		department = new ComboBox<>();
 		department.setPromptText("Choose");
+		if (emp.getDepartment() != ""){
+			department.getSelectionModel().select(emp.getDepartment());
+		}
 		skill = new CheckBox();
+		skill.setSelected(emp.getMultiSkilled());
+		
 		button1 = new Button();
 		button1.setText("1");
 		button2 = new Button();
@@ -68,6 +78,11 @@ public class EmployeeLine {
 		button20 = new Button();
 		button20.setText("20");
 		
+		// hold buttons in a collection
+		buttons.addAll(Arrays.asList(button1, button2, button3, button4, button5, button6, button7,
+				button8, button9, button10, button11, button12, button13, button14, button15, 
+				button16, button17, button18, button19, button20));
+		
 		// add change listener to the name text box
 		name.textProperty().addListener((observable, oldValue, newValue) -> {emp.setName(newValue);});
 		
@@ -80,6 +95,15 @@ public class EmployeeLine {
 		
 		// set multi skilled option
 		skill.setOnAction(e -> {emp.setMultiSkilled(skill.isSelected());});
+		
+		// set button styles
+		if (emp.getTime1() != 0 && emp.getTime2() != 0){
+			for(Button but:buttons){
+				if (Integer.parseInt(but.getText()) > Math.min(emp.getTime1(), emp.getTime2()) && Integer.parseInt(but.getText()) <= Math.max(emp.getTime1(), emp.getTime2())){
+					but.setStyle("-fx-background-color: green");
+				}
+			}
+		}
 		
 		// set button functions 
 		button1.setOnAction(e -> setTime(emp, button1));
@@ -103,10 +127,9 @@ public class EmployeeLine {
 		button19.setOnAction(e -> setTime(emp, button19));
 		button20.setOnAction(e -> setTime(emp, button20));
 		
-		// hold buttons in a collection
-		buttons.addAll(Arrays.asList(button1, button2, button3, button4, button5, button6, button7,
-				button8, button9, button10, button11, button12, button13, button14, button15, 
-				button16, button17, button18, button19, button20));
+		
+		
+		
 	}
 	
 	// set and and calculated employment time
@@ -125,19 +148,10 @@ public class EmployeeLine {
 		else if(emp.getTime2() == 0 && emp.getTime1() != Integer.parseInt(b.getText())){
 			
 			emp.setTime2(Integer.parseInt(b.getText()));
+			emp.setTotTime(Math.max(emp.getTime1(), emp.getTime2()) - Math.min(emp.getTime1(), emp.getTime2()));
 			
-			// set time worked and change button colors
-			if (emp.getTime1() < emp.getTime2()){
-				emp.setTotTime(emp.getTime2() - emp.getTime1());
-				for(Button but:buttons){
-					if (Integer.parseInt(but.getText()) > emp.getTime1() && Integer.parseInt(but.getText()) <= emp.getTime2() )
-					but.setStyle("-fx-background-color: green");
-				}
-			}
-			else{
-				emp.setTotTime(emp.getTime1() - emp.getTime2());
-				for(Button but:buttons){
-					if (Integer.parseInt(but.getText()) < emp.getTime1() && Integer.parseInt(but.getText()) >= emp.getTime2() )
+			for(Button but:buttons){
+				if (Integer.parseInt(but.getText()) >= Math.min(emp.getTime1(), emp.getTime2()) && Integer.parseInt(but.getText()) <= Math.max(emp.getTime1(), emp.getTime2())){
 					but.setStyle("-fx-background-color: green");
 				}
 			}
@@ -151,10 +165,12 @@ public class EmployeeLine {
 			b.setStyle("-fx-background-color: green");
 			emp.setTime2(0);
 		}
-	}
-	
+	}	
 
 	// getter and setter
+	public AVNEmployee getEmployee(){
+		return emp;
+	}
 	public TextField getName() {
 		return name;
 	}
