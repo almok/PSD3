@@ -25,28 +25,28 @@ public class FormSMenu implements Initializable {
 	private Button addButton, backButton, deleteButton;
 	
 	@FXML
-	private TableView<EmployeeLine> employeeTable;
+	private TableView<EmployeeList> employeeTable;
 	
 	@FXML
-	private TableColumn<EmployeeLine, TextField> name;
+	private TableColumn<EmployeeList, TextField> name;
 	
 	@FXML
-	private TableColumn<EmployeeLine, MenuButton> department;
+	private TableColumn<EmployeeList, MenuButton> department;
 	
 	
-	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
+	ObservableList<EmployeeList> employees = FXCollections.observableArrayList();
 
 	// creates new employee
 	@FXML
 	public void createNewEmployee(){
-		EmployeeLine emp = new EmployeeLine(new AVNEmployee());
-		employees.add(emp);
+		EmployeeList emp = new EmployeeList(new Employee());
+		employees.add(emp);	
 	}
 	
 	@FXML
 	public void deleteEmployee(){
-		ObservableList<EmployeeLine> allEmployees;
-		ObservableList<EmployeeLine> selectedEmployees;
+		ObservableList<EmployeeList> allEmployees;
+		ObservableList<EmployeeList> selectedEmployees;
 		
 		allEmployees = employeeTable.getItems();
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
@@ -56,15 +56,26 @@ public class FormSMenu implements Initializable {
 		
 	}
 	
+	public int countEmployees(ObservableList<EmployeeList> employees){
+		int numberEmployees = 0;
+		for (int i = 0;i<employees.size();i++){
+			String name = employees.get(i).getNameAsString();
+			String department = employees.get(i).getDepartmentName();
+			if (name != "" && department != null){
+				numberEmployees++;
+			}
+		}
+		return numberEmployees;
+	}
+	
 	// display this form
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("formS.fxml"));
 		Scene scene = new Scene(parent);
 		Stage stage = (Stage) button.getScene().getWindow();
-		stage.hide();
-		stage.setScene(scene);
-		stage.show();
+		stage.setTitle("Employee List");
 		scene.getStylesheets().add("Styling.css");
+		stage.setScene(scene);
 	}
 	
 	@Override
@@ -73,6 +84,8 @@ public class FormSMenu implements Initializable {
 		backButton.setOnAction(e -> {
 			FormVcontroller formV = new FormVcontroller();
 			try{
+				int numberEmployees = countEmployees(employees);
+				FormVcontroller.setEmployeeCosts(numberEmployees, 10, 20);
 				formV.display(backButton);
 			}catch(IOException e1){
 				e1.printStackTrace();
