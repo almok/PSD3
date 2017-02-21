@@ -301,6 +301,11 @@ public class PSDSingleton {
 		return formRDataHashMap.get(position);
 	}
 	
+	// fix this Boris!
+	public int getRoundTime(){
+		return 15;
+	}
+	
 	// Form S data
 	public void setFormSData(ArrayList<String[]> formSData){
 		this.formSData = new ArrayList<>();

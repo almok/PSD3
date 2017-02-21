@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.application.*;
@@ -19,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.PSDSingleton;
 import javafx.application.Application;
 
 
@@ -43,7 +45,7 @@ public class FormVcontroller implements Initializable{
 	@FXML
 	public static TextField Revenues;
 	@FXML
-	public static TextField Employees;
+	public Label Employees;
 	@FXML
 	private TextField Employment;
 	@FXML
@@ -80,9 +82,9 @@ public class FormVcontroller implements Initializable{
 	    public static void setEmployeeWage(int count)
 		{
 			
-		    Employees = new TextField(); 
-			System.out.println(String.valueOf(count));
-			Employees.setText(String.valueOf(count));
+		   // Employees = new Label(); 
+			System.out.println(String.valueOf("count of employees " + count));
+			//Employees.setText(String.valueOf(count));
 		}
 		
 		
@@ -120,6 +122,27 @@ public class FormVcontroller implements Initializable{
 					e1.printStackTrace();
 				}
 			});
+			
+			// calculate employee costs
+			// loop through employees
+			// 
+			
+			ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
+			if (arr.size() > 0){
+			int totalWageCost = 0;
+			for (int i = 0; i < arr.size() ; i ++){
+				totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
+				
+			}
+			int roundTime = PSDSingleton.getInstance().getRoundTime();
+			//System.out.println("round time " +roundTime);
+			System.out.println("total employee cost " + totalWageCost*roundTime);
+
+			//Employees = new TextField(); 
+			Employees.setText(String.valueOf(totalWageCost*roundTime));
+				} else {
+					Employees.setText("");
+					}
 		}
 	
 }		
