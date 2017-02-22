@@ -166,7 +166,15 @@ public class FormVcontroller implements Initializable{
 			for (AYNEmployee emp : ayn){
 				totPay += emp.calcWage();
 			}
-			Employment.setText(String.valueOf(totPay));
+			String pay = String.valueOf(totPay);
+			if (totPay == 0.0){
+				Employment.setText("");
+			}
+			else{
+				Employment.setText(pay);
+			}
+
+			
 		}
 	
 }		
