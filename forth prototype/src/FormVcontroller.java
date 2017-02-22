@@ -1,4 +1,5 @@
 
+import forms.AYNEmployee;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -157,6 +158,15 @@ public class FormVcontroller implements Initializable{
 				} else {
 					Employees.setText("");
 					}
+			
+			
+			// set total AYN expenses
+			ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
+			float totPay = 0;
+			for (AYNEmployee emp : ayn){
+				totPay += emp.calcWage();
+			}
+			Employment.setText(String.valueOf(totPay));
 		}
 	
 }		
