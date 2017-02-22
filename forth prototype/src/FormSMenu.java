@@ -100,7 +100,6 @@ public class FormSMenu implements Initializable {
 			ArrayList<String[]> formSData = new ArrayList<>();
 			for (int i = 0;i<employees.size();i++){
 				String name = employees.get(i).getNameAsString();
-				
 				String department = employees.get(i).getDepartmentName();
 				
 				if (name != "" && department != null){

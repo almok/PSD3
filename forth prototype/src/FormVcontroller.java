@@ -117,9 +117,8 @@ public class FormVcontroller implements Initializable{
 				}
 			});
 			
-			// calculate employee costs
-			// loop through employees
-			// 
+	
+			// calculate revenue
 			ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
 			if(array.size() > 0){
 				int totalRevenue = 0;
@@ -127,7 +126,12 @@ public class FormVcontroller implements Initializable{
 					String contractPrice = array.get(j)[2];
 					String scheduleTime = array.get(j)[3];
 					String actualTime = array.get(j)[4];
+					System.out.println("element: " + j + "\n" + 
+										"contract price: " + contractPrice + "\n" + 
+										"scheduled time: " + scheduleTime + "\n" + 
+										"actual time: " + actualTime);
 					int Revenue = (Integer.parseInt(contractPrice) - 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
+					System.out.println("revenue is: " + Revenue);
 					totalRevenue += Revenue;
 				}
 				System.out.println("total Revenue is " + totalRevenue);
@@ -140,23 +144,18 @@ public class FormVcontroller implements Initializable{
 			
 			
 			
-			
+			// calculate employee costs
 			ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 			if (arr.size() > 0){
-			int totalWageCost = 0;
-			for (int i = 0; i < arr.size() ; i ++){
-				totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
-				
-			}
-			int roundTime = PSDSingleton.getInstance().getRoundTime();
-			//System.out.println("round time " +roundTime);
-			System.out.println("total employee cost " + totalWageCost*roundTime);
-
-			//Employees = new Label(); 
-			Employees.setText(String.valueOf(totalWageCost*roundTime));
-				} else {
-					Employees.setText("");
-					}
+				int totalWageCost = 0;
+				for (int i = 0; i < arr.size() ; i ++){
+					totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
+				}
+				int roundTime = PSDSingleton.getInstance().getRoundTime();
+				Employees.setText(String.valueOf(totalWageCost*roundTime));
+			} else {
+				Employees.setText("");
+				}
 		}
 	
 }		
