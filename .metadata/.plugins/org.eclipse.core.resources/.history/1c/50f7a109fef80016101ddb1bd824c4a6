@@ -43,7 +43,7 @@ public class FormVcontroller implements Initializable{
 	@FXML
 	private Button formSButton;
 	@FXML
-	public Label Revenues;
+	public static Label Revenues;
 	@FXML
 	public Label Employees;
 	@FXML
@@ -71,7 +71,13 @@ public class FormVcontroller implements Initializable{
 			
 		}
 		
-	   
+	    public static void setRevenue(int revenue)
+		{
+			
+		    Revenues = new Label(); 
+			System.out.println(String.valueOf(revenue));
+			Revenues.setText(String.valueOf(revenue));
+		}
 	    
 	    public static void setEmployeeWage(int count)
 		{
@@ -125,17 +131,9 @@ public class FormVcontroller implements Initializable{
 				int totalRevenue = 0;
 				for(int j = 0; j < array.size(); j++ ){
 					String contractPrice = array.get(j)[2];
-					String scheduleTime = array.get(j)[3];
-					String actualTime = array.get(j)[4];
-					int Revenue = (Integer.parseInt(contractPrice) - 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
-					totalRevenue += Revenue;
+					System.out.println("contract Price is:" + contractPrice);
 				}
-				System.out.println("total Revenue is " + totalRevenue);
-				Revenues.setText(String.valueOf(totalRevenue));
-			} else {
-				Revenues.setText("");
 			}
-			
 			
 			
 			

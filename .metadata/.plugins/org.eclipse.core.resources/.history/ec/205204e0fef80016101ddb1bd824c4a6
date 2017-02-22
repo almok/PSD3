@@ -131,9 +131,7 @@ public class FormVcontroller implements Initializable{
 					totalRevenue += Revenue;
 				}
 				System.out.println("total Revenue is " + totalRevenue);
-				Revenues.setText(String.valueOf(totalRevenue));
-			} else {
-				Revenues.setText("");
+				
 			}
 			
 			

@@ -62,6 +62,21 @@ public class FormBMenu implements Initializable{
 		
 	}
 	
+	public String calculateRevenues(){
+		int rev = 0;
+		int revSum = 0;
+		for (int i = 0; i < formCounter - 1; i++) {
+			int f7 = this.isInteger(field7.get(i));
+			int f8 = this.isInteger(field8.get(i));
+			int f6 = this.isInteger(field6.get(i));
+			rev = (f7 - 30 * (f8 - f6));
+			revSum += rev;
+			
+			revenues.set(i, rev);
+		}
+		FormVcontroller.setRevenue(revSum);
+		return revSum + "";
+	}
 
 	private int isInteger(String s) {
 	    try { 

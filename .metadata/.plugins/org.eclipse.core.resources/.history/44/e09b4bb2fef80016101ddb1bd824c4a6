@@ -43,7 +43,7 @@ public class FormVcontroller implements Initializable{
 	@FXML
 	private Button formSButton;
 	@FXML
-	public Label Revenues;
+	public static Label Revenues;
 	@FXML
 	public Label Employees;
 	@FXML
@@ -71,7 +71,13 @@ public class FormVcontroller implements Initializable{
 			
 		}
 		
-	   
+	    public static void setRevenue(int revenue)
+		{
+			
+		    Revenues = new Label(); 
+			System.out.println(String.valueOf(revenue));
+			Revenues.setText(String.valueOf(revenue));
+		}
 	    
 	    public static void setEmployeeWage(int count)
 		{
@@ -131,9 +137,6 @@ public class FormVcontroller implements Initializable{
 					totalRevenue += Revenue;
 				}
 				System.out.println("total Revenue is " + totalRevenue);
-				Revenues.setText(String.valueOf(totalRevenue));
-			} else {
-				Revenues.setText("");
 			}
 			
 			
