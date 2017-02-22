@@ -32,7 +32,7 @@ public class EmployeeList {
 		
 	}
 	
-	// constructor for populating list with stored values
+	// constructor
 	public EmployeeList(Employee emp , String nameP , String departmentP) {
 		
 		name = new TextField(nameP);

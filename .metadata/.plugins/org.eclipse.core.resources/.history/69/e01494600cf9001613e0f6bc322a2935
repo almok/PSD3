@@ -38,13 +38,13 @@
     			 <Label text="Contract price (a):"/>
    			</VBox>
     		<VBox>
-    			 <TextField fx:id="orderField" promptText="" prefWidth="150" />
-    			 <TextField fx:id="chassisField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="productCodeField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="timeOfReceiptField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="leadTimeField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="scheduledDeliveryTimeField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="contractPriceField" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldOne" promptText="" prefWidth="150" />
+    			 <TextField fx:id="fieldTwo" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldThree" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldFour" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldFive" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldSix" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldSeven" promptText="" prefWidth="150"/>
        		</VBox>
     		<VBox>    
     		  
@@ -55,10 +55,10 @@
        		</VBox>
     		<VBox>
     		
-    			 <TextField fx:id="actualDeliveryTimeField" promptText="0" prefWidth="150"/>
-    			 <TextField fx:id="timeDifferenceField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="penaltyPriceField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="revenueField" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldEight" promptText="0" prefWidth="150"/>
+    			 <TextField fx:id="fieldNine" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldTen" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="fieldEleven" promptText="" prefWidth="150"/>
        		</VBox>
        </HBox>
      </center>

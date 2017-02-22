@@ -57,7 +57,7 @@
     		
     			 <TextField fx:id="actualDeliveryTimeField" promptText="0" prefWidth="150"/>
     			 <TextField fx:id="timeDifferenceField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="penaltyPriceField" promptText="" prefWidth="150"/>
+    			 <TextField fx:id="penaltyPriceField promptText="" prefWidth="150"/>
     			 <TextField fx:id="revenueField" promptText="" prefWidth="150"/>
        		</VBox>
        </HBox>
