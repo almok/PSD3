@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.PSDSingleton;
 
 
 
@@ -87,8 +89,12 @@ public class FormOMenu implements Initializable {
 		});
 		
 		// iterate through orders and add them using updateOrderHistory()
-		//
-		//
+		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormBData();
+		if (!arr.isEmpty()){
+			for (String [] data : arr){
+				updateOrderHistory(new Order(data[0], data[1], data[3], data[4], data[5], data[6]));
+			}
+		}
 		//
 		updateOrderHistory(new Order("talk to me", "aa", "dd", null, null, null));
 		updateOrderHistory(new Order(" shake that ass", "vva", "dsssd", null, null, null));
@@ -97,7 +103,7 @@ public class FormOMenu implements Initializable {
 		//
 		
 		// attach values to columns
-		orderNoColumn.setCellValueFactory(new PropertyValueFactory<>("orderNo"));
+		orderNoColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
 		orderNoColumn.setStyle("-fx-alignment: CENTER");
 		
 		productCodeColumn.setCellValueFactory(new PropertyValueFactory<>("productCode"));

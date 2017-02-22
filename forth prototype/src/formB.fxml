@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.*?>
@@ -6,63 +9,131 @@
 <?import javafx.scene.textfield.*?>
 <?import javafx.geometry.Insets?>
 
-
-<BorderPane fx:id = "borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="FormBMenu">
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FormBMenu">
 	
  	<top>
- 		<HBox fx:id = "topHBox">
-	        <Button fx:id = "backButton" text="Back"  />
-	        <Button fx:id = "newButton" text="New" />
-       		<Button fx:id = "deleteButton" text="Delete"/>
-       		<Button fx:id = "clearButton" text="Clear"/>
+ 		<HBox fx:id="topHBox">
+    <children>
+   	        <Button fx:id="backButton" prefHeight="40.0" prefWidth="85.0" text="Back">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding></Button>
+   	        <Button fx:id="newButton" prefHeight="40.0" prefWidth="85.0" text="New">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding></Button>
+          		<Button fx:id="deleteButton" prefHeight="40.0" prefWidth="85.0" text="Delete">
+               <HBox.margin>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+               </padding></Button>
+          		<Button fx:id="clearButton" prefHeight="40.0" prefWidth="85.0" text="Clear">
+               <HBox.margin>
+                  <Insets top="4.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets top="4.0" />
+               </padding></Button>
+    </children>
        </HBox>
     </top>
 
     <left>
-    	<VBox fx:id = "leftVBox">
-       </VBox>
+    	<VBox fx:id="leftVBox">
+         <children>
+            <Region prefWidth="100.0" />
+         </children></VBox>
     </left>
     
     
-    <center>   
-    	<HBox fx:id = "centerHBox">
-    		<VBox>
-    			 <Label text="Order number:"/>
-    			 <Label text="Chassis Type:"/>
-    			 <Label text="Product Code (C):"/>
-    			 
-    			 <Label text="Time of receipt of order :"/>
-    			 <Label text="Scheduled lead time (D):"/>
-    			 <Label text="Scheduled delivery time:"/>
-    			 <Label text="Contract price (a):"/>
-   			</VBox>
-    		<VBox>
-    			 <TextField fx:id="orderField" promptText="" prefWidth="150" />
-    			 <TextField fx:id="chassisField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="productCodeField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="timeOfReceiptField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="leadTimeField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="scheduledDeliveryTimeField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="contractPriceField" promptText="" prefWidth="150"/>
-       		</VBox>
-    		<VBox>    
-    		  
-    			 <Label text="Actual Delivery Time:"/>
-    			 <Label text="Schedule and Actual Time Difference:"/>
-    			 <Label text="Penalty (b):"/>
-    			 <Label text="Revenue (a-b):"/>
-       		</VBox>
-    		<VBox>
-    		
-    			 <TextField fx:id="actualDeliveryTimeField" promptText="0" prefWidth="150"/>
-    			 <TextField fx:id="timeDifferenceField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="penaltyPriceField" promptText="" prefWidth="150"/>
-    			 <TextField fx:id="revenueField" promptText="" prefWidth="150"/>
-       		</VBox>
-       </HBox>
+    <center>
+      <VBox fx:id="centerHBox" prefHeight="500.0">
+         <children>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Order number:" />
+          			 <TextField fx:id="orderField" prefWidth="150" promptText="" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Product Code (C):" />
+          			 <TextField fx:id="productCodeField" prefWidth="150" promptText="e.g. FST270X" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Chassis Type:" />
+          			 <TextField fx:id="chassisField" editable="false" prefWidth="150" promptText="" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 
+                			 <Label prefHeight="17.0" prefWidth="153.0" text="Time of receipt of order :" />
+          			 <TextField fx:id="timeOfReceiptField" prefWidth="150" promptText="" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Scheduled lead time (D):" />
+          			 <TextField fx:id="leadTimeField" prefWidth="150" promptText="time in minutes" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Scheduled delivery time:" />
+          			 <TextField fx:id="scheduledDeliveryTimeField" prefWidth="150" promptText="time in minutes" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Contract price (a):" />
+          			 <TextField fx:id="contractPriceField" prefWidth="150" promptText="" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>          		  
+          		<Label prefHeight="17.0" prefWidth="153.0" text="Actual Delivery Time:" />
+                <TextField fx:id="actualDeliveryTimeField" prefWidth="150" promptText="0" />
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="46.0" prefWidth="153.0" text="${'Schedule and Actual\nTime Difference:'}" />
+          			 <TextField fx:id="timeDifferenceField" alignment="CENTER" editable="false" prefWidth="150" promptText="">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin></TextField>
+               </children>
+            </HBox>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+               <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Penalty (b):" />
+          			 <TextField fx:id="penaltyPriceField" alignment="CENTER" editable="false" prefWidth="150.0" promptText="" />
+               </children>
+            </HBox>   
+          	<HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
+             <children>
+          			 <Label prefHeight="17.0" prefWidth="153.0" text="Revenue (a-b):" />
+          			 <TextField fx:id="revenueField" alignment="CENTER" editable="false" prefWidth="150" promptText="" />
+             </children>
+             </HBox>
+         </children>
+      </VBox>
      </center>
     <right>     </right>
     <bottom>    </bottom>
+   <bottom>
+      <HBox prefHeight="23.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </bottom>
     
 </BorderPane>
