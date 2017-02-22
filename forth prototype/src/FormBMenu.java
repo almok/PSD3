@@ -291,7 +291,7 @@ public class FormBMenu implements Initializable{
 					formBData.add(_order);
 				}
 		}
-		System.out.println("field 1 saved  :" + formBData.get(0)[0]);
+		//System.out.println("field 1 saved  :" + formBData.get(0)[0]);
 		PSDSingleton.getInstance().setFormBData(formBData);
 		
 		
