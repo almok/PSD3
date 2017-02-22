@@ -1,4 +1,7 @@
 package forms;
+
+import main.PSDSingleton;
+
 public class AYNEmployee {
 
 	
@@ -25,6 +28,17 @@ public class AYNEmployee {
 		time1 = 0;
 		time2 = 0;
 		multiSkilled = false;
+	}
+	
+	// calculate wage
+	public float calcWage(){
+		if (multiSkilled){
+			wage = PSDSingleton.getInstance().getEmployeeWage("AYN employee multiskilled");
+		}
+		else{
+			wage = PSDSingleton.getInstance().getEmployeeWage("AYN employee");
+		}
+		return wage*totTime;
 	}
 	
 	// getters and setters

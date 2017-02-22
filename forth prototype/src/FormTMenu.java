@@ -124,9 +124,9 @@ public class FormTMenu implements Initializable {
 		backButton.setOnAction(e -> {
 		
 			try {
-				formV.display(backButton);
 				// save employees
 				saveEmployees();
+				formV.display(backButton);
 				
 			} catch (IOException e1) {
 				e1.printStackTrace();
