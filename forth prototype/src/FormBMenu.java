@@ -89,6 +89,8 @@ public class FormBMenu implements Initializable{
 	}
 	
 	private void displayValues(int c){
+		System.out.println("displaying values : " + c);
+		System.out.println("field one display :" + field1.get(c));
 		fieldOne.setText(field1.get(c));
 		fieldTwo.setText(field2.get(c));
 		fieldThree.setText(field3.get(c));
@@ -148,8 +150,7 @@ public class FormBMenu implements Initializable{
 		field9.set(c, fieldNine.getText());
 		field10.set(c, fieldTen.getText());
 		field11.set(c, fieldEleven.getText());
-		orders.get(c).setOrderNumber(fieldOne.getText());
-	    orders.get(c).setScheduleTime(fieldSix.getText());
+		
 	    
 	}
 	
@@ -160,13 +161,27 @@ public class FormBMenu implements Initializable{
 	
 	private void addFormButtons(VBox left){
 		int c = formCounter;
-		if (formCounter > 0 && formCounter < 10){ 
+		if(formCounter == 1){
+			Button formButton = new Button(" Order " + formCounter + " ");
+			formCounter++;
+			left.getChildren().add(formButton);
+            formButton.setOnAction(e -> {
+				
+				System.out.println("current form is :" + currentForm);
+				
+				currentForm = c;
+				displayValues(c -1);
+				//saveFields(currentForm - 1);
+			});
+		}
+		else if (formCounter > 1 && formCounter < 10){ 
 			Button formButton = new Button(" Order " + formCounter + " ");
 			//Order order = new Order(Integer.toString(c), null, null, null, null, null);
 			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
 				
+				System.out.println("current form is :" + currentForm);
 				saveFields(currentForm - 1);
 				currentForm = c;
 				displayValues(c -1);
@@ -223,14 +238,14 @@ public class FormBMenu implements Initializable{
 	@FXML
 	private static Button form3;
 	
-	ObservableList<orderList> orders = FXCollections.observableArrayList();
-	public void createNewOrder(){
+	ObservableList<Order> orders = FXCollections.observableArrayList();
+	/*public void createNewOrder(){
 		
-		orderList order = new orderList(new Order(null, null, null, null, null, null));
+		Order order = new Order(null, null, null, null, null, null);
 		orders.add(order);
 		saveFields();
 		addFormButtons(leftVBox);
-	}
+	}*/
 	
 	
 	
@@ -240,38 +255,58 @@ public class FormBMenu implements Initializable{
 		//if there is data in forms simulate adding new order
 		
 		ArrayList<String []> array = PSDSingleton.getInstance().getFormBData();
+		System.out.println(array.size());
 		
 		for (int i = 0; i < array.size() ; i ++){
-
-			orderList order = new orderList(new Order(null, null, null, null, null, null), array.get(i)[0], array.get(i)[1]);
-			orders.add(order);	
+			
+				System.out.println("i is " + i);
+				field1.set(i, array.get(i)[0]);
+				field3.set(i, array.get(i)[1]);
+				field7.set(i, array.get(i)[2]);
+				field6.set(i, array.get(i)[3]);
+				field8.set(i, array.get(i)[4]);
+				
+				addFormButtons(leftVBox);
 			
 		}
+		
 		for(int j = 0; j < orders.size(); j++)
 		{
-			System.out.println("Order number is"  + orders.get(j).getOrderNumberAsString());
-			System.out.println("Schedule Time :" + orders.get(j).getScheduleTimeAsString());
-			field1.set(j , orders.get(j).getOrderNumberAsString());
-			field6.set(j, orders.get(j).getScheduleTimeAsString());
-			addFormButtons(leftVBox);
+			//System.out.println("Order number is"  + orders.get(j).getOrderNumberAsString());
+			//System.out.println("Schedule Time :" + orders.get(j).getScheduleTimeAsString());
+			//field1.set(j , orders.get(j).getOrderNumberAsString());
+			//field6.set(j, orders.get(j).getScheduleTimeAsString());
+			//addFormButtons(leftVBox);
 			
 		}
 		backButton.setOnAction(e -> {
 			ArrayList<String[]> formBData = new ArrayList<>();
-			System.out.println(orders);
-		for(int k = 0; k < orders.size(); k++){
-			String orderNum = orders.get(k).getOrderNumberAsString();
-			String schedTime = orders.get(k).getScheduleTimeAsString();
-			System.out.println("Sched is " + orders.get(k).getScheduleTimeAsString());
-			System.out.println( "order is " + orders.get(k).getOrderNumber());
-			if(orderNum != "" || schedTime != ""){
-				String[] _order = new String[2];
-				_order[0] = orderNum;
-				_order[1] = schedTime;
-				formBData.add(_order);
+			//iterate fields creating orders
+			for(int i = 0; i < field1.size(); i++)
+			{
+				Order order = new Order(field1.get(i),field3.get(i) , field7.get(i), field6.get(i),field8.get(i) , null);
+				System.out.println(order.getOrderNumber());
+				orders.add(order);
 			}
+		    //iterate orders adding to formB Data
+			for(int k = 0; k < orders.size(); k++){
+				String orderNum = orders.get(k).getOrderNumber();
+				String productCode = orders.get(k).getProductCode();
+				String contractPrice = orders.get(k).getContractPrice();
+				String scheduleTime = orders.get(k).getScheduleTime();
+				String actualTime = orders.get(k).getActualTime();
+				if(orderNum != ""){
+					String[] _order = new String[5];
+					_order[0] = orderNum;
+					_order[1] = productCode;
+					_order[2] = contractPrice;
+					_order[3] = scheduleTime;
+					_order[4] = actualTime;
+					
+					formBData.add(_order);
+				}
 		}
-		
+		System.out.println("field 1 saved  :" + formBData.get(0)[0]);
 		PSDSingleton.getInstance().setFormBData(formBData);
 		
 		
@@ -292,7 +327,7 @@ public class FormBMenu implements Initializable{
 		
 		
 		
-		fieldEight.textProperty().addListener((observable, oldValue, newValue) -> {
+		/*fieldEight.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		    calculateTimeDif();
 		});
@@ -304,7 +339,11 @@ public class FormBMenu implements Initializable{
 		fieldSix.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		});
-		
+		*/
+		newButton.setOnAction(event -> {
+			saveFields();
+			addFormButtons(leftVBox);
+        });
 	
 	}
 	

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.PSDSingleton;
 
 public class FormBMenu implements Initializable{
 	//private static Button backButton;
@@ -45,6 +48,7 @@ public class FormBMenu implements Initializable{
 	private ArrayList<String> field11 = new ArrayList<String>(Collections.nCopies(20, ""));
 	
 	private ArrayList<Integer> revenues = new ArrayList<Integer>(Collections.nCopies(20, 0));
+	
 	
 	
 	private void calculateTimeDif(){
@@ -99,14 +103,14 @@ public class FormBMenu implements Initializable{
 		
 	}
 	//save orders
-	private void saveOrders(int formCounter){
+	/*private void saveOrders(int formCounter){
 	int c = 0;
-	Main.orders.clear();
+	orders.clear();
 	for(int i = 0; i < formCounter ; i++){
 		Order order = new Order(null, null, null, null, null, null);
 		
 		order.setContractPrice(field7.get(i));
-		Main.orders.add(order);
+		orders.add(order);
 		c++;
 	}
 	
@@ -114,7 +118,7 @@ public class FormBMenu implements Initializable{
 	}
 	private void displayOrders(){
 		int j = 0;
-		for(Order order: Main.orders)
+		for(Order order: orders)
 		{
 			//field1.set(j, order.get);
 			//field2.set(j, fieldTwo.getText());
@@ -131,7 +135,7 @@ public class FormBMenu implements Initializable{
 			addFormButtons(leftVBox);
 		}
 		
-	}
+	}*/
 	private void saveFields(int c){
 		field1.set(c, fieldOne.getText());
 		field2.set(c, fieldTwo.getText());
@@ -144,6 +148,9 @@ public class FormBMenu implements Initializable{
 		field9.set(c, fieldNine.getText());
 		field10.set(c, fieldTen.getText());
 		field11.set(c, fieldEleven.getText());
+		//orders.get(c).setOrderNumber(fieldOne.getText());
+	    //orders.get(c).setScheduleTime(fieldSix.getText());
+	    
 	}
 	
 	private void saveFields(){
@@ -177,6 +184,7 @@ public class FormBMenu implements Initializable{
 			});
 		}
 	}
+
 	
 
 
@@ -215,30 +223,79 @@ public class FormBMenu implements Initializable{
 	@FXML
 	private static Button form3;
 	
+	ObservableList<Order> orders = FXCollections.observableArrayList();
+	/*public void createNewOrder(){
+		
+		Order order = new Order(null, null, null, null, null, null);
+		orders.add(order);
+		saveFields();
+		addFormButtons(leftVBox);
+	}*/
 	
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
+		//if there is data in forms simulate adding new order
 		
-		//re-populate forms
-		displayOrders();		
-		
-		newButton.setOnAction(event -> {
-			saveFields();
-			addFormButtons(leftVBox);
-        });
-		
-		
-		fieldEight.textProperty().addListener((observable, oldValue, newValue) -> {
-		    saveFields();
-		    calculateTimeDif();
-		});
-		
+		ArrayList<String []> array = PSDSingleton.getInstance().getFormBData();
+		System.out.println(array.size());
+		System.out.println("field 1 load : " + array.get(0)[0]);
+		for (int i = 0; i < array.size() ; i ++){
+
+				
+				field1.set(i, array.get(i)[0]);
+				field3.set(i, array.get(i)[1]);
+				field7.set(i, array.get(i)[2]);
+				field6.set(i, array.get(i)[3]);
+				field8.set(i, array.get(i)[4]);
+				addFormButtons(leftVBox);
+			
+		}
+		for(int j = 0; j < orders.size(); j++)
+		{
+			//System.out.println("Order number is"  + orders.get(j).getOrderNumberAsString());
+			//System.out.println("Schedule Time :" + orders.get(j).getScheduleTimeAsString());
+			//field1.set(j , orders.get(j).getOrderNumberAsString());
+			//field6.set(j, orders.get(j).getScheduleTimeAsString());
+			//addFormButtons(leftVBox);
+			
+		}
 		backButton.setOnAction(e -> {
-			FormVcontroller formV = new FormVcontroller();
-			saveOrders(formCounter );
+			ArrayList<String[]> formBData = new ArrayList<>();
+			//iterate fields creating orders
+			for(int i = 0; i < field1.size(); i++)
+			{
+				Order order = new Order(field1.get(i),field3.get(i) , field7.get(i), field6.get(i),field8.get(i) , null);
+				System.out.println(order.getOrderNumber());
+				orders.add(order);
+			}
+		    //iterate orders adding to formB Data
+			for(int k = 0; k < orders.size(); k++){
+				String orderNum = orders.get(k).getOrderNumber();
+				String productCode = orders.get(k).getProductCode();
+				String contractPrice = orders.get(k).getContractPrice();
+				String scheduleTime = orders.get(k).getScheduleTime();
+				String actualTime = orders.get(k).getActualTime();
+				if(orderNum != ""){
+					String[] _order = new String[5];
+					_order[0] = orderNum;
+					_order[1] = productCode;
+					_order[2] = contractPrice;
+					_order[3] = scheduleTime;
+					_order[4] = actualTime;
+					
+					formBData.add(_order);
+				}
+		}
+		System.out.println("field 1 saved  :" + formBData.get(0)[0]);
+		PSDSingleton.getInstance().setFormBData(formBData);
+		
+		
+		
+					FormVcontroller formV = new FormVcontroller();
+			
 			
 			try{
 				formV.display(backButton);
@@ -247,8 +304,29 @@ public class FormBMenu implements Initializable{
 			}
 		});
 		
+		//re-populate forms
+		//displayOrders();		
 		
 		
+		
+		
+		/*fieldEight.textProperty().addListener((observable, oldValue, newValue) -> {
+		    saveFields();
+		    calculateTimeDif();
+		});
+		
+		fieldOne.textProperty().addListener((observable, oldValue, newValue) -> {
+		    saveFields();
+		});
+		
+		fieldSix.textProperty().addListener((observable, oldValue, newValue) -> {
+		    saveFields();
+		});
+		*/
+		newButton.setOnAction(event -> {
+			saveFields();
+			addFormButtons(leftVBox);
+        });
 	
 	}
 	
