@@ -35,17 +35,17 @@ public class FormBMenu implements Initializable{
 	
 	
 	
-	private ArrayList<String> field1 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field2 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field3 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field4 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field5 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field6 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field7 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field8 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field9 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field10 = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> field11 = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> orderArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> chassisArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> productCodeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> timeOfReceiptArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> leadTimeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> scheduledDeliveryTimeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> contractPriceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> actualDeliveryTimeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> timeDifferenceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> penaltyPriceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> revenueArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
 	
 	private ArrayList<Integer> revenues = new ArrayList<Integer>(Collections.nCopies(20, 0));
 	
@@ -54,10 +54,10 @@ public class FormBMenu implements Initializable{
 	private void calculateTimeDif(){
 		String timeDif;
 	
-			int Actual = Integer.parseInt(fieldEight.getText());
-			int scheduled = Integer.parseInt(fieldSix.getText());
+			int Actual = Integer.parseInt(actualDeliveryTimeField.getText());
+			int scheduled = Integer.parseInt(scheduledDeliveryTimeField.getText());
 			timeDif = String.valueOf(Actual - scheduled);
-			fieldNine.setText(timeDif);
+			timeDifferenceField.setText(timeDif);
 			saveFields();
 		
 	}
@@ -75,18 +75,18 @@ public class FormBMenu implements Initializable{
 	
 	private void displayValues(int c){
 		System.out.println("displaying values : " + c);
-		System.out.println("field one display :" + field1.get(c));
-		fieldOne.setText(field1.get(c));
-		fieldTwo.setText(field2.get(c));
-		fieldThree.setText(field3.get(c));
-		fieldFour.setText(field4.get(c));
-		fieldFive.setText(field5.get(c));
-		fieldSix.setText(field6.get(c));
-		fieldSeven.setText(field7.get(c));
-		fieldEight.setText(field8.get(c));
-		fieldNine.setText(field9.get(c));
-		fieldTen.setText(field10.get(c));
-		fieldEleven.setText(field11.get(c));
+		System.out.println("field one display :" + orderArrayList.get(c));
+		orderField.setText(orderArrayList.get(c));
+		chassisField.setText(chassisArrayList.get(c));
+		productCodeField.setText(productCodeArrayList.get(c));
+		timeOfReceiptField.setText(timeOfReceiptArrayList.get(c));
+		leadTimeField.setText(leadTimeArrayList.get(c));
+		scheduledDeliveryTimeField.setText(scheduledDeliveryTimeArrayList.get(c));
+		contractPriceField.setText(contractPriceArrayList.get(c));
+		actualDeliveryTimeField.setText(actualDeliveryTimeArrayList.get(c));
+		timeDifferenceField.setText(timeDifferenceArrayList.get(c));
+		penaltyPriceField.setText(penaltyPriceArrayList.get(c));
+		revenueField.setText(revenueArrayList.get(c));
 		
 	}
 	//save orders
@@ -96,7 +96,7 @@ public class FormBMenu implements Initializable{
 	for(int i = 0; i < formCounter ; i++){
 		Order order = new Order(null, null, null, null, null, null);
 		
-		order.setContractPrice(field7.get(i));
+		order.setContractPrice(contractPriceArrayList.get(i));
 		orders.add(order);
 		c++;
 	}
@@ -107,34 +107,34 @@ public class FormBMenu implements Initializable{
 		int j = 0;
 		for(Order order: orders)
 		{
-			//field1.set(j, order.get);
-			//field2.set(j, fieldTwo.getText());
-			//field3.set(j, fieldThree.getText());
-			//field4.set(j, fieldFour.getText());
-			//field5.set(j, fieldFive.getText());
-			field6.set(j, order.getScheduleTime());
-			field7.set(j, order.getContractPrice());
-			field8.set(j, order.getActualTime());
-			//field9.set(j, fieldNine.getText());
-			//field10.set(j, fieldTen.getText());
-			//field11.set(j, fieldEleven.getText());
+			//orderArrayList.set(j, order.get);
+			//chassisArrayList.set(j, chassisField.getText());
+			//productCodeArrayList.set(j, productCodeField.getText());
+			//timeOfReceiptArrayList.set(j, timeOfReceiptField.getText());
+			//leadTimeArrayList.set(j, leadTimeField.getText());
+			scheduledDeliveryTimeArrayList.set(j, order.getScheduleTime());
+			contractPriceArrayList.set(j, order.getContractPrice());
+			actualDeliveryTimeArrayList.set(j, order.getActualTime());
+			//timeDifferenceArrayList.set(j, timeDifferenceField.getText());
+			//penaltyPriceArrayList.set(j, penaltyPriceField.getText());
+			//revenueArrayList.set(j, revenueField.getText());
 			j++;
 			addFormButtons(leftVBox);
 		}
 		
 	}*/
 	private void saveFields(int c){
-		field1.set(c, fieldOne.getText());
-		field2.set(c, fieldTwo.getText());
-		field3.set(c, fieldThree.getText());
-		field4.set(c, fieldFour.getText());
-		field5.set(c, fieldFive.getText());
-		field6.set(c, fieldSix.getText());
-		field7.set(c, fieldSeven.getText());
-		field8.set(c, fieldEight.getText());
-		field9.set(c, fieldNine.getText());
-		field10.set(c, fieldTen.getText());
-		field11.set(c, fieldEleven.getText());
+		orderArrayList.set(c, orderField.getText());
+		chassisArrayList.set(c, chassisField.getText());
+		productCodeArrayList.set(c, productCodeField.getText());
+		timeOfReceiptArrayList.set(c, timeOfReceiptField.getText());
+		leadTimeArrayList.set(c, leadTimeField.getText());
+		scheduledDeliveryTimeArrayList.set(c, scheduledDeliveryTimeField.getText());
+		contractPriceArrayList.set(c, contractPriceField.getText());
+		actualDeliveryTimeArrayList.set(c, actualDeliveryTimeField.getText());
+		timeDifferenceArrayList.set(c, timeDifferenceField.getText());
+		penaltyPriceArrayList.set(c, penaltyPriceField.getText());
+		revenueArrayList.set(c, revenueField.getText());
 		
 	    
 	}
@@ -195,27 +195,27 @@ public class FormBMenu implements Initializable{
 	@FXML
 	private VBox leftVBox;
 	@FXML
-	private  TextField fieldOne;
+	private  TextField orderField;
 	@FXML
-	private  TextField fieldTwo;
+	private  TextField chassisField;
 	@FXML
-	private  TextField fieldThree;
+	private  TextField productCodeField;
 	@FXML
-	private  TextField fieldFour;
+	private  TextField timeOfReceiptField;
 	@FXML
-	private  TextField fieldFive;
+	private  TextField leadTimeField;
 	@FXML
-	private  TextField fieldSix;
+	private  TextField scheduledDeliveryTimeField;
 	@FXML
-	private  TextField fieldSeven;
+	private  TextField contractPriceField;
 	@FXML
-	private  TextField fieldEight;
+	private  TextField actualDeliveryTimeField;
 	@FXML
-	private  TextField fieldNine;
+	private  TextField timeDifferenceField;
 	@FXML
-	private  TextField fieldTen;
+	private  TextField penaltyPriceField;
 	@FXML
-	private  TextField fieldEleven;
+	private  TextField revenueField;
 	@FXML
 	private static Button form1;
 	@FXML
@@ -245,11 +245,11 @@ public class FormBMenu implements Initializable{
 		for (int i = 0; i < array.size() ; i ++){
 			
 				System.out.println("i is " + i);
-				field1.set(i, array.get(i)[0]);
-				field3.set(i, array.get(i)[1]);
-				field7.set(i, array.get(i)[2]);
-				field6.set(i, array.get(i)[3]);
-				field8.set(i, array.get(i)[4]);
+				orderArrayList.set(i, array.get(i)[0]);
+				productCodeArrayList.set(i, array.get(i)[1]);
+				contractPriceArrayList.set(i, array.get(i)[2]);
+				scheduledDeliveryTimeArrayList.set(i, array.get(i)[3]);
+				actualDeliveryTimeArrayList.set(i, array.get(i)[4]);
 				
 				addFormButtons(leftVBox);
 			
@@ -259,17 +259,17 @@ public class FormBMenu implements Initializable{
 		{
 			//System.out.println("Order number is"  + orders.get(j).getOrderNumberAsString());
 			//System.out.println("Schedule Time :" + orders.get(j).getScheduleTimeAsString());
-			//field1.set(j , orders.get(j).getOrderNumberAsString());
-			//field6.set(j, orders.get(j).getScheduleTimeAsString());
+			//orderArrayList.set(j , orders.get(j).getOrderNumberAsString());
+			//scheduledDeliveryTimeArrayList.set(j, orders.get(j).getScheduleTimeAsString());
 			//addFormButtons(leftVBox);
 			
 		}
 		backButton.setOnAction(e -> {
 			ArrayList<String[]> formBData = new ArrayList<>();
 			//iterate fields creating orders
-			for(int i = 0; i < field1.size(); i++)
+			for(int i = 0; i < orderArrayList.size(); i++)
 			{
-				Order order = new Order(field1.get(i),field3.get(i) , field7.get(i), field6.get(i),field8.get(i) , null);
+				Order order = new Order(orderArrayList.get(i),productCodeArrayList.get(i) , contractPriceArrayList.get(i), scheduledDeliveryTimeArrayList.get(i),actualDeliveryTimeArrayList.get(i) , null);
 				System.out.println(order.getOrderNumber());
 				orders.add(order);
 			}
@@ -312,16 +312,16 @@ public class FormBMenu implements Initializable{
 		
 		
 		
-		/*fieldEight.textProperty().addListener((observable, oldValue, newValue) -> {
+		/*actualDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		    calculateTimeDif();
 		});
 		
-		fieldOne.textProperty().addListener((observable, oldValue, newValue) -> {
+		orderField.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		});
 		
-		fieldSix.textProperty().addListener((observable, oldValue, newValue) -> {
+		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		});
 		*/
