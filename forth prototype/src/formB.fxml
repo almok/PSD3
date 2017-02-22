@@ -12,8 +12,8 @@
 	
  	<top>
  		<HBox fx:id = "topHBox">
-	        <Button fx:id = "backButton" text="Back" />
-	        <Button fx:id = "newButton" text="New"/>
+	        <Button fx:id = "backButton" text="Back"  />
+	        <Button fx:id = "newButton" text="New" onAction = "#createNewOrder"/>
        		<Button fx:id = "deleteButton" text="Delete"/>
        		<Button fx:id = "clearButton" text="Clear"/>
        </HBox>

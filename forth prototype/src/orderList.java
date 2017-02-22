@@ -36,7 +36,31 @@ public class orderList {
 	    contractPrice.textProperty().addListener((observable, oldValue, newValue) -> {order.setContractPrice(newValue);});
 	    deliveryTime.textProperty().addListener((observable, oldValue, newValue) -> {order.setActualTime(newValue);});
 	}
-	public String getOrderNumber(){
+	
+	public orderList(Order order, String OrderNo, String schedTime){
+		OrderNum = new TextField(OrderNo);
+		scheduleTime = new TextField(schedTime);
+		OrderNum.textProperty().addListener((observable, oldValue, newValue) -> {order.setOrderNumber(newValue);});
+		scheduleTime.textProperty().addListener((observable, oldValue, newValue) -> {order.setScheduleTime(newValue);});
+	}
+	public TextField getOrderNumber(){
+		return OrderNum;
+	}
+	public String getOrderNumberAsString(){
 		return OrderNum.getText();
 	}
+	public void setOrderNumber(String OrderNum){
+		this.OrderNum.setText(OrderNum);
+	}
+	public TextField getScheduleTime(){
+		return scheduleTime;
+	}
+	public String getScheduleTimeAsString(){
+		return scheduleTime.getText();
+	}
+	public void setScheduleTime(String schedTime)
+	{
+		this.scheduleTime.setText(schedTime);
+	}
+	
 }

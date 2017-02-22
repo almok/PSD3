@@ -43,6 +43,7 @@ public class FormSMenu implements Initializable {
 	public void createNewEmployee(){
 		EmployeeList emp = new EmployeeList(new Employee());
 		employees.add(emp);	
+		
 	}
 	
 	@FXML
@@ -87,9 +88,10 @@ public class FormSMenu implements Initializable {
 		// simulate creating new employee if there is data in the table
 		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 		for (int i = 0; i < arr.size() ; i ++){
-
+            
 			EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
 			employees.add(emp);	
+			
 			
 		}
 		
@@ -98,6 +100,7 @@ public class FormSMenu implements Initializable {
 			ArrayList<String[]> formSData = new ArrayList<>();
 			for (int i = 0;i<employees.size();i++){
 				String name = employees.get(i).getNameAsString();
+				
 				String department = employees.get(i).getDepartmentName();
 				
 				if (name != "" && department != null){
