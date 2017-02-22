@@ -1,4 +1,5 @@
 package main;
+import forms.AYNEmployee;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +21,7 @@ public class PSDSingleton {
 	private ArrayList<String[]> formPData;
 	private ArrayList<String[]> formRData;
 	private ArrayList<String[]> formSData;
+	private ArrayList<AYNEmployee> formTData;
 	private ArrayList<String[]> formBData;
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
@@ -318,6 +320,19 @@ public class PSDSingleton {
 			this.formSData = new ArrayList<>();
 		}
 		return this.formSData;
+	}
+	
+	// Form T data
+	public void setFormTData(ArrayList<AYNEmployee> formTData){
+		this.formTData = new ArrayList<>();
+		this.formTData = formTData;
+	}
+	
+	public ArrayList<AYNEmployee> getFormTData(){
+		if (this.formTData == null){
+			this.formTData = new ArrayList<>();
+		}
+		return this.formTData;
 	}
 	
 	

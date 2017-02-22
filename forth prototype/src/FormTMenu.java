@@ -1,3 +1,4 @@
+import forms.AYNEmployee;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import main.PSDSingleton;
 
 
 
@@ -30,19 +32,19 @@ public class FormTMenu implements Initializable {
 	private Button addButton, backButton, deleteButton, saveButton;
 	
 	@FXML
-	private TableView<EmployeeLine> employeeTable;
+	private TableView<AYNEmployeeLine> employeeTable;
 	
 	@FXML
-	private TableColumn<EmployeeLine, TextField> name;
+	private TableColumn<AYNEmployeeLine, TextField> name;
 	
 	@FXML
-	private TableColumn<EmployeeLine, MenuButton> department;
+	private TableColumn<AYNEmployeeLine, MenuButton> department;
 	
 	@FXML
-	private TableColumn<EmployeeLine, CheckBox> skill;
+	private TableColumn<AYNEmployeeLine, CheckBox> skill;
 	
 	@FXML
-	private TableColumn<EmployeeLine, Button> button1, button2, button3, button4, button5, 
+	private TableColumn<AYNEmployeeLine, Button> button1, button2, button3, button4, button5, 
 		button6, button7, button8, button9, button10, button11, button12, button13, 
 		button14, button15, button16, button17, button18, button19, button20;
 	
@@ -50,19 +52,19 @@ public class FormTMenu implements Initializable {
 	FormVcontroller formV;
 	FormOMenu formO;
 	
-	ObservableList<EmployeeLine> employees = FXCollections.observableArrayList();
+	ObservableList<AYNEmployeeLine> employees = FXCollections.observableArrayList();
 
 	// creates new employee
 	@FXML
 	public void createNewEmployee(){
-		EmployeeLine emp = new EmployeeLine(new AYNEmployee());
+		AYNEmployeeLine emp = new AYNEmployeeLine(new AYNEmployee());
 		employees.add(emp);
 	}
 	
 	@FXML
 	public void deleteEmployee(){
-		ObservableList<EmployeeLine> allEmployees;
-		ObservableList<EmployeeLine> selectedEmployees;
+		ObservableList<AYNEmployeeLine> allEmployees;
+		ObservableList<AYNEmployeeLine> selectedEmployees;
 		
 		allEmployees = employeeTable.getItems();
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
@@ -74,12 +76,14 @@ public class FormTMenu implements Initializable {
 	@FXML
 	public void saveEmployees(){
 		ArrayList<AYNEmployee> listToSave = new ArrayList<>();
-		for(EmployeeLine empl : employeeTable.getItems()){
+		for(AYNEmployeeLine empl : employeeTable.getItems()){
 			listToSave.add(empl.getEmployee());
 		}
+		
+		PSDSingleton.getInstance().setFormTData(listToSave);
+		
 		emps.setEmployees(listToSave);
-		emps.toFile("AYN Employee List Default.csv");
-		emps.toFile("AYN Employee List.csv");
+		//emps.toFile("AYN Employee List.csv");
 	}
 	
 	
@@ -96,15 +100,23 @@ public class FormTMenu implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		// load existing employees
+		ArrayList<AYNEmployee> arr = PSDSingleton.getInstance().getFormTData();
+		for (int i = 0; i < arr.size() ; i ++){
+            
+			AYNEmployeeLine emp = new AYNEmployeeLine(arr.get(i));
+			employees.add(emp);				
+		}
 
 		// load existing employees
 		emps = new AYNEmployeeList();
 		//emps.getEmployees().add(new AYNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
 		
-		emps.loadList("AYN Employee List Default.csv");
-		for (AYNEmployee emp: emps.getEmployees()){
-			employees.add(new EmployeeLine(emp));
-		}
+		//emps.loadList("AYN Employee List Default.csv");
+		//for (AYNEmployee emp: emps.getEmployees()){
+		//	employees.add(new AYNEmployeeLine(emp));
+		//}
 		
 	
 		formV = new FormVcontroller();

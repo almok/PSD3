@@ -1,5 +1,5 @@
+import forms.AYNEmployee;
 import java.util.ArrayList;
-import java.lang.Math;
 import java.util.Arrays;
 
 import javafx.scene.control.Button;
@@ -7,7 +7,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class EmployeeLine {
+public class AYNEmployeeLine {
 
 	private TextField name;
 	private ComboBox<String> department;
@@ -21,7 +21,7 @@ public class EmployeeLine {
 	AYNEmployee emp;
 	
 	// constructor
-	public EmployeeLine(AYNEmployee emp) {
+	public AYNEmployeeLine(AYNEmployee emp) {
 		this.emp = emp;
 		
 		buttons = new ArrayList<>();
