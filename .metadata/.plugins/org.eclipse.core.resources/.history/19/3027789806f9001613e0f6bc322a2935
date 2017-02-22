@@ -161,6 +161,24 @@ public class FormVcontroller implements Initializable{
 				} else {
 					Employees.setText("");
 					}
+
+			
+			
+			// set total AYN expenses
+			ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
+			float totPay = 0;
+			for (AYNEmployee emp : ayn){
+				totPay += emp.calcWage();
+			}
+			String pay = String.valueOf(totPay);
+			if (totPay == 0.0){
+				Employment.setText("");
+			}
+			else{
+				Employment.setText(pay);
+			}
+
+
 		}
 	
 }		
