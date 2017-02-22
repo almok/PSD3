@@ -23,6 +23,7 @@ public class PSDSingleton {
 	private ArrayList<String[]> formSData;
 	private ArrayList<AYNEmployee> formTData;
 	private ArrayList<String[]> formBData;
+	private ArrayList<Integer> startScreenData;
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
@@ -337,16 +338,28 @@ public class PSDSingleton {
 	
 	
 	// Form B data
-		public void setFormBData(ArrayList<String[]> formBData){
+	public void setFormBData(ArrayList<String[]> formBData){
+		this.formBData = new ArrayList<>();
+		this.formBData = formBData;
+	}
+		
+	public ArrayList<String[]> getFormBData(){
+		if (this.formBData == null){
 			this.formBData = new ArrayList<>();
-			this.formBData = formBData;
 		}
+		return this.formBData;
+	}
 		
-		public ArrayList<String[]> getFormBData(){
-			if (this.formBData == null){
-				this.formBData = new ArrayList<>();
-			}
-			return this.formBData;
+	// Start Screen data
+	public void setStartData(ArrayList<Integer> startScreenData){
+		this.startScreenData = new ArrayList<>();
+		this.startScreenData = startScreenData;
+	}
+
+	public ArrayList<Integer> getStartData(){
+		if (this.startScreenData == null){
+			this.startScreenData = new ArrayList<>();
 		}
-		
+		return this.startScreenData;
+	}
 }

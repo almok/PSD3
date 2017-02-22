@@ -34,6 +34,7 @@ public class FormVcontroller implements Initializable{
 	FormTMenu formT = new FormTMenu();
 	FormOMenu formO = new FormOMenu();
 	FormSMenu formS = new FormSMenu();
+	StartScreen startScreen = new StartScreen();
 	
 	@FXML
 	private Button Rev;
@@ -43,6 +44,8 @@ public class FormVcontroller implements Initializable{
 	private Button formOButton;
 	@FXML
 	private Button formSButton;
+	@FXML 
+	private Button backButton;
 	@FXML
 	public Label Revenues;
 	@FXML
@@ -113,6 +116,14 @@ public class FormVcontroller implements Initializable{
 			formSButton.setOnAction(e -> {
 				try{
 					formS.display(formSButton);
+				}catch(IOException e1){
+					e1.printStackTrace();
+				}
+			});
+
+			backButton.setOnAction(e -> {
+				try {
+					startScreen.display(backButton);
 				}catch(IOException e1){
 					e1.printStackTrace();
 				}

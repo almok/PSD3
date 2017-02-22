@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.PSDSingleton;
 
 public class StartScreen extends Application implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
@@ -29,6 +31,16 @@ public class StartScreen extends Application implements Initializable, EventHand
 	public static void main(String[] args){
 		launch(args);
 	}
+
+	public void display(Button button) throws IOException{
+		Parent parent = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
+		Scene scene = new Scene(parent);
+		Stage stage = (Stage) button.getScene().getWindow();
+		scene.getStylesheets().add("Styling.css");
+		stage.setScene(scene);
+		stage.setTitle("QpQ");
+			
+		}
 	
 	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
 	
@@ -40,12 +52,8 @@ public class StartScreen extends Application implements Initializable, EventHand
 			//countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
 			try {
-				Parent root = FXMLLoader.load(getClass().getResource("SettingsScene.fxml"));
-				Scene scene = new Scene(root, 800, 700);
-				Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		        appStage.setTitle("Settings");
-		        appStage.setScene(scene);
-		        appStage.show();
+				SettingsScene settingsMenu = new SettingsScene();
+				settingsMenu.display(settingsButton);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -57,10 +65,13 @@ public class StartScreen extends Application implements Initializable, EventHand
 		} 
 	}
 	
-	private int roundCounter;
+	
+	ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
+	private int roundCounter = rounds.size();
 	public void addRoundButton(VBox left){
 		Button roundButton = new Button(" Round " + roundCounter + " ");
-		roundCounter++;
+		rounds.add(roundCounter);
+		PSDSingleton.getInstance().setStartData(rounds);
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
 			try {
@@ -70,6 +81,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 			 	e1.printStackTrace();
 			 }
 		});
+		roundCounter++;
 	}
 
 	@Override
@@ -81,6 +93,22 @@ public class StartScreen extends Application implements Initializable, EventHand
 		startButton.setOnAction(this);
 		settingsButton.setOnAction(this);
 		reportButton.setOnAction(this);
+
+		ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
+		if (rounds.size() > 0){
+			for (int i = 0; i < rounds.size(); i++){
+				Button roundButton = new Button(" Round " + rounds.get(i) + " ");
+				leftVBox.getChildren().add(roundButton);
+				roundButton.setOnAction(e -> {
+					try {
+						FormVcontroller formVMenu = new FormVcontroller();
+						formVMenu.display(roundButton);
+			 		} catch (Exception e1) {
+			 			e1.printStackTrace();
+			 		}
+				});
+			}
+		}
 	}
 
 	@Override
@@ -89,7 +117,9 @@ public class StartScreen extends Application implements Initializable, EventHand
 
 		Scene scene = new Scene(root, 800, 700);
         primaryStage.setTitle("FXML Welcome");
+        scene.getStylesheets().add("Styling.css");
         primaryStage.setScene(scene);
         primaryStage.show();
+
 	}
 }
