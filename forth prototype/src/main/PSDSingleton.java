@@ -27,6 +27,7 @@ public class PSDSingleton {
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
+	private Double formOData;
 	
 	private static PSDSingleton instance = null;
 	protected PSDSingleton() {}
@@ -361,5 +362,17 @@ public class PSDSingleton {
 			this.startScreenData = new ArrayList<>();
 		}
 		return this.startScreenData;
+	}
+
+	// Form O data
+	public void setFormOData(Double formOData){
+		this.formOData = formOData;
+	}
+		
+	public Double getFormOData(){
+		if (this.formOData == null){
+			this.formOData = null;
+		}
+		return this.formOData;
 	}
 }
