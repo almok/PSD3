@@ -94,7 +94,7 @@ public class FormOMenu implements Initializable {
 		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormBData();
 		if (!arr.isEmpty()){
 			for (String [] data : arr){
-				updateOrderHistory(new Order(data[0], data[1], data[3], data[4], data[5], data[6]));
+				updateOrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5]));
 			}
 		}
 		//

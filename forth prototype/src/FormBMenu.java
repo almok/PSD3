@@ -280,13 +280,16 @@ public class FormBMenu implements Initializable{
 				String contractPrice = orders.get(k).getContractPrice();
 				String scheduleTime = orders.get(k).getScheduleTime();
 				String actualTime = orders.get(k).getActualTime();
+				String penalty = orders.get(k).getPenalty();
 				if(orderNum != ""){
-					String[] _order = new String[5];
+					String[] _order = new String[6];
 					_order[0] = orderNum;
 					_order[1] = productCode;
 					_order[2] = contractPrice;
 					_order[3] = scheduleTime;
 					_order[4] = actualTime;
+					_order[5] = penalty;
+					
 					
 					formBData.add(_order);
 				}
@@ -340,10 +343,9 @@ public class FormBMenu implements Initializable{
 				Parent parent = FXMLLoader.load(getClass().getResource("formB.fxml"));
 				Scene scene = new Scene(parent);
 				Stage stage = (Stage) button.getScene().getWindow();
-				stage.hide();
-				stage.setScene(scene);
-				stage.show();
 				scene.getStylesheets().add("Styling.css");
+				stage.setScene(scene);
+				
 			}
 		
 	
