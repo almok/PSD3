@@ -143,7 +143,7 @@ public class FormVcontroller implements Initializable{
 										"contract price: " + contractPrice + "\n" + 
 										"scheduled time: " + scheduleTime + "\n" + 
 										"actual time: " + actualTime);
-					int Revenue = (Integer.parseInt(contractPrice) - 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
+					int Revenue = (Integer.parseInt(contractPrice)- 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
 					System.out.println("revenue is: " + Revenue);
 					totalRevenue += Revenue;
 				}
