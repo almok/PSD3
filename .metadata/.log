@@ -378,3 +378,66 @@ Binding(ALT+SHIFT+D R,
 
 !ENTRY org.eclipse.equinox.ds 1 0 2017-02-22 19:56:51.016
 !MESSAGE Could not bind a reference of component org.eclipse.fx.ide.css.cssext.ui.internal.DefaultCssExtProvider. The reference is: Reference[name = ICSSExtModelProvider, interface = org.eclipse.fx.ide.css.cssext.ICSSExtModelProvider, policy = dynamic, cardinality = 0..n, target = null, bind = bindCssExtensionModelProvider, unbind = unbindCssExtensionModelProvider]
+!SESSION 2017-02-23 08:43:16.442 -----------------------------------------------
+eclipse.buildId=4.6.0.I20160606-1100
+java.version=1.8.0_102
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-02-23 08:43:25.286
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jface.text 2 0 2017-02-23 08:48:51.465
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2017-02-23 08:48:51.470
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.recommenders.types.rcp 1 4 2017-02-23 08:49:38.281
+!MESSAGE Full project indexing required:
+  [+] /usr/java/jdk1.8.0_102/jre/lib/charsets.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/cldrdata.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/dnsns.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/jaccess.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/jfxrt.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/localedata.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/nashorn.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/sunec.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/sunjce_provider.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/sunpkcs11.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/ext/zipfs.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/jce.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/jfr.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/jsse.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/resources.jar
+  [+] /usr/java/jdk1.8.0_102/jre/lib/rt.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\cldrdata.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\jaccess.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\jfxrt.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\charsets.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\zipfs.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\sunmscapi.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\localedata.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\nashorn.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\dnsns.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\jfr.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\jce.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\jsse.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\rt.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\access-bridge-64.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\sunjce_provider.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\sunpkcs11.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\resources.jar
+  [-] /users/level3/2136487g/C:\Program Files\Java\jdk1.8.0_121\jre\lib\ext\sunec.jar
+
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:381)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:134)
+	at org.eclipse.recommenders.internal.types.rcp.ProjectTypesIndex.needsRebuild(ProjectTypesIndex.java:169)
+	at org.eclipse.recommenders.internal.types.rcp.ProjectTypesIndex.startUp(ProjectTypesIndex.java:122)
+	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
+	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
+	at java.lang.Thread.run(Thread.java:745)

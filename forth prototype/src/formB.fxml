@@ -109,10 +109,10 @@
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" prefWidth="200.0">
                <children>
           			 <Label prefHeight="46.0" prefWidth="153.0" text="${'Schedule and Actual\nTime Difference:'}" />
-          			 <TextField fx:id="timeDifferenceField" alignment="CENTER" editable="false" prefWidth="150" promptText="">
+          			 <Label fx:id="timeDifferenceLabel" alignment="CENTER">
                      <HBox.margin>
                         <Insets top="10.0" />
-                     </HBox.margin></TextField>
+                     </HBox.margin></Label>
                </children>
             </HBox>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
