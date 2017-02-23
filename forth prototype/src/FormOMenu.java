@@ -59,7 +59,9 @@ public class FormOMenu implements Initializable {
 		
 		double sum = 0;
 		for(OrderHistory order : orders){
-			sum+= order.getKitPrice();
+			if (order.getKitPrice() != -1){
+				sum+= order.getKitPrice();
+			}
 		}
 		return sum;
 	}
