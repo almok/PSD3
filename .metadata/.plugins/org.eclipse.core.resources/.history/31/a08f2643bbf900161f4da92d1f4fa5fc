@@ -167,7 +167,7 @@ public class FormBMenu implements Initializable{
 				//System.out.println("values in field 1 :" + );
 				currentForm = c;
 				displayValues(c -1);
-				saveFields(currentForm - 1);
+				//saveFields(currentForm - 1);
 			});
 		}
 		else if (formCounter > 1 && formCounter < 10){ 
@@ -258,7 +258,6 @@ public class FormBMenu implements Initializable{
 				System.out.println("i is " + i);
 				if(array.get(i)[0].isEmpty() != true)
 				{
-				System.out.println("order number is :" + array.get(i)[0]);
 				orderArrayList.set(i, array.get(i)[0]);
 				}
 				if(array.get(i)[1].isEmpty() != true)

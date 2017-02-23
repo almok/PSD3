@@ -167,7 +167,7 @@ public class FormBMenu implements Initializable{
 				//System.out.println("values in field 1 :" + );
 				currentForm = c;
 				displayValues(c -1);
-				saveFields(currentForm - 1);
+				//saveFields(currentForm - 1);
 			});
 		}
 		else if (formCounter > 1 && formCounter < 10){ 
