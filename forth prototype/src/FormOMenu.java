@@ -63,6 +63,7 @@ public class FormOMenu implements Initializable {
 				sum+= order.getKitPrice();
 			}
 		}
+		PSDSingleton.getInstance().setFormOData(sum);
 		return sum;
 	}
 	
