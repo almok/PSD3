@@ -8,6 +8,7 @@ public class Order {
 	private String scheduleTime;
 	private String actualTime;
 	private String penalty;
+	private int    timeDiff;
 	
 	public Order(String orderNumber, String productCode, String contractPrice, String scheduleTime, String actualTime, String penalty) {
 		this.orderNumber = orderNumber;
@@ -74,5 +75,12 @@ public class Order {
 		this.scheduleTime = scheduleTime;
 	}
 	
+	public int getTimeDiff(){
+		return timeDiff;
+	}
+
+    public void setTimeDiff(int timeDiff){
+    	this.timeDiff = timeDiff;
+    }
 	
 }
