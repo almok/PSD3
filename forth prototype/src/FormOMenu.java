@@ -42,7 +42,7 @@ public class FormOMenu implements Initializable {
 	private TableColumn<OrderHistory, String> productCodeColumn;
 	
 	@FXML
-	private TableColumn<OrderHistory, Double> kitPriceColumn;
+	private TableColumn<OrderHistory, String> kitPriceColumn;
 	
 	ObservableList<OrderHistory> orders = FXCollections.observableArrayList();
 	
@@ -96,9 +96,9 @@ public class FormOMenu implements Initializable {
 			}
 		}
 		//
-		updateOrderHistory(new Order("talk to me", "aa", "dd", null, null, null));
-		updateOrderHistory(new Order(" shake that ass", "vva", "dsssd", null, null, null));
-		updateOrderHistory(new Order("order 1", "aaddd", "dfdddd", null, null, null));
+		updateOrderHistory(new Order("talk to me", "FST270Y", "dd", null, null, null));
+		updateOrderHistory(new Order(" shake that ass", "PDE321X", "dsssd", null, null, null));
+		updateOrderHistory(new Order("order 1", "CSS897", "dfdddd", null, null, null));
 		//
 		//
 		
@@ -109,7 +109,7 @@ public class FormOMenu implements Initializable {
 		productCodeColumn.setCellValueFactory(new PropertyValueFactory<>("productCode"));
 		productCodeColumn.setStyle("-fx-alignment: CENTER");
 		
-		kitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("kitPrice"));
+		kitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("kitPriceString"));
 		kitPriceColumn.setStyle("-fx-alignment: CENTER");
 		
 		// add orders into a table
@@ -118,8 +118,5 @@ public class FormOMenu implements Initializable {
 		// set total kit price
 		totalKitPrice.setText(Double.toString(calcTotalKitPrice()));
 		totalKitPrice.setStyle("-fx-alignment: CENTER");
-		
-		
-		
 	}
 }

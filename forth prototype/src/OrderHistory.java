@@ -5,6 +5,7 @@ public class OrderHistory {
 	private String orderNumber;
 	private String productCode;
 	private Double kitPrice;
+	private String kitPriceString;
 	
 	
 	public OrderHistory(Order order) {
@@ -12,6 +13,7 @@ public class OrderHistory {
 		orderNumber = order.getOrderNumber();
 		productCode = order.getProductCode();
 		kitPrice = calcKitPrice();
+		kitPriceString = ((kitPrice == -1) ? "Invalid Product Code" : Double.toString(kitPrice));
 	}
 
 	// getter and setter
@@ -27,6 +29,10 @@ public class OrderHistory {
 
 	public Double getKitPrice() {
 		return kitPrice;
+	}
+	
+	public String getKitPriceString() {
+		return kitPriceString;
 	}
 
 
@@ -44,8 +50,15 @@ public class OrderHistory {
 		this.kitPrice = kitPrice;
 	}
 	
+	public void setKitPriceString(String kitPriceString) {
+		this.kitPriceString = kitPriceString;
+	}
+	
 	// calculate kit price using product code
 	public double calcKitPrice(){
+		if (productCode.length() != 6 && productCode.length() != 7){
+			return -1;
+		}
 		String carName;
 		String chassis;
 		String prodLine;
@@ -61,30 +74,30 @@ public class OrderHistory {
 			case "P": case "p": carName = "Pony "; break;
 			case "S": case "s": carName = "Sedan "; break;
 			case "A": case "a": carName = "Ayrton "; break;
-			case "C": case "c": carName = "Coast"; break;
+			case "C": case "c": carName = "Coast";  break;
 			case "T": case "t": carName = "Thunder"; break;	
 			default: return -1;
 		}
 		
-		if (prodLine == "C" || prodLine == "c" || prodLine == "T" || prodLine == "t"){
+		if (carName == "Coast" || carName == "Thunder"){
 			return Double.parseDouble(PSDSingleton.getInstance().getLightsPrice(carName));
 		}
 		else {
-			
-			lights = productCode.charAt(6);
-			gps = productCode.charAt(5);
-			
 			switch(chassis){
 				case "ST": case "st": case "St": case "sT": carName += "Standard"; break;
 				case "DE": case "de": case "Dr": case "dT": carName += "Dragstar"; break;
 				case "DR": case "dr": case "De": case "dE": carName += "Deluxe"; break;
 				default: return -1;
 			}
+			
+			lights = productCode.charAt(6);
+			gps = productCode.charAt(5);
 		
 			if (lights == 'Y' && gps == '1'){
 				return Double.parseDouble(PSDSingleton.getInstance().getGPSYellowPrice(carName));
 			}
 			else if (lights == 'Y' && gps == '0'){
+				
 				return Double.parseDouble(PSDSingleton.getInstance().getNoGPSYellowPrice(carName));
 			}
 			else if (lights == 'X' && gps == '1'){
