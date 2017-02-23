@@ -143,7 +143,7 @@ public class FormVcontroller implements Initializable{
 										"contract price: " + contractPrice + "\n" + 
 										"scheduled time: " + scheduleTime + "\n" + 
 										"actual time: " + actualTime);
-				if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
+				if(contractPrice != "" && scheduleTime != "" && actualTime != ""){
 					
 				
 					int Revenue = (Integer.parseInt(contractPrice)- 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));

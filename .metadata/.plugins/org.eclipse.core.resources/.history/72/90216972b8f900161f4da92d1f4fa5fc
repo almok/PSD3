@@ -260,22 +260,10 @@ public class FormBMenu implements Initializable{
 				{
 				orderArrayList.set(i, array.get(i)[0]);
 				}
-				if(array.get(i)[1].isEmpty() != true)
-				{
 				productCodeArrayList.set(i, array.get(i)[1]);
-				}
-				if(array.get(i)[2].isEmpty() != true)
-				{
 				contractPriceArrayList.set(i, array.get(i)[2]);
-				}
-				if(array.get(i)[3].isEmpty() != true)
-				{
 				scheduledDeliveryTimeArrayList.set(i, array.get(i)[3]);
-				}
-				if(array.get(i)[4].isEmpty() != true)
-				{
 				actualDeliveryTimeArrayList.set(i, array.get(i)[4]);
-				}
 				
 				if(array.get(i)[3].isEmpty() != true && array.get(i)[4].isEmpty() != true){
 				int sch = (Integer.parseInt(array.get(i)[3]));
