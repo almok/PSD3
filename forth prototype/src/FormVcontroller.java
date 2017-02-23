@@ -211,7 +211,35 @@ public class FormVcontroller implements Initializable{
 			// }
 			// else{
 			// 	Materials.setText("");
-			// }			
+			// }
+
+			//Diplay Total Expenditure
+			displayTotal();			
+		}
+		public void displayTotal(){
+			// assert Revenues != null : "fx:id=\"Revenues\" was not injected";
+			// assert Employees != null : "fx:id=\"Employees\" was not injected";
+			// assert Employment != null : "fx:id=\"Employment\" was not injected";
+			// assert Materials != null : "fx:id=\"Materials\" was not injected";
+			// Calculate total expenditure
+			try{
+				double totalExpenditure = 0;
+				double revenue = Double.parseDouble(Revenues.getText());
+				double employeeCosts = Double.parseDouble(Employees.getText());
+				double aynCosts = Double.parseDouble(Employment.getText());
+				double materialCosts = Double.parseDouble(Materials.getText());
+				
+				totalExpenditure = + employeeCosts + aynCosts + materialCosts;
+				//System.out.println("rev " + revenue + "empl " + employeeCosts + "ayn " + aynCosts);
+				
+				Exp.setText(String.valueOf(totalExpenditure));
+				ProfitLoss.setText(String.valueOf(revenue - totalExpenditure));
+			}catch(Exception e){
+				System.out.print(e.toString());
+				Exp.setText("0.00");
+				ProfitLoss.setText("0.00");
+			}
+		
 		}
 	
 }		
