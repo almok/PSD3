@@ -1,5 +1,6 @@
 
 import forms.AYNEmployee;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -180,21 +181,26 @@ public class FormVcontroller implements Initializable{
 				Employment.setText(pay);
 			}
 
-			// display kitprice
+			// display kit price
 			double sum = 0;
-			// for all orders!!!!
-			//to do
-			OrderHistory ord = new OrderHistory(new Order(null, null, null, null, null, null));
-			if (ord.getKitPrice() != -1){
-				sum+= ord.getKitPrice();
-			}
-			if (sum == 0){
-				Materials.setText("");
+			ArrayList<String[]> orderData = PSDSingleton.getInstance().getFormBData();
+			if (!arr.isEmpty()){
+				for (String [] data : orderData){
+					OrderHistory ordHist = new OrderHistory(new Order(data[0], data[1], data[3], data[4], data[5], data[6]));
+					if (ordHist.getKitPrice() != -1){
+						sum+= ordHist.getKitPrice();
+					}
+					if (sum == 0){
+						Materials.setText("");
+					}
+					else{
+						Materials.setText(Double.toString(sum));
+					}
+				}
 			}
 			else{
-				Materials.setText(Double.toString(sum));
-			}
-			
+				Materials.setText("");
+			}			
 		}
 	
 }		

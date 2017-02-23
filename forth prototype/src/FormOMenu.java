@@ -99,7 +99,7 @@ public class FormOMenu implements Initializable {
 		}
 		//
 		//
-		// need to load all the orders from singleton
+		// examples
 		updateOrderHistory(new Order("talk to me", "FST270Y", "dd", null, null, null));
 		updateOrderHistory(new Order(" shake that ass", "PDE321X", "dsssd", null, null, null));
 		updateOrderHistory(new Order("order 1", "CSS897", "dfdddd", null, null, null));
