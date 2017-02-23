@@ -152,10 +152,6 @@ public class FormVcontroller implements Initializable{
 				Revenues.setText("");
 			}
 			
-			
-			
-			
-			
 			// calculate employee costs
 			ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 			if (arr.size() > 0){
@@ -169,9 +165,6 @@ public class FormVcontroller implements Initializable{
 			} else {
 				Employees.setText("");
 			}
-			
-			
-			
 			
 			// set total AYN expenses
 			ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
@@ -187,6 +180,21 @@ public class FormVcontroller implements Initializable{
 				Employment.setText(pay);
 			}
 
+			// display kitprice
+			double sum = 0;
+			// for all orders!!!!
+			//to do
+			OrderHistory ord = new OrderHistory(new Order(null, null, null, null, null, null));
+			if (ord.getKitPrice() != -1){
+				sum+= ord.getKitPrice();
+			}
+			if (sum == 0){
+				Materials.setText("");
+			}
+			else{
+				Materials.setText(Double.toString(sum));
+			}
+			
 		}
 	
 }		

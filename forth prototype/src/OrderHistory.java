@@ -56,7 +56,7 @@ public class OrderHistory {
 	
 	// calculate kit price using product code
 	public double calcKitPrice(){
-		if (productCode.length() != 6 && productCode.length() != 7){
+		if (productCode == null || productCode.length() != 6 && productCode.length() != 7){
 			return -1;
 		}
 		String carName;
