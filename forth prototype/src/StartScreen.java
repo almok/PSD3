@@ -43,11 +43,17 @@ public class StartScreen extends Application implements Initializable, EventHand
 		}
 	
 	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
-	
+	ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
+	RoundCounter roundCounter = RoundCounter.getInstance();
+
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == startButton){
+
 			addRoundButton(leftVBox);
+			rounds.add(roundCounter.getRoundCounter());
+			PSDSingleton.getInstance().setStartData(rounds);
+			roundCounter.incRoundCounter();
 			//CountDownTimer countDown = new CountDownTimer();
 			//countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
@@ -65,23 +71,23 @@ public class StartScreen extends Application implements Initializable, EventHand
 		} 
 	}
 	
-	
-	ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
-	private int roundCounter = rounds.size();
+	Button roundButton;
 	public void addRoundButton(VBox left){
-		Button roundButton = new Button(" Round " + roundCounter + " ");
-		rounds.add(roundCounter);
-		PSDSingleton.getInstance().setStartData(rounds);
+		if (roundCounter.getRoundCounter() == 0){
+			roundButton = new Button(" Trial Round ");
+		} else {
+			roundButton = new Button(" Round " + roundCounter.getRoundCounter() + " ");
+		}
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
+			FormVcontroller formVMenu = new FormVcontroller();
+			formVMenu.setRoundCount(roundCounter.getRoundCounter());
 			try {
-				FormVcontroller formVMenu = new FormVcontroller();
 				formVMenu.display(roundButton);
 			 } catch (Exception e1) {
 			 	e1.printStackTrace();
 			 }
 		});
-		roundCounter++;
 	}
 
 	@Override
@@ -94,19 +100,31 @@ public class StartScreen extends Application implements Initializable, EventHand
 		settingsButton.setOnAction(this);
 		reportButton.setOnAction(this);
 
+		// Button trialRound = new Button("Trial Round");
+		// Button roundOne = new Button("Round 1");
+		// Button roundTwo = new Button("Round 2");
+		// Button roundThree = new Button("Round 3");
+		// Button roundfour = new Button("Round 4");
+
+		// leftVBox.getChildren().add(trialRound);
+		// leftVBox.getChildren().add(roundOne);
+		// leftVBox.getChildren().add(roundTwo);
+		// leftVBox.getChildren().add(roundThree);
+		// leftVBox.getChildren().add(roundfour);
+
+		// trialRound.setOnAction(e -> {
+
+		// });
+
 		ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
-		if (rounds.size() > 0){
-			for (int i = 0; i < rounds.size(); i++){
-				Button roundButton = new Button(" Round " + rounds.get(i) + " ");
-				leftVBox.getChildren().add(roundButton);
-				roundButton.setOnAction(e -> {
-					try {
-						FormVcontroller formVMenu = new FormVcontroller();
-						formVMenu.display(roundButton);
-			 		} catch (Exception e1) {
-			 			e1.printStackTrace();
-			 		}
-				});
+		RoundCounter roundCounter = RoundCounter.getInstance();
+		System.out.println("Printing round count " + roundCounter.getRoundCounter());
+		if (roundCounter.getRoundCounter() >= 0){
+			int i = roundCounter.getRoundCounter();
+			roundCounter.setRoundCounter(0);
+			while (roundCounter.getRoundCounter() < i){
+				addRoundButton(leftVBox);
+				roundCounter.incRoundCounter();
 			}
 		}
 	}

@@ -9,6 +9,7 @@ public class Round{
 	private String materialsSum;
 	private String totalExpenditure;
 	private String profitLoss;
+	private Round formVData;
 
 	public Round(String roundNum, String totalRevenue, String employeeWage, 
 		String aynPay, String materialsSum, String totalExpenditure, String profitLoss){
@@ -19,6 +20,10 @@ public class Round{
 		this.materialsSum = materialsSum;
 		this.totalExpenditure = totalExpenditure;
 		this.profitLoss = profitLoss;
+	}
+
+	public void setRoundData(Round formVData){
+		this.formVData = formVData;
 	}
 
 	// getters and setters

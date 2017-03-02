@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.Round;
 import javafx.application.Application;
 
 
@@ -36,6 +37,7 @@ public class FormVcontroller implements Initializable{
 	FormOMenu formO = new FormOMenu();
 	FormSMenu formS = new FormSMenu();
 	StartScreen startScreen = new StartScreen();
+	private int roundC;
 	
 	@FXML
 	private Button Rev;
@@ -63,7 +65,6 @@ public class FormVcontroller implements Initializable{
 	private Label Exp;
 	@FXML
 	private Label ProfitLoss;
-	
 
 	// display this form
 		public void display(Button button) throws IOException{
@@ -73,9 +74,15 @@ public class FormVcontroller implements Initializable{
 			scene.getStylesheets().add("Styling.css");
 			stage.setScene(scene);
 			stage.setTitle("QpQ");
-			
 		}
-		
+
+		public int getRoundCount(){
+			return roundC;
+		}
+
+		public void setRoundCount(int roundC){
+			this.roundC = roundC;
+		}
 	   
 	    
 	    public static void setEmployeeWage(int count)
@@ -90,6 +97,23 @@ public class FormVcontroller implements Initializable{
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			
+			ArrayList<Round> formVData = PSDSingleton.getInstance().getFormVData();
+			final Round round = null;
+			try{
+				round.setRoundData(formVData.get(roundC));
+				if (round != null){
+					Revenues.setText(round.getTotalRevenue());
+					Employees.setText(round.getEmployeeWage());
+					Employment.setText(round.getAynPay());
+					Materials.setText(round.getMaterialsSum());
+					Exp.setText(round.getTotalExpenditure());
+					ProfitLoss.setText(round.getProfitLoss());
+				}
+			} catch(Exception e1){
+				e1.printStackTrace();
+			}
+
+
 			Rev.setOnAction(e -> {
 				try{
 					formB.display(Rev);
@@ -124,6 +148,15 @@ public class FormVcontroller implements Initializable{
 
 			backButton.setOnAction(e -> {
 				try {
+					round.setRoundNum(String.valueOf(roundC));
+					round.setTotalRevenue(Revenues.getText());
+					round.setEmployeeWage(Employees.getText());
+					round.setAynPay(Employment.getText());
+					round.setMaterialsSum(Materials.getText());
+					round.setTotalExpenditure(Exp.getText());
+					round.setProfitLoss(ProfitLoss.getText());
+					formVData.set(roundC, round);
+					PSDSingleton.getInstance().setFormVData(formVData);
 					startScreen.display(backButton);
 				}catch(IOException e1){
 					e1.printStackTrace();
