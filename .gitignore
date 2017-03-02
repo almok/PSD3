@@ -1,2 +1,8 @@
-/*.class
-/.metadata/
+*.log
+*.swp
+*./DS_Store
+.bundle
+*/.metadata/
+*/.recommenders/
+*/.settings/
+*/*.class
