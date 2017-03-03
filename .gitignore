@@ -4,10 +4,10 @@
 *.swp
 *./DS_Store
 .bundle
-#*/.metadata/
+*/.metadata/
 */.plugins/
 */.mylyn/
-#.metadata/
+.metadata/
 */.project
 */.classpath
 */.recommenders/
