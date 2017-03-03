@@ -1,0 +1,12 @@
+*.log
+*.swp
+*./DS_Store
+.bundle
+*/.metadata/
+*/.project
+*/.classpath
+*/.recommenders/
+*/.settings/
+*/RemoteSystemsTempFiles/
+*/*.class
+*/bin/
