@@ -156,6 +156,7 @@ public class FormBMenu implements Initializable{
 			
 			formCounter++;
 			left.getChildren().add(formButton);
+			
             //buttons action
 			formButton.setOnAction(e -> {
 				
@@ -172,6 +173,7 @@ public class FormBMenu implements Initializable{
 		else if (formCounter > 1 && formCounter < 10){ 
 			Button formButton = new Button(" Order " + formCounter + " ");
 			//Order order = new Order(Integer.toString(c), null, null, null, null, null);
+			
 			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
@@ -186,9 +188,12 @@ public class FormBMenu implements Initializable{
 		} else if (formCounter >= 10 && formCounter <= 20){ 
 			Button formButton = new Button("Order " + formCounter);
 			//Order order = new Order(Integer.toString(c), null, null, null, null, null);
+			
 			formCounter++;
 			left.getChildren().add(formButton);
+			
 			formButton.setOnAction(e -> {
+				
 				if(isInputValid()){
 				saveFields(currentForm - 1);
 				currentForm = c;
@@ -261,6 +266,7 @@ public class FormBMenu implements Initializable{
 			order.setScheduleTime(scheduledDeliveryTimeArrayList.get(i));
 			order.setActualTime(actualDeliveryTimeArrayList.get(i));
 			order.setProductCode(productCodeArrayList.get(i));
+			order.setPenalty(penaltyPriceArrayList.get(i));
 			//adds order to list
 			orders.add(order);
 			c++;
@@ -305,6 +311,15 @@ public class FormBMenu implements Initializable{
 				Integer.parseInt(contractPriceField.getText());
 			}catch (NumberFormatException e){
 				errorMessage += "No valid Contract Price (must be an integer)\n";
+			}
+		}
+		if(penaltyPriceField.getText() == null || penaltyPriceField.getText().length() == 0  ){
+			errorMessage += "No valid Penalty Price.\n";
+		}else{
+			try{
+				Integer.parseInt(penaltyPriceField.getText());
+			}catch (NumberFormatException e){
+				errorMessage += "No valid Penalty Price (must be an integer)\n";
 			}
 		}
 		
@@ -357,7 +372,10 @@ public class FormBMenu implements Initializable{
 				{
 				actualDeliveryTimeArrayList.set(i, array.get(i)[4]);
 				}
-				
+				if(array.get(i)[5].isEmpty() != true)
+				{
+					penaltyPriceArrayList.set(i, array.get(i)[5]);
+				}
 				if(array.get(i)[3].isEmpty() != true && array.get(i)[4].isEmpty() != true){
 				
 					
@@ -375,22 +393,7 @@ public class FormBMenu implements Initializable{
 			
 		}
 		
-		for(int j = 0; j < orders.size(); j++)
-		{
-			//System.out.println("Order number is"  + orders.get(j).getOrderNumberAsString());
-			//System.out.println("Schedule Time :" + orders.get(j).getScheduleTimeAsString());
-			//orderArrayList.set(j , orders.get(j).getOrderNumberAsString());
-			//scheduledDeliveryTimeArrayList.set(j, orders.get(j).getScheduleTimeAsString());
-			//addFormButtons(leftVBox);
-			
-		}
-		/*saveButton.setOnAction(e -> {
-			ArrayList<String[]> formBData = new ArrayList<>();
-			for(int j = 0; j < formCounter; j++)
-			{
-				
-			}
-		});*/
+	
 		backButton.setOnAction(e -> {
 			
 			ArrayList<String[]> formBData = new ArrayList<>();
@@ -417,13 +420,13 @@ public class FormBMenu implements Initializable{
 				String actualTime = orders.get(k).getActualTime();
 				String penalty = orders.get(k).getPenalty();
 				if(orderNum != ""){
-					String[] _order = new String[5];
+					String[] _order = new String[6];
 					_order[0] = orderNum;
 					_order[1] = productCode;
 					_order[2] = contractPrice;
 					_order[3] = scheduleTime;
 					_order[4] = actualTime;
-					//_order[5] = penalty;
+					_order[5] = penalty;
 					
 					
 					formBData.add(_order);
@@ -448,14 +451,27 @@ public class FormBMenu implements Initializable{
 		//re-populate forms
 		//displayOrders();		
 		
-		
-		
-		
-		/*actualDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
-		    saveFields();
-		    calculateTimeDif();
+		actualDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
+		    if(scheduledDeliveryTimeField.getText() == null || scheduledDeliveryTimeField.getText().length() == 0){
+		   
+		    }
+		    else{
+		   
+			int penalty = 0;
+			int revenue = 0;
+		    int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+		    int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+		    
+		    penalty = 30 *(actualTime - schedTime);
+		    penaltyPriceField.setText(Integer.toString(penalty));
+		    revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+		    revenueField.setText(Integer.toString(revenue));
+		    }
 		});
 		
+		
+		
+		/*
 		orderField.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		});
@@ -467,6 +483,7 @@ public class FormBMenu implements Initializable{
 		newButton.setOnAction(event -> {
 			//saveFields();
 			//createNewOrder();
+			
 			addFormButtons(leftVBox);
         });
 	
