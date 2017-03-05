@@ -280,6 +280,34 @@ public class FormBMenu implements Initializable{
 				errorMessage += "No valid Order Number(must be an integer)\n";
 			}
 		}
+		if(scheduledDeliveryTimeField.getText() == null || scheduledDeliveryTimeField.getText().length() == 0  ){
+			errorMessage += "No valid Scheduled delivery time.\n";
+		}else{
+			try{
+				Integer.parseInt(scheduledDeliveryTimeField.getText());
+			}catch (NumberFormatException e){
+				errorMessage += "No valid scheduled delivery time (must be an integer)\n";
+			}
+		}
+		if(actualDeliveryTimeField.getText() == null || actualDeliveryTimeField.getText().length() == 0  ){
+			errorMessage += "No valid Actual Delivery time.\n";
+		}else{
+			try{
+				Integer.parseInt(actualDeliveryTimeField.getText());
+			}catch (NumberFormatException e){
+				errorMessage += "No valid Actual Delivery time(must be an integer)\n";
+			}
+		}
+		if(contractPriceField.getText() == null || contractPriceField.getText().length() == 0  ){
+			errorMessage += "No valid Contract Price.\n";
+		}else{
+			try{
+				Integer.parseInt(contractPriceField.getText());
+			}catch (NumberFormatException e){
+				errorMessage += "No valid Contract Price (must be an integer)\n";
+			}
+		}
+		
 		 if (errorMessage.length() == 0) {
 	            return true;
 	        } else {
