@@ -23,7 +23,6 @@ public class StartScreen extends Application implements Initializable, EventHand
 	@FXML private Button startButton;
 	@FXML private Button settingsButton;
 	@FXML private Button reportButton;
-	@FXML private Button financeButton;
 	@FXML private VBox leftVBox;
 	@FXML private Label rightLabel;
 	@FXML private AnchorPane aPane;
@@ -71,8 +70,8 @@ public class StartScreen extends Application implements Initializable, EventHand
 		} 
 	}
 	
-	Button roundButton;
 	public void addRoundButton(VBox left){
+		Button roundButton;
 		if (roundCounter.getRoundCounter() == 0){
 			roundButton = new Button(" Trial Round ");
 		} else {
@@ -80,13 +79,21 @@ public class StartScreen extends Application implements Initializable, EventHand
 		}
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
+			String buttonTxt = roundButton.getText().replaceAll("\\D+", "");
+			System.out.println(buttonTxt);
+			try{
+				roundCounter.setRoundCounter(Integer.parseInt(buttonTxt));
+				System.out.println(roundCounter.getRoundCounter());
+			} catch (Exception e1){
+				roundCounter.setRoundCounter(0);
+				System.out.println(roundCounter.getRoundCounter());
+			}
 			FormVcontroller formVMenu = new FormVcontroller();
-			formVMenu.setRoundCount(roundCounter.getRoundCounter());
 			try {
-				formVMenu.display(roundButton);
-			 } catch (Exception e1) {
-			 	e1.printStackTrace();
-			 }
+		 		formVMenu.display(roundButton);
+		 	 } catch (Exception e1) {
+		 	 	e1.printStackTrace();
+		 	 }
 		});
 	}
 
@@ -115,11 +122,8 @@ public class StartScreen extends Application implements Initializable, EventHand
 		// trialRound.setOnAction(e -> {
 
 		// });
-
-		ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
-		RoundCounter roundCounter = RoundCounter.getInstance();
 		System.out.println("Printing round count " + roundCounter.getRoundCounter());
-		if (roundCounter.getRoundCounter() >= 0){
+		if (roundCounter.getMaxRoundCount() >= 0){
 			int i = roundCounter.getRoundCounter();
 			roundCounter.setRoundCounter(0);
 			while (roundCounter.getRoundCounter() < i){

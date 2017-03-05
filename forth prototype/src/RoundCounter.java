@@ -8,6 +8,7 @@ public class RoundCounter{
 	}
 
 	public void setRoundCounter(int roundCounter){
+		System.out.println("setting round counter");
 		this.roundCounter = roundCounter;
 	}
 

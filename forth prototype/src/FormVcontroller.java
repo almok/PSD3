@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Collections;
 
 import javafx.application.*;
 import javafx.event.ActionEvent;
@@ -37,8 +38,18 @@ public class FormVcontroller implements Initializable{
 	FormOMenu formO = new FormOMenu();
 	FormSMenu formS = new FormSMenu();
 	StartScreen startScreen = new StartScreen();
-	private int roundC;
-	
+	RoundCounter roundCounter = RoundCounter.getInstance();
+
+	private ArrayList<String> roundNumArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> totalRevenueArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> employeeWageArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> aynPayArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> materialsSumArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> totalExpenditureArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> profitLossArray = new ArrayList<String>(Collections.nCopies(20, ""));
+
+
+
 	@FXML
 	private Button Rev;
 	@FXML
@@ -76,14 +87,15 @@ public class FormVcontroller implements Initializable{
 			stage.setTitle("QpQ");
 		}
 
-		public int getRoundCount(){
-			return roundC;
+		public void saveFields(){
+			roundNumArrayList.set(roundCounter.getRoundCounter(), String.valueOf(roundCounter.getRoundCounter()));
+			totalRevenueArray.set(roundCounter.getRoundCounter(), Revenues.getText());
+			employeeWageArray.set(roundCounter.getRoundCounter(), Employees.getText());
+			aynPayArray.set(roundCounter.getRoundCounter(), Employment.getText());
+			materialsSumArray.set(roundCounter.getRoundCounter(), Materials.getText());
+			totalExpenditureArray.set(roundCounter.getRoundCounter(), Exp.getText());
+			profitLossArray.set(roundCounter.getRoundCounter(), ProfitLoss.getText());
 		}
-
-		public void setRoundCount(int roundC){
-			this.roundC = roundC;
-		}
-	   
 	    
 	    public static void setEmployeeWage(int count)
 		{
@@ -93,25 +105,26 @@ public class FormVcontroller implements Initializable{
 			//Employees.setText(String.valueOf(count));
 		}
 		
-		
+
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+
+
 			
 			ArrayList<Round> formVData = PSDSingleton.getInstance().getFormVData();
-			final Round round = null;
-			try{
-				round.setRoundData(formVData.get(roundC));
-				if (round != null){
-					Revenues.setText(round.getTotalRevenue());
-					Employees.setText(round.getEmployeeWage());
-					Employment.setText(round.getAynPay());
-					Materials.setText(round.getMaterialsSum());
-					Exp.setText(round.getTotalExpenditure());
-					ProfitLoss.setText(round.getProfitLoss());
-				}
-			} catch(Exception e1){
-				e1.printStackTrace();
-			}
+			// try{
+			// 	Round round = formVData.get(roundCounter.getRoundCounter());
+			// 	if (Integer.parseInt(round.getRoundNum()) == roundCounter.getRoundCounter()){
+			// 		Revenues.setText(round.getTotalRevenue());
+			// 		Employees.setText(round.getEmployeeWage());
+			// 		Employment.setText(round.getAynPay());
+			// 		Materials.setText(round.getMaterialsSum());
+			// 		Exp.setText(round.getTotalExpenditure());
+			// 		ProfitLoss.setText(round.getProfitLoss());
+			// 	}
+			// } catch(Exception e1){
+			// 	continue;
+			// }
 
 
 			Rev.setOnAction(e -> {
@@ -147,16 +160,13 @@ public class FormVcontroller implements Initializable{
 			});
 
 			backButton.setOnAction(e -> {
+				int i = roundCounter.getRoundCounter();
+				Round rounds = new Round(roundNumArrayList.get(i), totalRevenueArray.get(i), employeeWageArray.get(i), aynPayArray.get(i),
+					materialsSumArray.get(i), totalExpenditureArray.get(i), profitLossArray.get(i));
+				System.out.println(rounds.getRoundNum());
+				formVData.add(rounds);
+				PSDSingleton.getInstance().setFormVData(formVData);
 				try {
-					round.setRoundNum(String.valueOf(roundC));
-					round.setTotalRevenue(Revenues.getText());
-					round.setEmployeeWage(Employees.getText());
-					round.setAynPay(Employment.getText());
-					round.setMaterialsSum(Materials.getText());
-					round.setTotalExpenditure(Exp.getText());
-					round.setProfitLoss(ProfitLoss.getText());
-					formVData.set(roundC, round);
-					PSDSingleton.getInstance().setFormVData(formVData);
 					startScreen.display(backButton);
 				}catch(IOException e1){
 					e1.printStackTrace();
@@ -247,7 +257,8 @@ public class FormVcontroller implements Initializable{
 			// }
 
 			//Diplay Total Expenditure
-			displayTotal();			
+			displayTotal();
+			saveFields();			
 		}
 		public void displayTotal(){
 			// assert Revenues != null : "fx:id=\"Revenues\" was not injected";

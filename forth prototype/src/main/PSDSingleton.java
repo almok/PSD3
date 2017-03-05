@@ -378,7 +378,7 @@ public class PSDSingleton {
 	}
 
 	//Form V Data
-	public void setFormVData(ArrayList<Round> formBData){
+	public void setFormVData(ArrayList<Round> formVData){
 		this.formVData = new ArrayList<>();
 		this.formVData = formVData;
 	}
