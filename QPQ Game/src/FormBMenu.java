@@ -147,18 +147,19 @@ public class FormBMenu implements Initializable{
 		saveFields(c);
 	}
 	int totalOrders=0;
-	private void addFormButtons(VBox left){
+	public void addFormButtons(VBox left){
 		int c = formCounter;
 		
 		totalOrders++;
 		if(formCounter == 1){
-			Button formButton = new Button(" Order " + formCounter + " ");
+			
+			Button formButton1  = new Button(" Order " + formCounter + " ");
 			
 			formCounter++;
-			left.getChildren().add(formButton);
+			left.getChildren().add(formButton1);
 			
             //buttons action
-			formButton.setOnAction(e -> {
+			formButton1.setOnAction(e -> {
 				
 				System.out.println("current form is :" + currentForm);
 				//System.out.println("values in field 1 :" + );
@@ -210,6 +211,8 @@ public class FormBMenu implements Initializable{
 	private Button backButton;
 	@FXML
 	private Button newButton;
+	@FXML
+	private Button deleteButton;
 	@FXML
 	private VBox leftVBox;
 	@FXML
@@ -272,7 +275,64 @@ public class FormBMenu implements Initializable{
 			c++;
 		}
 	}
+	private void deleteOrder(){
+		int lastOrder = totalOrders;
+		System.out.println("number of orders : "+totalOrders);
+		FormBMenu formB = new FormBMenu();
+		//remove entries from arrayList
+		orderArrayList.remove(totalOrders - 1);
+		chassisArrayList.remove(totalOrders - 1);
+		productCodeArrayList.remove(totalOrders - 1);
+		timeOfReceiptArrayList.remove(totalOrders - 1);
+		leadTimeArrayList.remove(totalOrders - 1);
+		scheduledDeliveryTimeArrayList.remove(totalOrders - 1);
+		contractPriceArrayList.remove(totalOrders - 1);
+		actualDeliveryTimeArrayList.remove(totalOrders - 1);
+		timeDifferenceArrayList.remove(totalOrders - 1);
+		penaltyPriceArrayList.remove(totalOrders - 1);
+		revenueArrayList.remove(totalOrders - 1);
+		//remove order button
+		ArrayList<String[]> formBData = new ArrayList<>();
+		
+		
+		//saves orders
+		saveOrders(totalOrders);
+		orders.remove(totalOrders - 1);
+		
+		//iterate orders adding to formB Data
+		for(int k = 0; k < orders.size(); k++){
+			String orderNum = orders.get(k).getOrderNumber();
+			System.out.println("order number saved :" + orderNum);
+			String productCode = orders.get(k).getProductCode();
+			String contractPrice = orders.get(k).getContractPrice();
+			String scheduleTime = orders.get(k).getScheduleTime();
+			String actualTime = orders.get(k).getActualTime();
+			String penalty = orders.get(k).getPenalty();
+			if(orderNum != ""){
+				String[] _order = new String[6];
+				_order[0] = orderNum;
+				_order[1] = productCode;
+				_order[2] = contractPrice;
+				_order[3] = scheduleTime;
+				_order[4] = actualTime;
+				_order[5] = penalty;
+				
+				
+				formBData.add(_order);
+			}
+	}
 	
+	//System.out.println("field 1 saved  :" + formBData.get(0)[0]);
+	PSDSingleton.getInstance().setFormBData(formBData);
+	
+	
+	//refresh page
+		try{
+			formB.display(deleteButton);
+		}catch(IOException e1){
+			e1.printStackTrace();
+		}
+	}
 	private boolean isInputValid(){
 		String errorMessage = "";
 		
@@ -479,6 +539,10 @@ public class FormBMenu implements Initializable{
 		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
 		    saveFields();
 		});*/
+		
+		deleteButton.setOnAction(event -> {
+			deleteOrder();
+		});
 		
 		newButton.setOnAction(event -> {
 			//saveFields();
