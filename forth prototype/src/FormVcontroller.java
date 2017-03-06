@@ -109,22 +109,7 @@ public class FormVcontroller implements Initializable{
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 
-
-			
 			ArrayList<Round> formVData = PSDSingleton.getInstance().getFormVData();
-			// try{
-			// 	Round round = formVData.get(roundCounter.getRoundCounter());
-			// 	if (Integer.parseInt(round.getRoundNum()) == roundCounter.getRoundCounter()){
-			// 		Revenues.setText(round.getTotalRevenue());
-			// 		Employees.setText(round.getEmployeeWage());
-			// 		Employment.setText(round.getAynPay());
-			// 		Materials.setText(round.getMaterialsSum());
-			// 		Exp.setText(round.getTotalExpenditure());
-			// 		ProfitLoss.setText(round.getProfitLoss());
-			// 	}
-			// } catch(Exception e1){
-			// 	continue;
-			// }
 
 
 			Rev.setOnAction(e -> {
@@ -172,99 +157,75 @@ public class FormVcontroller implements Initializable{
 					e1.printStackTrace();
 				}
 			});
-			
 	
 			// calculate revenue
-			ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
-			if(array.size() > 0){
-				int totalRevenue = 0;
-				for(int j = 0; j < array.size(); j++ ){
-					String contractPrice = array.get(j)[2];
-					String scheduleTime = array.get(j)[3];
-					String actualTime = array.get(j)[4];
-					System.out.println("element: " + j + "\n" + 
-										"contract price: " + contractPrice + "\n" + 
-										"scheduled time: " + scheduleTime + "\n" + 
-										"actual time: " + actualTime);
-				if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
+				ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
+				if(array.size() > 0){
+					int totalRevenue = 0;
+					for(int j = 0; j < array.size(); j++ ){
+						String contractPrice = array.get(j)[2];
+						String scheduleTime = array.get(j)[3];
+						String actualTime = array.get(j)[4];
+						System.out.println("element: " + j + "\n" + 
+											"contract price: " + contractPrice + "\n" + 
+											"scheduled time: " + scheduleTime + "\n" + 
+											"actual time: " + actualTime);
+					if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
+						
 					
-				
-					int Revenue = (Integer.parseInt(contractPrice)- 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
-					System.out.println("revenue is: " + Revenue);
-					totalRevenue += Revenue;
+						int Revenue = (Integer.parseInt(contractPrice)- 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
+						System.out.println("revenue is: " + Revenue);
+						totalRevenue += Revenue;
+						}
 					}
+					System.out.println("total Revenue is " + totalRevenue);
+					Revenues.setText(String.valueOf(totalRevenue));
+					
+				} else {
+					Revenues.setText("");
 				}
-				System.out.println("total Revenue is " + totalRevenue);
-				Revenues.setText(String.valueOf(totalRevenue));
 				
-			} else {
-				Revenues.setText("");
-			}
-			
-			// calculate employee costs
-			ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
-			if (arr.size() > 0){
-				int totalWageCost = 0;
-				for (int i = 0; i < arr.size() ; i ++){
-					totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
+				// calculate employee costs
+				ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
+				if (arr.size() > 0){
+					int totalWageCost = 0;
+					for (int i = 0; i < arr.size() ; i ++){
+						totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
+					}
+					int roundTime = PSDSingleton.getInstance().getRoundTime();
+
+					Employees.setText(String.valueOf(totalWageCost*roundTime));
+				} else {
+					Employees.setText("");
 				}
-				int roundTime = PSDSingleton.getInstance().getRoundTime();
+				
+				// set total AYN expenses
+				ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
+				float totPay = 0;
+				for (AYNEmployee emp : ayn){
+					totPay += emp.calcWage();
+				}
+				String pay = String.valueOf(totPay);
+				if (totPay == 0.0){
+					Employment.setText("");
+				}
+				else{
+					Employment.setText(pay);
+				}
 
-				Employees.setText(String.valueOf(totalWageCost*roundTime));
-			} else {
-				Employees.setText("");
-			}
-			
-			// set total AYN expenses
-			ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
-			float totPay = 0;
-			for (AYNEmployee emp : ayn){
-				totPay += emp.calcWage();
-			}
-			String pay = String.valueOf(totPay);
-			if (totPay == 0.0){
-				Employment.setText("");
-			}
-			else{
-				Employment.setText(pay);
-			}
+				// Display kit price
+				Double sum = PSDSingleton.getInstance().getFormOData();
+				if (sum != null){
+					Materials.setText(String.valueOf(sum));
+				} else{
+					Materials.setText("");
+				}
 
-			// Display kit price
-			Double sum = PSDSingleton.getInstance().getFormOData();
-			if (sum != null){
-				Materials.setText(String.valueOf(sum));
-			} else{
-				Materials.setText("");
-			}
-			// double sum = 0;
-			// ArrayList<String[]> orderData = PSDSingleton.getInstance().getFormBData();
-			// if (!arr.isEmpty()){
-			// 	for (String [] data : orderData){
-			// 		OrderHistory ordHist = new OrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5]));
-			// 		if (ordHist.getKitPrice() != -1){
-			// 			sum+= ordHist.getKitPrice();
-			// 		}
-			// 		if (sum == 0){
-			// 			Materials.setText("");
-			// 		}
-			// 		else{
-			// 			Materials.setText(Double.toString(sum));
-			// 		}
-			// 	}
-			// }
-			// else{
-			// 	Materials.setText("");
-			// }
-
-			//Diplay Total Expenditure
-			displayTotal();
-			saveFields();			
+				//Diplay Total Expenditure
+				displayTotal();
+				saveFields();			
 		}
 		public void displayTotal(){
-			// assert Revenues != null : "fx:id=\"Revenues\" was not injected";
-			// assert Employees != null : "fx:id=\"Employees\" was not injected";
-			// assert Employment != null : "fx:id=\"Employment\" was not injected";
-			// assert Materials != null : "fx:id=\"Materials\" was not injected";
 			// Calculate total expenditure
 			try{
 				double totalExpenditure = 0;
@@ -288,26 +249,4 @@ public class FormVcontroller implements Initializable{
 	
 }		
 		
-		
-		
-		
-		
-	
-			
-			/*if (event.getSource() == revenueButton){
 
-				System.out.println(this.rev.getText());
-				Main.window.setScene(formB.display(this , rev));
-			} else if (event.getSource() == goodsHistoryButton){
-				if (formOScene == null){
-					formOScene = FormOMenu.display();
-				}
-				Main.window.setScene(formOScene );
-			}  else if (event.getSource() == employmentAgencyButton){
-				if (formTScene == null){
-					formTScene = FormTMenu.display();
-				}
-				Main.window.setScene(formTScene);
-			} 
-		}
-*/

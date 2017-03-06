@@ -351,19 +351,6 @@ public class PSDSingleton {
 		}
 		return this.formBData;
 	}
-		
-	// Start Screen data
-	public void setStartData(ArrayList<Integer> startScreenData){
-		this.startScreenData = new ArrayList<>();
-		this.startScreenData = startScreenData;
-	}
-
-	public ArrayList<Integer> getStartData(){
-		if (this.startScreenData == null){
-			this.startScreenData = new ArrayList<>();
-		}
-		return this.startScreenData;
-	}
 
 	// Form O data
 	public void setFormOData(Double formOData){
@@ -388,5 +375,12 @@ public class PSDSingleton {
 			this.formVData = new ArrayList<>();
 		}
 		return this.formVData;
+	}
+
+	public boolean isEmpty(ArrayList<Round> formVData,int roundCount){
+		if (formVData.get(roundCount) == null){
+			return true;
+		}
+		return false;
 	}
 }

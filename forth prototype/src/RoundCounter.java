@@ -2,6 +2,7 @@
 public class RoundCounter{
 
 	private static int roundCounter = 0;
+	private static int maxRoundCount = 0;
 
 	public int getRoundCounter(){
 		return roundCounter;
@@ -14,6 +15,14 @@ public class RoundCounter{
 
 	public void incRoundCounter(){
 		roundCounter++;
+	}
+
+	public int getMaxCount(){
+		return maxRoundCount;
+	}
+
+	public void setMaxCount(int maxRoundCount){
+		this.maxRoundCount = maxRoundCount;
 	}
 	private static RoundCounter instance = null;
 	protected RoundCounter() {}

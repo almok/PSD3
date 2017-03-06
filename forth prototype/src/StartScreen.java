@@ -42,7 +42,6 @@ public class StartScreen extends Application implements Initializable, EventHand
 		}
 	
 	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
-	ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
 	RoundCounter roundCounter = RoundCounter.getInstance();
 
 	@Override
@@ -50,7 +49,6 @@ public class StartScreen extends Application implements Initializable, EventHand
 		if (event.getSource() == startButton){
 
 			addRoundButton(leftVBox);
-			rounds.add(roundCounter.getRoundCounter());
 			PSDSingleton.getInstance().setStartData(rounds);
 			roundCounter.incRoundCounter();
 			//CountDownTimer countDown = new CountDownTimer();
@@ -95,6 +93,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 		 	 	e1.printStackTrace();
 		 	 }
 		});
+		roundCounter.setMaxCount(roundCounter.getRoundCounter());
 	}
 
 	@Override
@@ -122,11 +121,11 @@ public class StartScreen extends Application implements Initializable, EventHand
 		// trialRound.setOnAction(e -> {
 
 		// });
-		System.out.println("Printing round count " + roundCounter.getRoundCounter());
-		if (roundCounter.getMaxRoundCount() >= 0){
-			int i = roundCounter.getRoundCounter();
+		System.out.println("Printing round count " + roundCounter.getMaxCount());
+		if (roundCounter.getMaxCount() >= -1){
+			int i = roundCounter.getMaxCount();
 			roundCounter.setRoundCounter(0);
-			while (roundCounter.getRoundCounter() < i){
+			while (roundCounter.getRoundCounter() <= i){
 				addRoundButton(leftVBox);
 				roundCounter.incRoundCounter();
 			}
