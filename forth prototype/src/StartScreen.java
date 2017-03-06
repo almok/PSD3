@@ -49,7 +49,6 @@ public class StartScreen extends Application implements Initializable, EventHand
 		if (event.getSource() == startButton){
 
 			addRoundButton(leftVBox);
-			PSDSingleton.getInstance().setStartData(rounds);
 			roundCounter.incRoundCounter();
 			//CountDownTimer countDown = new CountDownTimer();
 			//countdown.display(startButton);

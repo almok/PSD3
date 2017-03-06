@@ -148,7 +148,7 @@ public class FormVcontroller implements Initializable{
 				int i = roundCounter.getRoundCounter();
 				Round rounds = new Round(roundNumArrayList.get(i), totalRevenueArray.get(i), employeeWageArray.get(i), aynPayArray.get(i),
 					materialsSumArray.get(i), totalExpenditureArray.get(i), profitLossArray.get(i));
-				System.out.println(rounds.getRoundNum());
+				System.out.println("\nround num " + rounds.getRoundNum());
 				formVData.add(rounds);
 				PSDSingleton.getInstance().setFormVData(formVData);
 				try {
