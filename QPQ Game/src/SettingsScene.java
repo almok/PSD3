@@ -29,23 +29,23 @@ public class SettingsScene implements Initializable{
 		 assert formPButton != null : "fx:id=\"formPButton\" was not injected";
 		 assert formQButton != null : "fx:id=\"formQButton\" was not injected";
 		 gameRulesButton.setOnAction(e -> {
-			 this.openPage("gameRules.csv" , e.getSource());
+			 this.openPage("GameRules.fxml" , e.getSource());
 		 });
 		 
 		 formCButton.setOnAction(e -> {
 			 this.openPage("EditFormC.fxml" , e.getSource());
 		 });
 		 formDButton.setOnAction(e -> {
-			 this.openPage("formD.csv" , e.getSource());
+			 this.openPage("EditFormD.fxml" , e.getSource());
 		 });
 		 formOButton.setOnAction(e -> {
-			 this.openPage("formO.csv" , e.getSource());
+			 this.openPage("EditFormO.fxml" , e.getSource());
 		 });
 		 formPButton.setOnAction(e -> {
-			 this.openPage("formP.csv" , e.getSource());
+			 this.openPage("EditFormP.fxml" , e.getSource());
 		 });
 		 formQButton.setOnAction(e -> {
-			 this.openPage("formQ.csv" , e.getSource());
+			 this.openPage("EditFormQ.fxml" , e.getSource());
 		 });
 		 backButton.setOnAction(e -> {
 		 	StartScreen startScreen = new StartScreen();
