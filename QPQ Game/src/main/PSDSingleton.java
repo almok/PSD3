@@ -178,8 +178,7 @@ public class PSDSingleton {
 				  arr.get(i)[1] + "," + 
 				  arr.get(i)[2] + "," + 
 				  arr.get(i)[3] + "," + 
-				  arr.get(i)[4] + "," + 
-				  arr.get(i)[5] + "\n");
+				  arr.get(i)[4] + "\n");
 			}
 	        pw.close();
 		} catch (FileNotFoundException e) {
