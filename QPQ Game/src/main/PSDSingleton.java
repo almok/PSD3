@@ -15,18 +15,21 @@ public class PSDSingleton {
 	private final static String pathFormD = "DataBase/Personal/FormD.csv";
 	private final static String pathFormP = "DataBase/Personal/FormP.csv";
 	private final static String pathFormR = "DataBase/Personal/FormR.csv";
+	private final static String pathGameRules = "DataBase/Personal/GameRules.csv";
 
 	private ArrayList<String[]> formCData;
 	private ArrayList<String[]> formDData;
 	private ArrayList<String[]> formPData;
 	private ArrayList<String[]> formRData;
 	private ArrayList<String[]> formSData;
+	private ArrayList<String[]> gameRulesData;
 	private ArrayList<AYNEmployee> formTData;
 	private ArrayList<String[]> formBData;
 	private ArrayList<Integer> startScreenData;
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
+	private Map<String, String> gameRulesDataHashMap;
 	private Double formOData;
 	
 	private static PSDSingleton instance = null;
@@ -317,11 +320,103 @@ public class PSDSingleton {
 		if(this.formRDataHashMap == null){
 			this.createHashFormR();
 		}
-		return formRDataHashMap.get(position);
+		
+		if (this.formRDataHashMap.containsKey(position)){
+			return formRDataHashMap.get(position);
+		}
+		
+		return 20;
 	}
 	
-	// fix this Boris!
+	
+	
+	
+	private void loadGameRulesData(){
+		this.gameRulesData = new ArrayList<>();
+		this.gameRulesData = this.getFileData(pathGameRules);
+	}
+	
+	public void setGameRulesData(ArrayList<String[]> gameRulesData){
+		this.gameRulesData = new ArrayList<>();
+		this.gameRulesData = gameRulesData;
+	}
+	
+	public ArrayList<String[]> getGameRulesData(){
+		if (this.gameRulesData == null){
+			this.loadGameRulesData();
+		}
+		return this.gameRulesData;
+	}
+	
+	public void saveGameRulesData(){
+		PrintWriter pw;
+		ArrayList<String[]> arr = this.getGameRulesData();
+		try {
+			pw = new PrintWriter(new File(pathGameRules));
+			for (int i = 0; i < arr.size(); i++) {
+				pw.write("" + arr.get(i)[0] + "," + 
+				  arr.get(i)[1] + "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createHashGameRules(){
+		 this.gameRulesDataHashMap = new HashMap<String, String>();
+		 ArrayList<String[]> arr = this.getGameRulesData();
+
+		 for (int i = 0; i < arr.size(); i++) {
+			this.gameRulesDataHashMap.put(arr.get(i)[0], arr.get(i)[1]);
+		}
+	}
+
 	public int getRoundTime(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Game time")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Game time"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 15;
+		}
+		return 15;
+	}
+	
+	public int getRoundNumber(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Round number")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Round number"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 15;
+		}
+		return 15;
+	}
+	
+	public int getPenalty(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Penalty")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Penalty"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 15;
+		}
 		return 15;
 	}
 	
