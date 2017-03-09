@@ -25,7 +25,7 @@ public class PSDSingleton {
 	private ArrayList<String[]> gameRulesData;
 	private ArrayList<AYNEmployee> formTData;
 	private ArrayList<String[]> formBData;
-	private ArrayList<Integer> startScreenData;
+	private ArrayList<Round> formVData;
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
@@ -459,19 +459,6 @@ public class PSDSingleton {
 		}
 		return this.formBData;
 	}
-		
-	// Start Screen data
-	public void setStartData(ArrayList<Integer> startScreenData){
-		this.startScreenData = new ArrayList<>();
-		this.startScreenData = startScreenData;
-	}
-
-	public ArrayList<Integer> getStartData(){
-		if (this.startScreenData == null){
-			this.startScreenData = new ArrayList<>();
-		}
-		return this.startScreenData;
-	}
 
 	// Form O data
 	public void setFormOData(Double formOData){
@@ -483,5 +470,18 @@ public class PSDSingleton {
 			this.formOData = null;
 		}
 		return this.formOData;
+	}
+
+	//Form V Data
+	public void setFormVData(ArrayList<Round> formVData){
+		this.formVData = new ArrayList<>();
+		this.formVData = formVData;
+	}
+		
+	public ArrayList<Round> getFormVData(){
+		if (this.formVData == null){
+			this.formVData = new ArrayList<>();
+		}
+		return this.formVData;
 	}
 }

@@ -43,11 +43,13 @@ public class StartScreen extends Application implements Initializable, EventHand
 		}
 	
 	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
+	RoundCounter roundCounter = RoundCounter.getInstance();
 	
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == startButton){
 			addRoundButton(leftVBox);
+			roundCounter.incRoundCounter();
 			//CountDownTimer countDown = new CountDownTimer();
 			//countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
@@ -66,22 +68,32 @@ public class StartScreen extends Application implements Initializable, EventHand
 	}
 	
 	
-	ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
-	private int roundCounter = rounds.size();
 	public void addRoundButton(VBox left){
-		Button roundButton = new Button(" Round " + roundCounter + " ");
-		rounds.add(roundCounter);
-		PSDSingleton.getInstance().setStartData(rounds);
+		Button roundButton;
+		if (roundCounter.getRoundCounter() == 0){
+			roundButton = new Button(" Trial Round ");
+		} else {
+			roundButton = new Button(" Round " + roundCounter.getRoundCounter() + " ");
+		}
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
+			String buttonTxt = roundButton.getText().replaceAll("\\D+", "");
+			System.out.println(buttonTxt);
+			try{
+				roundCounter.setRoundCounter(Integer.parseInt(buttonTxt));
+				System.out.println(roundCounter.getRoundCounter());
+			} catch (Exception e1){
+				roundCounter.setRoundCounter(0);
+				System.out.println(roundCounter.getRoundCounter());
+			}
+			FormVcontroller formVMenu = new FormVcontroller();
 			try {
-				FormVcontroller formVMenu = new FormVcontroller();
-				formVMenu.display(roundButton);
-			 } catch (Exception e1) {
-			 	e1.printStackTrace();
-			 }
+		 		formVMenu.display(roundButton);
+		 	 } catch (Exception e1) {
+		 	 	e1.printStackTrace();
+		 	 }
 		});
-		roundCounter++;
+		roundCounter.setMaxCount(roundCounter.getRoundCounter());
 	}
 
 	@Override
@@ -94,19 +106,13 @@ public class StartScreen extends Application implements Initializable, EventHand
 		settingsButton.setOnAction(this);
 		reportButton.setOnAction(this);
 
-		ArrayList<Integer> rounds = PSDSingleton.getInstance().getStartData();
-		if (rounds.size() > 0){
-			for (int i = 0; i < rounds.size(); i++){
-				Button roundButton = new Button(" Round " + rounds.get(i) + " ");
-				leftVBox.getChildren().add(roundButton);
-				roundButton.setOnAction(e -> {
-					try {
-						FormVcontroller formVMenu = new FormVcontroller();
-						formVMenu.display(roundButton);
-			 		} catch (Exception e1) {
-			 			e1.printStackTrace();
-			 		}
-				});
+		System.out.println("Printing round count " + roundCounter.getMaxCount());
+		if (roundCounter.getMaxCount() >= -1){
+			int i = roundCounter.getMaxCount();
+			roundCounter.setRoundCounter(0);
+			while (roundCounter.getRoundCounter() <= i){
+				addRoundButton(leftVBox);
+				roundCounter.incRoundCounter();
 			}
 		}
 	}

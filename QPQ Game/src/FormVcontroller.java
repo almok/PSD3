@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Collections;
 
 import javafx.application.*;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.Round;
 import javafx.application.Application;
 
 
@@ -36,6 +38,15 @@ public class FormVcontroller implements Initializable{
 	FormOMenu formO = new FormOMenu();
 	FormSMenu formS = new FormSMenu();
 	StartScreen startScreen = new StartScreen();
+	RoundCounter roundCounter = RoundCounter.getInstance();
+
+	private ArrayList<String> roundNumArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> totalRevenueArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> employeeWageArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> aynPayArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> materialsSumArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> totalExpenditureArray = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<String> profitLossArray = new ArrayList<String>(Collections.nCopies(20, ""));
 	
 	@FXML
 	private Button Rev;
@@ -75,6 +86,16 @@ public class FormVcontroller implements Initializable{
 			stage.setTitle("QpQ");
 			
 		}
+
+		public void saveFields(){
+			roundNumArrayList.set(roundCounter.getRoundCounter(), String.valueOf(roundCounter.getRoundCounter()));
+			totalRevenueArray.set(roundCounter.getRoundCounter(), Revenues.getText());
+			employeeWageArray.set(roundCounter.getRoundCounter(), Employees.getText());
+			aynPayArray.set(roundCounter.getRoundCounter(), Employment.getText());
+			materialsSumArray.set(roundCounter.getRoundCounter(), Materials.getText());
+			totalExpenditureArray.set(roundCounter.getRoundCounter(), Exp.getText());
+			profitLossArray.set(roundCounter.getRoundCounter(), ProfitLoss.getText());
+		}
 		
 	   
 	    
@@ -89,6 +110,8 @@ public class FormVcontroller implements Initializable{
 		
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+
+			ArrayList<Round> formVData = PSDSingleton.getInstance().getFormVData();
 			
 			Rev.setOnAction(e -> {
 				try{
@@ -123,6 +146,12 @@ public class FormVcontroller implements Initializable{
 			});
 
 			backButton.setOnAction(e -> {
+				int i = roundCounter.getRoundCounter();
+				Round rounds = new Round(roundNumArrayList.get(i), totalRevenueArray.get(i), employeeWageArray.get(i), aynPayArray.get(i),
+					materialsSumArray.get(i), totalExpenditureArray.get(i), profitLossArray.get(i));
+				System.out.println("\nround num " + rounds.getRoundNum());
+				formVData.add(rounds);
+				PSDSingleton.getInstance().setFormVData(formVData);
 				try {
 					startScreen.display(backButton);
 				}catch(IOException e1){
@@ -193,35 +222,11 @@ public class FormVcontroller implements Initializable{
 			} else{
 				Materials.setText("");
 			}
-			// double sum = 0;
-			// ArrayList<String[]> orderData = PSDSingleton.getInstance().getFormBData();
-			// if (!arr.isEmpty()){
-			// 	for (String [] data : orderData){
-			// 		OrderHistory ordHist = new OrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5]));
-			// 		if (ordHist.getKitPrice() != -1){
-			// 			sum+= ordHist.getKitPrice();
-			// 		}
-			// 		if (sum == 0){
-			// 			Materials.setText("");
-			// 		}
-			// 		else{
-			// 			Materials.setText(Double.toString(sum));
-			// 		}
-			// 	}
-			// }
-			// else{
-			// 	Materials.setText("");
-			// }
 
-			//Diplay Total Expenditure
-			displayTotal();			
+			displayTotal();
+			saveFields();			
 		}
 		public void displayTotal(){
-			// assert Revenues != null : "fx:id=\"Revenues\" was not injected";
-			// assert Employees != null : "fx:id=\"Employees\" was not injected";
-			// assert Employment != null : "fx:id=\"Employment\" was not injected";
-			// assert Materials != null : "fx:id=\"Materials\" was not injected";
-			// Calculate total expenditure
 			try{
 				double totalExpenditure = 0;
 				double revenue = Double.parseDouble(Revenues.getText());
@@ -230,7 +235,6 @@ public class FormVcontroller implements Initializable{
 				double materialCosts = Double.parseDouble(Materials.getText());
 				
 				totalExpenditure = + employeeCosts + aynCosts + materialCosts;
-				//System.out.println("rev " + revenue + "empl " + employeeCosts + "ayn " + aynCosts);
 				
 				Exp.setText(String.valueOf(totalExpenditure));
 				ProfitLoss.setText(String.valueOf(revenue - totalExpenditure));
