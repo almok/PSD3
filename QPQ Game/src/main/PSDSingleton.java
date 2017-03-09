@@ -200,35 +200,14 @@ public class PSDSingleton {
 			this.createHashFormP();
 		}
 		
-		if (formPDataHashMap.get(carName).length >= 2){
-			return formPDataHashMap.get(carName)[1];
+		if (this.formPDataHashMap.containsKey(carName)){
+
+			if (formPDataHashMap.get(carName).length >= 2){
+				return formPDataHashMap.get(carName)[1];
+			}
+			return "0";
 		}
-		
-		return "No data";
-	}
-	
-	public String getNoGPSYellowPrice(String carName){
-		if(this.formPDataHashMap == null){
-			this.createHashFormP();
-		}
-		
-		if (formPDataHashMap.get(carName).length >= 3){
-			return formPDataHashMap.get(carName)[2];
-		}
-		
-		return "No data";
-	}
-	
-	public String getNoGPSXenonPrice(String carName){
-		if(this.formPDataHashMap == null){
-			this.createHashFormP();
-		}
-		
-		if (formPDataHashMap.get(carName).length == 4){
-			return formPDataHashMap.get(carName)[3];
-		}
-		
-		return "No data";
+		return "0";
 	}
 	
 	public String getGPSYellowPrice(String carName){
@@ -236,11 +215,13 @@ public class PSDSingleton {
 			this.createHashFormP();
 		}
 		
-		if (formPDataHashMap.get(carName).length == 5){
-			return formPDataHashMap.get(carName)[4];
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 2){
+				return formPDataHashMap.get(carName)[1];
+			}
+			return "0";
 		}
-		
-		return "No data";
+		return "0";
 	}
 	
 	public String getGPSXenonPrice(String carName){
@@ -248,12 +229,46 @@ public class PSDSingleton {
 			this.createHashFormP();
 		}
 		
-		if (formPDataHashMap.get(carName).length == 6){
-			return formPDataHashMap.get(carName)[5];
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 3){
+				return formPDataHashMap.get(carName)[2];
+			}
+			return "0";
+		}
+		return "0";
+	}
+	
+	
+	public String getNoGPSYellowPrice(String carName){
+		if(this.formPDataHashMap == null){
+			this.createHashFormP();
 		}
 		
-		return "No data";
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 4){
+				return formPDataHashMap.get(carName)[3];
+			}
+			return "0";
+		}
+		return "0";
 	}
+	
+	public String getNoGPSXenonPrice(String carName){
+		if(this.formPDataHashMap == null){
+			this.createHashFormP();
+		}
+		
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 5){
+				return formPDataHashMap.get(carName)[4];
+			}
+			return "0";
+		}
+		return "0";
+	}
+	
+	
+	
 	
 
 	

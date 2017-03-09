@@ -8,7 +8,6 @@
 	<Button fx:id="gameRulesButton" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Game Rules" />
 	<Button fx:id="formCButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Form C" />
 	<Button fx:id="formDButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Form D" />
-	<Button fx:id="formOButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Form O" />
 	<Button fx:id="formPButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Form P" />	
 	<Button fx:id="formRButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Form R" />
 	<Button fx:id="backButton"  layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Back" />

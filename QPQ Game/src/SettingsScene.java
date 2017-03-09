@@ -14,7 +14,6 @@ public class SettingsScene implements Initializable{
 	@FXML private Button gameRulesButton;
 	@FXML private Button formCButton;
 	@FXML private Button formDButton;
-	@FXML private Button formOButton;
 	@FXML private Button formPButton;
 	@FXML private Button formRButton;
 	@FXML private Button backButton;
@@ -25,7 +24,6 @@ public class SettingsScene implements Initializable{
 		 assert gameRulesButton != null : "fx:id=\"startButton\" was not injected";
 		 assert formCButton != null : "fx:id=\"formCButton\" was not injected";
 		 assert formDButton != null : "fx:id=\"formDButton\" was not injected";
-		 assert formOButton != null : "fx:id=\"formOButton\" was not injected";
 		 assert formPButton != null : "fx:id=\"formPButton\" was not injected";
 		 assert formRButton != null : "fx:id=\"formRButton\" was not injected";
 		 gameRulesButton.setOnAction(e -> {
@@ -37,9 +35,6 @@ public class SettingsScene implements Initializable{
 		 });
 		 formDButton.setOnAction(e -> {
 			 this.openPage("EditFormD.fxml" , e.getSource());
-		 });
-		 formOButton.setOnAction(e -> {
-			 this.openPage("EditFormO.fxml" , e.getSource());
 		 });
 		 formPButton.setOnAction(e -> {
 			 this.openPage("EditFormP.fxml" , e.getSource());
