@@ -1,14 +1,11 @@
-Family Standard,270
-Family Dragstar,290
-Family Deluxe,325
-Pony Standard,280
-Pony Dragstar,294
-Pony Deluxe,331
-Sedan Standard,310
-Sedan Dragstar,314
-Sedan Deluxe,358
-Ayrton Standard,331
-Ayrton Dragstar,339
-Ayrton Deluxe,378
-Coast,463
-Thunder,496
+Manager,10
+Sales,10
+Production Planning,10
+Goods Receipt,10
+Shop Floor Control,10
+Production,10
+Ledger,10
+Quality Assurance,10
+Finance,10
+AYN employee,15
+AYN employee multiskilled,25
