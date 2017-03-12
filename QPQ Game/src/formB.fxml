@@ -35,13 +35,7 @@
                <padding>
                   <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
                </padding></Button>
-          		<Button fx:id="clearButton" prefHeight="40.0" prefWidth="85.0" text="Clear">
-               <HBox.margin>
-                  <Insets top="4.0" />
-               </HBox.margin>
-               <padding>
-                  <Insets top="4.0" />
-               </padding></Button>
+          		
     </children>
        </HBox>
     </top>
