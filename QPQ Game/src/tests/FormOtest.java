@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.Assert.fail;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import forms.FormOMenu;
@@ -10,8 +10,8 @@ import main.PSDSingleton;
 
 public class FormOtest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	@Before
+	public static void init() throws Exception {
 		PSDSingleton data = PSDSingleton.getInstance();
 		FormOMenu formO = new FormOMenu();
 	}
