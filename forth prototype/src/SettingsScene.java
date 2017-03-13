@@ -14,9 +14,8 @@ public class SettingsScene implements Initializable{
 	@FXML private Button gameRulesButton;
 	@FXML private Button formCButton;
 	@FXML private Button formDButton;
-	@FXML private Button formOButton;
 	@FXML private Button formPButton;
-	@FXML private Button formQButton;
+	@FXML private Button formRButton;
 	@FXML private Button backButton;
 
 
@@ -25,27 +24,23 @@ public class SettingsScene implements Initializable{
 		 assert gameRulesButton != null : "fx:id=\"startButton\" was not injected";
 		 assert formCButton != null : "fx:id=\"formCButton\" was not injected";
 		 assert formDButton != null : "fx:id=\"formDButton\" was not injected";
-		 assert formOButton != null : "fx:id=\"formOButton\" was not injected";
 		 assert formPButton != null : "fx:id=\"formPButton\" was not injected";
-		 assert formQButton != null : "fx:id=\"formQButton\" was not injected";
+		 assert formRButton != null : "fx:id=\"formRButton\" was not injected";
 		 gameRulesButton.setOnAction(e -> {
-			 this.openPage("gameRules.csv" , e.getSource());
+			 this.openPage("GameRules.fxml" , e.getSource());
 		 });
 		 
 		 formCButton.setOnAction(e -> {
 			 this.openPage("EditFormC.fxml" , e.getSource());
 		 });
 		 formDButton.setOnAction(e -> {
-			 this.openPage("formD.csv" , e.getSource());
-		 });
-		 formOButton.setOnAction(e -> {
-			 this.openPage("formO.csv" , e.getSource());
+			 this.openPage("EditFormD.fxml" , e.getSource());
 		 });
 		 formPButton.setOnAction(e -> {
-			 this.openPage("formP.csv" , e.getSource());
+			 this.openPage("EditFormP.fxml" , e.getSource());
 		 });
-		 formQButton.setOnAction(e -> {
-			 this.openPage("formQ.csv" , e.getSource());
+		 formRButton.setOnAction(e -> {
+			 this.openPage("EditFormR.fxml" , e.getSource());
 		 });
 		 backButton.setOnAction(e -> {
 		 	StartScreen startScreen = new StartScreen();

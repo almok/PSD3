@@ -18,6 +18,7 @@
                   <Button fx:id="startButton" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Start Game" />
                   <Button fx:id="settingsButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Settings" />
                   <Button fx:id="reportButton" layoutX="268.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Report" />
+                  <Button fx:id="financeButton" layoutX="398.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Financials" />
                   <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QPQ Game">
                      <font>
                         <Font size="18.0" />

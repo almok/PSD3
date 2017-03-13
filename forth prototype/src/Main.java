@@ -26,8 +26,9 @@ public class Main extends Application{
         Scene scene = new Scene(root, 700, 500);
         scene.getStylesheets().add("Styling.css");
 		stage.setScene(scene);
+		
         stage.show();
-        
+        stage.setMaximized(true);
 	}
 	
 	public static void main(String[] args){

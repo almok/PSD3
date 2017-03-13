@@ -9,26 +9,30 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
 
 public class PSDSingleton {
 	private final static String pathFormC = "DataBase/Personal/FormC.csv";
 	private final static String pathFormD = "DataBase/Personal/FormD.csv";
 	private final static String pathFormP = "DataBase/Personal/FormP.csv";
 	private final static String pathFormR = "DataBase/Personal/FormR.csv";
+	private final static String pathGameRules = "DataBase/Personal/GameRules.csv";
 
 	private ArrayList<String[]> formCData;
 	private ArrayList<String[]> formDData;
 	private ArrayList<String[]> formPData;
 	private ArrayList<String[]> formRData;
 	private ArrayList<String[]> formSData;
+	private ArrayList<String[]> gameRulesData;
 	private ArrayList<AYNEmployee> formTData;
 	private ArrayList<String[]> formBData;
 	private ArrayList<Round> formVData;
-	private ArrayList<Integer> startScreenData;
 	private Map<String, String[]> formPDataHashMap;
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
-	private Double formOData;
+	private Map<String, String> gameRulesDataHashMap;
+	private ArrayList<String> formOData = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<Integer> formCountArray = new ArrayList<Integer>(Collections.nCopies(20, 1));
 	
 	private static PSDSingleton instance = null;
 	protected PSDSingleton() {}
@@ -179,8 +183,7 @@ public class PSDSingleton {
 				  arr.get(i)[1] + "," + 
 				  arr.get(i)[2] + "," + 
 				  arr.get(i)[3] + "," + 
-				  arr.get(i)[4] + "," + 
-				  arr.get(i)[5] + "\n");
+				  arr.get(i)[4] + "\n");
 			}
 	        pw.close();
 		} catch (FileNotFoundException e) {
@@ -202,35 +205,14 @@ public class PSDSingleton {
 			this.createHashFormP();
 		}
 		
-		if (formPDataHashMap.get(carName).length >= 2){
-			return formPDataHashMap.get(carName)[1];
+		if (this.formPDataHashMap.containsKey(carName)){
+
+			if (formPDataHashMap.get(carName).length >= 2){
+				return formPDataHashMap.get(carName)[1];
+			}
+			return "0";
 		}
-		
-		return "No data";
-	}
-	
-	public String getNoGPSYellowPrice(String carName){
-		if(this.formPDataHashMap == null){
-			this.createHashFormP();
-		}
-		
-		if (formPDataHashMap.get(carName).length >= 3){
-			return formPDataHashMap.get(carName)[2];
-		}
-		
-		return "No data";
-	}
-	
-	public String getNoGPSXenonPrice(String carName){
-		if(this.formPDataHashMap == null){
-			this.createHashFormP();
-		}
-		
-		if (formPDataHashMap.get(carName).length == 4){
-			return formPDataHashMap.get(carName)[3];
-		}
-		
-		return "No data";
+		return "0";
 	}
 	
 	public String getGPSYellowPrice(String carName){
@@ -238,11 +220,13 @@ public class PSDSingleton {
 			this.createHashFormP();
 		}
 		
-		if (formPDataHashMap.get(carName).length == 5){
-			return formPDataHashMap.get(carName)[4];
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 2){
+				return formPDataHashMap.get(carName)[1];
+			}
+			return "0";
 		}
-		
-		return "No data";
+		return "0";
 	}
 	
 	public String getGPSXenonPrice(String carName){
@@ -250,12 +234,46 @@ public class PSDSingleton {
 			this.createHashFormP();
 		}
 		
-		if (formPDataHashMap.get(carName).length == 6){
-			return formPDataHashMap.get(carName)[5];
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 3){
+				return formPDataHashMap.get(carName)[2];
+			}
+			return "0";
+		}
+		return "0";
+	}
+	
+	
+	public String getNoGPSYellowPrice(String carName){
+		if(this.formPDataHashMap == null){
+			this.createHashFormP();
 		}
 		
-		return "No data";
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 4){
+				return formPDataHashMap.get(carName)[3];
+			}
+			return "0";
+		}
+		return "0";
 	}
+	
+	public String getNoGPSXenonPrice(String carName){
+		if(this.formPDataHashMap == null){
+			this.createHashFormP();
+		}
+		
+		if (this.formPDataHashMap.containsKey(carName)){
+			if (formPDataHashMap.get(carName).length >= 5){
+				return formPDataHashMap.get(carName)[4];
+			}
+			return "0";
+		}
+		return "0";
+	}
+	
+	
+	
 	
 
 	
@@ -304,11 +322,103 @@ public class PSDSingleton {
 		if(this.formRDataHashMap == null){
 			this.createHashFormR();
 		}
-		return formRDataHashMap.get(position);
+		
+		if (this.formRDataHashMap.containsKey(position)){
+			return formRDataHashMap.get(position);
+		}
+		
+		return 20;
 	}
 	
-	// fix this Boris!
+	
+	
+	
+	private void loadGameRulesData(){
+		this.gameRulesData = new ArrayList<>();
+		this.gameRulesData = this.getFileData(pathGameRules);
+	}
+	
+	public void setGameRulesData(ArrayList<String[]> gameRulesData){
+		this.gameRulesData = new ArrayList<>();
+		this.gameRulesData = gameRulesData;
+	}
+	
+	public ArrayList<String[]> getGameRulesData(){
+		if (this.gameRulesData == null){
+			this.loadGameRulesData();
+		}
+		return this.gameRulesData;
+	}
+	
+	public void saveGameRulesData(){
+		PrintWriter pw;
+		ArrayList<String[]> arr = this.getGameRulesData();
+		try {
+			pw = new PrintWriter(new File(pathGameRules));
+			for (int i = 0; i < arr.size(); i++) {
+				pw.write("" + arr.get(i)[0] + "," + 
+				  arr.get(i)[1] + "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void createHashGameRules(){
+		 this.gameRulesDataHashMap = new HashMap<String, String>();
+		 ArrayList<String[]> arr = this.getGameRulesData();
+
+		 for (int i = 0; i < arr.size(); i++) {
+			this.gameRulesDataHashMap.put(arr.get(i)[0], arr.get(i)[1]);
+		}
+	}
+
 	public int getRoundTime(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Game time")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Game time"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 15;
+		}
+		return 15;
+	}
+	
+	public int getRoundNumber(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Round number")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Round number"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 15;
+		}
+		return 15;
+	}
+	
+	public int getPenalty(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Penalty")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Penalty"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 15;
+		}
 		return 15;
 	}
 	
@@ -353,11 +463,11 @@ public class PSDSingleton {
 	}
 
 	// Form O data
-	public void setFormOData(Double formOData){
+	public void setFormOData(ArrayList<String> formOData){
 		this.formOData = formOData;
 	}
 		
-	public Double getFormOData(){
+	public ArrayList<String> getFormOData(){
 		if (this.formOData == null){
 			this.formOData = null;
 		}
@@ -377,10 +487,15 @@ public class PSDSingleton {
 		return this.formVData;
 	}
 
-	public boolean isEmpty(ArrayList<Round> formVData,int roundCount){
-		if (formVData.get(roundCount) == null){
-			return true;
+	public ArrayList<Integer> getFormCounter(){
+		if (this.formCountArray == null){
+			this.formCountArray = new ArrayList<>();
 		}
-		return false;
+		return this.formCountArray;
+	}
+
+	public void setFormCounter(ArrayList<Integer> formCountArray){
+		this.formCountArray = new ArrayList<>();
+		this.formCountArray = formCountArray;
 	}
 }

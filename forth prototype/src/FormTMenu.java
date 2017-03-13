@@ -25,6 +25,9 @@ import main.PSDSingleton;
 
 
 public class FormTMenu implements Initializable {
+
+	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
 	
 	@FXML private BorderPane FormTMenu;
 	

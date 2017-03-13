@@ -23,6 +23,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 	@FXML private Button startButton;
 	@FXML private Button settingsButton;
 	@FXML private Button reportButton;
+	@FXML private Button financeButton;
 	@FXML private VBox leftVBox;
 	@FXML private Label rightLabel;
 	@FXML private AnchorPane aPane;
@@ -43,11 +44,10 @@ public class StartScreen extends Application implements Initializable, EventHand
 	
 	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
 	RoundCounter roundCounter = RoundCounter.getInstance();
-
+	
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == startButton){
-
 			addRoundButton(leftVBox);
 			roundCounter.incRoundCounter();
 			//CountDownTimer countDown = new CountDownTimer();
@@ -67,6 +67,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 		} 
 	}
 	
+	
 	public void addRoundButton(VBox left){
 		Button roundButton;
 		if (roundCounter.getRoundCounter() == 0){
@@ -85,7 +86,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 				roundCounter.setRoundCounter(0);
 				System.out.println(roundCounter.getRoundCounter());
 			}
-			FormVcontroller formVMenu = new FormVcontroller();
+			FormVcontroller formVMenu = FormVcontroller.getInstance();
 			try {
 		 		formVMenu.display(roundButton);
 		 	 } catch (Exception e1) {
@@ -105,21 +106,6 @@ public class StartScreen extends Application implements Initializable, EventHand
 		settingsButton.setOnAction(this);
 		reportButton.setOnAction(this);
 
-		// Button trialRound = new Button("Trial Round");
-		// Button roundOne = new Button("Round 1");
-		// Button roundTwo = new Button("Round 2");
-		// Button roundThree = new Button("Round 3");
-		// Button roundfour = new Button("Round 4");
-
-		// leftVBox.getChildren().add(trialRound);
-		// leftVBox.getChildren().add(roundOne);
-		// leftVBox.getChildren().add(roundTwo);
-		// leftVBox.getChildren().add(roundThree);
-		// leftVBox.getChildren().add(roundfour);
-
-		// trialRound.setOnAction(e -> {
-
-		// });
 		System.out.println("Printing round count " + roundCounter.getMaxCount());
 		if (roundCounter.getMaxCount() >= -1){
 			int i = roundCounter.getMaxCount();

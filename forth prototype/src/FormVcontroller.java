@@ -33,12 +33,21 @@ public class FormVcontroller implements Initializable{
 	
 	public Scene formVScene;
 	static Stage window;
-	FormBMenu formB = new FormBMenu();
+	FormBMenu formB = FormBMenu.getInstance();
 	FormTMenu formT = new FormTMenu();
-	FormOMenu formO = new FormOMenu();
-	FormSMenu formS = new FormSMenu();
+	FormOMenu formO = FormOMenu.getInstance();
+	FormSMenu formS = FormSMenu.getInstance();
 	StartScreen startScreen = new StartScreen();
 	RoundCounter roundCounter = RoundCounter.getInstance();
+
+	private static FormVcontroller instance = null;
+
+	public static FormVcontroller getInstance() {
+		if(instance == null) {
+			instance = new FormVcontroller();
+	    }
+		return instance;
+	}
 
 	private ArrayList<String> roundNumArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> totalRevenueArray = new ArrayList<String>(Collections.nCopies(20, ""));
@@ -47,9 +56,7 @@ public class FormVcontroller implements Initializable{
 	private ArrayList<String> materialsSumArray = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> totalExpenditureArray = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> profitLossArray = new ArrayList<String>(Collections.nCopies(20, ""));
-
-
-
+	
 	@FXML
 	private Button Rev;
 	@FXML
@@ -76,6 +83,7 @@ public class FormVcontroller implements Initializable{
 	private Label Exp;
 	@FXML
 	private Label ProfitLoss;
+	
 
 	// display this form
 		public void display(Button button) throws IOException{
@@ -85,6 +93,7 @@ public class FormVcontroller implements Initializable{
 			scene.getStylesheets().add("Styling.css");
 			stage.setScene(scene);
 			stage.setTitle("QpQ");
+			
 		}
 
 		public void saveFields(){
@@ -96,6 +105,8 @@ public class FormVcontroller implements Initializable{
 			totalExpenditureArray.set(roundCounter.getRoundCounter(), Exp.getText());
 			profitLossArray.set(roundCounter.getRoundCounter(), ProfitLoss.getText());
 		}
+		
+	   
 	    
 	    public static void setEmployeeWage(int count)
 		{
@@ -105,13 +116,12 @@ public class FormVcontroller implements Initializable{
 			//Employees.setText(String.valueOf(count));
 		}
 		
-
+		
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 
 			ArrayList<Round> formVData = PSDSingleton.getInstance().getFormVData();
-
-
+			
 			Rev.setOnAction(e -> {
 				try{
 					formB.display(Rev);
@@ -157,12 +167,14 @@ public class FormVcontroller implements Initializable{
 					e1.printStackTrace();
 				}
 			});
+			
 	
 			// calculate revenue
-				ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
-				if(array.size() > 0){
-					int totalRevenue = 0;
-					for(int j = 0; j < array.size(); j++ ){
+			ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
+			if(array.size() > 0){
+				int totalRevenue = 0;
+				for(int j = 0; j < array.size(); j++ ){
+					if (Integer.parseInt(array.get(j)[6]) == roundCounter.getRoundCounter()){
 						String contractPrice = array.get(j)[2];
 						String scheduleTime = array.get(j)[3];
 						String actualTime = array.get(j)[4];
@@ -176,57 +188,61 @@ public class FormVcontroller implements Initializable{
 						int Revenue = (Integer.parseInt(contractPrice)- 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
 						System.out.println("revenue is: " + Revenue);
 						totalRevenue += Revenue;
-						}
 					}
-					System.out.println("total Revenue is " + totalRevenue);
-					Revenues.setText(String.valueOf(totalRevenue));
-					
-				} else {
-					Revenues.setText("");
 				}
+			}
+				System.out.println("total Revenue is " + totalRevenue);
+				Revenues.setText(String.valueOf(totalRevenue));
 				
-				// calculate employee costs
-				ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
-				if (arr.size() > 0){
-					int totalWageCost = 0;
-					for (int i = 0; i < arr.size() ; i ++){
+			} else {
+				Revenues.setText("");
+			}
+			
+			// calculate employee costs
+			ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
+			if (arr.size() > 0){
+				int totalWageCost = 0;
+				for (int i = 0; i < arr.size() ; i ++){
+					if (Integer.parseInt(arr.get(i)[2]) == roundCounter.getRoundCounter()){
 						totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
 					}
-					int roundTime = PSDSingleton.getInstance().getRoundTime();
+				}
+				int roundTime = PSDSingleton.getInstance().getRoundTime();
 
-					Employees.setText(String.valueOf(totalWageCost*roundTime));
-				} else {
-					Employees.setText("");
-				}
-				
-				// set total AYN expenses
-				ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
-				float totPay = 0;
-				for (AYNEmployee emp : ayn){
-					totPay += emp.calcWage();
-				}
-				String pay = String.valueOf(totPay);
-				if (totPay == 0.0){
-					Employment.setText("");
-				}
-				else{
-					Employment.setText(pay);
-				}
+				Employees.setText(String.valueOf(totalWageCost*roundTime));
+			} else {
+				Employees.setText("");
+			}
+			
+			// set total AYN expenses
+			ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
+			float totPay = 0;
+			for (AYNEmployee emp : ayn){
+				totPay += emp.calcWage();
+			}
+			String pay = String.valueOf(totPay);
+			if (totPay == 0.0){
+				Employment.setText("");
+			}
+			else{
+				Employment.setText(pay);
+			}
 
-				// Display kit price
-				Double sum = PSDSingleton.getInstance().getFormOData();
+			// Display kit price
+			ArrayList<String> formOData = PSDSingleton.getInstance().getFormOData();
+			try{
+				Double sum = Double.parseDouble(formOData.get(roundCounter.getRoundCounter()));
 				if (sum != null){
 					Materials.setText(String.valueOf(sum));
 				} else{
 					Materials.setText("");
 				}
+			} catch (Exception e) {}
 
-				//Diplay Total Expenditure
-				displayTotal();
-				saveFields();			
+			displayTotal();
+			saveFields();			
 		}
 		public void displayTotal(){
-			// Calculate total expenditure
 			try{
 				double totalExpenditure = 0;
 				double revenue = Double.parseDouble(Revenues.getText());
@@ -235,7 +251,6 @@ public class FormVcontroller implements Initializable{
 				double materialCosts = Double.parseDouble(Materials.getText());
 				
 				totalExpenditure = + employeeCosts + aynCosts + materialCosts;
-				//System.out.println("rev " + revenue + "empl " + employeeCosts + "ayn " + aynCosts);
 				
 				Exp.setText(String.valueOf(totalExpenditure));
 				ProfitLoss.setText(String.valueOf(revenue - totalExpenditure));
@@ -249,4 +264,26 @@ public class FormVcontroller implements Initializable{
 	
 }		
 		
+		
+		
+		
+		
+	
+			
+			/*if (event.getSource() == revenueButton){
 
+				System.out.println(this.rev.getText());
+				Main.window.setScene(formB.display(this , rev));
+			} else if (event.getSource() == goodsHistoryButton){
+				if (formOScene == null){
+					formOScene = FormOMenu.display();
+				}
+				Main.window.setScene(formOScene );
+			}  else if (event.getSource() == employmentAgencyButton){
+				if (formTScene == null){
+					formTScene = FormTMenu.display();
+				}
+				Main.window.setScene(formTScene);
+			} 
+		}
+*/

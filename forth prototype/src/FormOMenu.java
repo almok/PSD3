@@ -18,10 +18,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.Round;
 
 
 
 public class FormOMenu implements Initializable {
+
+	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
+
+	private static FormOMenu instance = null;
+
+	public static FormOMenu getInstance() {
+		if(instance == null) {
+			instance = new FormOMenu();
+	    }
+		return instance;
+	}
 	
 	@FXML
 	private BorderPane formOMenu;
@@ -57,13 +70,15 @@ public class FormOMenu implements Initializable {
 	
 	public double calcTotalKitPrice(){
 		
+		ArrayList<String> formOData = PSDSingleton.getInstance().getFormOData();
 		double sum = 0;
 		for(OrderHistory order : orders){
 			if (order.getKitPrice() != -1){
 				sum+= order.getKitPrice();
 			}
 		}
-		PSDSingleton.getInstance().setFormOData(sum);
+		formOData.set(roundCount, String.valueOf(sum));
+		PSDSingleton.getInstance().setFormOData(formOData);
 		return sum;
 	}
 	
@@ -81,7 +96,7 @@ public class FormOMenu implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		formV = new FormVcontroller();
+		FormVcontroller formV = FormVcontroller.getInstance();
 		
 		backButton.setOnAction(e -> {
 			try {
