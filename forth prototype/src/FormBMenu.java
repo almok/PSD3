@@ -36,8 +36,7 @@ public class FormBMenu implements Initializable{
 	RoundCounter roundCounter = RoundCounter.getInstance();
 	int roundCount = roundCounter.getRoundCounter();
 
-	ArrayList<Integer> formCountArray = PSDSingleton.getInstance().getFormCounter();
-	private int formCounter = formCountArray.get(roundCount);
+	private int formCounter = 1;
 	private int currentForm = 1;
 	public Scene scene;
 	
@@ -468,10 +467,10 @@ public class FormBMenu implements Initializable{
 			    
 				timeDifferenceArrayList.set(i,String.valueOf(timeDiff));
 				}
-			}
-				displayValues(0);
+				
 				addFormButtons(leftVBox);
-			
+			}
+			displayValues(0);
 		}
 		
 	
@@ -518,9 +517,6 @@ public class FormBMenu implements Initializable{
 		
 			//System.out.println("field 1 saved  :" + formBData.get(0)[0]);
 			PSDSingleton.getInstance().setFormBData(formBData);
-
-			formCountArray.set(roundCount, formCounter);
-			PSDSingleton.getInstance().setFormCounter(formCountArray);
 			
 			FormVcontroller formV = FormVcontroller.getInstance();	
 				
