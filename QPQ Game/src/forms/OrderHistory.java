@@ -95,17 +95,17 @@ public class OrderHistory {
 			lights = productCode.charAt(6);
 			gps = productCode.charAt(5);
 		
-			if (lights == 'Y' && gps == '1'){
+			if ((lights == 'Y' || lights == 'y') && gps == '1'){
 				return Double.parseDouble(PSDSingleton.getInstance().getGPSYellowPrice(carName));
 			}
-			else if (lights == 'Y' && gps == '0'){
+			else if ((lights == 'Y' || lights == 'y') && gps == '0'){
 				
 				return Double.parseDouble(PSDSingleton.getInstance().getNoGPSYellowPrice(carName));
 			}
-			else if (lights == 'X' && gps == '1'){
+			else if ((lights == 'X' || lights == 'x') && gps == '1'){
 				return Double.parseDouble(PSDSingleton.getInstance().getGPSXenonPrice(carName));
 			}
-			else if (lights == 'X' && gps == '0'){
+			else if ((lights == 'X' || lights == 'x') && gps == '0'){
 				return Double.parseDouble(PSDSingleton.getInstance().getNoGPSXenonPrice(carName));
 			}
 		}
