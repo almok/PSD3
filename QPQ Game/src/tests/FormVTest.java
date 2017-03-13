@@ -6,13 +6,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import forms.FormVcontroller;
+import main.PSDSingleton;
 
 public class FormVTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		PSDSingleton data = PSDSingleton.getInstance();
 		FormVcontroller formV = new FormVcontroller();
-		
 	}
 
 	@Test
