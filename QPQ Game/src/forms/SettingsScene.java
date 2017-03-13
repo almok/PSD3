@@ -1,3 +1,4 @@
+package forms;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +69,7 @@ public class SettingsScene implements Initializable{
 		Parent parent = FXMLLoader.load(getClass().getResource("SettingsScene.fxml"));
 		Scene scene = new Scene(parent);
 		Stage stage = (Stage) button.getScene().getWindow();
-		scene.getStylesheets().add("Styling.css");	
+		scene.getStylesheets().add("forms/Styling.css");	
 		stage.setScene(scene);
 		stage.setTitle("QpQ");
 			

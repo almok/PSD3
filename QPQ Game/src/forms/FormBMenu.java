@@ -1,4 +1,4 @@
-
+package forms;
 
 import java.io.IOException;
 import java.net.URL;
@@ -562,7 +562,7 @@ public class FormBMenu implements Initializable{
 				Scene scene = new Scene(parent);
 				Stage stage = (Stage) button.getScene().getWindow();
 				
-				scene.getStylesheets().add("Styling.css");
+				scene.getStylesheets().add("forms/Styling.css");
 				stage.setScene(scene);
 				
 				stage.setMaximized(true);

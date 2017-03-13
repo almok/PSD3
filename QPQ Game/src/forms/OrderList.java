@@ -1,6 +1,8 @@
+package forms;
+
 import javafx.scene.control.TextField;
 
-public class orderList {
+public class OrderList {
 	private TextField OrderNum;
 	private TextField chassisType;
 	private TextField productCode;
@@ -16,7 +18,7 @@ public class orderList {
 	
 	
 	//constructor
-	public orderList(Order order ){
+	public OrderList(Order order ){
 		
 		OrderNum = new TextField();
 	    chassisType = new TextField();
@@ -37,7 +39,7 @@ public class orderList {
 	    deliveryTime.textProperty().addListener((observable, oldValue, newValue) -> {order.setActualTime(newValue);});
 	}
 	
-	public orderList(Order order, String OrderNo, String schedTime){
+	public OrderList(Order order, String OrderNo, String schedTime){
 		OrderNum = new TextField(OrderNo);
 		scheduleTime = new TextField(schedTime);
 		OrderNum.textProperty().addListener((observable, oldValue, newValue) -> {order.setOrderNumber(newValue);});

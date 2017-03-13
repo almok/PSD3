@@ -1,3 +1,5 @@
+package forms;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -72,7 +74,7 @@ public class FormOMenu implements Initializable {
 			Parent parent = FXMLLoader.load(getClass().getResource("formO.fxml"));
 			Scene scene = new Scene(parent);
 			Stage stage = (Stage) button.getScene().getWindow();
-			scene.getStylesheets().add("Styling.css");
+			scene.getStylesheets().add("forms/Styling.css");
 			stage.setScene(scene);
 			stage.setTitle("Order History");
 			

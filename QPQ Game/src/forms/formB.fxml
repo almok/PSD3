@@ -9,7 +9,7 @@
 <?import javafx.scene.textfield.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FormBMenu">
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forms.FormBMenu">
 	
  	<top>
  		<HBox fx:id="topHBox">

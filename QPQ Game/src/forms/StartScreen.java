@@ -1,7 +1,8 @@
+package forms;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.PSDSingleton;
+import main.RoundCounter;
 
 public class StartScreen extends Application implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
@@ -36,7 +36,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 		Parent parent = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
 		Scene scene = new Scene(parent);
 		Stage stage = (Stage) button.getScene().getWindow();
-		scene.getStylesheets().add("Styling.css");
+		scene.getStylesheets().add("forms/Styling.css");
 		stage.setScene(scene);
 		stage.setTitle("QpQ");
 			
@@ -123,7 +123,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 
 		Scene scene = new Scene(root, 800, 700);
         primaryStage.setTitle("FXML Welcome");
-        scene.getStylesheets().add("Styling.css");
+        scene.getStylesheets().add("forms/Styling.css");
         primaryStage.setScene(scene);
         primaryStage.show();
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:id="aPane"  fx:controller="EditFormC">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:id="aPane"  fx:controller="forms.EditFormC">
 	<HBox prefHeight="100.0" prefWidth="600.0" fx:id="topButtons">
 		<Button fx:id="backButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Back" />
 		<Button fx:id="saveButton" layoutX="140.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Save" />

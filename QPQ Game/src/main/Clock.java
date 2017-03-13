@@ -1,3 +1,6 @@
+package main;
+
+import forms.*;
 import javafx.animation.*;
 import javafx.animation.*;
 import javafx.application.Application;
@@ -111,7 +114,7 @@ class CountDown {
   }
 }*/
 
-public class Clocky {
+public class Clock {
     private long startTime;
     private long skippedTime = 0L;
     private long addedTime = 0L;
@@ -121,14 +124,14 @@ public class Clocky {
     /**
      * Constructs a new clock starting 0ms
      * */
-    Clocky(){
+    Clock(){
         startTime = System.currentTimeMillis();
     }
 
     /**
      * Constructs a new clock starting at the specified time
      * */
-    Clocky(long time) {
+    Clock(long time) {
         startTime = System.currentTimeMillis();
         addedTime += time;
     }
