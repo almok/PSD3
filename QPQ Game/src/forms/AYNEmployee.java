@@ -9,10 +9,10 @@ public class AYNEmployee {
 	private String department;
 	private boolean multiSkilled;
 	private int time1, time2, totTime;
-	private float wage;
+	private double wage;
 	
 	
-	public AYNEmployee(String name, String department, boolean multiSkilled, int time1, int time2, int totTime, float wage) {
+	public AYNEmployee(String name, String department, boolean multiSkilled, int time1, int time2, int totTime, Double wage) {
 		this.name = name;
 		this.department = department;
 		this.multiSkilled = multiSkilled;
@@ -31,7 +31,7 @@ public class AYNEmployee {
 	}
 	
 	// calculate wage
-	public float calcWage(){
+	public Double calcWage(){
 		if (multiSkilled){
 			wage = PSDSingleton.getInstance().getEmployeeWage("AYN employee multiskilled");
 		}
@@ -66,7 +66,7 @@ public class AYNEmployee {
 		return totTime;
 	}
 	
-	public float getWage() {
+	public double getWage() {
 		return wage;
 	}
 
@@ -94,7 +94,7 @@ public class AYNEmployee {
 		this.totTime = totTime;
 	}
 	
-	public void setWage(float wage) {
+	public void setWage(double wage) {
 		this.wage = wage;
 	}
 	

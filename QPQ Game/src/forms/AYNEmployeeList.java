@@ -55,7 +55,7 @@ public class AYNEmployeeList {
 				
 				// assign the numbers to PID, CBT and AAT in a process
 				AYNEmployee employee = new AYNEmployee(stats[0], department, Boolean.parseBoolean(stats[2]), Integer.parseInt(stats[3]), 
-						Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Float.parseFloat(stats[6]));
+						Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Double.parseDouble(stats[6]));
 				
 				// add a process to a collection of processes
 				employees.add(employee);

@@ -2,23 +2,30 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import forms.AYNEmployee;
-import main.PSDSingleton;
 
 public class AYNEmptest {
+	
+	private static AYNEmployee emp;
 
-	@Before
-	public void setUp() {
-		PSDSingleton data = PSDSingleton.getInstance();
-		AYNEmployee emp = new AYNEmployee();
+	@BeforeClass
+	public static void setUp() {
+		emp = new AYNEmployee("", "", false, 1, 2, 1, 0.0);
+		
 	}
 
 	@Test
 	public void testCalcWage() {
-		fail("Not yet implemented");
+		assertEquals((Double) 15.0, (Double) emp.calcWage());
+		
+		
+		emp.setMultiSkilled(true);
+		assertEquals((Double) 25.0, (Double) emp.calcWage());
+		
+		// what about hiring and firing costs?
 	}
 
 }
