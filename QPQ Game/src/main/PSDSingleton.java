@@ -137,16 +137,17 @@ public class PSDSingleton {
 	}
 	
 	private void createHashFormD(){
-		 this.formRDataHashMap = new HashMap<String, Integer>();
-		 ArrayList<String[]> arr = this.getFormRData();
+		 this.formDDataHashMap = new HashMap<String, Integer>();
+		 ArrayList<String[]> arr = this.getFormDData();
 
 		 for (int i = 0; i < arr.size(); i++) {
 			 for (int j = 1; j < arr.get(i).length; j++) {
-				 this.formRDataHashMap.put(arr.get(i)[0] + " " + j, Integer.parseInt(arr.get(i)[j]));
+				 this.formDDataHashMap.put(arr.get(i)[0] + " " + j, Integer.parseInt(arr.get(i)[j]));
 			 }
 		}
 	}
-
+	
+	// what if the time is not an int between 1 and 10
 	public int getContractPrice(String carName , String time){
 		if(this.formDDataHashMap == null){
 			this.createHashFormD();

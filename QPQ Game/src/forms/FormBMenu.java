@@ -480,16 +480,21 @@ public class FormBMenu implements Initializable {
 			if (scheduledDeliveryTimeField.getText() == null || scheduledDeliveryTimeField.getText().length() == 0) {
 
 			} else {
-
-				int penalty = 0;
-				int revenue = 0;
-				int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
-				int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
-
-				penalty = 30 * (actualTime - schedTime);
-				penaltyPriceField.setText(Integer.toString(penalty));
-				revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
-				revenueField.setText(Integer.toString(revenue));
+				
+				try{
+					int penalty = 0;
+					int revenue = 0;
+					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+	
+					penalty = 30 * (actualTime - schedTime);
+					penaltyPriceField.setText(Integer.toString(penalty));
+					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+					revenueField.setText(Integer.toString(revenue));
+				}
+				catch(Exception e){
+					System.out.println("entered actual delivery time is not a number");
+				}
 			}
 		});
 
@@ -501,23 +506,36 @@ public class FormBMenu implements Initializable {
 		 * oldValue, newValue) -> { saveFields(); });
 		 */
 		
+		// add change listener to scheduled time to calculate contract price immediately
+		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (Order.isCodeValid(productCodeField.getText())){
+				if (scheduledDeliveryTimeField.getText() == ""){
+					contractPriceField.setText("0");
+				}
+				else{
+					String carName = getCarName();
+					getContPrice(carName, scheduledDeliveryTimeField.getText());
+				}
+			}
+			else {
+				contractPriceField.setText("0");
+			}
+			
+		});
 		
 		// add change listener to product code
 		productCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (Order.isCodeValid(productCodeField.getText())){
-				String chassis = Character.toString(productCodeField.getText().charAt(1)); 
-				chassis += Character.toString(productCodeField.getText().charAt(2));
+			if (Order.isCodeValid(productCodeField.getText()) && scheduledDeliveryTimeField.getText() != ""){
 				
-				switch(chassis){
-					case "ST": case "st": case "St": case "sT": chassisField.setText("Standard"); break;
-					case "DR": case "dr": case "Dr": case "dR": chassisField.setText("Dragstar"); break;
-					case "DE": case "de": case "De": case "dE": chassisField.setText("Deluxe"); break;
-					case "SS": case "ss": case "Ss": case "sS": chassisField.setText("Special"); break;
-					default: chassisField.setText("");
+				String carName = getCarName();
+				
+				if(scheduledDeliveryTimeField.getText() != ""){
+					getContPrice(carName, scheduledDeliveryTimeField.getText());	
 				}
 			}
 			else{
 				chassisField.setText("");
+				contractPriceField.setText("0");
 			}
 		});
 
@@ -547,5 +565,86 @@ public class FormBMenu implements Initializable {
 		// stage.setMaximized(true);
 
 	}
+	
+	// extract a car name from a valid product code
+	private String getCarName(){
+		String carName = "";
+		String prodLine = Character.toString(productCodeField.getText().charAt(0));
+		String chassis = Character.toString(productCodeField.getText().charAt(1)); 
+		chassis += Character.toString(productCodeField.getText().charAt(2));
+		
+		switch(prodLine.toLowerCase()){
+			case "f": carName = "Family "; break;
+			case "P": case "p": carName = "Pony "; break;
+			case "S": case "s": carName = "Sedan "; break;
+			case "A": case "a": carName = "Ayrton "; break;
+			case "C": case "c": carName = "Coast";  break;
+			case "T": case "t": carName = "Thunder"; break;
+	}
+		
+		switch(chassis.toLowerCase()){
+			case "st": chassisField.setText("Standard"); carName += "Standard"; break;
+			case "dr": chassisField.setText("Dragstar"); carName += "Dragstar"; break;
+			case "de": chassisField.setText("Deluxe"); carName += "Deluxe"; break;
+			case "ss": chassisField.setText("Special"); break;
 
+		}
+	return carName;
+	}
+
+	// convert time input into a correct integer for a contract price call
+	private void getContPrice(String carName, String time){
+		System.out.println(carName);
+		
+		try{
+			Double t = Double.parseDouble(scheduledDeliveryTimeField.getText());
+			int price;
+			
+			if (t < 0 || t > 10){
+				price = 0;
+			}
+			else if (t < 1){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "1");
+			}
+			else if (t < 2){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "2");
+			}
+			else if (t < 3){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "3");
+			}
+			else if (t < 4){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "4");
+			}
+			else if (t < 5){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "5");
+			}
+			else if (t < 6){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "6");
+			}
+			else if (t < 7){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "7");
+			}
+			else if (t < 8){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "8");
+			}
+			else if (t < 9){
+				price = PSDSingleton.getInstance().getContractPrice(carName, "9");
+			}
+			else{
+				price = PSDSingleton.getInstance().getContractPrice(carName, "10");
+			}
+
+
+			if (price != 0){
+				contractPriceField.setText(Integer.toString(price));
+			}
+			else{
+				contractPriceField.setText("0");
+			}
+			
+		
+		}catch(Exception e){
+			System.out.println("entered time is not a number");
+		}
+	}
 }
