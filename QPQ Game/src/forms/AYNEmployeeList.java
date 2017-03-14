@@ -53,7 +53,7 @@ public class AYNEmployeeList {
 				
 				//System.out.println(stats[]);
 				
-				// assign the numbers to PID, CBT and AAT in a process
+				// assign the values
 				AYNEmployee employee = new AYNEmployee(stats[0], department, Boolean.parseBoolean(stats[2]), Integer.parseInt(stats[3]), 
 						Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Double.parseDouble(stats[6]));
 				

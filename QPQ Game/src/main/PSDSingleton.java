@@ -220,7 +220,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 2){
-				return formPDataHashMap.get(carName)[1];
+				return formPDataHashMap.get(carName)[3];
 			}
 			return "0";
 		}
@@ -234,7 +234,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 3){
-				return formPDataHashMap.get(carName)[2];
+				return formPDataHashMap.get(carName)[4];
 			}
 			return "0";
 		}
@@ -249,7 +249,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 4){
-				return formPDataHashMap.get(carName)[3];
+				return formPDataHashMap.get(carName)[1];
 			}
 			return "0";
 		}
@@ -263,7 +263,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 5){
-				return formPDataHashMap.get(carName)[4];
+				return formPDataHashMap.get(carName)[2];
 			}
 			return "0";
 		}

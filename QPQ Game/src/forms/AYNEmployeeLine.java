@@ -128,9 +128,6 @@ public class AYNEmployeeLine {
 		button19.setOnAction(e -> setTime(emp, button19));
 		button20.setOnAction(e -> setTime(emp, button20));
 		
-		
-		
-		
 	}
 	
 	// set and and calculated employment time

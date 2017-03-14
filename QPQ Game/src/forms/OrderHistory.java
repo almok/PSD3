@@ -97,6 +97,7 @@ public class OrderHistory {
 			
 			lights = productCode.charAt(6);
 			gps = productCode.charAt(5);
+			
 		
 			if ((lights == 'Y' || lights == 'y') && gps == '1'){
 				return Double.parseDouble(PSDSingleton.getInstance().getGPSYellowPrice(carName));
