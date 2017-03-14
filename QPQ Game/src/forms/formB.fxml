@@ -91,7 +91,7 @@
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                <children>
           			 <Label prefHeight="17.0" prefWidth="153.0" text="Contract price (a):" />
-          			 <TextField fx:id="contractPriceField" prefWidth="150" promptText="" />
+          			 <TextField fx:id="contractPriceField" editable="false" prefWidth="150" promptText="" />
                </children>
             </HBox>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
@@ -112,7 +112,7 @@
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                <children>
           			 <Label prefHeight="17.0" prefWidth="153.0" text="Penalty (b):" />
-          			 <TextField fx:id="penaltyPriceField" alignment="CENTER" prefWidth="150.0" promptText="" />
+          			 <TextField fx:id="penaltyPriceField" editable="false" alignment="CENTER" prefWidth="150.0" promptText="" />
                </children>
             </HBox>   
           	<HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">

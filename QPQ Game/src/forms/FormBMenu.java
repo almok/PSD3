@@ -422,54 +422,57 @@ public class FormBMenu implements Initializable {
 		}
 
 		backButton.setOnAction(e -> {
+			
+			if (isInputValid()){
 
-			ArrayList<String[]> formBData = new ArrayList<>();
-			// check all fields are correct input
-
-			// saves orders
-			saveOrders(totalOrders);
-
-			// iterate fields creating orders
-			/*
-			 * for(int i = 0; i < orders.size(); i++) { Order order = new
-			 * Order(orderArrayList.get(i),productCodeArrayList.get(i) ,
-			 * contractPriceArrayList.get(i),
-			 * scheduledDeliveryTimeArrayList.get(i),actualDeliveryTimeArrayList
-			 * .get(i) , null); System.out.println(order.getOrderNumber());
-			 * orders.add(order); }
-			 */
-
-			// iterate orders adding to formB Data
-			for (int k = 0; k < orders.size(); k++) {
-				String orderNum = orders.get(k).getOrderNumber();
-				System.out.println("order number saved :" + orderNum);
-				String productCode = orders.get(k).getProductCode();
-				String contractPrice = orders.get(k).getContractPrice();
-				String scheduleTime = orders.get(k).getScheduleTime();
-				String actualTime = orders.get(k).getActualTime();
-				String penalty = orders.get(k).getPenalty();
-				if (orderNum != "") {
-					String[] _order = new String[6];
-					_order[0] = orderNum;
-					_order[1] = productCode;
-					_order[2] = contractPrice;
-					_order[3] = scheduleTime;
-					_order[4] = actualTime;
-					_order[5] = penalty;
-
-					formBData.add(_order);
+				ArrayList<String[]> formBData = new ArrayList<>();
+				// check all fields are correct input
+	
+				// saves orders
+				saveOrders(totalOrders);
+	
+				// iterate fields creating orders
+				/*
+				 * for(int i = 0; i < orders.size(); i++) { Order order = new
+				 * Order(orderArrayList.get(i),productCodeArrayList.get(i) ,
+				 * contractPriceArrayList.get(i),
+				 * scheduledDeliveryTimeArrayList.get(i),actualDeliveryTimeArrayList
+				 * .get(i) , null); System.out.println(order.getOrderNumber());
+				 * orders.add(order); }
+				 */
+	
+				// iterate orders adding to formB Data
+				for (int k = 0; k < orders.size(); k++) {
+					String orderNum = orders.get(k).getOrderNumber();
+					System.out.println("order number saved :" + orderNum);
+					String productCode = orders.get(k).getProductCode();
+					String contractPrice = orders.get(k).getContractPrice();
+					String scheduleTime = orders.get(k).getScheduleTime();
+					String actualTime = orders.get(k).getActualTime();
+					String penalty = orders.get(k).getPenalty();
+					if (orderNum != "") {
+						String[] _order = new String[6];
+						_order[0] = orderNum;
+						_order[1] = productCode;
+						_order[2] = contractPrice;
+						_order[3] = scheduleTime;
+						_order[4] = actualTime;
+						_order[5] = penalty;
+	
+						formBData.add(_order);
+					}
 				}
-			}
-
-			// System.out.println("field 1 saved :" + formBData.get(0)[0]);
-			PSDSingleton.getInstance().setFormBData(formBData);
-
-			FormVcontroller formV = new FormVcontroller();
-
-			try {
-				formV.display(backButton);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+	
+				// System.out.println("field 1 saved :" + formBData.get(0)[0]);
+				PSDSingleton.getInstance().setFormBData(formBData);
+	
+				FormVcontroller formV = new FormVcontroller();
+	
+				try {
+					formV.display(backButton);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -477,9 +480,8 @@ public class FormBMenu implements Initializable {
 		// displayOrders();
 
 		actualDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (scheduledDeliveryTimeField.getText() == null || scheduledDeliveryTimeField.getText().length() == 0) {
-
-			} else {
+			if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0 
+					&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
 				
 				try{
 					int penalty = 0;
@@ -525,11 +527,10 @@ public class FormBMenu implements Initializable {
 		
 		// add change listener to product code
 		productCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (Order.isCodeValid(productCodeField.getText()) && scheduledDeliveryTimeField.getText() != ""){
-				
+			if (Order.isCodeValid(productCodeField.getText())){
 				String carName = getCarName();
 				
-				if(scheduledDeliveryTimeField.getText() != ""){
+				if(scheduledDeliveryTimeField.getText().length() != 0){
 					getContPrice(carName, scheduledDeliveryTimeField.getText());	
 				}
 			}
@@ -594,7 +595,6 @@ public class FormBMenu implements Initializable {
 
 	// convert time input into a correct integer for a contract price call
 	private void getContPrice(String carName, String time){
-		System.out.println(carName);
 		
 		try{
 			Double t = Double.parseDouble(scheduledDeliveryTimeField.getText());
