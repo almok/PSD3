@@ -504,16 +504,16 @@ public class FormBMenu implements Initializable {
 		
 		// add change listener to product code
 		productCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (productCodeField.getText().length() > 2){
+			if (Order.isCodeValid(productCodeField.getText())){
 				String chassis = Character.toString(productCodeField.getText().charAt(1)); 
 				chassis += Character.toString(productCodeField.getText().charAt(2));
 				
 				switch(chassis){
-				case "ST": case "st": case "St": case "sT": chassisField.setText("Standard"); break;
-				case "DR": case "dr": case "Dr": case "dR": chassisField.setText("Dragstar"); break;
-				case "DE": case "de": case "De": case "dE": chassisField.setText("Deluxe"); break;
-				case "SS": case "ss": case "Ss": case "sS": chassisField.setText("Special"); break;
-				default: chassisField.setText("");
+					case "ST": case "st": case "St": case "sT": chassisField.setText("Standard"); break;
+					case "DR": case "dr": case "Dr": case "dR": chassisField.setText("Dragstar"); break;
+					case "DE": case "de": case "De": case "dE": chassisField.setText("Deluxe"); break;
+					case "SS": case "ss": case "Ss": case "sS": chassisField.setText("Special"); break;
+					default: chassisField.setText("");
 				}
 			}
 			else{
