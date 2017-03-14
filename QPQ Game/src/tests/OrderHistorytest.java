@@ -1,8 +1,7 @@
 package tests;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import forms.Order;
@@ -10,14 +9,11 @@ import forms.OrderHistory;
 
 public class OrderHistorytest {
 
-	@Before
-	public void setUp() throws Exception {
-		OrderHistory order = new OrderHistory(new Order(null, null, null, null, null, null));		
-	}
 
 	@Test
 	public void testCalcKitPrice() {
-		fail("Not yet implemented");
+		OrderHistory order = new OrderHistory(new Order(null, "FDR371Y", null, null, null, null));
+		assertEquals((Double) 290.0, (Double) order.getKitPrice());
 	}
 
 }

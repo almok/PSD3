@@ -67,9 +67,12 @@ public class OrderHistory {
 		char lights;
 		char gps;
 		
+		
+		
 		prodLine = Character.toString(productCode.charAt(0));
 		chassis = Character.toString(productCode.charAt(1));
 		chassis += Character.toString(productCode.charAt(2));
+		
 		
 		switch(prodLine){
 			case "F": case "f": carName = "Family "; break;
@@ -87,8 +90,8 @@ public class OrderHistory {
 		else {
 			switch(chassis){
 				case "ST": case "st": case "St": case "sT": carName += "Standard"; break;
-				case "DE": case "de": case "Dr": case "dT": carName += "Dragstar"; break;
-				case "DR": case "dr": case "De": case "dE": carName += "Deluxe"; break;
+				case "DR": case "dr": case "Dr": case "dR": carName += "Dragstar"; break;
+				case "DE": case "de": case "De": case "dE": carName += "Deluxe"; break;
 				default: return -1;
 			}
 			
@@ -109,6 +112,7 @@ public class OrderHistory {
 				return Double.parseDouble(PSDSingleton.getInstance().getNoGPSXenonPrice(carName));
 			}
 		}
+		
 		return -1;
 	}
 }
