@@ -25,8 +25,9 @@ import main.PSDSingleton;
 public class FormBMenu implements Initializable {
 	// private static Button backButton;
 
-	private int formCounter = 1;
-	private int currentForm = 1;
+	private int counter;
+	private int formCounter = 0;
+	private int currentForm = 0;
 	public Scene scene;
 
 	private ArrayList<String> orderArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
@@ -122,66 +123,66 @@ public class FormBMenu implements Initializable {
 	}
 
 	private void saveFields() {
-		int c = currentForm - 1;
+		int c = formCounter - 1;
 		saveFields(c);
 	}
 
-	int totalOrders = 0;
-
 	public void addFormButtons(VBox left) {
-		int c = formCounter;
 
-		totalOrders++;
-		if (formCounter == 1) {
-
+		if (formCounter == 0) {
+			formCounter++;
+			currentForm = formCounter; // 1
 			Button formButton1 = new Button(" Order " + formCounter + " ");
 
-			formCounter++;
 			left.getChildren().add(formButton1);
+
+			centerVBox.setVisible(true);
 
 			// buttons action
 			formButton1.setOnAction(e -> {
+				saveFields(currentForm - 1);
+				currentForm = Integer.parseInt(Character.toString(formButton1.getText().charAt(7)));
+				System.out.println(Integer.parseInt(Character.toString(formButton1.getText().charAt(7))));
 
 				System.out.println("current form is :" + currentForm);
 				// System.out.println("values in field 1 :" + );
-
-				saveFields(currentForm - 1);
-				currentForm = c;
-				displayValues(c - 1);
-
-				// saveFields(currentForm - 1);
+				displayValues(currentForm - 1);
 			});
-		} else if (formCounter > 1 && formCounter < 10) {
+		} else if (formCounter >= 1 && formCounter < 9) {
+			centerVBox.setVisible(true);
+			formCounter++;
 			Button formButton = new Button(" Order " + formCounter + " ");
 			// Order order = new Order(Integer.toString(c), null, null, null,
 			// null, null);
 
-			formCounter++;
 			left.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
-
+				saveFields(currentForm - 1);
+				currentForm = Integer.parseInt(Character.toString(formButton.getText().charAt(7)));
 				System.out.println("current form is :" + currentForm);
-				if (isInputValid()) {
-					saveFields(currentForm - 1);
-					currentForm = c;
-					displayValues(c - 1);
-				}
+				// if (isInputValid()) {
+
+				displayValues(currentForm - 1);
+				// }
 			});
-		} else if (formCounter >= 10 && formCounter <= 20) {
+		} else if (formCounter >= 9 && formCounter < 20) {
+			formCounter++;
+			centerVBox.setVisible(true);
 			Button formButton = new Button("Order " + formCounter);
 			// Order order = new Order(Integer.toString(c), null, null, null,
 			// null, null);
 
-			formCounter++;
 			left.getChildren().add(formButton);
 
 			formButton.setOnAction(e -> {
-
-				if (isInputValid()) {
-					saveFields(currentForm - 1);
-					currentForm = c;
-					displayValues(c - 1);
-				}
+				saveFields(currentForm);
+				String currF = Character.toString(formButton.getText().charAt(6));
+				currF += Character.toString(formButton.getText().charAt(7));
+				currentForm = Integer.parseInt(currF);
+				//if (isInputValid()) {
+					
+					displayValues(currentForm - 1);
+				//}
 			});
 		}
 	}
@@ -193,7 +194,7 @@ public class FormBMenu implements Initializable {
 	@FXML
 	private Button deleteButton;
 	@FXML
-	private VBox leftVBox;
+	private VBox leftVBox, centerVBox;
 	@FXML
 	private TextField orderField;
 	@FXML
@@ -235,8 +236,6 @@ public class FormBMenu implements Initializable {
 
 	// save order objects to observable list
 	private void saveOrders(int forms) {
-		saveFields();
-		int c = 0;
 		orders.clear();
 		for (int i = 0; i < forms; i++) {
 			// creates new order
@@ -246,69 +245,90 @@ public class FormBMenu implements Initializable {
 			System.out.println("Saving order number " + i + " as " + orderArrayList.get(i));
 			order.setContractPrice(contractPriceArrayList.get(i));
 			order.setOrderNumber(orderArrayList.get(i));
+			System.out.println("order number is " + order.getOrderNumber() + " at a position " + i);
 			order.setScheduleTime(scheduledDeliveryTimeArrayList.get(i));
 			order.setActualTime(actualDeliveryTimeArrayList.get(i));
 			order.setProductCode(productCodeArrayList.get(i));
 			order.setPenalty(penaltyPriceArrayList.get(i));
 			// adds order to list
 			orders.add(order);
-			c++;
 		}
 	}
 
 	private void deleteOrder() {
-		int lastOrder = totalOrders;
-		System.out.println("number of orders : " + totalOrders);
-		FormBMenu formB = new FormBMenu();
-		// remove entries from arrayList
-		orderArrayList.remove(totalOrders - 1);
-		chassisArrayList.remove(totalOrders - 1);
-		productCodeArrayList.remove(totalOrders - 1);
-		timeOfReceiptArrayList.remove(totalOrders - 1);
-		leadTimeArrayList.remove(totalOrders - 1);
-		scheduledDeliveryTimeArrayList.remove(totalOrders - 1);
-		contractPriceArrayList.remove(totalOrders - 1);
-		actualDeliveryTimeArrayList.remove(totalOrders - 1);
-		timeDifferenceArrayList.remove(totalOrders - 1);
-		penaltyPriceArrayList.remove(totalOrders - 1);
-		revenueArrayList.remove(totalOrders - 1);
-		// remove order button
-		ArrayList<String[]> formBData = new ArrayList<>();
 
-		// saves orders
-		saveOrders(totalOrders);
-		orders.remove(totalOrders - 1);
-
-		// iterate orders adding to formB Data
-		for (int k = 0; k < orders.size(); k++) {
-			String orderNum = orders.get(k).getOrderNumber();
-			System.out.println("order number saved :" + orderNum);
-			String productCode = orders.get(k).getProductCode();
-			String contractPrice = orders.get(k).getContractPrice();
-			String scheduleTime = orders.get(k).getScheduleTime();
-			String actualTime = orders.get(k).getActualTime();
-			String penalty = orders.get(k).getPenalty();
-			if (orderNum != "") {
-				String[] _order = new String[6];
-				_order[0] = orderNum;
-				_order[1] = productCode;
-				_order[2] = contractPrice;
-				_order[3] = scheduleTime;
-				_order[4] = actualTime;
-				_order[5] = penalty;
-
-				formBData.add(_order);
+		if (currentForm != 0) {
+			// System.out.println("number of orders : " + totalOrders);
+			FormBMenu formB = new FormBMenu();
+			// remove entries from arrayList
+			orderArrayList.remove(currentForm - 1);
+			for (int i = 0; i < orderArrayList.size(); i++) {
+				System.out.println("--- " + orderArrayList.get(i) + " at pos " + i);
 			}
-		}
+			chassisArrayList.remove(currentForm - 1);
+			productCodeArrayList.remove(currentForm - 1);
+			timeOfReceiptArrayList.remove(currentForm - 1);
+			leadTimeArrayList.remove(currentForm - 1);
+			scheduledDeliveryTimeArrayList.remove(currentForm - 1);
+			contractPriceArrayList.remove(currentForm - 1);
+			actualDeliveryTimeArrayList.remove(currentForm - 1);
+			timeDifferenceArrayList.remove(currentForm - 1);
+			penaltyPriceArrayList.remove(currentForm - 1);
+			revenueArrayList.remove(currentForm - 1);
 
-		// System.out.println("field 1 saved :" + formBData.get(0)[0]);
-		PSDSingleton.getInstance().setFormBData(formBData);
+			formCounter--;
 
-		// refresh page
-		try {
-			formB.display(deleteButton);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			// remove order button
+			ArrayList<String[]> formBData = new ArrayList<>();
+
+			// saves orders
+
+			saveOrders(formCounter);
+			for (int i = 0; i < orders.size(); i++) {
+				System.out.println("+++ " + orders.get(i).getOrderNumber());
+			}
+			// orders.remove(currentForm - 1);
+
+			// iterate orders adding to formB Data
+			for (int k = 0; k < orders.size(); k++) {
+				// add buttons
+				counter = k;
+				Button formButton = new Button(" Order " + (counter + 1) + " ");
+				leftVBox.getChildren().add(formButton);
+				formButton.setOnAction(e -> {
+					currentForm = counter + 1;
+					displayValues(counter);
+				});
+
+				String orderNum = orders.get(k).getOrderNumber();
+				System.out.println("order number saved :" + orderNum);
+				String productCode = orders.get(k).getProductCode();
+				String contractPrice = orders.get(k).getContractPrice();
+				String scheduleTime = orders.get(k).getScheduleTime();
+				String actualTime = orders.get(k).getActualTime();
+				String penalty = orders.get(k).getPenalty();
+				if (orderNum != "") {
+					String[] _order = new String[6];
+					_order[0] = orderNum;
+					_order[1] = productCode;
+					_order[2] = contractPrice;
+					_order[3] = scheduleTime;
+					_order[4] = actualTime;
+					_order[5] = penalty;
+
+					formBData.add(_order);
+				}
+			}
+
+			// System.out.println("field 1 saved :" + formBData.get(0)[0]);
+			PSDSingleton.getInstance().setFormBData(formBData);
+
+			// refresh page
+			try {
+				formB.display(deleteButton);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -416,31 +436,42 @@ public class FormBMenu implements Initializable {
 
 				timeDifferenceArrayList.set(i, String.valueOf(timeDiff));
 			}
-			displayValues(0);
-			addFormButtons(leftVBox);
 
+			addFormButtons(leftVBox);
+		}
+
+		if (array.size() != 0) {
+			currentForm = array.size();
+			formCounter = currentForm;
+		}
+		System.out.println("what is curr form? " + currentForm);
+		if (currentForm != 0) {
+			displayValues(currentForm - 1);
+		} else {
+			displayValues(0);
 		}
 
 		backButton.setOnAction(e -> {
-			
-			if (isInputValid()){
+
+			if (isInputValid()) {
 
 				ArrayList<String[]> formBData = new ArrayList<>();
 				// check all fields are correct input
-	
+
 				// saves orders
-				saveOrders(totalOrders);
-	
+				// saveOrders(totalOrders);
+
 				// iterate fields creating orders
 				/*
 				 * for(int i = 0; i < orders.size(); i++) { Order order = new
 				 * Order(orderArrayList.get(i),productCodeArrayList.get(i) ,
 				 * contractPriceArrayList.get(i),
-				 * scheduledDeliveryTimeArrayList.get(i),actualDeliveryTimeArrayList
-				 * .get(i) , null); System.out.println(order.getOrderNumber());
+				 * scheduledDeliveryTimeArrayList.get(i),
+				 * actualDeliveryTimeArrayList .get(i) , null);
+				 * System.out.println(order.getOrderNumber());
 				 * orders.add(order); }
 				 */
-	
+
 				// iterate orders adding to formB Data
 				for (int k = 0; k < orders.size(); k++) {
 					String orderNum = orders.get(k).getOrderNumber();
@@ -458,16 +489,16 @@ public class FormBMenu implements Initializable {
 						_order[3] = scheduleTime;
 						_order[4] = actualTime;
 						_order[5] = penalty;
-	
+
 						formBData.add(_order);
 					}
 				}
-	
+
 				// System.out.println("field 1 saved :" + formBData.get(0)[0]);
 				PSDSingleton.getInstance().setFormBData(formBData);
-	
+
 				FormVcontroller formV = new FormVcontroller();
-	
+
 				try {
 					formV.display(backButton);
 				} catch (IOException e1) {
@@ -480,21 +511,20 @@ public class FormBMenu implements Initializable {
 		// displayOrders();
 
 		actualDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0 
+			if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
 					&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
-				
-				try{
+
+				try {
 					int penalty = 0;
 					int revenue = 0;
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
-	
+
 					penalty = 30 * (actualTime - schedTime);
 					penaltyPriceField.setText(Integer.toString(penalty));
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
-				}
-				catch(Exception e){
+				} catch (Exception e) {
 					System.out.println("entered actual delivery time is not a number");
 				}
 			}
@@ -507,34 +537,32 @@ public class FormBMenu implements Initializable {
 		 * scheduledDeliveryTimeField.textProperty().addListener((observable,
 		 * oldValue, newValue) -> { saveFields(); });
 		 */
-		
-		// add change listener to scheduled time to calculate contract price immediately
+
+		// add change listener to scheduled time to calculate contract price
+		// immediately
 		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (Order.isCodeValid(productCodeField.getText())){
-				if (scheduledDeliveryTimeField.getText() == ""){
+			if (Order.isCodeValid(productCodeField.getText())) {
+				if (scheduledDeliveryTimeField.getText() == "") {
 					contractPriceField.setText("0");
-				}
-				else{
+				} else {
 					String carName = getCarName();
 					getContPrice(carName, scheduledDeliveryTimeField.getText());
 				}
-			}
-			else {
+			} else {
 				contractPriceField.setText("0");
 			}
-			
+
 		});
-		
+
 		// add change listener to product code
 		productCodeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			if (Order.isCodeValid(productCodeField.getText())){
+			if (Order.isCodeValid(productCodeField.getText())) {
 				String carName = getCarName();
-				
-				if(scheduledDeliveryTimeField.getText().length() != 0){
-					getContPrice(carName, scheduledDeliveryTimeField.getText());	
+
+				if (scheduledDeliveryTimeField.getText().length() != 0) {
+					getContPrice(carName, scheduledDeliveryTimeField.getText());
 				}
-			}
-			else{
+			} else {
 				chassisField.setText("");
 				contractPriceField.setText("0");
 			}
@@ -549,6 +577,10 @@ public class FormBMenu implements Initializable {
 			// createNewOrder();
 
 			addFormButtons(leftVBox);
+			saveFields(currentForm - 1);
+			currentForm = formCounter;
+			displayValues(currentForm - 1);
+
 		});
 
 	}
@@ -566,84 +598,99 @@ public class FormBMenu implements Initializable {
 		// stage.setMaximized(true);
 
 	}
-	
+
 	// extract a car name from a valid product code
-	private String getCarName(){
+	private String getCarName() {
 		String carName = "";
 		String prodLine = Character.toString(productCodeField.getText().charAt(0));
-		String chassis = Character.toString(productCodeField.getText().charAt(1)); 
+		String chassis = Character.toString(productCodeField.getText().charAt(1));
 		chassis += Character.toString(productCodeField.getText().charAt(2));
-		
-		switch(prodLine.toLowerCase()){
-			case "f": carName = "Family "; break;
-			case "P": case "p": carName = "Pony "; break;
-			case "S": case "s": carName = "Sedan "; break;
-			case "A": case "a": carName = "Ayrton "; break;
-			case "C": case "c": carName = "Coast";  break;
-			case "T": case "t": carName = "Thunder"; break;
-	}
-		
-		switch(chassis.toLowerCase()){
-			case "st": chassisField.setText("Standard"); carName += "Standard"; break;
-			case "dr": chassisField.setText("Dragstar"); carName += "Dragstar"; break;
-			case "de": chassisField.setText("Deluxe"); carName += "Deluxe"; break;
-			case "ss": chassisField.setText("Special"); break;
+
+		switch (prodLine.toLowerCase()) {
+		case "f":
+			carName = "Family ";
+			break;
+		case "P":
+		case "p":
+			carName = "Pony ";
+			break;
+		case "S":
+		case "s":
+			carName = "Sedan ";
+			break;
+		case "A":
+		case "a":
+			carName = "Ayrton ";
+			break;
+		case "C":
+		case "c":
+			carName = "Coast";
+			break;
+		case "T":
+		case "t":
+			carName = "Thunder";
+			break;
+		}
+
+		switch (chassis.toLowerCase()) {
+		case "st":
+			chassisField.setText("Standard");
+			carName += "Standard";
+			break;
+		case "dr":
+			chassisField.setText("Dragstar");
+			carName += "Dragstar";
+			break;
+		case "de":
+			chassisField.setText("Deluxe");
+			carName += "Deluxe";
+			break;
+		case "ss":
+			chassisField.setText("Special");
+			break;
 
 		}
-	return carName;
+		return carName;
 	}
 
 	// convert time input into a correct integer for a contract price call
-	private void getContPrice(String carName, String time){
-		
-		try{
+	private void getContPrice(String carName, String time) {
+
+		try {
 			Double t = Double.parseDouble(scheduledDeliveryTimeField.getText());
 			int price;
-			
-			if (t < 0 || t > 10){
+
+			if (t < 0 || t > 10) {
 				price = 0;
-			}
-			else if (t < 1){
+			} else if (t < 1) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "1");
-			}
-			else if (t < 2){
+			} else if (t < 2) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "2");
-			}
-			else if (t < 3){
+			} else if (t < 3) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "3");
-			}
-			else if (t < 4){
+			} else if (t < 4) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "4");
-			}
-			else if (t < 5){
+			} else if (t < 5) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "5");
-			}
-			else if (t < 6){
+			} else if (t < 6) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "6");
-			}
-			else if (t < 7){
+			} else if (t < 7) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "7");
-			}
-			else if (t < 8){
+			} else if (t < 8) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "8");
-			}
-			else if (t < 9){
+			} else if (t < 9) {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "9");
-			}
-			else{
+			} else {
 				price = PSDSingleton.getInstance().getContractPrice(carName, "10");
 			}
 
-
-			if (price != 0){
+			if (price != 0) {
 				contractPriceField.setText(Integer.toString(price));
-			}
-			else{
+			} else {
 				contractPriceField.setText("0");
 			}
-			
-		
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			System.out.println("entered time is not a number");
 		}
 	}
