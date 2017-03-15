@@ -9,6 +9,8 @@ public class Order {
 	private String scheduleTime;
 	private String actualTime;
 	private String penalty;
+	private String scheLeadTime;
+	private String receiptTime;
 	private int    timeDiff;
 	
 	public Order(String orderNumber, String productCode, String contractPrice, String scheduleTime, String actualTime, String penalty) {
@@ -104,6 +106,19 @@ public class Order {
 
 	public String getContractPrice() {
 		return contractPrice;
+	}
+	public String getScheLeadTime() {
+		return scheLeadTime;
+	}
+	public String getReceiptTime() {
+		return receiptTime;
+	}
+	
+	public void setScheLeadTime(String scheLeadTime) {
+		this.scheLeadTime = scheLeadTime;
+	}
+	public void setReceiptTime(String receiptTime) {
+		this.receiptTime = receiptTime;
 	}
 
 
