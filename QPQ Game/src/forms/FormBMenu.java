@@ -123,8 +123,11 @@ public class FormBMenu implements Initializable {
 	}
 
 	private void saveFields() {
-		int c = formCounter - 1;
-		saveFields(c);
+		int c = currentForm - 1;
+		if (c != -1){
+			saveFields(c);
+		}
+		
 	}
 
 	public void addFormButtons(VBox left) {
@@ -146,6 +149,20 @@ public class FormBMenu implements Initializable {
 
 				System.out.println("current form is :" + currentForm);
 				// System.out.println("values in field 1 :" + );
+				
+				if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
+						&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
+
+					int revenue = 0;
+					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+
+					int penalty = 30 * (actualTime - schedTime);
+					penaltyPriceField.setText(Integer.toString(penalty));
+					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+					revenueField.setText(Integer.toString(revenue));
+				}
+				
 				displayValues(currentForm - 1);
 			});
 		} else if (formCounter >= 1 && formCounter < 9) {
@@ -161,7 +178,20 @@ public class FormBMenu implements Initializable {
 				currentForm = Integer.parseInt(Character.toString(formButton.getText().charAt(7)));
 				System.out.println("current form is :" + currentForm);
 				// if (isInputValid()) {
+				
+				if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
+						&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
 
+					int revenue = 0;
+					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+
+					int penalty = 30 * (actualTime - schedTime);
+					penaltyPriceField.setText(Integer.toString(penalty));
+					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+					revenueField.setText(Integer.toString(revenue));
+				}
+				
 				displayValues(currentForm - 1);
 				// }
 			});
@@ -180,7 +210,21 @@ public class FormBMenu implements Initializable {
 				currF += Character.toString(formButton.getText().charAt(7));
 				currentForm = Integer.parseInt(currF);
 				//if (isInputValid()) {
-					
+				
+				if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
+						&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
+
+					int revenue = 0;
+					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+
+					int penalty = 30 * (actualTime - schedTime);
+					penaltyPriceField.setText(Integer.toString(penalty));
+					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+					revenueField.setText(Integer.toString(revenue));
+				}
+				
+				
 					displayValues(currentForm - 1);
 				//}
 			});
@@ -331,8 +375,12 @@ public class FormBMenu implements Initializable {
 			}
 		}
 	}
-
-	private boolean isInputValid() {
+	
+	private boolean isInputValid(){
+		return isInputValid(-1);
+	}
+	
+	private boolean isInputValid(int formNo) {
 		String errorMessage = "";
 
 		if (orderField.getText() == null || orderField.getText().length() == 0) {
@@ -343,6 +391,9 @@ public class FormBMenu implements Initializable {
 			} catch (NumberFormatException e) {
 				errorMessage += "No valid Order Number(must be an integer)\n";
 			}
+		}
+		if (chassisField.getText() == null || chassisField.getText().length() == 0) {
+			errorMessage += "No valid Product Code.\n";
 		}
 		if (scheduledDeliveryTimeField.getText() == null || scheduledDeliveryTimeField.getText().length() == 0) {
 			errorMessage += "No valid Scheduled delivery time.\n";
@@ -362,7 +413,7 @@ public class FormBMenu implements Initializable {
 				errorMessage += "No valid Actual Delivery time(must be an integer)\n";
 			}
 		}
-		if (contractPriceField.getText() == null || contractPriceField.getText().length() == 0) {
+		/*if (contractPriceField.getText() == null || contractPriceField.getText().length() == 0) {
 			errorMessage += "No valid Contract Price.\n";
 		} else {
 			try {
@@ -380,13 +431,19 @@ public class FormBMenu implements Initializable {
 				errorMessage += "No valid Penalty Price (must be an integer)\n";
 			}
 		}
-
+*/
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
 			// Show the error message.
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
+			
+			if (formNo > 0 && formNo < 21){
+				alert.setTitle("Error in Order Form: Order " + Integer.toString(formNo));
+			}
+			else{
+				alert.setTitle("Error");
+			}
 			alert.setHeaderText("Error, invalid input");
 			alert.setContentText(errorMessage);
 
@@ -450,10 +507,51 @@ public class FormBMenu implements Initializable {
 		} else {
 			displayValues(0);
 		}
+		
+		// automatically add chassis
+		if (Order.isCodeValid(productCodeField.getText())) {
+			if (scheduledDeliveryTimeField.getText() == "") {
+				contractPriceField.setText("0");
+			} else {
+				String carName = getCarName();
+				getContPrice(carName, scheduledDeliveryTimeField.getText());
+			}
+		} else {
+			contractPriceField.setText("0");
+		}
+		
+		// automatically add penalty and revenue and contract price
+		if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
+				&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
+
+			try {
+				int penalty = 0;
+				int revenue = 0;
+				int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+				int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+
+				penalty = 30 * (actualTime - schedTime);
+				penaltyPriceField.setText(Integer.toString(penalty));
+				revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+				revenueField.setText(Integer.toString(revenue));
+			} catch (Exception e) {
+				System.out.println("entered actual delivery time is not a number");
+			}
+		}
 
 		backButton.setOnAction(e -> {
-
-			if (isInputValid()) {
+			saveFields();
+			boolean toSave = true;
+			for (int i = 1; i <= formCounter; i++){
+				displayValues(i-1);
+				currentForm = i;
+				if (!isInputValid(i)){
+					toSave = false;
+				}
+			}
+			if (toSave){  //if (isInputValid()) {
+				saveOrders(formCounter);
+			
 
 				ArrayList<String[]> formBData = new ArrayList<>();
 				// check all fields are correct input
@@ -504,7 +602,7 @@ public class FormBMenu implements Initializable {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			}
+			}   
 		});
 
 		// re-populate forms
@@ -550,6 +648,24 @@ public class FormBMenu implements Initializable {
 				}
 			} else {
 				contractPriceField.setText("0");
+			}
+			
+			if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
+					&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
+
+				try {
+					int penalty = 0;
+					int revenue = 0;
+					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
+					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+
+					penalty = 30 * (actualTime - schedTime);
+					penaltyPriceField.setText(Integer.toString(penalty));
+					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
+					revenueField.setText(Integer.toString(revenue));
+				} catch (Exception e) {
+					System.out.println("entered actual delivery time is not a number");
+				}
 			}
 
 		});
