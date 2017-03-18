@@ -24,12 +24,21 @@ public class FormVcontroller implements Initializable{
 	
 	public Scene formVScene;
 	static Stage window;
-	FormBMenu formB = new FormBMenu();
-	FormTMenu formT = new FormTMenu();
-	FormOMenu formO = new FormOMenu();
-	FormSMenu formS = new FormSMenu();
+	FormBMenu formB = FormBMenu.getInstance();
+	FormTMenu formT = FormTMenu.getInstance();
+	FormOMenu formO = FormOMenu.getInstance();
+	FormSMenu formS = FormSMenu.getInstance();
 	StartScreen startScreen = new StartScreen();
 	RoundCounter roundCounter = RoundCounter.getInstance();
+
+	private static FormVcontroller instance = null;
+
+	public static FormVcontroller getInstance() {
+		if(instance == null) {
+			instance = new FormVcontroller();
+	    }
+		return instance;
+	}
 
 	private ArrayList<String> roundNumArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> totalRevenueArray = new ArrayList<String>(Collections.nCopies(20, ""));
@@ -156,24 +165,25 @@ public class FormVcontroller implements Initializable{
 			if(array.size() > 0){
 				int totalRevenue = 0;
 				for(int j = 0; j < array.size(); j++ ){
-					String contractPrice = array.get(j)[2];
-					String scheduleTime = array.get(j)[3];
-					String actualTime = array.get(j)[4];
-					System.out.println("element: " + j + "\n" + 
-										"contract price: " + contractPrice + "\n" + 
-										"scheduled time: " + scheduleTime + "\n" + 
-										"actual time: " + actualTime);
-				if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
-					
-				
-					int Revenue = (Integer.parseInt(contractPrice)- 30 *(Integer.parseInt(actualTime) - Integer.parseInt(scheduleTime)));
-					System.out.println("revenue is: " + Revenue);
-					totalRevenue += Revenue;
+					if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
+						String contractPrice = array.get(j)[2];
+						String scheduleTime = array.get(j)[3];
+						String actualTime = array.get(j)[4];
+						System.out.println("element: " + j + "\n" + 
+									"contract price: " + contractPrice + "\n" + 
+									"scheduled time: " + scheduleTime + "\n" + 
+									"actual time: " + actualTime);
+						if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
+							int Revenue = (Integer.parseInt(contractPrice) 
+									- 30 *(Integer.parseInt(actualTime) 
+									- Integer.parseInt(scheduleTime)));
+							System.out.println("revenue is: " + Revenue);
+							totalRevenue += Revenue;
+						}
 					}
 				}
 				System.out.println("total Revenue is " + totalRevenue);
 				Revenues.setText(String.valueOf(totalRevenue));
-				
 			} else {
 				Revenues.setText("");
 			}
@@ -182,12 +192,17 @@ public class FormVcontroller implements Initializable{
 			ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 			if (arr.size() > 0){
 				int totalWageCost = 0;
-				for (int i = 0; i < arr.size() ; i ++){
-					totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);	
+				for (int i = 0; i < arr.size() ; i++){
+					System.out.println("emp " + Integer.parseInt(arr.get(i)[2]));
+					if (Integer.parseInt(arr.get(i)[2]) == roundCounter.getRoundCounter()){
+						totalWageCost = totalWageCost + PSDSingleton.getInstance().getEmployeeWage(arr.get(i)[1]);
+					}
 				}
 				int roundTime = PSDSingleton.getInstance().getRoundTime();
-
-				Employees.setText(String.valueOf(totalWageCost*roundTime));
+				
+				if (totalWageCost*roundTime != 0){
+					Employees.setText(String.valueOf(totalWageCost*roundTime));
+				}
 			} else {
 				Employees.setText("");
 			}
@@ -196,7 +211,9 @@ public class FormVcontroller implements Initializable{
 			ArrayList<AYNEmployee> ayn = PSDSingleton.getInstance().getFormTData();
 			float totPay = 0;
 			for (AYNEmployee emp : ayn){
-				totPay += emp.calcWage();
+				if(emp.getRoundCount() == roundCounter.getRoundCounter()){
+					totPay += emp.calcWage();
+				}
 			}
 			String pay = String.valueOf(totPay);
 			if (totPay == 0.0){
@@ -207,15 +224,18 @@ public class FormVcontroller implements Initializable{
 			}
 
 			// Display kit price
-			Double sum = PSDSingleton.getInstance().getFormOData();
-			if (sum != null){
-				Materials.setText(String.valueOf(sum));
-			} else{
-				Materials.setText("");
-			}
+			ArrayList<String> formOData = PSDSingleton.getInstance().getFormOData();
+			try{
+				Double sum = Double.parseDouble(formOData.get(roundCounter.getRoundCounter()));
+				if (sum != null){
+					Materials.setText(String.valueOf(sum));
+				} else{
+					Materials.setText("");
+				}
+			} catch (Exception e) {}
 
 			displayTotal();
-			saveFields();			
+			saveFields();		
 		}
 		public void displayTotal(){
 			try{

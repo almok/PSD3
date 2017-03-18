@@ -21,9 +21,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.Round;
+import main.RoundCounter;
 
 public class FormBMenu implements Initializable {
-	// private static Button backButton;
+	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
+
+	private static FormBMenu instance = null;
+	
+	public static FormBMenu getInstance() {
+		if(instance == null) {
+			instance = new FormBMenu();
+	    }
+		return instance;
+	}
+	
 
 	private int counter;
 	private int formCounter = 0;
@@ -41,6 +54,7 @@ public class FormBMenu implements Initializable {
 	private ArrayList<String> timeDifferenceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> penaltyPriceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> revenueArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
+	private ArrayList<Integer> roundCountArray = new ArrayList<Integer>(Collections.nCopies(20, 0));
 
 	private void displayValues(int c) {
 
@@ -80,6 +94,7 @@ public class FormBMenu implements Initializable {
 		timeDifferenceArrayList.set(c, timeDifferenceLabel.getText());
 		penaltyPriceArrayList.set(c, penaltyPriceField.getText());
 		revenueArrayList.set(c, revenueField.getText());
+		roundCountArray.set(c, roundCount);
 
 	}
 
@@ -257,7 +272,7 @@ public class FormBMenu implements Initializable {
 
 		if (currentForm != 0) {
 			
-			FormBMenu formB = new FormBMenu();
+			FormBMenu formB = FormBMenu.getInstance();
 			// remove entries from arrayList
 			orderArrayList.remove(currentForm - 1);
 			chassisArrayList.remove(currentForm - 1);
@@ -270,10 +285,12 @@ public class FormBMenu implements Initializable {
 			timeDifferenceArrayList.remove(currentForm - 1);
 			penaltyPriceArrayList.remove(currentForm - 1);
 			revenueArrayList.remove(currentForm - 1);
+			roundCountArray.remove(currentForm-1);
+
 
 			formCounter--;
 
-			// remove order button
+			// remove order button //Point of bug
 			ArrayList<String[]> formBData = new ArrayList<>();
 
 			// saves orders
@@ -300,7 +317,7 @@ public class FormBMenu implements Initializable {
 				String scheLeadTime = orders.get(k).getScheLeadTime();
 				String receiptTime = orders.get(k).getReceiptTime();
 				if (orderNum != "") {
-					String[] _order = new String[8];
+					String[] _order = new String[9];
 					_order[0] = orderNum;
 					_order[1] = productCode;
 					_order[2] = contractPrice;
@@ -309,6 +326,7 @@ public class FormBMenu implements Initializable {
 					_order[5] = penalty;
 					_order[6] = scheLeadTime;
 					_order[7] = receiptTime;
+					_order[8] = String.valueOf(roundCount);
 
 					formBData.add(_order);
 				}
@@ -373,6 +391,15 @@ public class FormBMenu implements Initializable {
 		}
 
 	}
+	
+	boolean contains(ArrayList<String[]> formBData, String orderNum){
+		for (int i = 0; i < formBData.size(); i++){
+			if (formBData.get(i)[0].equals(orderNum) && Integer.parseInt(formBData.get(i)[8]) == roundCount){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -383,46 +410,47 @@ public class FormBMenu implements Initializable {
 
 		for (int i = 0; i < array.size(); i++) {
 
+			if (Integer.parseInt(array.get(i)[8]) == roundCount){
+				if (array.get(i)[0].isEmpty() != true) {
+					orderArrayList.set(i, array.get(i)[0]);
 
-			if (array.get(i)[0].isEmpty() != true) {
-				orderArrayList.set(i, array.get(i)[0]);
-
-			}
-			if (array.get(i)[1].isEmpty() != true) {
-				productCodeArrayList.set(i, array.get(i)[1]);
-			}
-			if (array.get(i)[2].isEmpty() != true) {
-				contractPriceArrayList.set(i, array.get(i)[2]);
-			}
-			if (array.get(i)[3].isEmpty() != true) {
-				scheduledDeliveryTimeArrayList.set(i, array.get(i)[3]);
-			}
-			if (array.get(i)[4].isEmpty() != true) {
-				actualDeliveryTimeArrayList.set(i, array.get(i)[4]);
-			}
-			if (array.get(i)[5].isEmpty() != true) {
-				penaltyPriceArrayList.set(i, array.get(i)[5]);
-			}
-				
-			if (array.get(i)[6].isEmpty() != true) {
-				leadTimeArrayList.set(i, array.get(i)[6]);
-			}
+				}
+				if (array.get(i)[1].isEmpty() != true) {
+					productCodeArrayList.set(i, array.get(i)[1]);
+				}
+				if (array.get(i)[2].isEmpty() != true) {
+					contractPriceArrayList.set(i, array.get(i)[2]);
+				}
+				if (array.get(i)[3].isEmpty() != true) {
+					scheduledDeliveryTimeArrayList.set(i, array.get(i)[3]);
+				}
+				if (array.get(i)[4].isEmpty() != true) {
+					actualDeliveryTimeArrayList.set(i, array.get(i)[4]);
+				}
+				if (array.get(i)[5].isEmpty() != true) {
+					penaltyPriceArrayList.set(i, array.get(i)[5]);
+				}
 					
-			if (array.get(i)[7].isEmpty() != true) {
-				timeOfReceiptArrayList.set(i, array.get(i)[7]);
+				if (array.get(i)[6].isEmpty() != true) {
+					leadTimeArrayList.set(i, array.get(i)[6]);
+				}
+						
+				if (array.get(i)[7].isEmpty() != true) {
+					timeOfReceiptArrayList.set(i, array.get(i)[7]);
+				}
+				
+				if (array.get(i)[3].isEmpty() != true && array.get(i)[4].isEmpty() != true) {
+
+					int sch = (Integer.parseInt(array.get(i)[3]));
+					int act = (Integer.parseInt(array.get(i)[4]));
+
+					int timeDiff = act - sch;
+
+					timeDifferenceArrayList.set(i, String.valueOf(timeDiff));
+				}
+
+				addFormButtons(leftVBox);
 			}
-			
-			if (array.get(i)[3].isEmpty() != true && array.get(i)[4].isEmpty() != true) {
-
-				int sch = (Integer.parseInt(array.get(i)[3]));
-				int act = (Integer.parseInt(array.get(i)[4]));
-
-				int timeDiff = act - sch;
-
-				timeDifferenceArrayList.set(i, String.valueOf(timeDiff));
-			}
-
-			addFormButtons(leftVBox);
 		}
 
 		if (array.size() != 0) {
@@ -481,7 +509,8 @@ public class FormBMenu implements Initializable {
 				saveOrders(formCounter);
 			
 
-				ArrayList<String[]> formBData = new ArrayList<>();
+				//ArrayList<String[]> formBData = new ArrayList<>();
+				ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
 
 				// iterate orders adding to formB Data
 				for (int k = 0; k < orders.size(); k++) {
@@ -493,8 +522,8 @@ public class FormBMenu implements Initializable {
 					String penalty = orders.get(k).getPenalty();
 					String scheLeadTime = orders.get(k).getScheLeadTime();
 					String receiptTime = orders.get(k).getReceiptTime();
-					if (orderNum != "") {
-						String[] _order = new String[8];
+					if (orderNum != "" && contains(formBData, orderNum) == false) {
+						String[] _order = new String[9];
 						_order[0] = orderNum;
 						_order[1] = productCode;
 						_order[2] = contractPrice;
@@ -503,6 +532,8 @@ public class FormBMenu implements Initializable {
 						_order[5] = penalty;
 						_order[6] = scheLeadTime;
 						_order[7] = receiptTime;
+						_order[8] = String.valueOf(roundCount);
+
 						
 
 						formBData.add(_order);
@@ -511,7 +542,7 @@ public class FormBMenu implements Initializable {
 
 				PSDSingleton.getInstance().setFormBData(formBData);
 
-				FormVcontroller formV = new FormVcontroller();
+				FormVcontroller formV = FormVcontroller.getInstance();	
 
 				try {
 					formV.display(backButton);

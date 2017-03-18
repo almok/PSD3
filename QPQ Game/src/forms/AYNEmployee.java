@@ -1,6 +1,7 @@
 package forms;
 
 import main.PSDSingleton;
+import main.RoundCounter;
 
 public class AYNEmployee {
 
@@ -10,9 +11,10 @@ public class AYNEmployee {
 	private boolean multiSkilled;
 	private int time1, time2, totTime;
 	private double wage;
+	private int roundCount = RoundCounter.getInstance().getRoundCounter();
 	
 	
-	public AYNEmployee(String name, String department, boolean multiSkilled, int time1, int time2, int totTime, Double wage) {
+	public AYNEmployee(String name, String department, boolean multiSkilled, int time1, int time2, int totTime, Double wage, int roundCount) {
 		this.name = name;
 		this.department = department;
 		this.multiSkilled = multiSkilled;
@@ -20,6 +22,7 @@ public class AYNEmployee {
 		this.time2 = time2;
 		this.totTime = totTime;
 		this.wage = wage;
+		this.roundCount = roundCount;
 	}
 
 	public AYNEmployee () {
@@ -96,6 +99,14 @@ public class AYNEmployee {
 	
 	public void setWage(double wage) {
 		this.wage = wage;
+	}
+	
+	public int getRoundCount(){
+		return roundCount;
+	}
+	
+	public void setRoundCount(int roundCount){
+		this.roundCount = roundCount;
 	}
 	
 	@Override

@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
+
 
 public class PSDSingleton {
 	private final static String pathFormC = "DataBase/Personal/FormC.csv";
@@ -30,7 +32,8 @@ public class PSDSingleton {
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
 	private Map<String, String> gameRulesDataHashMap;
-	private Double formOData;
+	private ArrayList<String> formOData = new ArrayList<String>(Collections.nCopies(20, ""));
+	private EmployeeList emp;
 	
 	private static PSDSingleton instance = null;
 	protected PSDSingleton() {}
@@ -462,11 +465,11 @@ public class PSDSingleton {
 	}
 
 	// Form O data
-	public void setFormOData(Double formOData){
+	public void setFormOData(ArrayList<String> formOData){
 		this.formOData = formOData;
 	}
 		
-	public Double getFormOData(){
+	public ArrayList<String> getFormOData(){
 		if (this.formOData == null){
 			this.formOData = null;
 		}
@@ -484,5 +487,13 @@ public class PSDSingleton {
 			this.formVData = new ArrayList<>();
 		}
 		return this.formVData;
+	}
+	
+	//EmployeeList Singleton
+	public EmployeeList getEmployeeList(){
+		if(this.emp == null){
+			this.emp = new EmployeeList(new Employee());
+		}
+		return this.emp;
 	}
 }

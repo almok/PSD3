@@ -20,10 +20,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.RoundCounter;
 
 
 
 public class FormSMenu implements Initializable {
+
+	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
+
+	private static FormSMenu instance = null;
+
+	public static FormSMenu getInstance() {
+		if(instance == null) {
+			instance = new FormSMenu();
+	    }
+		return instance;
+	}
 	
 	@FXML
 	private Button addButton, backButton, deleteButton;
@@ -73,6 +86,18 @@ public class FormSMenu implements Initializable {
 		return numberEmployees;
 	}
 	
+	boolean contains(ArrayList<String[]> formSData, String name, String department){
+		for (int i = 0; i < formSData.size(); i++){
+			if (formSData.get(i)[0].equals(name) 
+					&& formSData.get(i)[1].equals(department) 
+					&& Integer.parseInt(formSData.get(i)[2]) == roundCount){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
 	// display this form
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("formS.fxml"));
@@ -90,24 +115,25 @@ public class FormSMenu implements Initializable {
 		// simulate creating new employee if there is data in the table
 		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 		for (int i = 0; i < arr.size() ; i ++){
-            
-			EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
-			employees.add(emp);	
-			
-			
+			if(Integer.parseInt(arr.get(i)[2]) == roundCount){
+				EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
+				employees.add(emp);	
+			}
 		}
 		
 		backButton.setOnAction(e -> {
 			
-			ArrayList<String[]> formSData = new ArrayList<>();
+			ArrayList<String[]> formSData = PSDSingleton.getInstance().getFormSData();
+			System.out.println("employees size: " + employees.size() + " Form s " + formSData.size());
 			for (int i = 0;i<employees.size();i++){
 				String name = employees.get(i).getNameAsString();
 				String department = employees.get(i).getDepartmentName();
 				
-				if (name != "" && department != null){
-					String[] person = new String[2];
+				if (name != "" && department != null && contains(formSData, name, department) == false){
+					String[] person = new String[3];
 					person[0] = name;
 					person[1] = department;
+					person[2] = String.valueOf(roundCount);
 					formSData.add(person);
 				}
 			} 
@@ -115,7 +141,7 @@ public class FormSMenu implements Initializable {
 			PSDSingleton.getInstance().setFormSData(formSData);
 			
 			
-			FormVcontroller formV = new FormVcontroller();
+			FormVcontroller formV = FormVcontroller.getInstance();
 			try{
 				FormVcontroller.setEmployeeWage(countEmployees(employees));
 				formV.display(backButton);

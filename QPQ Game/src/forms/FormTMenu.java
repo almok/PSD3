@@ -23,10 +23,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.RoundCounter;
 
 
 
 public class FormTMenu implements Initializable {
+
+	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
+	
+	private static FormTMenu instance = null;
+
+	public static FormTMenu getInstance() {
+		if(instance == null) {
+			instance = new FormTMenu();
+	    }
+		return instance;
+	}
 	
 	@FXML private BorderPane FormTMenu;
 	
@@ -75,11 +88,22 @@ public class FormTMenu implements Initializable {
 		selectedEmployees.forEach(allEmployees::remove);
 	}
 	
+	boolean contains(ArrayList<AYNEmployee> formTData, String name){
+		for (int i = 0; i < formTData.size(); i++){
+			if (formTData.get(i).getName().equals(name) && formTData.get(i).getRoundCount() == roundCount){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@FXML
 	public void saveEmployees(){
-		ArrayList<AYNEmployee> listToSave = new ArrayList<>();
+		ArrayList<AYNEmployee> listToSave = PSDSingleton.getInstance().getFormTData();
 		for(AYNEmployeeLine empl : employeeTable.getItems()){
-			listToSave.add(empl.getEmployee());
+			if (contains(listToSave, empl.getEmployee().getName()) == false){
+				listToSave.add(empl.getEmployee());
+			}
 		}
 		
 		PSDSingleton.getInstance().setFormTData(listToSave);
@@ -105,14 +129,17 @@ public class FormTMenu implements Initializable {
 		
 		// load existing employees
 		ArrayList<AYNEmployee> arr = PSDSingleton.getInstance().getFormTData();
+		System.out.println("arr " + arr);
 		for (int i = 0; i < arr.size() ; i ++){
             
-			AYNEmployeeLine emp = new AYNEmployeeLine(arr.get(i));
-			employees.add(emp);				
+			if (arr.get(i).getRoundCount() == roundCount){
+				AYNEmployeeLine emp = new AYNEmployeeLine(arr.get(i));
+				employees.add(emp);
+			}
 		}
 
 		// load existing employees
-		emps = new AYNEmployeeList();
+		emps = AYNEmployeeList.getInstance();
 		//emps.getEmployees().add(new AYNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
 		
 		//emps.loadList("AYN Employee List Default.csv");

@@ -20,10 +20,25 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.PSDSingleton;
+import main.Round;
+import main.RoundCounter;
+
 
 
 
 public class FormOMenu implements Initializable {
+
+	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
+
+	private static FormOMenu instance = null;
+
+	public static FormOMenu getInstance() {
+		if(instance == null) {
+			instance = new FormOMenu();
+	    }
+		return instance;
+	}
 	
 	@FXML
 	private BorderPane formOMenu;
@@ -48,9 +63,6 @@ public class FormOMenu implements Initializable {
 	
 	ObservableList<OrderHistory> orders = FXCollections.observableArrayList();
 	
-	FormTMenu formT;
-	FormVcontroller formV;
-	
 
 	// add new orders to the table
 	public void updateOrderHistory(Order order){
@@ -59,13 +71,15 @@ public class FormOMenu implements Initializable {
 	
 	public double calcTotalKitPrice(){
 		
+		ArrayList<String> formOData = PSDSingleton.getInstance().getFormOData();
 		double sum = 0;
 		for(OrderHistory order : orders){
 			if (order.getKitPrice() != -1){
 				sum+= order.getKitPrice();
 			}
 		}
-		PSDSingleton.getInstance().setFormOData(sum);
+		formOData.set(roundCount, String.valueOf(sum));
+		PSDSingleton.getInstance().setFormOData(formOData);
 		return sum;
 	}
 	
@@ -83,7 +97,7 @@ public class FormOMenu implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		formV = new FormVcontroller();
+		FormVcontroller formV = FormVcontroller.getInstance();
 		
 		backButton.setOnAction(e -> {
 			try {
@@ -97,13 +111,15 @@ public class FormOMenu implements Initializable {
 		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormBData();
 		if (!arr.isEmpty()){
 			for (String [] data : arr){
-				updateOrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5]));
+				if (Integer.parseInt(data[8]) == roundCount){
+					updateOrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5]));
+				}
 			}
 		}
 		//
 		//
 		// examples
-		updateOrderHistory(new Order("order 1", "CSS897", "dfdddd", null, null, null));
+		//updateOrderHistory(new Order("order 1", "CSS897", "dfdddd", null, null, null));
 		//
 		//
 		
