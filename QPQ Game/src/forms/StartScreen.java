@@ -18,12 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.RoundCounter;
+import main.Timer;
 
 public class StartScreen extends Application implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
 	@FXML private Button settingsButton;
 	@FXML private Button reportButton;
 	@FXML private Button financeButton;
+	@FXML private Button TimerButton;
 	@FXML private VBox leftVBox;
 	@FXML private Label rightLabel;
 	@FXML private AnchorPane aPane;
@@ -65,6 +67,11 @@ public class StartScreen extends Application implements Initializable, EventHand
 		} else if (event.getSource() == reportButton){
 			//produce report from financials of rounds available
 		} 
+		else if (event.getSource() == TimerButton){
+			//display timer in separate window
+			System.out.println("Timer button pressed");
+			new Timer();
+		}
 	}
 	
 	
@@ -105,6 +112,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 		startButton.setOnAction(this);
 		settingsButton.setOnAction(this);
 		reportButton.setOnAction(this);
+		TimerButton.setOnAction(this);
 
 		System.out.println("Printing round count " + roundCounter.getMaxCount());
 		if (roundCounter.getMaxCount() >= -1){
