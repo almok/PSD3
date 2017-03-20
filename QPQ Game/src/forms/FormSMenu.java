@@ -158,7 +158,8 @@ public class FormSMenu implements Initializable {
 			}
 		});
 		
-		name.setCellValueFactory(new PropertyValueFactory<>("name"));				name.setStyle("-fx-alignment: CENTER");
+		name.setCellValueFactory(new PropertyValueFactory<>("name"));				
+		name.setStyle("-fx-alignment: CENTER");
 		department.setCellValueFactory(new PropertyValueFactory<>("department"));
 		
 		employeeTable.setItems(employees);
