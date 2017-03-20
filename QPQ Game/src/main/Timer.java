@@ -64,11 +64,15 @@ public class Timer extends Stage {
 					
 					
 					if (timeline != null){
-						timeline.stop();
-					}
+						System.out.println("timeline not null");
+						//timeline.stop();
+						
+					}else{
 					timeMin = STARTTIME;
-					//update timer label
 					timeLabel.setText(timeMin.toString() + ":00");
+					}
+					//update timer label
+					
 			        timeline = new Timeline();
 			        timeline.setCycleCount(Timeline.INDEFINITE);
 			        timeline.getKeyFrames().add(
