@@ -264,42 +264,63 @@ public class FormBMenu implements Initializable {
 			order.setPenalty(penaltyPriceArrayList.get(i));
 			order.setScheLeadTime(leadTimeArrayList.get(i));
 			order.setReceiptTime(timeOfReceiptArrayList.get(i));
-			
+			System.out.println("order saved");
 			// adds order to list
 			orders.add(order);
+			
 		}
 	}
 
 	private void deleteOrder() {
-		saveOrders(formCounter);
-		//System.out.println("final order num"+ orderArrayList.get(currentForm)+ "\n");
-		currentForm = formCountList.get(roundCount);
+		
+		//saveOrders(formCounter);
+		
+		//currentForm = formCountList.get(roundCount);
 		System.out.println("form counter is " + formCounter);
 		if (currentForm != 0) {
 			
 			FormBMenu formB = FormBMenu.getInstance();
 			ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
 			int i = 0;
-			
-			while (!formBData.get(i)[0].equals(orderArrayList.get(currentForm)) 
+			// find current form in sinlgeton
+			System.out.println("Current form:" + currentForm);
+			/*while (!formBData.get(i)[0].equals(orderArrayList.get(currentForm - 1)) 
 					&& Integer.parseInt(formBData.get(i)[8]) != roundCount
 					&& formBData.get(i) != null){
-				i++;
+					i++;
+			}*/
+			int j;
+			for( j = 0 ; j < formBData.size(); j++)
+			{
+				//check round
+				if (Integer.parseInt(formBData.get(j)[8]) == roundCount)
+				{
+					//check order numbers
+					System.out.println("form B data round count" + formBData.get(j)[8]);
+					if(Integer.parseInt(formBData.get(j)[0]) == Integer.parseInt(orderArrayList.get(currentForm - 1 )))
+							{
+								System.out.println("True\n");
+								formBData.remove(j);
+								break;
+							}
+				}
 			}
-			formBData.remove(i);
+			//System.out.println("form B data order number:"+formBData.get(j)[0]);
+			System.out.println("order arraylist order number " + orderArrayList.get(currentForm - 1));
+			
 			// remove entries from arrayList
-			orderArrayList.remove(currentForm);
-			chassisArrayList.remove(currentForm);
-			productCodeArrayList.remove(currentForm);
-			timeOfReceiptArrayList.remove(currentForm);
-			leadTimeArrayList.remove(currentForm);
-			scheduledDeliveryTimeArrayList.remove(currentForm);
-			contractPriceArrayList.remove(currentForm);
-			actualDeliveryTimeArrayList.remove(currentForm);
-			timeDifferenceArrayList.remove(currentForm);
-			penaltyPriceArrayList.remove(currentForm);
-			revenueArrayList.remove(currentForm);
-			roundCountArray.remove(currentForm);
+			orderArrayList.remove(currentForm -1);
+			chassisArrayList.remove(currentForm - 1);
+			productCodeArrayList.remove(currentForm-1);
+			timeOfReceiptArrayList.remove(currentForm-1);
+			leadTimeArrayList.remove(currentForm-1);
+			scheduledDeliveryTimeArrayList.remove(currentForm-1);
+			contractPriceArrayList.remove(currentForm-1);
+			actualDeliveryTimeArrayList.remove(currentForm-1);
+			timeDifferenceArrayList.remove(currentForm-1);
+			penaltyPriceArrayList.remove(currentForm-1);
+			revenueArrayList.remove(currentForm-1);
+			roundCountArray.remove(currentForm-1);
 
 
 			formCounter--;
