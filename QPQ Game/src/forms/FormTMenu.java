@@ -1,6 +1,5 @@
 package forms;
 
-import forms.AYNEmployee;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
 import main.RoundCounter;
@@ -121,6 +122,12 @@ public class FormTMenu implements Initializable {
 		scene.getStylesheets().add("forms/Styling.css");	
 		stage.setScene(scene);
 		stage.setTitle("AYN Employee List");
+		
+		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+		stage.setX(screen.getMinX());
+		stage.setY(screen.getMinY());
+		stage.setWidth(screen.getWidth());
+		stage.setHeight(screen.getHeight());
 		
 	}
 	

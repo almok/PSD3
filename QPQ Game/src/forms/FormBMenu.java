@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -19,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
 import main.Round;
@@ -685,9 +687,12 @@ public class FormBMenu implements Initializable {
 
 		scene.getStylesheets().add("forms/Styling.css");
 		stage.setScene(scene);
-
-		// stage.setMaximized(true);
-
+		
+		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+		stage.setX(screen.getMinX());
+		stage.setY(screen.getMinY());
+		stage.setWidth(screen.getWidth());
+	
 	}
 
 	// extract a car name from a valid product code

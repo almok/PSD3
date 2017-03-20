@@ -9,10 +9,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
 import main.Round;
@@ -84,6 +86,12 @@ public class FormVcontroller implements Initializable{
 			scene.getStylesheets().add("forms/Styling.css");
 			stage.setScene(scene);
 			stage.setTitle("QpQ");
+			
+			Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+			stage.setX(screen.getMinX());
+			stage.setY(screen.getMinY());
+			stage.setWidth(screen.getWidth());
+			stage.setHeight(screen.getHeight());
 			
 		}
 
@@ -227,11 +235,7 @@ public class FormVcontroller implements Initializable{
 			ArrayList<String> formOData = PSDSingleton.getInstance().getFormOData();
 			try{
 				Double sum = Double.parseDouble(formOData.get(roundCounter.getRoundCounter()));
-				if (sum != null){
-					Materials.setText(String.valueOf(sum));
-				} else{
-					Materials.setText("");
-				}
+				Materials.setText(String.valueOf(sum));
 			} catch (Exception e) {}
 
 			displayTotal();

@@ -10,12 +10,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.RoundCounter;
 import main.Timer;
@@ -41,6 +43,12 @@ public class StartScreen extends Application implements Initializable, EventHand
 		scene.getStylesheets().add("forms/Styling.css");
 		stage.setScene(scene);
 		stage.setTitle("QpQ");
+		
+		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+		stage.setX(screen.getMinX());
+		stage.setY(screen.getMinY());
+		stage.setWidth(screen.getWidth());
+		stage.setHeight(screen.getHeight());
 			
 		}
 	
@@ -132,6 +140,7 @@ public class StartScreen extends Application implements Initializable, EventHand
 		Scene scene = new Scene(root, 800, 700);
         primaryStage.setTitle("FXML Welcome");
         scene.getStylesheets().add("forms/Styling.css");
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
 
