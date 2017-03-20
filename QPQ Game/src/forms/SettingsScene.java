@@ -3,13 +3,16 @@ package forms;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 public class SettingsScene implements Initializable{
 	@FXML private Button gameRulesButton;
@@ -72,6 +75,12 @@ public class SettingsScene implements Initializable{
 		scene.getStylesheets().add("forms/Styling.css");	
 		stage.setScene(scene);
 		stage.setTitle("QpQ");
+		
+		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+		stage.setX(screen.getMinX());
+		stage.setY(screen.getMinY());
+		stage.setWidth(screen.getWidth());
+		stage.setHeight(screen.getHeight());
 			
 		}
 }
