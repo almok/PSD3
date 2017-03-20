@@ -14,26 +14,26 @@
  	<top>
  		<HBox fx:id="topHBox">
     <children>
-   	        <Button fx:id="backButton" prefHeight="40.0" prefWidth="85.0" text="Back">
+   	        <Button fx:id="backButton" prefHeight="37.0" prefWidth="99.0" text="Back">
                <HBox.margin>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
                <padding>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></Button>
-   	        <Button fx:id="newButton" prefHeight="40.0" prefWidth="85.0" text="New">
+   	        <Button fx:id="newButton" prefHeight="37.0" prefWidth="99.0" text="New">
                <HBox.margin>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
                <padding>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></Button>
-          		<Button fx:id="deleteButton" prefHeight="40.0" prefWidth="85.0" text="Delete">
+          		<Button fx:id="deleteButton" prefHeight="37.0" prefWidth="99.0" text="Delete">
                <HBox.margin>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
                <padding>
-                  <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding></Button>
           		
     </children>
@@ -49,7 +49,7 @@
     
     
     <center>
-      <VBox fx:id="centerVBox" prefHeight="500.0" alignment="TOP_CENTER" visible="false">
+      <VBox fx:id="centerVBox" alignment="TOP_CENTER" prefHeight="500.0" visible="false">
          <children>
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="500.0">
                <children>
@@ -112,7 +112,7 @@
             <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                <children>
           			 <Label prefHeight="17.0" prefWidth="153.0" text="Penalty (b):" />
-          			 <TextField fx:id="penaltyPriceField" editable="false" alignment="CENTER" prefWidth="150.0" promptText="" />
+          			 <TextField fx:id="penaltyPriceField" alignment="CENTER" editable="false" prefWidth="150.0" promptText="" />
                </children>
             </HBox>   
           	<HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
