@@ -2,7 +2,7 @@
 *.lock
 *.ini
 *.swp
-*./DS_Store
+*/.DS_Store
 .bundle
 */.metadata/
 .metadata/
