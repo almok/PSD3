@@ -271,14 +271,16 @@ public class FormBMenu implements Initializable {
 	}
 
 	private void deleteOrder() {
-		
+		saveOrders(formCounter);
+		//System.out.println("final order num"+ orderArrayList.get(currentForm)+ "\n");
 		currentForm = formCountList.get(roundCount);
-
+		System.out.println("form counter is " + formCounter);
 		if (currentForm != 0) {
 			
 			FormBMenu formB = FormBMenu.getInstance();
 			ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
 			int i = 0;
+			
 			while (!formBData.get(i)[0].equals(orderArrayList.get(currentForm)) 
 					&& Integer.parseInt(formBData.get(i)[8]) != roundCount
 					&& formBData.get(i) != null){
@@ -589,17 +591,20 @@ public class FormBMenu implements Initializable {
 
 		// add change listener to scheduled time to calculate contract price
 		// immediately
-		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
+		leadTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (Order.isCodeValid(productCodeField.getText())) {
-				if (scheduledDeliveryTimeField.getText() == "") {
+				if (leadTimeField.getText() == "") {
 					contractPriceField.setText("0");
 				} else {
 					String carName = getCarName();
-					getContPrice(carName, scheduledDeliveryTimeField.getText());
+					getContPrice(carName, leadTimeField.getText());
 				}
 			} else {
 				contractPriceField.setText("0");
 			}
+		});
+		
+		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
 			
 			if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
 					&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
@@ -722,7 +727,7 @@ public class FormBMenu implements Initializable {
 	private void getContPrice(String carName, String time) {
 
 		try {
-			Double t = Double.parseDouble(scheduledDeliveryTimeField.getText());
+			Double t = Double.parseDouble(leadTimeField.getText());
 			int price;
 
 			if (t < 0 || t > 10) {
