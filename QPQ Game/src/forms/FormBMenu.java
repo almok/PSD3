@@ -110,11 +110,19 @@ public class FormBMenu implements Initializable {
 	}
 
 	public void addFormButtons(VBox left) {
+		
+		left.setSpacing(10);
 
 		if (formCounter == 0) {
 			formCounter++;
 			currentForm = formCounter; // 1
 			Button formButton1 = new Button(" Order " + formCounter + " ");
+			
+			formButton1.setMaxWidth(99);
+			formButton1.setMinWidth(99);
+			formButton1.setMaxHeight(25);
+			formButton1.setMinHeight(25);
+			
 
 			left.getChildren().add(formButton1);
 
@@ -146,6 +154,12 @@ public class FormBMenu implements Initializable {
 			centerVBox.setVisible(true);
 			formCounter++;
 			Button formButton = new Button(" Order " + formCounter + " ");
+			
+			formButton.setMaxWidth(99);
+			formButton.setMinWidth(99);
+			formButton.setMaxHeight(25);
+			formButton.setMinHeight(25);
+			
 			left.getChildren().add(formButton);
 			
 			formButton.setOnAction(e -> {
@@ -172,6 +186,11 @@ public class FormBMenu implements Initializable {
 			formCounter++;
 			centerVBox.setVisible(true);
 			Button formButton = new Button("Order " + formCounter);
+			
+			formButton.setMaxWidth(99);
+			formButton.setMinWidth(99);
+			formButton.setMaxHeight(25);
+			formButton.setMinHeight(25);
 
 			left.getChildren().add(formButton);
 
@@ -209,7 +228,7 @@ public class FormBMenu implements Initializable {
 	@FXML
 	private Button deleteButton;
 	@FXML
-	private VBox leftVBox, centerVBox;
+	private VBox leftVBox, centerVBox, buttonsBox;
 	@FXML
 	private TextField orderField;
 	@FXML
@@ -246,7 +265,7 @@ public class FormBMenu implements Initializable {
 		Order order = new Order(null, null, null, null, null, null);
 		orders.add(order);
 		saveFields();
-		addFormButtons(leftVBox);
+		addFormButtons(buttonsBox);
 	}
 
 	// save order objects to observable list
@@ -312,7 +331,7 @@ public class FormBMenu implements Initializable {
 			}
 
 			PSDSingleton.getInstance().setFormBData(formBData);
-			int i = 0;
+			//int i = 0;
 			// find current form in sinlgeton
 			System.out.println("Current form:" + currentForm);
 			/*while (!formBData.get(i)[0].equals(orderArrayList.get(currentForm - 1)) 
@@ -368,7 +387,7 @@ public class FormBMenu implements Initializable {
 				// add buttons
 				counter = k;
 				Button formButton = new Button(" Order " + (counter + 1) + " ");
-				leftVBox.getChildren().add(formButton);
+				buttonsBox.getChildren().add(formButton);
 				formButton.setOnAction(e -> {
 					currentForm = counter + 1;
 					displayValues(counter);
@@ -515,7 +534,7 @@ public class FormBMenu implements Initializable {
 					timeDifferenceArrayList.set(formCounter, String.valueOf(timeDiff));
 				}
 				
-				addFormButtons(leftVBox);
+				addFormButtons(buttonsBox);
 			}
 		}
 
@@ -695,10 +714,12 @@ public class FormBMenu implements Initializable {
 		deleteButton.setOnAction(event -> {
 			deleteOrder();
 		});
+		
+		
 
 		newButton.setOnAction(event -> {
 
-			addFormButtons(leftVBox);
+			addFormButtons(buttonsBox);
 			saveFields(currentForm - 1);
 			currentForm = formCounter;
 			displayValues(currentForm - 1);
