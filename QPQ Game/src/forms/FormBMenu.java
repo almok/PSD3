@@ -160,7 +160,6 @@ public class FormBMenu implements Initializable {
 					int revenue = 0;
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
-
 					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
 					int penalty = 30 * (actualTime - schedTime);
 					penaltyPriceField.setText(Integer.toString(penalty));
@@ -275,14 +274,44 @@ public class FormBMenu implements Initializable {
 
 	private void deleteOrder() {
 		
-		//saveOrders(formCounter);
+		saveFields();
+		saveOrders(formCounter);
 		
 		//currentForm = formCountList.get(roundCount);
-		System.out.println("form counter is " + formCounter);
+		//System.out.println("form counter is " + formCounter);
 		if (currentForm != 0) {
-			
+			//save data to form B data before delete	
 			FormBMenu formB = FormBMenu.getInstance();
 			ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
+			// iterate orders adding to formB Data
+			for (int k = 0; k < orders.size(); k++) {
+				String orderNum = orders.get(k).getOrderNumber();
+				String productCode = orders.get(k).getProductCode();
+				String contractPrice = orders.get(k).getContractPrice();
+				String scheduleTime = orders.get(k).getScheduleTime();
+				String actualTime = orders.get(k).getActualTime();
+				String penalty = orders.get(k).getPenalty();
+				String scheLeadTime = orders.get(k).getScheLeadTime();
+				String receiptTime = orders.get(k).getReceiptTime();
+				if (orderNum != "" && contains(formBData, orderNum) == false) {
+					String[] _order = new String[9];
+					_order[0] = orderNum;
+					_order[1] = productCode;
+					_order[2] = contractPrice;
+					_order[3] = scheduleTime;
+					_order[4] = actualTime;
+					_order[5] = penalty;
+					_order[6] = scheLeadTime;
+					_order[7] = receiptTime;
+					_order[8] = String.valueOf(roundCount);
+
+					System.out.println("order num" + _order[0]);
+
+					formBData.add(_order);
+				}
+			}
+
+			PSDSingleton.getInstance().setFormBData(formBData);
 			int i = 0;
 			// find current form in sinlgeton
 			System.out.println("Current form:" + currentForm);
@@ -444,7 +473,7 @@ public class FormBMenu implements Initializable {
 		// if there is data in forms simulate adding new order
 
 		ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
-
+		System.out.println("orders size" + array.size());
 		for (int i = 0; i < array.size(); i++) {
 
 			if (Integer.parseInt(array.get(i)[8]) == roundCount){
@@ -544,7 +573,7 @@ public class FormBMenu implements Initializable {
 			}
 			if (toSave){  //if (isInputValid()) {
 				saveOrders(formCounter);
-			
+				System.out.println(orders);
 
 				//ArrayList<String[]> formBData = new ArrayList<>();
 				ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
