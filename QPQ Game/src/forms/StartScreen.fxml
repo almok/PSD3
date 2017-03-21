@@ -15,7 +15,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="startButton" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Start Game" />
+                  <Button fx:id="startButton" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Add round" />
                   <Button fx:id="reportButton" layoutX="268.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Report" />
 				  <Button fx:id="importButton" layoutX="398.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Import" />
 				  <Button fx:id="exportButton" layoutX="528.0" layoutY="51.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="111.0" text="Export" />
