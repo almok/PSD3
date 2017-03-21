@@ -411,9 +411,18 @@ public class FormBMenu implements Initializable {
 
 		if (orderField.getText() == null || orderField.getText().length() == 0) {
 			errorMessage += "No valid Order Number.\n";
-		} else {
+		} 
+		else {
+			
+			
 			try {
-				Integer.parseInt(orderField.getText());
+				int ord = Integer.parseInt(orderField.getText());
+				for (int i = 0; i < formNo; i++){
+					if (ord == Integer.parseInt(orderArrayList.get(i))){
+						break;
+					}
+				}
+				errorMessage += "Order numbers needs to be unique\n";
 			} catch (NumberFormatException e) {
 				errorMessage += "No valid Order Number(must be an integer)\n";
 			}
