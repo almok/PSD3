@@ -69,8 +69,13 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		} 
 		else if (event.getSource() == timerButton){
 			//display timer in separate window
+			Timer timer = new Timer();
 			System.out.println("Timer button pressed");
-			new Timer();
+			try {
+		 		timer.display(timerButton);
+		 	 } catch (Exception e1) {
+		 	 	e1.printStackTrace();
+		 	 }
 		} else if (event.getSource() == exportButton){
 			PrintWriter pw;
 			
