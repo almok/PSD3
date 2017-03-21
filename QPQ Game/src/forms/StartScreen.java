@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import main.GameScreen;
 import main.PSDSingleton;
 import main.Round;
 import main.RoundCounter;
@@ -34,6 +35,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button importButton;	
 	@FXML private Button reportButton;
 	@FXML private Button timerButton;
+	@FXML private Button backButton;
 	@FXML private VBox leftVBox;
 	@FXML private Label rightLabel;
 	@FXML private AnchorPane aPane;
@@ -66,8 +68,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 			//countdown.display(startButton);
 		} else if (event.getSource() == reportButton){
 			//produce report from financials of rounds available
-		} 
-		else if (event.getSource() == timerButton){
+		} else if (event.getSource() == timerButton){
 			//display timer in separate window
 			Timer timer = new Timer();
 			System.out.println("Timer button pressed");
@@ -76,6 +77,13 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		 	 } catch (Exception e1) {
 		 	 	e1.printStackTrace();
 		 	 }
+		} else if (event.getSource() == backButton){
+		 	GameScreen GameScreen = new GameScreen();
+		 	try{
+		 		GameScreen.display(backButton);	
+		 	}catch(IOException e1){
+		 		e1.printStackTrace();
+		 	}
 		} else if (event.getSource() == exportButton){
 			PrintWriter pw;
 			
@@ -94,7 +102,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 				pw = new PrintWriter(new File("Export/FormBData.csv"));
 				for (int i = 0; i < formBData.size(); i++) {
 					pw.write("" + formBData.get(i)[0] + "," + formBData.get(i)[1]+ "," + formBData.get(i)[2]+ "," + formBData.get(i)[3]+ "," + formBData.get(i)[4]+ "," + formBData.get(i)[5]
-							+ "," + formBData.get(i)[6]+ "," + formBData.get(i)[7]+ "," + formBData.get(i)[8] + "\n");
+							+ "," + formBData.get(i)[6]+ "," + formBData.get(i)[7]+ "," + formBData.get(i)[8] + "," + formBData.get(i)[9] + "\n");
 				}
 		        pw.close();
 			} catch (FileNotFoundException e) {
@@ -174,10 +182,12 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
 		 assert startButton != null : "fx:id=\"startButton\" was not injected";
+		 assert backButton != null : "fx:id=\"backButton\" was not injected";
 		 assert exportButton != null : "fx:id=\"exportButton\" was not injected";
 		 assert importButton != null : "fx:id=\"importButton\" was not injected";
 		 assert reportButton != null : "fx:id=\"reportButton\" was not injected";
 
+		backButton.setOnAction(this);
 		startButton.setOnAction(this);
 		exportButton.setOnAction(this);
 		importButton.setOnAction(this);

@@ -12,18 +12,21 @@ public class Order {
 	private String scheLeadTime;
 	private String receiptTime;
 	private int    timeDiff;
+	private String fulfilledOrder;
 	
-	public Order(String orderNumber, String productCode, String contractPrice, String scheduleTime, String actualTime, String penalty) {
+	public Order(String orderNumber, String productCode, String contractPrice, String scheduleTime, String actualTime
+			, String penalty, String fulfilledOrder) {
 		this.orderNumber = orderNumber;
 		this.productCode = productCode;
 		this.contractPrice = contractPrice;
 		this.scheduleTime = scheduleTime;
 		this.actualTime = actualTime;
 		this.penalty = penalty;
+		this.fulfilledOrder = fulfilledOrder;
 		
 	}
 	
-	// checks if a productcode is valid
+	// checks if a product code is valid
 	public static boolean isCodeValid (String prodCode){
 		if (prodCode.length() != 6 && prodCode.length() != 7){
 			return false;
@@ -102,8 +105,12 @@ public class Order {
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
-
-
+	public String getFulfilledOrder(){
+		return fulfilledOrder;
+	}
+	public void setFulfilledOrder(String string ){
+		this.fulfilledOrder = string;
+	}
 	public String getContractPrice() {
 		return contractPrice;
 	}

@@ -173,20 +173,29 @@ public class FormVcontroller implements Initializable{
 			if(array.size() > 0){
 				int totalRevenue = 0;
 				for(int j = 0; j < array.size(); j++ ){
-					if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
-						String contractPrice = array.get(j)[2];
-						String scheduleTime = array.get(j)[3];
-						String actualTime = array.get(j)[4];
-						System.out.println("element: " + j + "\n" + 
-									"contract price: " + contractPrice + "\n" + 
-									"scheduled time: " + scheduleTime + "\n" + 
-									"actual time: " + actualTime);
-						if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
-							int Revenue = (Integer.parseInt(contractPrice) 
-									- PSDSingleton.getInstance().getPenalty() *(Integer.parseInt(actualTime) 
-									- Integer.parseInt(scheduleTime)));
-							System.out.println("revenue is: " + Revenue);
-							totalRevenue += Revenue;
+					if (array.get(j)[9].equals("True")){
+						if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
+							String contractPrice = array.get(j)[2];
+							String scheduleTime = array.get(j)[3];
+							String actualTime = array.get(j)[4];
+							System.out.println("element: " + j + "\n" + 
+										"contract price: " + contractPrice + "\n" + 
+										"scheduled time: " + scheduleTime + "\n" + 
+										"actual time: " + actualTime);
+							if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
+								int Revenue = (Integer.parseInt(contractPrice) 
+										- PSDSingleton.getInstance().getPenalty() *(Integer.parseInt(actualTime) 
+										- Integer.parseInt(scheduleTime)));
+								System.out.println("revenue is: " + Revenue);
+								totalRevenue += Revenue;
+							}
+						}
+					} else {
+						if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
+							Order order = new Order(array.get(j)[0], array.get(j)[1], array.get(j)[2], 
+									array.get(j)[3], array.get(j)[4], array.get(j)[5], array.get(j)[9]);
+							OrderHistory orders = new OrderHistory(order);
+							totalRevenue -= orders.getKitPrice();
 						}
 					}
 				}

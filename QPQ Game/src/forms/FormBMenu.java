@@ -17,13 +17,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
-import main.Round;
 import main.RoundCounter;
 
 public class FormBMenu implements Initializable {
@@ -39,26 +39,31 @@ public class FormBMenu implements Initializable {
 		return instance;
 	}
 	
-	private ArrayList<Integer> formCountList = new ArrayList<Integer>(Collections.nCopies(20, 0));
+	int numOrders = PSDSingleton.getInstance().getOrderNum();
+	
+	private ArrayList<Integer> formCountList = new ArrayList<Integer>(Collections.nCopies(numOrders, 0));
 	
 	private int counter;
 	private int formCounter = formCountList.get(roundCount);
 	private int currentForm = formCountList.get(roundCount);
 	public Scene scene;
+	
 
-	private ArrayList<String> orderArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> chassisArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> productCodeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> timeOfReceiptArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> leadTimeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> scheduledDeliveryTimeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> contractPriceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> actualDeliveryTimeArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> timeDifferenceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> penaltyPriceArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<String> revenueArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
-	private ArrayList<Integer> roundCountArray = new ArrayList<Integer>(Collections.nCopies(20, 0));
 
+	private ArrayList<String> orderArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> chassisArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> productCodeArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> timeOfReceiptArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> leadTimeArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> scheduledDeliveryTimeArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> contractPriceArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> actualDeliveryTimeArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> timeDifferenceArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> penaltyPriceArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<String> revenueArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
+	private ArrayList<Integer> roundCountArray = new ArrayList<Integer>(Collections.nCopies(numOrders, 0));
+	private ArrayList<String> fulfilledOrderArray = new ArrayList<String>(Collections.nCopies(numOrders, "False"));
+	
 	private void displayValues(int c) {
 
 		orderField.setText(orderArrayList.get(c));
@@ -70,7 +75,13 @@ public class FormBMenu implements Initializable {
 		contractPriceField.setText(contractPriceArrayList.get(c));
 		actualDeliveryTimeField.setText(actualDeliveryTimeArrayList.get(c));
 		timeDifferenceLabel.setText(timeDifferenceArrayList.get(c));
-
+		System.out.println("fulfilled" + fulfilledOrderArray.get(c));
+		if (fulfilledOrderArray.get(c).equals("True")){
+			fulfilledOrderDrop.getSelectionModel().select(0);
+		}
+		else{
+			fulfilledOrderDrop.getSelectionModel().select(1);
+		}
 		// working around to get time difference displaying on reopening an
 		// order - to be sorted and cleaned up
 		if (!scheduledDeliveryTimeArrayList.get(c).equals("") && !actualDeliveryTimeArrayList.get(c).equals("")) {
@@ -98,7 +109,8 @@ public class FormBMenu implements Initializable {
 		penaltyPriceArrayList.set(c, penaltyPriceField.getText());
 		revenueArrayList.set(c, revenueField.getText());
 		roundCountArray.set(c, roundCount);
-
+		fulfilledOrderArray.set(c, fulfilledOrderDrop
+				.getSelectionModel().getSelectedItem().toString());
 	}
 
 	private void saveFields() {
@@ -275,6 +287,8 @@ public class FormBMenu implements Initializable {
 	@FXML
 	private TextField revenueField;
 	@FXML
+	private ComboBox<String> fulfilledOrderDrop;
+	@FXML
 	private static Button form1;
 	@FXML
 	private static Button form2;
@@ -285,7 +299,7 @@ public class FormBMenu implements Initializable {
 
 	public void createNewOrder() {
 
-		Order order = new Order(null, null, null, null, null, null);
+		Order order = new Order(null, null, null, null, null, null, "False");
 		orders.add(order);
 		saveFields();
 		addFormButtons(buttonsBox);
@@ -296,7 +310,7 @@ public class FormBMenu implements Initializable {
 		orders.clear();
 		for (int i = 0; i < forms; i++) {
 			// creates new order
-			Order order = new Order(null, null, null, null, null, null);
+			Order order = new Order(null, null, null, null, null, null, "False");
 
 			// gets order details and sets
 			order.setContractPrice(contractPriceArrayList.get(i));
@@ -307,6 +321,7 @@ public class FormBMenu implements Initializable {
 			order.setPenalty(penaltyPriceArrayList.get(i));
 			order.setScheLeadTime(leadTimeArrayList.get(i));
 			order.setReceiptTime(timeOfReceiptArrayList.get(i));
+			order.setFulfilledOrder(fulfilledOrderArray.get(i));
 			System.out.println("order saved");
 			// adds order to list
 			orders.add(order);
@@ -335,6 +350,7 @@ public class FormBMenu implements Initializable {
 		penaltyPriceArrayList.remove(currentForm-1);
 		revenueArrayList.remove(currentForm-1);
 		roundCountArray.remove(currentForm-1);
+		fulfilledOrderArray.remove(currentForm-1);
 
 
 		formCounter--;
@@ -379,8 +395,9 @@ public class FormBMenu implements Initializable {
 			String penalty = orders.get(k).getPenalty();
 			String scheLeadTime = orders.get(k).getScheLeadTime();
 			String receiptTime = orders.get(k).getReceiptTime();
+			String fulfilledOrder = orders.get(k).getFulfilledOrder();
 			
-			String[] _order = new String[9];
+			String[] _order = new String[10];
 			_order[0] = orderNum;
 			_order[1] = productCode;
 			_order[2] = contractPrice;
@@ -390,6 +407,7 @@ public class FormBMenu implements Initializable {
 			_order[6] = scheLeadTime;
 			_order[7] = receiptTime;
 			_order[8] = String.valueOf(roundCount);
+			_order[9] = fulfilledOrder;
 
 
 			formBData.add(_order);
@@ -523,6 +541,9 @@ public class FormBMenu implements Initializable {
 
 					timeDifferenceArrayList.set(formCounter, String.valueOf(timeDiff));
 				}
+				if (array.get(i)[9].isEmpty() != true){
+					fulfilledOrderArray.set(formCounter, array.get(i)[9]);
+				}
 				
 				addFormButtons(buttonsBox);
 			}
@@ -610,8 +631,9 @@ public class FormBMenu implements Initializable {
 					String penalty = orders.get(k).getPenalty();
 					String scheLeadTime = orders.get(k).getScheLeadTime();
 					String receiptTime = orders.get(k).getReceiptTime();
+					String fulfilledOrder = orders.get(k).getFulfilledOrder();
 					
-					String[] _order = new String[9];
+					String[] _order = new String[10];
 					_order[0] = orderNum;
 					_order[1] = productCode;
 					_order[2] = contractPrice;
@@ -621,6 +643,7 @@ public class FormBMenu implements Initializable {
 					_order[6] = scheLeadTime;
 					_order[7] = receiptTime;
 					_order[8] = String.valueOf(roundCount);
+					_order[9] = fulfilledOrder;
 
 					formBData.add(_order);
 				}

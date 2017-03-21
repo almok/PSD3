@@ -447,9 +447,25 @@ public class PSDSingleton {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			return 15;
+			return 3;
 		}
-		return 15;
+		return 3;
+	}
+	
+	public int getOrderNum(){
+		if(this.gameRulesDataHashMap == null){
+			this.createHashGameRules();
+		}
+		
+		if (this.gameRulesDataHashMap.containsKey("Number of orders")){
+			try {
+				return Integer.parseInt(gameRulesDataHashMap.get("Number of orders"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return 22;
+		}
+		return 22;
 	}
 	
 	public int getPenalty(){
