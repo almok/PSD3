@@ -10,7 +10,7 @@ public class AYNEmployee {
 	private String department;
 	private boolean multiSkilled;
 	private int time1, time2, totTime;
-	private double wage;
+	private double wage,hiringCosts,firingCosts;
 	private int roundCount = RoundCounter.getInstance().getRoundCounter();
 	
 	
@@ -41,7 +41,11 @@ public class AYNEmployee {
 		else{
 			wage = PSDSingleton.getInstance().getEmployeeWage("AYN employee");
 		}
-		return wage*totTime;
+		firingCosts = PSDSingleton.getInstance().getFiringCost();
+		hiringCosts = PSDSingleton.getInstance().getHiringCost();
+		double totalCost = (wage*totTime) + firingCosts + hiringCosts;
+		
+		return totalCost;
 	}
 	
 	// getters and setters

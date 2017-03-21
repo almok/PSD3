@@ -381,9 +381,9 @@ public class PSDSingleton {
 			this.createHashGameRules();
 		}
 		
-		if (this.gameRulesDataHashMap.containsKey("Game time")){
+		if (this.gameRulesDataHashMap.containsKey("Round time")){
 			try {
-				return Integer.parseInt(gameRulesDataHashMap.get("Game time"));
+				return Integer.parseInt(gameRulesDataHashMap.get("Round time"));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -392,14 +392,14 @@ public class PSDSingleton {
 		return 15;
 	}
 	
-	public int getRoundNumber(){
+	public int getNumberOfRounds(){
 		if(this.gameRulesDataHashMap == null){
 			this.createHashGameRules();
 		}
 		
-		if (this.gameRulesDataHashMap.containsKey("Round number")){
+		if (this.gameRulesDataHashMap.containsKey("Number of rounds")){
 			try {
-				return Integer.parseInt(gameRulesDataHashMap.get("Round number"));
+				return Integer.parseInt(gameRulesDataHashMap.get("Number of rounds"));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -423,6 +423,32 @@ public class PSDSingleton {
 		}
 		return 15;
 	}
+	
+	public int getHiringCost(){
+		if(this.formRDataHashMap == null){
+			this.createHashFormR();
+		}
+		if (this.formRDataHashMap.containsKey("Hiring")){
+	
+			return formRDataHashMap.get("Hiring");
+		}
+		
+		return 75;
+	}
+	
+	public int getFiringCost(){
+		if(this.formRDataHashMap == null){
+			this.createHashFormR();
+		}
+		
+		if (this.formRDataHashMap.containsKey("Firing")){
+			return formRDataHashMap.get("Firing");
+		}
+		
+		return 100;
+	}
+	
+	
 	
 	// Form S data
 	public void setFormSData(ArrayList<String[]> formSData){

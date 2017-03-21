@@ -183,7 +183,7 @@ public class FormVcontroller implements Initializable{
 									"actual time: " + actualTime);
 						if(contractPrice.isEmpty() != true && scheduleTime.isEmpty() != true && actualTime.isEmpty() != true){
 							int Revenue = (Integer.parseInt(contractPrice) 
-									- 30 *(Integer.parseInt(actualTime) 
+									- PSDSingleton.getInstance().getPenalty() *(Integer.parseInt(actualTime) 
 									- Integer.parseInt(scheduleTime)));
 							System.out.println("revenue is: " + Revenue);
 							totalRevenue += Revenue;

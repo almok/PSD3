@@ -211,7 +211,7 @@ public class FormBMenu implements Initializable {
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
 
 					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
-					int penalty = 30 * (actualTime - schedTime);
+					int penalty = PSDSingleton.getInstance().getPenalty() * (actualTime - schedTime);
 					penaltyPriceField.setText(Integer.toString(penalty));
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
