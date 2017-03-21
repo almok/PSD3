@@ -33,6 +33,17 @@ public class AYNEmployee {
 		multiSkilled = false;
 	}
 	
+	public String getDepartmentWithoutBreak() {
+		String dep = this.department;
+				
+
+		dep = dep.replace("\n", "");
+		dep = dep.replace(System.getProperty("line.separator"), "");
+		dep = dep.replaceAll("\\r|\\n", "");
+		
+		return dep;
+	}
+	
 	// calculate wage
 	public Double calcWage(){
 		if (multiSkilled){

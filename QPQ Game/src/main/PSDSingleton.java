@@ -274,10 +274,50 @@ public class PSDSingleton {
 		return "0";
 	}
 	
-	
-	
-	
+	public void importData(){
+		ArrayList<String[]> formBData = this.getFileData("Export/FormBData.csv");
+		this.setFormBData(formBData);
+		
+		ArrayList<String[]> formSData = this.getFileData("Export/FormSData.csv");
+		this.setFormSData(formSData);
+		
+		
+		ArrayList<String[]> formTData = this.getFileData("Export/FormTData.csv");
+		ArrayList<AYNEmployee> employees = new ArrayList<AYNEmployee>();
+		for (int i = 0; i < formTData.size(); i++) {
+			try{
+				AYNEmployee employee = new AYNEmployee();
+				employee.setName(formTData.get(i)[0]);
+				employee.setDepartment(formTData.get(i)[1]);
+				
+				if (formTData.get(i)[2].toLowerCase() == "true"){
+					employee.setMultiSkilled(true);
+				} else {
+					employee.setMultiSkilled(false);
+				}
+				
+				employee.setTime1(Integer.parseInt(formTData.get(i)[3]));
+				employee.setTime2(Integer.parseInt(formTData.get(i)[4]));
+				employee.setTotTime(Integer.parseInt(formTData.get(i)[5]));
+				employee.setWage(Double.parseDouble(formTData.get(i)[6]));
+				employee.setRoundCount(Integer.parseInt(formTData.get(i)[7]));
 
+				employees.add(employee);
+			} catch(Exception e){}
+		}
+		this.setFormTData(employees);
+		
+		ArrayList<String[]> formVData = this.getFileData("Export/FormVData.csv");
+		ArrayList<Round> rounds = new ArrayList<Round>();
+		for (int i = 0; i < formVData.size(); i++) {
+			try{
+				rounds.add(new Round(formVData.get(i)[0] , formVData.get(i)[1] , formVData.get(i)[2] , formVData.get(i)[3] , formVData.get(i)[4] , formVData.get(i)[5] , formVData.get(i)[6]));
+			} catch(Exception e){}
+		}
+		this.setFormVData(rounds);
+		
+		
+	}
 	
 	private void loadFormRData(){
 		this.formRData = new ArrayList<>();
@@ -372,7 +412,11 @@ public class PSDSingleton {
 		 ArrayList<String[]> arr = this.getGameRulesData();
 
 		 for (int i = 0; i < arr.size(); i++) {
-			this.gameRulesDataHashMap.put(arr.get(i)[0], arr.get(i)[1]);
+			 try{
+				this.gameRulesDataHashMap.put(arr.get(i)[0], arr.get(i)[1]);
+			 } catch (Exception e){
+				 e.printStackTrace();
+			 }
 		}
 	}
 
