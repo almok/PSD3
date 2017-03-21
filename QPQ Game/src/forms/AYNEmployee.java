@@ -9,7 +9,7 @@ public class AYNEmployee {
 	private String department;
 	private boolean multiSkilled;
 	private int time1, time2, totTime;
-	private double wage,firingCost,hiringCost;
+	private double wage;
 	
 	
 	public AYNEmployee(String name, String department, boolean multiSkilled, int time1, int time2, int totTime, Double wage) {
@@ -38,13 +38,7 @@ public class AYNEmployee {
 		else{
 			wage = PSDSingleton.getInstance().getEmployeeWage("AYN employee");
 		}
-		hiringCost = PSDSingleton.getInstance().getHiringCost();
-		firingCost = PSDSingleton.getInstance().getFiringCost();
-		System.out.println("hiring costs " + hiringCost);
-		System.out.println("firing costs " + firingCost);
-		double totalCost = wage*totTime + hiringCost + firingCost;
-		System.out.println("totalCost " + totalCost);
-		return totalCost;
+		return wage*totTime;
 	}
 	
 	// getters and setters
