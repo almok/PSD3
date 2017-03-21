@@ -191,13 +191,6 @@ public class FormVcontroller implements Initializable{
 								totalRevenue += Revenue;
 							}
 						}
-					} else {
-						if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
-							Order order = new Order(array.get(j)[0], array.get(j)[1], array.get(j)[2], 
-									array.get(j)[3], array.get(j)[4], array.get(j)[5], array.get(j)[9]);
-							OrderHistory orders = new OrderHistory(order);
-							totalRevenue -= orders.getKitPrice();
-						}
 					}
 				}
 				System.out.println("total Revenue is " + totalRevenue);
@@ -254,7 +247,7 @@ public class FormVcontroller implements Initializable{
 				for (String [] data : orderHistory){
 					if (Integer.parseInt(data[8]) == roundCounter.getRoundCounter()){
 						
-						FormOMenu.getInstance().updateOrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5], data[8]));
+						FormOMenu.getInstance().updateOrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5], data[9]));
 					}
 				}
 			}

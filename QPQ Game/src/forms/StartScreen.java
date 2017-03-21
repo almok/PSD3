@@ -56,8 +56,10 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 			
 		}
 	
-	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
 	RoundCounter roundCounter = RoundCounter.getInstance();
+	
+	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
+	
 	
 	@Override
 	public void handle(ActionEvent event) {
@@ -79,6 +81,9 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		 	 }
 		} else if (event.getSource() == backButton){
 		 	GameScreen GameScreen = new GameScreen();
+		 	PSDSingleton.clear();
+		 	roundCounter.setRoundCounter(0);
+		 	roundCounter.setMaxCount(0);
 		 	try{
 		 		GameScreen.display(backButton);	
 		 	}catch(IOException e1){
@@ -149,8 +154,8 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 			PSDSingleton.getInstance().importData();
 		}
 	}
-	
-	
+
+
 	public void addRoundButton(VBox left){
 		Button roundButton;
 		if (roundCounter.getRoundCounter() == 0){
