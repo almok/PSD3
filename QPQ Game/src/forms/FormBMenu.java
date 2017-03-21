@@ -318,136 +318,91 @@ public class FormBMenu implements Initializable {
 		
 		saveFields();
 		saveOrders(formCounter);
+	
+		//System.out.println("form B data order number:"+formBData.get(j)[0]);
+		System.out.println("order arraylist order number " + orderArrayList.get(currentForm - 1));
 		
-		//currentForm = formCountList.get(roundCount);
-		//System.out.println("form counter is " + formCounter);
-		if (currentForm != 0) {
-			//save data to form B data before delete	
-			FormBMenu formB = FormBMenu.getInstance();
-			ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
-			// iterate orders adding to formB Data
-			for (int k = 0; k < orders.size(); k++) {
-				String orderNum = orders.get(k).getOrderNumber();
-				String productCode = orders.get(k).getProductCode();
-				String contractPrice = orders.get(k).getContractPrice();
-				String scheduleTime = orders.get(k).getScheduleTime();
-				String actualTime = orders.get(k).getActualTime();
-				String penalty = orders.get(k).getPenalty();
-				String scheLeadTime = orders.get(k).getScheLeadTime();
-				String receiptTime = orders.get(k).getReceiptTime();
-				if (orderNum != "" && contains(formBData, orderNum) == false) {
-					String[] _order = new String[9];
-					_order[0] = orderNum;
-					_order[1] = productCode;
-					_order[2] = contractPrice;
-					_order[3] = scheduleTime;
-					_order[4] = actualTime;
-					_order[5] = penalty;
-					_order[6] = scheLeadTime;
-					_order[7] = receiptTime;
-					_order[8] = String.valueOf(roundCount);
+		// remove entries from arrayList
+		orderArrayList.remove(currentForm -1);
+		chassisArrayList.remove(currentForm - 1);
+		productCodeArrayList.remove(currentForm-1);
+		timeOfReceiptArrayList.remove(currentForm-1);
+		leadTimeArrayList.remove(currentForm-1);
+		scheduledDeliveryTimeArrayList.remove(currentForm-1);
+		contractPriceArrayList.remove(currentForm-1);
+		actualDeliveryTimeArrayList.remove(currentForm-1);
+		timeDifferenceArrayList.remove(currentForm-1);
+		penaltyPriceArrayList.remove(currentForm-1);
+		revenueArrayList.remove(currentForm-1);
+		roundCountArray.remove(currentForm-1);
 
-					System.out.println("order num" + _order[0]);
 
-					formBData.add(_order);
-				}
-			}
+		formCounter--;
 
-			PSDSingleton.getInstance().setFormBData(formBData);
-			//int i = 0;
-			// find current form in sinlgeton
-			System.out.println("Current form:" + currentForm);
-			/*while (!formBData.get(i)[0].equals(orderArrayList.get(currentForm - 1)) 
-					&& Integer.parseInt(formBData.get(i)[8]) != roundCount
-					&& formBData.get(i) != null){
-					i++;
-			}*/
-			int j;
-			for( j = 0 ; j < formBData.size(); j++)
-			{
-				//check round
-				if (Integer.parseInt(formBData.get(j)[8]) == roundCount)
-				{
-					//check order numbers
-					System.out.println("form B data round count" + formBData.get(j)[8]);
-					if(Integer.parseInt(formBData.get(j)[0]) == Integer.parseInt(orderArrayList.get(currentForm - 1 )))
-							{
-								System.out.println("True\n");
-								formBData.remove(j);
-								break;
-							}
-				}
-			}
-			//System.out.println("form B data order number:"+formBData.get(j)[0]);
-			System.out.println("order arraylist order number " + orderArrayList.get(currentForm - 1));
+		// remove order button //Point of bug
+		//ArrayList<String[]> formBData = new ArrayList<>();
+
+		// saves orders
+
+		saveOrders(formCounter);
+		
+		// iterate orders adding to formB Data
+		for (int k = 0; k < orders.size(); k++) {
+			// add buttons
+			counter = k;
+			System.out.println("loop k "+k);
+			Button formButton = new Button(" Order " + (counter + 1) + " ");
+			buttonsBox.getChildren().add(formButton);
+			formButton.setOnAction(e -> {
+				currentForm = counter + 1;
+				displayValues(counter);
+			});
+
+		}
 			
-			// remove entries from arrayList
-			orderArrayList.remove(currentForm -1);
-			chassisArrayList.remove(currentForm - 1);
-			productCodeArrayList.remove(currentForm-1);
-			timeOfReceiptArrayList.remove(currentForm-1);
-			leadTimeArrayList.remove(currentForm-1);
-			scheduledDeliveryTimeArrayList.remove(currentForm-1);
-			contractPriceArrayList.remove(currentForm-1);
-			actualDeliveryTimeArrayList.remove(currentForm-1);
-			timeDifferenceArrayList.remove(currentForm-1);
-			penaltyPriceArrayList.remove(currentForm-1);
-			revenueArrayList.remove(currentForm-1);
-			roundCountArray.remove(currentForm-1);
-
-
-			formCounter--;
-
-			// remove order button //Point of bug
-			//ArrayList<String[]> formBData = new ArrayList<>();
-
-			// saves orders
-
-			saveOrders(formCounter);
-
-			// iterate orders adding to formB Data
-			for (int k = 0; k < orders.size(); k++) {
-				// add buttons
-				counter = k;
-				Button formButton = new Button(" Order " + (counter + 1) + " ");
-				buttonsBox.getChildren().add(formButton);
-				formButton.setOnAction(e -> {
-					currentForm = counter + 1;
-					displayValues(counter);
-				});
-
-				/*String orderNum = orders.get(k).getOrderNumber();
-				String productCode = orders.get(k).getProductCode();
-				String contractPrice = orders.get(k).getContractPrice();
-				String scheduleTime = orders.get(k).getScheduleTime();
-				String actualTime = orders.get(k).getActualTime();
-				String penalty = orders.get(k).getPenalty();
-				String scheLeadTime = orders.get(k).getScheLeadTime();
-				String receiptTime = orders.get(k).getReceiptTime();
-				if (orderNum != "" && contains(formBData, orderNum) == false) {
-					String[] _order = new String[9];
-					_order[0] = orderNum;
-					_order[1] = productCode;
-					_order[2] = contractPrice;
-					_order[3] = scheduleTime;
-					_order[4] = actualTime;
-					_order[5] = penalty;
-					_order[6] = scheLeadTime;
-					_order[7] = receiptTime;
-					_order[8] = String.valueOf(roundCount);
-
-					formBData.add(_order);
-				}
+		//ArrayList<String[]> formBData = new ArrayList<>();
+		ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
+		
+		for (int i = formBData.size() -1 ; i >= 0; i--){
+			if (Integer.parseInt(formBData.get(i)[8]) == roundCount){
+				formBData.remove(i);
 			}
+		}
 
-			PSDSingleton.getInstance().setFormBData(formBData);*/
-			}
-			// refresh page
-			try {
-				formB.display(deleteButton);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+		// iterate orders adding to formB Data
+		for (int k = 0; k < orders.size(); k++) {
+			String orderNum = orders.get(k).getOrderNumber();
+			String productCode = orders.get(k).getProductCode();
+			String contractPrice = orders.get(k).getContractPrice();
+			String scheduleTime = orders.get(k).getScheduleTime();
+			String actualTime = orders.get(k).getActualTime();
+			String penalty = orders.get(k).getPenalty();
+			String scheLeadTime = orders.get(k).getScheLeadTime();
+			String receiptTime = orders.get(k).getReceiptTime();
+			
+			String[] _order = new String[9];
+			_order[0] = orderNum;
+			_order[1] = productCode;
+			_order[2] = contractPrice;
+			_order[3] = scheduleTime;
+			_order[4] = actualTime;
+			_order[5] = penalty;
+			_order[6] = scheLeadTime;
+			_order[7] = receiptTime;
+			_order[8] = String.valueOf(roundCount);
+
+
+			formBData.add(_order);
+		}
+
+		PSDSingleton.getInstance().setFormBData(formBData);
+		
+
+		// refresh page
+		try {
+			display(deleteButton);
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 	
@@ -608,6 +563,7 @@ public class FormBMenu implements Initializable {
 		}
 
 		backButton.setOnAction(e -> {
+			
 			saveFields();
 			boolean toSave = true;
 			for (int i = 1; i <= formCounter; i++){
@@ -624,6 +580,13 @@ public class FormBMenu implements Initializable {
 
 				//ArrayList<String[]> formBData = new ArrayList<>();
 				ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
+				
+				// remove potential duplicates
+				for (int i = formBData.size() -1 ; i >= 0; i--){
+					if (Integer.parseInt(formBData.get(i)[8]) == roundCount){
+						formBData.remove(i);
+					}
+				}
 
 				// iterate orders adding to formB Data
 				for (int k = 0; k < orders.size(); k++) {
@@ -635,22 +598,19 @@ public class FormBMenu implements Initializable {
 					String penalty = orders.get(k).getPenalty();
 					String scheLeadTime = orders.get(k).getScheLeadTime();
 					String receiptTime = orders.get(k).getReceiptTime();
-					if (orderNum != "" && contains(formBData, orderNum) == false) {
-						String[] _order = new String[9];
-						_order[0] = orderNum;
-						_order[1] = productCode;
-						_order[2] = contractPrice;
-						_order[3] = scheduleTime;
-						_order[4] = actualTime;
-						_order[5] = penalty;
-						_order[6] = scheLeadTime;
-						_order[7] = receiptTime;
-						_order[8] = String.valueOf(roundCount);
+					
+					String[] _order = new String[9];
+					_order[0] = orderNum;
+					_order[1] = productCode;
+					_order[2] = contractPrice;
+					_order[3] = scheduleTime;
+					_order[4] = actualTime;
+					_order[5] = penalty;
+					_order[6] = scheLeadTime;
+					_order[7] = receiptTime;
+					_order[8] = String.valueOf(roundCount);
 
-						
-
-						formBData.add(_order);
-					}
+					formBData.add(_order);
 				}
 
 				PSDSingleton.getInstance().setFormBData(formBData);
