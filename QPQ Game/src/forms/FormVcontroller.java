@@ -32,6 +32,7 @@ public class FormVcontroller implements Initializable{
 	FormSMenu formS = FormSMenu.getInstance();
 	StartScreen startScreen = new StartScreen();
 	RoundCounter roundCounter = RoundCounter.getInstance();
+	int roundCount = roundCounter.getRoundCounter();
 
 	private static FormVcontroller instance = null;
 
@@ -241,7 +242,35 @@ public class FormVcontroller implements Initializable{
 			}
 
 			// Display kit price
+			
+			ArrayList<String[]> orderHistory = PSDSingleton.getInstance().getFormBData();
+			// delete duplicates
+			for (int i = FormOMenu.getInstance().getOrders().size() - 1; i >= 0; i--){
+					FormOMenu.getInstance().getOrders().remove(i);
+				
+			}
+			System.out.println("is empty? " + orderHistory.isEmpty());
+			if (!orderHistory.isEmpty()){
+				for (String [] data : orderHistory){
+					if (Integer.parseInt(data[8]) == roundCounter.getRoundCounter()){
+						
+						FormOMenu.getInstance().updateOrderHistory(new Order(data[0], data[1], data[2], data[3], data[4], data[5], data[8]));
+					}
+				}
+			}
+			
 			ArrayList<String> formOData = PSDSingleton.getInstance().getFormOData();
+			
+
+			Double kPrice = FormOMenu.getInstance().calcTotalKitPrice();
+			
+			formOData.set(roundCount, String.valueOf(kPrice));
+			
+			for(String s : formOData){ 
+				System.out.println("---------->>>>>>>> " + s);
+			}
+			
+			PSDSingleton.getInstance().setFormOData(formOData);
 			try{
 				Double sum = Double.parseDouble(formOData.get(roundCounter.getRoundCounter()));
 				Materials.setText(String.valueOf(sum));
@@ -271,27 +300,3 @@ public class FormVcontroller implements Initializable{
 		}
 	
 }		
-		
-		
-		
-		
-		
-	
-			
-			/*if (event.getSource() == revenueButton){
-
-				System.out.println(this.rev.getText());
-				Main.window.setScene(formB.display(this , rev));
-			} else if (event.getSource() == goodsHistoryButton){
-				if (formOScene == null){
-					formOScene = FormOMenu.display();
-				}
-				Main.window.setScene(formOScene );
-			}  else if (event.getSource() == employmentAgencyButton){
-				if (formTScene == null){
-					formTScene = FormTMenu.display();
-				}
-				Main.window.setScene(formTScene);
-			} 
-		}
-*/
