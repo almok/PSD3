@@ -26,7 +26,7 @@ import javafx.util.Duration;
 
 
 
-public class Timer implements Initializable {
+public class Timer extends Stage implements Initializable  {
 	@FXML
 	private Button resetTimer;
 	@FXML
@@ -148,9 +148,9 @@ public class Timer implements Initializable {
 			//this.setTitle("Timer");
 			//Group root = new Group();
 			Scene scene = new Scene(root, 800, 700);
-			Stage stage = (Stage) button.getScene().getWindow();
-			
-			stage.setScene(scene);
+			scene.getStylesheets().add("forms/Styling.css");
+			this.setScene(scene);
+			this.show();
 		}
 
 
@@ -162,7 +162,7 @@ public class Timer implements Initializable {
 			
 			 timeLabel.setText(STARTTIME.toString() + ":00");
 		     timeLabel.setTextFill(Color.RED);
-		     timeLabel.setStyle("-fx-font-size: 4em;");
+		     timeLabel.setStyle("-fx-font-size: 10em;");
 			//Button resetTimer = new Button();
 			//resetTimer.setText("Reset");
 			resetTimer.setOnAction(new EventHandler<ActionEvent>(){

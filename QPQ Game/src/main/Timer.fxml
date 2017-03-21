@@ -10,7 +10,7 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.Timer">
-	<center>
+	<top>
       <HBox alignment="TOP_CENTER">
 			<Button fx:id="startTimer" prefHeight="37.0" prefWidth="99.0" text="Start" />
                <HBox.margin>
@@ -24,9 +24,16 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
-               <Label fx:id = "timeLabel" prefHeight="17.0" prefWidth="153.0" />
+               
 	</HBox>
+	</top>
+	<center>
+	<HBox alignment="CENTER">
+	<Label fx:id = "timeLabel" prefHeight="400.0" prefWidth="400.0" />
+	</HBox>
+	
      </center>
+     
 </BorderPane>
 
 

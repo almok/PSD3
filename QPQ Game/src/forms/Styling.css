@@ -34,6 +34,7 @@
 	-fx-font-family: "Arial";
 	-fx-background-color: linear-gradient(#9EA7E5, #61a2b1);
 	-fx-text-fill:#ffffff;
+	-fx-font-size: 14px; 
 	
 }
 
