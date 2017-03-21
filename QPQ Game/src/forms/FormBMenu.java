@@ -708,36 +708,35 @@ public class FormBMenu implements Initializable {
 			} else {
 				contractPriceField.setText("0");
 			}
+			if (leadTimeField.getText() != "" && timeOfReceiptField.getText() != ""){
+				int leadTime = Integer.parseInt(leadTimeField.getText());
+				int timeReceipt = Integer.parseInt(timeOfReceiptField.getText());
+				String scheduledTime = String.valueOf(leadTime + timeReceipt);
+				scheduledDeliveryTimeField.setText(scheduledTime);
+			}
+			
 		});
 		
-		scheduledDeliveryTimeField.textProperty().addListener((observable, oldValue, newValue) -> {
-			
-			if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
-					&& actualDeliveryTimeField.getText() != null && actualDeliveryTimeField.getText().length() != 0) {
-
-				try {
-					int penalty = 0;
-					int revenue = 0;
-					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
-					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
-
-					int timeDiff = actualTime - schedTime;
-					timeDifferenceLabel.setText(Integer.toString(timeDiff));
-				
-					if (timeDiff > 0){
-						penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
-						penaltyPriceField.setText(Integer.toString(penalty));
-					}
-					else{
-						penaltyPriceField.setText(Integer.toString(penalty));
-					}
-					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
-					revenueField.setText(Integer.toString(revenue));
-				} catch (Exception e) {
-					System.out.println("entered actual delivery time is not a number");
+		timeOfReceiptField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (Order.isCodeValid(productCodeField.getText())) {
+				if (leadTimeField.getText() == "") {
+					contractPriceField.setText("0");
+				} else {
+					String carName = getCarName();
+					getContPrice(carName, leadTimeField.getText());
 				}
+			} else {
+				contractPriceField.setText("0");
 			}
+			if (leadTimeField.getText() != "" && timeOfReceiptField.getText() != ""){
+				int leadTime = Integer.parseInt(leadTimeField.getText());
+				int timeReceipt = Integer.parseInt(timeOfReceiptField.getText());
+				String scheduledTime = String.valueOf(leadTime + timeReceipt);
+				scheduledDeliveryTimeField.setText(scheduledTime);
+			}
+			
 		});
+		
 
 		// add change listener to product code
 		productCodeField.textProperty().addListener((observable, oldValue, newValue) -> {

@@ -88,7 +88,7 @@
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
                 			 <Label prefHeight="17.0" prefWidth="153.0" text="Scheduled delivery time:" />
-                			 <TextField fx:id="scheduledDeliveryTimeField" prefWidth="150" promptText="time in minutes" />
+                			 <TextField fx:id="scheduledDeliveryTimeField" editable="false" prefWidth="150" promptText="time in minutes" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
