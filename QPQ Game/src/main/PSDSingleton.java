@@ -9,8 +9,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Collections;
-
 
 public class PSDSingleton {
 	private final static String pathFormC = "DataBase/Personal/FormC.csv";
@@ -32,8 +30,7 @@ public class PSDSingleton {
 	private Map<String, Integer> formRDataHashMap;
 	private Map<String, Integer> formDDataHashMap;
 	private Map<String, String> gameRulesDataHashMap;
-	private ArrayList<String> formOData = new ArrayList<String>(Collections.nCopies(20, ""));
-	private EmployeeList emp;
+	private Double formOData;
 	
 	private static PSDSingleton instance = null;
 	protected PSDSingleton() {}
@@ -224,7 +221,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 2){
-				return formPDataHashMap.get(carName)[3];
+				return formPDataHashMap.get(carName)[1];
 			}
 			return "0";
 		}
@@ -238,7 +235,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 3){
-				return formPDataHashMap.get(carName)[4];
+				return formPDataHashMap.get(carName)[2];
 			}
 			return "0";
 		}
@@ -253,7 +250,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 4){
-				return formPDataHashMap.get(carName)[1];
+				return formPDataHashMap.get(carName)[3];
 			}
 			return "0";
 		}
@@ -267,7 +264,7 @@ public class PSDSingleton {
 		
 		if (this.formPDataHashMap.containsKey(carName)){
 			if (formPDataHashMap.get(carName).length >= 5){
-				return formPDataHashMap.get(carName)[2];
+				return formPDataHashMap.get(carName)[4];
 			}
 			return "0";
 		}
@@ -298,12 +295,11 @@ public class PSDSingleton {
 	
 	public void saveFormRData(){
 		PrintWriter pw;
-		ArrayList<String[]> arr = this.getFormCData();
+		ArrayList<String[]> arr = this.getFormRData();
 		try {
 			pw = new PrintWriter(new File(pathFormR));
 			for (int i = 0; i < arr.size(); i++) {
-				pw.write("" + arr.get(i)[0] + "," + 
-				  arr.get(i)[1] + "\n");
+				pw.write("" + arr.get(i)[0] + "," + arr.get(i)[1] + "\n");
 			}
 	        pw.close();
 		} catch (FileNotFoundException e) {
@@ -424,6 +420,55 @@ public class PSDSingleton {
 		return 15;
 	}
 	
+	
+	public void importData(){
+		ArrayList<String[]> formBData = this.getFileData("Export/FormBData.csv");
+		this.setFormBData(formBData);
+		
+		ArrayList<String[]> formSData = this.getFileData("Export/FormSData.csv");
+		this.setFormSData(formSData);
+		
+		
+		ArrayList<String[]> formTData = this.getFileData("Export/FormTData.csv");
+		ArrayList<AYNEmployee> employees = new ArrayList<AYNEmployee>();
+		for (int i = 0; i < formTData.size(); i++) {
+			try{
+				AYNEmployee employee = new AYNEmployee();
+				employee.setName(formTData.get(i)[0]);
+				employee.setDepartment(formTData.get(i)[1]);
+				
+				if (formTData.get(i)[2].toLowerCase() == "true"){
+					employee.setMultiSkilled(true);
+				} else {
+					employee.setMultiSkilled(false);
+				}
+				
+				employee.setTime1(Integer.parseInt(formTData.get(i)[3]));
+				employee.setTime2(Integer.parseInt(formTData.get(i)[4]));
+				employee.setTotTime(Integer.parseInt(formTData.get(i)[5]));
+				employee.setWage(Double.parseDouble(formTData.get(i)[6]));
+
+				employees.add(employee);
+			} catch(Exception e){}
+		}
+		this.setFormTData(employees);
+		
+		ArrayList<String[]> formVData = this.getFileData("Export/FormVData.csv");
+		ArrayList<Round> rounds = new ArrayList<Round>();
+		for (int i = 0; i < formVData.size(); i++) {
+			try{
+				rounds.add(new Round(formVData.get(i)[0] , formVData.get(i)[1] , formVData.get(i)[2] , formVData.get(i)[3] , formVData.get(i)[4] , formVData.get(i)[5] , formVData.get(i)[6]));
+			} catch(Exception e){}
+		}
+		this.setFormVData(rounds);
+		
+		
+	}
+	
+	
+	
+	
+	
 	// Form S data
 	public void setFormSData(ArrayList<String[]> formSData){
 		this.formSData = new ArrayList<>();
@@ -465,11 +510,11 @@ public class PSDSingleton {
 	}
 
 	// Form O data
-	public void setFormOData(ArrayList<String> formOData){
+	public void setFormOData(Double formOData){
 		this.formOData = formOData;
 	}
 		
-	public ArrayList<String> getFormOData(){
+	public Double getFormOData(){
 		if (this.formOData == null){
 			this.formOData = null;
 		}
@@ -487,13 +532,5 @@ public class PSDSingleton {
 			this.formVData = new ArrayList<>();
 		}
 		return this.formVData;
-	}
-	
-	//EmployeeList Singleton
-	public EmployeeList getEmployeeList(){
-		if(this.emp == null){
-			this.emp = new EmployeeList(new Employee());
-		}
-		return this.emp;
 	}
 }

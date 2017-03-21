@@ -11,7 +11,7 @@ public class EmployeeList {
 	private TextField name;
 	private ComboBox<String> department;
 	private ArrayList<String> departments = new ArrayList<>(Arrays.asList("Sales", "Production Planning", "Goods Receipt", 
-				"Floor Control", "Production", "Ledger", "Quality Assurance", "Finance", "Supplier", "Manager"));
+				"Floor Control", "Production", "Ledger", "Quality Assurance", "Finance", "Manager"));
 	
 	// constructor
 	public EmployeeList(Employee emp) {

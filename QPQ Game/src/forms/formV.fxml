@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -13,129 +8,72 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forms.FormVcontroller">
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forms.FormVcontroller">
 
 <center>
-      <VBox BorderPane.alignment="TOP_CENTER">
-         <children>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-               
-                     
-               	
-                     		<Label prefHeight="40.0" prefWidth="200.0" text="α: Revenue ∑ Form B :" />
-                  <Region prefHeight="200.0" prefWidth="115.0" />
-               		<Label fx:id="Revenues" prefHeight="40.0" prefWidth="85.0">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               		<Button fx:id="Rev" contentDisplay="RIGHT" maxWidth="99.0" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form B" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="31.0" prefWidth="452.0">
-               <children>
-               		
-                     	
-               		<Label prefHeight="20.0" prefWidth="100.0" text="Expenditures" />
-                  <Region prefHeight="200.0" prefWidth="399.0" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="25.0" prefWidth="452.0">
-               <children>
-               	
-                     		<Label prefHeight="20.0" prefWidth="100.0" text="Salary" />
-                  <Region prefHeight="200.0" prefWidth="399.0" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-               
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="   Employees (No of QPQ employees x time x salary)" />
-               		<Label fx:id="Employees" prefHeight="40.0" prefWidth="85.0" />
-               		<Button fx:id="formSButton" contentDisplay="RIGHT" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form S" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-               
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="   Employment Agency (AYN) (Form T)" />
-               		<Label fx:id="Employment" prefHeight="40.0" prefWidth="85.0" />
-                     <Button fx:id="formTButton" contentDisplay="RIGHT" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form T" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                     
-                           
-               		<Label prefHeight="40.0" prefWidth="315.0" text="Materials (Form O)" />
-               		<Label fx:id="Materials" prefHeight="40.0" prefWidth="85.0" />
-           			<Button fx:id="formOButton" contentDisplay="RIGHT" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form O" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                     
-                 			    	
-               		<Label prefHeight="40.0" prefWidth="315.0" text="Investments (Form R)" />
-               		<Label fx:id="Investments" prefHeight="40.0" prefWidth="85.0" />
-                  <Region prefHeight="200.0" prefWidth="99.0" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-               	
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="Consultant Fees (WSWK) (Form R)" />
-               		<Label fx:id="Consultant" prefHeight="40.0" prefWidth="85.0" />
-                  <Region prefHeight="200.0" prefWidth="99.0" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-               
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="Total expenditures (∑ β)" />
-               		<Label fx:id="Exp" prefHeight="40.0" prefWidth="85.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Label>
-                  <Region prefHeight="200.0" prefWidth="99.0" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-               	
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="Profit/Loss (α – β)" />
-               		<Label fx:id="ProfitLoss" prefHeight="40.0" prefWidth="85.0">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Label>
-                  <Region prefHeight="200.0" prefWidth="99.0" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-	 </center>
-   <left>
-      <Region prefHeight="400.0" prefWidth="73.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <Region prefHeight="400.0" prefWidth="75.0" BorderPane.alignment="CENTER" />
-   </right>
-   <top>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="backButton" contentDisplay="RIGHT" minWidth="99.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="99.0" text="Back">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </top>  		
+<GridPane fx:id="gridBoard" hgap="10" vgap="10" BorderPane.alignment="center">
+      <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
+      
+      
+      	
+      		<Label text="α: Revenue ∑ Form B :" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+      		<Label fx:id="Revenues" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+      		<Button fx:id="Rev" text="Form B" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+      		
+      	
+      		<Label text="Expenditures" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      	
+      		<Label text="Salary" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      
+      		<Label text="Employees (No of QPQ employees x time x salary)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      		<Label fx:id="Employees" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      		<Button fx:id="formSButton" text="Form S" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      
+      		<Label text="Employment Agency (AYN) (Form T)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+      		<Label fx:id="Employment" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <Button fx:id="formTButton" text="Form T" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            
+            
+      		<Label text="Materials (Form O)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+      		<Label fx:id="Materials" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+  			<Button fx:id="formOButton" text="Form O" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            
+  			    	
+      		<Label text="Investments (Form R)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+      		<Label fx:id="Investments" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+      	
+      		<Label text="Consultant Fees (WSWK) (Form R)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+      		<Label fx:id="Consultant" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+      
+      		<Label text="Total expenditures (∑ β)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+      		<Label fx:id="Exp" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+      	
+      		<Label text="Profit/Loss (α – β)" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+      		<Label fx:id="ProfitLoss" prefWidth="150" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+         <Button fx:id="backButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" text="Back" GridPane.columnIndex="5" GridPane.rowIndex="11" />
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+      	 
+	 </GridPane>
+	 </center>  		
 </BorderPane>

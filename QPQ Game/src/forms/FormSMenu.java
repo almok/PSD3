@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,26 +18,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
-import main.RoundCounter;
 
 
 
 public class FormSMenu implements Initializable {
-
-	RoundCounter roundCounter = RoundCounter.getInstance();
-	int roundCount = roundCounter.getRoundCounter();
-
-	private static FormSMenu instance = null;
-
-	public static FormSMenu getInstance() {
-		if(instance == null) {
-			instance = new FormSMenu();
-	    }
-		return instance;
-	}
 	
 	@FXML
 	private Button addButton, backButton, deleteButton;
@@ -88,18 +73,6 @@ public class FormSMenu implements Initializable {
 		return numberEmployees;
 	}
 	
-	boolean contains(ArrayList<String[]> formSData, String name, String department){
-		for (int i = 0; i < formSData.size(); i++){
-			if (formSData.get(i)[0].equals(name) 
-					&& formSData.get(i)[1].equals(department) 
-					&& Integer.parseInt(formSData.get(i)[2]) == roundCount){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-
 	// display this form
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("formS.fxml"));
@@ -108,12 +81,6 @@ public class FormSMenu implements Initializable {
 		stage.setTitle("Employee List");
 		scene.getStylesheets().add("forms/Styling.css");
 		stage.setScene(scene);
-		
-		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
-		stage.setX(screen.getMinX());
-		stage.setY(screen.getMinY());
-		stage.setWidth(screen.getWidth());
-		stage.setHeight(screen.getHeight());
 	}
 	
 	@Override
@@ -123,25 +90,24 @@ public class FormSMenu implements Initializable {
 		// simulate creating new employee if there is data in the table
 		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 		for (int i = 0; i < arr.size() ; i ++){
-			if(Integer.parseInt(arr.get(i)[2]) == roundCount){
-				EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
-				employees.add(emp);	
-			}
+            
+			EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
+			employees.add(emp);	
+			
+			
 		}
 		
 		backButton.setOnAction(e -> {
 			
-			ArrayList<String[]> formSData = PSDSingleton.getInstance().getFormSData();
-			System.out.println("employees size: " + employees.size() + " Form s " + formSData.size());
+			ArrayList<String[]> formSData = new ArrayList<>();
 			for (int i = 0;i<employees.size();i++){
 				String name = employees.get(i).getNameAsString();
 				String department = employees.get(i).getDepartmentName();
 				
-				if (name != "" && department != null && contains(formSData, name, department) == false){
-					String[] person = new String[3];
+				if (name != "" && department != null){
+					String[] person = new String[2];
 					person[0] = name;
 					person[1] = department;
-					person[2] = String.valueOf(roundCount);
 					formSData.add(person);
 				}
 			} 
@@ -149,7 +115,7 @@ public class FormSMenu implements Initializable {
 			PSDSingleton.getInstance().setFormSData(formSData);
 			
 			
-			FormVcontroller formV = FormVcontroller.getInstance();
+			FormVcontroller formV = new FormVcontroller();
 			try{
 				FormVcontroller.setEmployeeWage(countEmployees(employees));
 				formV.display(backButton);
@@ -158,8 +124,7 @@ public class FormSMenu implements Initializable {
 			}
 		});
 		
-		name.setCellValueFactory(new PropertyValueFactory<>("name"));				
-		name.setStyle("-fx-alignment: CENTER");
+		name.setCellValueFactory(new PropertyValueFactory<>("name"));				name.setStyle("-fx-alignment: CENTER");
 		department.setCellValueFactory(new PropertyValueFactory<>("department"));
 		
 		employeeTable.setItems(employees);

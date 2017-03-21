@@ -1,5 +1,6 @@
 package forms;
 
+import forms.AYNEmployee;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,26 +21,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
-import main.RoundCounter;
 
 
 
 public class FormTMenu implements Initializable {
-
-	RoundCounter roundCounter = RoundCounter.getInstance();
-	int roundCount = roundCounter.getRoundCounter();
-	
-	private static FormTMenu instance = null;
-
-	public static FormTMenu getInstance() {
-		if(instance == null) {
-			instance = new FormTMenu();
-	    }
-		return instance;
-	}
 	
 	@FXML private BorderPane FormTMenu;
 	
@@ -89,22 +75,11 @@ public class FormTMenu implements Initializable {
 		selectedEmployees.forEach(allEmployees::remove);
 	}
 	
-	boolean contains(ArrayList<AYNEmployee> formTData, String name){
-		for (int i = 0; i < formTData.size(); i++){
-			if (formTData.get(i).getName().equals(name) && formTData.get(i).getRoundCount() == roundCount){
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	@FXML
 	public void saveEmployees(){
-		ArrayList<AYNEmployee> listToSave = PSDSingleton.getInstance().getFormTData();
+		ArrayList<AYNEmployee> listToSave = new ArrayList<>();
 		for(AYNEmployeeLine empl : employeeTable.getItems()){
-			if (contains(listToSave, empl.getEmployee().getName()) == false){
-				listToSave.add(empl.getEmployee());
-			}
+			listToSave.add(empl.getEmployee());
 		}
 		
 		PSDSingleton.getInstance().setFormTData(listToSave);
@@ -123,12 +98,6 @@ public class FormTMenu implements Initializable {
 		stage.setScene(scene);
 		stage.setTitle("AYN Employee List");
 		
-		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
-		stage.setX(screen.getMinX());
-		stage.setY(screen.getMinY());
-		stage.setWidth(screen.getWidth());
-		stage.setHeight(screen.getHeight());
-		
 	}
 	
 	@Override
@@ -136,17 +105,14 @@ public class FormTMenu implements Initializable {
 		
 		// load existing employees
 		ArrayList<AYNEmployee> arr = PSDSingleton.getInstance().getFormTData();
-		System.out.println("arr " + arr);
 		for (int i = 0; i < arr.size() ; i ++){
             
-			if (arr.get(i).getRoundCount() == roundCount){
-				AYNEmployeeLine emp = new AYNEmployeeLine(arr.get(i));
-				employees.add(emp);
-			}
+			AYNEmployeeLine emp = new AYNEmployeeLine(arr.get(i));
+			employees.add(emp);				
 		}
 
 		// load existing employees
-		emps = AYNEmployeeList.getInstance();
+		emps = new AYNEmployeeList();
 		//emps.getEmployees().add(new AYNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
 		
 		//emps.loadList("AYN Employee List Default.csv");

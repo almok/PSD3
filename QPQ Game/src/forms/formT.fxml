@@ -13,15 +13,16 @@
 
 <BorderPane prefHeight="400.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="forms.FormTMenu">
    <center>
-   		<HBox alignment="TOP_CENTER" prefHeight="336.0" prefWidth="590.0">
+   		<HBox alignment="TOP_CENTER" prefHeight="336.0" prefWidth="564.0">
       <children>
-   	      <VBox maxWidth="1300.0" minWidth="300.0" prefHeight="336.0" prefWidth="1000.0">
+   	      <VBox maxWidth="1300.0" minWidth="300.0" prefHeight="336.0" prefWidth="960.0">
    	         <children>
    	            <TableView fx:id="employeeTable" minHeight="-Infinity" prefHeight="311.0" VBox.vgrow="ALWAYS">
    	              <columns>
-   	                <TableColumn fx:id="name" minWidth="165.0" prefWidth="165.0" resizable="false" text="Name" />   	                
+   	                <TableColumn fx:id="name" minWidth="165.0" prefWidth="165.0" resizable="false" text="Name" />
+   	                
    	                <TableColumn fx:id="department" minWidth="130.0" prefWidth="130.0" resizable="false" text="Department" />
-   	                <TableColumn fx:id="skill" minWidth="60.0" prefWidth="60.0" resizable="false" text="${' Multi\nskilled'}" />
+   	                <TableColumn fx:id="skill" minWidth="12.0" prefWidth="45.0" resizable="false" text="${' Multi\nskilled'}"/>
                     <TableColumn fx:id="button1" minWidth="26.0" prefWidth="26.0" resizable="false" text="1" />
                     <TableColumn fx:id="button2" minWidth="26.0" prefWidth="26.0" resizable="false" text="2" />
                     <TableColumn fx:id="button3" minWidth="26.0" prefWidth="26.0" resizable="false" text="3" />
