@@ -79,7 +79,7 @@ public class FormBMenu implements Initializable {
 
 			timeDifferenceLabel.setText(String.valueOf(act - sch));
 		}
-
+		System.out.println("penalty is " + penaltyPriceArrayList.get(c));
 		penaltyPriceField.setText(penaltyPriceArrayList.get(c));
 		revenueField.setText(revenueArrayList.get(c));
 
@@ -141,9 +141,16 @@ public class FormBMenu implements Initializable {
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
 
-					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
-					int penalty = 30 * (actualTime - schedTime);
-					penaltyPriceField.setText(Integer.toString(penalty));
+					int timeDiff = actualTime - schedTime;
+					timeDifferenceLabel.setText(Integer.toString(timeDiff));
+					int penalty = 0;
+					if (timeDiff > 0){
+						penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
+					else{
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				}
@@ -174,9 +181,16 @@ public class FormBMenu implements Initializable {
 					int revenue = 0;
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
-					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
-					int penalty = 30 * (actualTime - schedTime);
-					penaltyPriceField.setText(Integer.toString(penalty));
+					int timeDiff = actualTime - schedTime;
+					timeDifferenceLabel.setText(Integer.toString(timeDiff));
+					int penalty = 0;
+					if (timeDiff > 0){
+						penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
+					else{
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				}
@@ -210,9 +224,18 @@ public class FormBMenu implements Initializable {
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
 
-					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
-					int penalty = PSDSingleton.getInstance().getPenalty() * (actualTime - schedTime);
-					penaltyPriceField.setText(Integer.toString(penalty));
+					int timeDiff = actualTime - schedTime;
+					timeDifferenceLabel.setText(Integer.toString(timeDiff));
+					int penalty = 0;
+					if (timeDiff > 0){
+						penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
+					else{
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
+				
+					
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				}
@@ -569,8 +592,13 @@ public class FormBMenu implements Initializable {
 				int revenue = 0;
 				int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 				int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
+				int timeDiff = actualTime - schedTime;
 
-				penalty = 30 * (actualTime - schedTime);
+				if (timeDiff > 0){
+					penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
+					penaltyPriceField.setText(Integer.toString(penalty));
+				}
+				
 				penaltyPriceField.setText(Integer.toString(penalty));
 				revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 				revenueField.setText(Integer.toString(revenue));
@@ -649,9 +677,16 @@ public class FormBMenu implements Initializable {
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
 
-					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
-					penalty = 30 * (actualTime - schedTime);
-					penaltyPriceField.setText(Integer.toString(penalty));
+					int timeDiff = actualTime - schedTime;
+					timeDifferenceLabel.setText(Integer.toString(timeDiff));
+				
+					if (timeDiff > 0){
+						penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
+					else{
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				} catch (Exception e) {
@@ -686,9 +721,16 @@ public class FormBMenu implements Initializable {
 					int actualTime = Integer.parseInt(actualDeliveryTimeField.getText());
 					int schedTime = Integer.parseInt(scheduledDeliveryTimeField.getText());
 
-					timeDifferenceLabel.setText(Integer.toString(actualTime - schedTime));
-					penalty = 30 * (actualTime - schedTime);
-					penaltyPriceField.setText(Integer.toString(penalty));
+					int timeDiff = actualTime - schedTime;
+					timeDifferenceLabel.setText(Integer.toString(timeDiff));
+				
+					if (timeDiff > 0){
+						penalty = PSDSingleton.getInstance().getPenalty() * (timeDiff);
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
+					else{
+						penaltyPriceField.setText(Integer.toString(penalty));
+					}
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				} catch (Exception e) {
