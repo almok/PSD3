@@ -420,6 +420,31 @@ public class PSDSingleton {
 		return 15;
 	}
 	
+	public int getHiringCost(){
+		if(this.formRDataHashMap == null){
+			this.createHashFormR();
+			System.out.println("creating hash");
+		}
+		System.out.println("hiring is in hash = " + this.formRDataHashMap.containsKey("Hiring"));
+		if (this.formRDataHashMap.containsKey("Hiring")){
+			System.out.println("hiring is in hash");
+			return formRDataHashMap.get("Hiring");
+		}
+		
+		return 75;
+	}
+	
+	public int getFiringCost(){
+		if(this.formRDataHashMap == null){
+			this.createHashFormR();
+		}
+		
+		if (this.formRDataHashMap.containsKey("Firing")){
+			return formRDataHashMap.get("Firing");
+		}
+		return 100;
+	}
+	
 	
 	public void importData(){
 		ArrayList<String[]> formBData = this.getFileData("Export/FormBData.csv");
