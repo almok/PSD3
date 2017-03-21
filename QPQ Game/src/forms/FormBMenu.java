@@ -417,12 +417,15 @@ public class FormBMenu implements Initializable {
 			
 			try {
 				int ord = Integer.parseInt(orderField.getText());
-				for (int i = 0; i < formNo; i++){
+				System.out.println("--------------------->" + ord);
+				for (int i = 0; i < formNo - 1; i++){
+					System.out.println("+++++++++++>>>>>" + Integer.parseInt(orderArrayList.get(i)));
 					if (ord == Integer.parseInt(orderArrayList.get(i))){
+						errorMessage += "Order numbers needs to be unique\n";
 						break;
 					}
 				}
-				errorMessage += "Order numbers needs to be unique\n";
+				
 			} catch (NumberFormatException e) {
 				errorMessage += "No valid Order Number(must be an integer)\n";
 			}
