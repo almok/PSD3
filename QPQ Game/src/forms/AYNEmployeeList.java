@@ -6,9 +6,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import main.RoundCounter;
+
 public class AYNEmployeeList {
 
 	private ArrayList<AYNEmployee> employees;
+	
+	private static AYNEmployeeList instance = null;
+
+	public static AYNEmployeeList getInstance() {
+		if(instance == null) {
+			instance = new AYNEmployeeList();
+	    }
+		return instance;
+	}
 	
 	public AYNEmployeeList(){
 		employees = new ArrayList<>();
@@ -55,7 +66,7 @@ public class AYNEmployeeList {
 				
 				// assign the values
 				AYNEmployee employee = new AYNEmployee(stats[0], department, Boolean.parseBoolean(stats[2]), Integer.parseInt(stats[3]), 
-						Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Double.parseDouble(stats[6]));
+						Integer.parseInt(stats[4]), Integer.parseInt(stats[5]), Double.parseDouble(stats[6]), RoundCounter.getInstance().getRoundCounter());
 				
 				// add a process to a collection of processes
 				employees.add(employee);

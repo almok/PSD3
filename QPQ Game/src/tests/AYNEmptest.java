@@ -13,7 +13,7 @@ public class AYNEmptest {
 
 	@BeforeClass
 	public static void setUp() {
-		emp = new AYNEmployee("", "", false, 1, 2, 1, 0.0);
+		emp = new AYNEmployee("", "", false, 1, 2, 1, 0.0, 0);
 		
 	}
 
