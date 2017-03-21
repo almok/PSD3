@@ -38,12 +38,11 @@ public class AYNEmployee {
 		else{
 			wage = PSDSingleton.getInstance().getEmployeeWage("AYN employee");
 		}
-		hiringCost = PSDSingleton.getInstance().getHiringCost();
-		firingCost = PSDSingleton.getInstance().getFiringCost();
-		System.out.println("hiring costs " + hiringCost);
-		System.out.println("firing costs " + firingCost);
+		hiringCost = PSDSingleton.getInstance().getHiringCost("Hiring");
+		firingCost = PSDSingleton.getInstance().getFiringCost("Firing");
+	
 		double totalCost = wage*totTime + hiringCost + firingCost;
-		System.out.println("totalCost " + totalCost);
+		
 		return totalCost;
 	}
 	
