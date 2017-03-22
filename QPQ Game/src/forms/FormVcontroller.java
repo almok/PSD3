@@ -174,7 +174,7 @@ public class FormVcontroller implements Initializable{
 			if(array.size() > 0){
 				int totalRevenue = 0;
 				for(int j = 0; j < array.size(); j++ ){
-					if (array.get(j)[9].equals("True")){
+					if (array.get(j)[9].equals("Yes")){
 						if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
 							String contractPrice = array.get(j)[2];
 							String scheduleTime = array.get(j)[3];
