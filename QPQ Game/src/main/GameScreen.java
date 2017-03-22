@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -28,8 +27,6 @@ import javafx.stage.Stage;
 public class GameScreen extends Application implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
 	@FXML private Button settingsButton;
-	private float CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
-	private float CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 3;
 	
 	 final Label hello = new Label("Please provide password for entry");
 	    private Button ok = new Button("ok");
@@ -41,26 +38,13 @@ public class GameScreen extends Application implements Initializable, EventHandl
 		@FXML private AnchorPane aPane;
 		
 
-		private void callPopUp(Stage stage){
+		private void callPopUp(){
 			popup.hide();
 			popup = new Popup();
 
 			 VBox popUpVBox = new VBox();
 			 HBox popUpHBox = new HBox();
-
-			 popUpVBox.setStyle("-fx-border-color: white;\n" +
-                   "-fx-border-insets: 5;\n" +
-                   "-fx-border-width: 3;\n");
 			 
-			 popUpVBox.setPadding(new Insets(10, 10, 10, 10));
-			 
-			 popUpVBox.setMinWidth(400);
-			 popUpVBox.setSpacing(10);
-			 popUpHBox.setSpacing(10);
-			 ok.setMinWidth(200);
-			 ok.setMaxWidth(200);
-			 cencel.setMinWidth(200);
-			 cencel.setMaxWidth(200);
 
 			 popUpHBox.getChildren().add(ok);
 			 popUpHBox.getChildren().add(cencel);
@@ -75,9 +59,8 @@ public class GameScreen extends Application implements Initializable, EventHandl
 			 popup.setAutoFix(false);
 			 popup.setHideOnEscape(true);
 			 popup.getContent().addAll(popUpVBox);
-			 
-			 popup.setX((stage.getWidth() - 400) / 2);
-			 popup.setY(settingsButton.getLayoutY() + 100);
+			 popup.setX(600);
+			 popup.setY(200);
 
 		        ok.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -105,7 +88,7 @@ public class GameScreen extends Application implements Initializable, EventHandl
 		        });
 			
 			
-			popup.show(stage);
+			popup.show((Stage) settingsButton.getScene().getWindow());
 		}
 	
 	public static void main(String[] args){
@@ -142,7 +125,7 @@ public class GameScreen extends Application implements Initializable, EventHandl
 			//CountDownTimer countDown = new CountDownTimer();
 			//countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
-			this.callPopUp((Stage) settingsButton.getScene().getWindow());
+			this.callPopUp();
 		}
 	}
 	@Override
