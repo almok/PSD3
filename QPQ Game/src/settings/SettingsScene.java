@@ -32,13 +32,7 @@ public class SettingsScene implements Initializable{
 		 assert formPButton != null : "fx:id=\"formPButton\" was not injected";
 		 assert formRButton != null : "fx:id=\"formRButton\" was not injected";
 		 
-		 
-		 // invisible until fxml implemented
-		 formDButton.setVisible(false);
-		 
-		 
-		 
-		 
+
 		 gameRulesButton.setOnAction(e -> {
 			 this.openPage("GameRules.fxml" , e.getSource());
 		 });
@@ -47,7 +41,7 @@ public class SettingsScene implements Initializable{
 			 this.openPage("EditFormC.fxml" , e.getSource());
 		 });
 		 formDButton.setOnAction(e -> {
-			 this.openPage("EditFormP.fxml" , e.getSource());
+			 this.openPage("EditFormD.fxml" , e.getSource());
 		 });
 		 formPButton.setOnAction(e -> {
 			 this.openPage("EditFormP.fxml" , e.getSource());
