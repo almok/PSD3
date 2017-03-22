@@ -2,12 +2,10 @@ package main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
 
+import forms.SettingsScene;
+import forms.StartScreen;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,16 +16,16 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import forms.*;
 
 public class GameScreen extends Application implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
 	@FXML private Button settingsButton;
+	@FXML private Text text;
+	@FXML private AnchorPane aPane;
 	
 	public static void main(String[] args){
 		launch(args);
@@ -78,6 +76,10 @@ public class GameScreen extends Application implements Initializable, EventHandl
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
+		
+		aPane.setStyle("-fx-background: #363738;");
+		text.setStyle("-fx-fill: #ffffff;");
+		
 		 assert startButton != null : "fx:id=\"startButton\" was not injected";
 		 assert settingsButton != null : "fx:id=\"settingsButton\" was not injected";
 
