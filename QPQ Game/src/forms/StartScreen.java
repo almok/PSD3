@@ -68,7 +68,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 			//CountDownTimer countDown = new CountDownTimer();
 			//countdown.display(startButton);
 		} else if (event.getSource() == reportButton){
-			//produce report from financials of rounds available
+			PSDSingleton.getInstance().reportData();
 		} else if (event.getSource() == timerButton){
 			//display timer in separate window
 			Timer timer = new Timer();

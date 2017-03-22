@@ -340,6 +340,77 @@ public class PSDSingleton {
 		
 	}
 	
+	public void reportData(){
+		System.out.println("Report");
+		
+		PrintWriter pw;
+		File theDir = new File("Report");
+		if (!theDir.exists()) {
+		    try{
+		        theDir.mkdir();
+		    } 
+		    catch(SecurityException se){
+		    }  
+		}
+
+		ArrayList<String[]> formBData = this.getFormBData();
+		ArrayList<String[]> formSData = this.getFormSData();
+		ArrayList<AYNEmployee> formTData = this.getFormTData();
+		ArrayList<Round> formVData = this.getFormVData();
+		try {
+			pw = new PrintWriter(new File("Report/report.csv"));
+			
+
+			pw.write("Form B Data:\n");
+			
+			for (int i = 0; i < formBData.size(); i++) {
+				pw.write("" + formBData.get(i)[0] + "," + formBData.get(i)[1]+ "," + formBData.get(i)[2]+ "," + formBData.get(i)[3]+ "," + formBData.get(i)[4]+ "," + formBData.get(i)[5]
+						+ "," + formBData.get(i)[6]+ "," + formBData.get(i)[7]+ "," + formBData.get(i)[8] + "," + formBData.get(i)[9] + "\n");
+			}
+
+			pw.write("\n");
+			pw.write("\n");
+			pw.write("\n");
+			pw.write("\n");
+
+			pw.write("Form S Data:\n");
+			
+			for (int i = 0; i < formSData.size(); i++) {
+				pw.write("" + formSData.get(i)[0] + "," + formSData.get(i)[1]+ "," + formSData.get(i)[2] + "\n");
+			}
+
+			pw.write("\n");
+			pw.write("\n");
+			pw.write("\n");
+			pw.write("\n");
+			
+			pw.write("Form T Data:\n");
+			pw.write("Worker name" + "," + "Department" + "," + "Is multiskilled" + "," + "Time 1" + "," + "Time 2" + "," + "Total time" + "," + "Wage" + "," + "Round" + "\n");
+
+			for (int i = 0; i < formTData.size(); i++) {
+				pw.write("" + formTData.get(i).getName() + "," + formTData.get(i).getDepartmentWithoutBreak() + "," + formTData.get(i).getMultiSkilled() + "," + formTData.get(i).getTime1()
+						 + "," + formTData.get(i).getTime2() + "," + formTData.get(i).getTotTime() + "," + formTData.get(i).getWage()+ "," + formTData.get(i).getRoundCount() + "\n");
+			}
+
+			pw.write("\n");
+			pw.write("\n");
+			pw.write("\n");
+			pw.write("\n");
+			
+			pw.write("Form V Data:\n");
+			pw.write("Round" + "," + "Total revenue" + "," + "Employees wage" + "," + "AYN" + "," + "Materials sum" + "," + "Total expenditure" + "," + "Profit/Loss" + "\n");
+
+			for (int i = 0; i < formVData.size(); i++) {
+				pw.write("" + formVData.get(i).getRoundNum() + "," + formVData.get(i).getTotalRevenue() + "," + formVData.get(i).getEmployeeWage()
+						+ "," + formVData.get(i).getAynPay()
+						 + "," + formVData.get(i).getMaterialsSum() + "," + formVData.get(i).getTotalExpenditure() + "," + formVData.get(i).getProfitLoss()+ "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void importData(){
 		//ArrayList<String[]> formOData = this.getFileData("Export/FormBData.csv");
 		//this.setFormOData(formOData.get(0));
