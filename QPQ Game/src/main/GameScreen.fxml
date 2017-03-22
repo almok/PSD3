@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GameScreen">
+<HBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GameScreen">
    <children>
       <AnchorPane fx:id="aPane" prefHeight="400.0" prefWidth="600.0">
          <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
             <Button fx:id="startButton" layoutX="80.0" layoutY="200.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="200.0" text="Start Game" />
             <Button fx:id="settingsButton" layoutX="333.0" layoutY="200.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="200.0" text="Settings" />
-            
-                                          <Text fx:id="text" layoutX="210.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QPQ Game" wrappingWidth="207.8359375">
+            <Text fx:id="text" layoutX="56.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QPQ Game" textAlignment="CENTER" wrappingWidth="511.8359375">
                <font>
                   <Font size="40.0" />
                </font>

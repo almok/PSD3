@@ -24,6 +24,8 @@ import main.GameScreen;
 import main.PSDSingleton;
 import main.RoundCounter;
 import main.Timer;
+import settings.*;
+
 public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
 	@FXML private Button exportButton;
@@ -93,36 +95,38 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		}
 	}
 	public void addRoundButton(HBox left){
-		left.setSpacing(10);
 		Button roundButton;
-		if (roundCounter.getRoundCounter() == 0){
-			roundButton = new Button(" Trial Round ");
-			roundButton.setMinWidth(99);
-			roundButton.setMinHeight(37);
-		} else {
-			roundButton = new Button(" Round " + roundCounter.getRoundCounter() + " ");
-			roundButton.setMinWidth(99);
-			roundButton.setMinHeight(37);
-		}
-		left.getChildren().add(roundButton);
-		roundButton.setOnAction(e -> {
-			String buttonTxt = roundButton.getText().replaceAll("\\D+", "");
-			System.out.println(buttonTxt);
-			try{
-				roundCounter.setRoundCounter(Integer.parseInt(buttonTxt));
-				System.out.println(roundCounter.getRoundCounter());
-			} catch (Exception e1){
-				roundCounter.setRoundCounter(0);
-				System.out.println(roundCounter.getRoundCounter());
+		left.setSpacing(10);
+		if (roundCounter.getRoundCounter() < PSDSingleton.getInstance().getNumberOfRounds()){
+			if (roundCounter.getRoundCounter() == 0){
+				roundButton = new Button(" Trial Round ");
+				roundButton.setMinWidth(99);
+				roundButton.setMinHeight(37);
+			} else {
+				roundButton = new Button(" Round " + roundCounter.getRoundCounter() + " ");
+				roundButton.setMinWidth(99);
+				roundButton.setMinHeight(37);
 			}
-			FormVcontroller formVMenu = new FormVcontroller();
-			try {
-		 		formVMenu.display(roundButton);
-		 	 } catch (Exception e1) {
-		 	 	e1.printStackTrace();
-		 	 }
-		});
-		roundCounter.setMaxCount(roundCounter.getRoundCounter());
+			left.getChildren().add(roundButton);
+			roundButton.setOnAction(e -> {
+				String buttonTxt = roundButton.getText().replaceAll("\\D+", "");
+				System.out.println(buttonTxt);
+				try{
+					roundCounter.setRoundCounter(Integer.parseInt(buttonTxt));
+					System.out.println(roundCounter.getRoundCounter());
+				} catch (Exception e1){
+					roundCounter.setRoundCounter(0);
+					System.out.println(roundCounter.getRoundCounter());
+				}
+				FormVcontroller formVMenu = new FormVcontroller();
+				try {
+			 		formVMenu.display(roundButton);
+			 	 } catch (Exception e1) {
+			 	 	e1.printStackTrace();
+			 	 }
+			});
+			roundCounter.setMaxCount(roundCounter.getRoundCounter());
+		}
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
