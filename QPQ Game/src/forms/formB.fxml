@@ -65,56 +65,56 @@
                <children>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="500.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Order number:" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Order number:" />
                 			 <TextField fx:id="orderField" prefWidth="150" promptText="" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Product Code (C):" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Product Code (C):" />
                 			 <TextField fx:id="productCodeField" prefWidth="150" promptText="e.g. FST270X" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Chassis Type:" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Chassis Type:" />
                 			 <TextField fx:id="chassisField" editable="false" prefWidth="150" promptText="" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
                 			 
-                      			 <Label prefHeight="17.0" prefWidth="153.0" text="Time of receipt of order :" />
+                      			 <Label prefHeight="17.0" prefWidth="250.0" text="Time of receipt of order :" />
                 			 <TextField fx:id="timeOfReceiptField" prefWidth="150" promptText="" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Scheduled lead time (D):" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Scheduled lead time (D):" />
                 			 <TextField fx:id="leadTimeField" prefWidth="150" promptText="time in minutes" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Scheduled delivery time:" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Scheduled delivery time:" />
                 			 <TextField fx:id="scheduledDeliveryTimeField" editable="false" prefWidth="150" promptText="time in minutes" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Contract price (a):" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Contract price (a):" />
                 			 <TextField fx:id="contractPriceField" editable="false" prefWidth="150" promptText="" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>          		  
-                		<Label prefHeight="17.0" prefWidth="153.0" text="Actual Delivery Time:" />
+                		<Label prefHeight="17.0" prefWidth="250.0" text="Actual Delivery Time:" />
                       <TextField fx:id="actualDeliveryTimeField" prefWidth="150" promptText="0" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="46.0" prefWidth="153.0" text="${'Schedule and Actual\nTime Difference:'}" />
+                			 <Label prefHeight="46.0" prefWidth="250.0" text="${'Schedule and Actual\nTime Difference:'}" />
                 			 <Label fx:id="timeDifferenceLabel" alignment="CENTER">
                            <HBox.margin>
                               <Insets top="10.0" />
@@ -124,19 +124,19 @@
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Penalty (b):" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Penalty (b):" />
                 			 <TextField fx:id="penaltyPriceField" alignment="CENTER" editable="false" prefWidth="150.0" promptText="" />
                      </children>
                   </HBox>   
                 	<HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                    <children>
-                			 <Label prefHeight="17.0" prefWidth="153.0" text="Revenue (a-b):" />
+                			 <Label prefHeight="17.0" prefWidth="250.0" text="Revenue (a-b):" />
                 			 <TextField fx:id="revenueField" alignment="CENTER" editable="false" prefWidth="150" promptText="" />
                    </children>
                    </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Label prefWidth="153.0" text="Completed: " />
+                        <Label prefWidth="250.0" text="Completed: " />
                         <ComboBox fx:id="fulfilledOrderDrop" prefHeight="17.0" prefWidth="150.0">
                         <items>
                        	 <FXCollections fx:factory="observableArrayList">           

@@ -23,7 +23,7 @@
                
                      
                	
-                     		<Label prefHeight="40.0" prefWidth="200.0" text="α: Revenue ∑ Form B :" />
+                     		<Label prefHeight="40.0" prefWidth="300.0" text="α: Revenue ∑ Form B :" />
                   <Region prefHeight="200.0" prefWidth="115.0" />
                		<Label fx:id="Revenues" prefHeight="40.0" prefWidth="85.0">
                      <padding>
@@ -40,21 +40,21 @@
                <children>
                		
                      	
-               		<Label prefHeight="20.0" prefWidth="100.0" text="Expenditures" />
+               		<Label prefHeight="20.0" prefWidth="200.0" text="Expenditures" />
                   <Region prefHeight="200.0" prefWidth="399.0" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="25.0" prefWidth="452.0">
                <children>
                	
-                     		<Label prefHeight="20.0" prefWidth="100.0" text="Salary" />
+                     		<Label prefHeight="20.0" prefWidth="200.0" text="Salary" />
                   <Region prefHeight="200.0" prefWidth="399.0" />
                </children>
             </HBox>
             <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="   Employees (No of QPQ employees x time x salary)" />
+                     		<Label prefHeight="40.0" prefWidth="415.0" text="   Employees (No of QPQ employees x time x salary)" />
                		<Label fx:id="Employees" prefHeight="40.0" prefWidth="85.0" />
                		<Button fx:id="formSButton" contentDisplay="RIGHT" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form S" />
                </children>
@@ -62,7 +62,7 @@
             <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="   Employment Agency (AYN) (Form T)" />
+                     		<Label prefHeight="40.0" prefWidth="415.0" text="   Employment Agency (AYN) (Form T)" />
                		<Label fx:id="Employment" prefHeight="40.0" prefWidth="85.0" />
                      <Button fx:id="formTButton" contentDisplay="RIGHT" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form T" />
                </children>
@@ -71,7 +71,7 @@
                <children>
                      
                            
-               		<Label prefHeight="40.0" prefWidth="315.0" text="Materials (Form O)" />
+               		<Label prefHeight="40.0" prefWidth="415.0" text="Materials (Form O)" />
                		<Label fx:id="Materials" prefHeight="40.0" prefWidth="85.0" />
            			<Button fx:id="formOButton" contentDisplay="RIGHT" minWidth="99.0" prefHeight="37.0" prefWidth="99.0" text="Form O" />
                </children>
@@ -80,7 +80,7 @@
                <children>
                      
                  			    	
-               		<Label prefHeight="40.0" prefWidth="315.0" text="Investments (Form R)" />
+               		<Label prefHeight="40.0" prefWidth="415.0" text="Investments (Form R)" />
                		<Label fx:id="Investments" prefHeight="40.0" prefWidth="85.0" />
                   <Region prefHeight="200.0" prefWidth="99.0" />
                </children>
@@ -88,7 +88,7 @@
             <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                	
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="Consultant Fees (WSWK) (Form R)" />
+                     		<Label prefHeight="40.0" prefWidth="415.0" text="Consultant Fees (WSWK) (Form R)" />
                		<Label fx:id="Consultant" prefHeight="40.0" prefWidth="85.0" />
                   <Region prefHeight="200.0" prefWidth="99.0" />
                </children>
@@ -96,7 +96,7 @@
             <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="Total expenditures (∑ β)" />
+                     		<Label prefHeight="40.0" prefWidth="415.0" text="Total expenditures (∑ β)" />
                		<Label fx:id="Exp" prefHeight="40.0" prefWidth="85.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -107,7 +107,7 @@
             <HBox alignment="TOP_CENTER" maxHeight="50.0" minHeight="50.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                	
-                     		<Label prefHeight="40.0" prefWidth="315.0" text="Profit/Loss (α – β)" />
+                     		<Label prefHeight="40.0" prefWidth="415.0" text="Profit/Loss (α – β)" />
                		<Label fx:id="ProfitLoss" prefHeight="40.0" prefWidth="85.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
