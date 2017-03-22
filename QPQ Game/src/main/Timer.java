@@ -147,7 +147,7 @@ public class Timer extends Stage implements Initializable  {
 			Parent root = FXMLLoader.load(getClass().getResource("Timer.fxml"));
 			//this.setTitle("Timer");
 			//Group root = new Group();
-			Scene scene = new Scene(root, 800, 700);
+			Scene scene = new Scene(root, 350, 250);
 			scene.getStylesheets().add("forms/Styling.css");
 			this.setScene(scene);
 			this.show();
