@@ -66,7 +66,7 @@
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="500.0">
                      <children>
                 			 <Label prefHeight="17.0" prefWidth="250.0" text="Order number:" />
-                			 <TextField fx:id="orderField" prefWidth="150" promptText="" />
+                			 <TextField fx:id="orderField" prefWidth="150" promptText="unique integer number" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
@@ -85,7 +85,7 @@
                      <children>
                 			 
                       			 <Label prefHeight="17.0" prefWidth="250.0" text="Time of receipt of order :" />
-                			 <TextField fx:id="timeOfReceiptField" prefWidth="150" promptText="" />
+                			 <TextField fx:id="timeOfReceiptField" prefWidth="150" promptText="the minute" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
@@ -97,7 +97,7 @@
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
                 			 <Label prefHeight="17.0" prefWidth="250.0" text="Scheduled delivery time:" />
-                			 <TextField fx:id="scheduledDeliveryTimeField" editable="false" prefWidth="150" promptText="time in minutes" />
+                			 <TextField fx:id="scheduledDeliveryTimeField" editable="false" prefWidth="150" promptText="" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
@@ -109,7 +109,7 @@
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>          		  
                 		<Label prefHeight="17.0" prefWidth="250.0" text="Actual Delivery Time:" />
-                      <TextField fx:id="actualDeliveryTimeField" prefWidth="150" promptText="0" />
+                      <TextField fx:id="actualDeliveryTimeField" prefWidth="150" promptText="the minute" />
                      </children>
                   </HBox>
                   <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="55.0" prefWidth="200.0">

@@ -3,6 +3,7 @@ package forms;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -39,46 +40,105 @@ public class AYNEmployeeLine {
 		skill.setSelected(emp.getMultiSkilled());
 		
 		button1 = new Button();
+		button1.setMinHeight(26);
+		button1.setMinWidth(26);
+		button1.setPadding(new Insets(0,0,0,0));
 		button1.setText("1");
 		button2 = new Button();
+		button2.setMinHeight(26);
+		button2.setMinWidth(26);
+		button2.setPadding(new Insets(0,0,0,0));
 		button2.setText("2");
 		button3 = new Button();
+		button3.setMinHeight(26);
+		button3.setMinWidth(26);
+		button3.setPadding(new Insets(0,0,0,0));
 		button3.setText("3");
 		button4 = new Button();
+		button4.setMinHeight(26);
+		button4.setMinWidth(26);
+		button4.setPadding(new Insets(0,0,0,0));
 		button4.setText("4");
 		button5 = new Button();
+		button5.setMinHeight(26);
+		button5.setMinWidth(26);
+		button5.setPadding(new Insets(0,0,0,0));
 		button5.setText("5");
 		button6 = new Button();
+		button6.setMinHeight(26);
+		button6.setMinWidth(26);
+		button6.setPadding(new Insets(0,0,0,0));
 		button6.setText("6");
 		button7 = new Button();
+		button7.setMinHeight(26);
+		button7.setMinWidth(26);
+		button7.setPadding(new Insets(0,0,0,0));
 		button7.setText("7");
 		button8 = new Button();
+		button8.setMinHeight(26);
+		button8.setMinWidth(26);
+		button8.setPadding(new Insets(0,0,0,0));
 		button8.setText("8");
 		button9 = new Button();
+		button9.setMinHeight(26);
+		button9.setMinWidth(26);
+		button9.setPadding(new Insets(0,0,0,0));
 		button9.setText("9");
 		button10 = new Button();
+		button10.setMinHeight(26);
+		button10.setMinWidth(26);
+		button10.setPadding(new Insets(0,0,0,0));
 		button10.setText("10");
 		button11 = new Button();
+		button11.setMinHeight(26);
+		button11.setMinWidth(26);
+		button11.setPadding(new Insets(0,0,0,0));
 		button11.setText("11");
 		button12 = new Button();
+		button12.setMinHeight(26);
+		button12.setMinWidth(26);
+		button12.setPadding(new Insets(0,0,0,0));
 		button12.setText("12");
 		button13 = new Button();
+		button13.setMinHeight(26);
+		button13.setMinWidth(26);
+		button13.setPadding(new Insets(0,0,0,0));
 		button13.setText("13");
 		button14 = new Button();
+		button14.setMinHeight(26);
+		button14.setMinWidth(26);
+		button14.setPadding(new Insets(0,0,0,0));
 		button14.setText("14");
 		button15 = new Button();
+		button15.setMinHeight(26);
+		button15.setMinWidth(26);
+		button15.setPadding(new Insets(0,0,0,0));
 		button15.setText("15");
 		button16 = new Button();
+		button16.setMinHeight(26);
+		button16.setMinWidth(26);
+		button16.setPadding(new Insets(0,0,0,0));
 		button16.setText("16");
 		button17 = new Button();
+		button17.setMinHeight(26);
+		button17.setMinWidth(26);
+		button17.setPadding(new Insets(0,0,0,0));
 		button17.setText("17");
 		button18 = new Button();
+		button18.setMinHeight(26);
+		button18.setMinWidth(26);
+		button18.setPadding(new Insets(0,0,0,0));
 		button18.setText("18");
 		button19 = new Button();
+		button19.setMinHeight(26);
+		button19.setMinWidth(26);
+		button19.setPadding(new Insets(0,0,0,0));
 		button19.setText("19");
 		button20 = new Button();
+		button20.setMinHeight(26);
+		button20.setMinWidth(26);
+		button20.setPadding(new Insets(0,0,0,0));
 		button20.setText("20");
-		
 		// hold buttons in a collection
 		buttons.addAll(Arrays.asList(button1, button2, button3, button4, button5, button6, button7,
 				button8, button9, button10, button11, button12, button13, button14, button15, 
@@ -100,7 +160,7 @@ public class AYNEmployeeLine {
 		// set button styles
 		if (emp.getTime1() != 0 && emp.getTime2() != 0){
 			for(Button but:buttons){
-				if (Integer.parseInt(but.getText()) > Math.min(emp.getTime1(), emp.getTime2()) && Integer.parseInt(but.getText()) <= Math.max(emp.getTime1(), emp.getTime2())){
+				if (Integer.parseInt(but.getText()) >= Math.min(emp.getTime1(), emp.getTime2()) && Integer.parseInt(but.getText()) <= Math.max(emp.getTime1(), emp.getTime2())){
 					but.setStyle("-fx-background-color: green");
 				}
 			}
