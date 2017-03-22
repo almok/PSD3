@@ -15,13 +15,13 @@ public class FormOtest {
 	@Before
 	public void setUp(){
 		formO = new FormOMenu();
-		formO.updateOrderHistory(new Order(null, "FDR371Y", null, null, null, null));
-		formO.updateOrderHistory(new Order(null, "pst350y", null, null, null, null));
-		formO.updateOrderHistory(new Order(null, "aDe350X", null, null, null, null));
-		formO.updateOrderHistory(new Order(null, "ssT370Y", null, null, null, null));
-		formO.updateOrderHistory(new Order(null, "CsSB0y", null, null, null, null));
-		formO.updateOrderHistory(new Order(null, "dddddddddddddd", null, null, null, null));
-		formO.updateOrderHistory(new Order(null, "", null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "FDR371Y", null, null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "pst350y", null, null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "aDe350X", null, null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "ssT370Y", null, null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "CsSB0y", null, null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "dddddddddddddd", null, null, null, null, null));
+		formO.updateOrderHistory(new Order(null, "", null, null, null, null, null));
 	}
 
 	@Test

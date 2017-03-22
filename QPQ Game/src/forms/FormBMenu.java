@@ -19,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -76,7 +77,7 @@ public class FormBMenu implements Initializable {
 		actualDeliveryTimeField.setText(actualDeliveryTimeArrayList.get(c));
 		timeDifferenceLabel.setText(timeDifferenceArrayList.get(c));
 		System.out.println("fulfilled" + fulfilledOrderArray.get(c));
-		if (fulfilledOrderArray.get(c).equals("True")){
+		if (fulfilledOrderArray.get(c).equals("Yes")){
 			fulfilledOrderDrop.getSelectionModel().select(0);
 		}
 		else{
@@ -256,6 +257,8 @@ public class FormBMenu implements Initializable {
 		formCountList.set(roundCount,formCounter);
 	}
 
+	@FXML
+	private ScrollPane scr;
 	@FXML
 	private Button backButton;
 	@FXML
@@ -496,6 +499,8 @@ public class FormBMenu implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		scr.setStyle("-fx-background: #363738;");
 
 		// if there is data in forms simulate adding new order
 

@@ -14,7 +14,7 @@ public class OrderHistorytest {
 	
 	@Before
 	public void setUp() {
-		order = new OrderHistory(new Order(null, "FDR371Y", null, null, null, null));}
+		order = new OrderHistory(new Order(null, "FDR371Y", null, null, null, null, null));}
 
 
 	@Test

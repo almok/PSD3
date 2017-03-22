@@ -15,8 +15,13 @@
 	-fx-spacing: 10;
 	-fx-padding:25;
 	-fx-vbox-color:#363738
-	
 	}
+	
+.scroll-pane {
+    -fx-background-color:#363738;
+    -fx-padding:25;
+}
+
 .text {
 	
 	text-fill: #ffffff;

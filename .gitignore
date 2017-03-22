@@ -3,6 +3,7 @@
 *.ini
 *.swp
 */.DS_Store
+/QPQ Game/src/main/.DS_Store
 .bundle
 */.metadata/
 .metadata/

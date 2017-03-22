@@ -44,6 +44,9 @@ public class PSDSingleton {
 	    }
 		return instance;
 	}
+	public static void clear(){
+		instance = null;
+	}
 	
 	private ArrayList<String[]> getFileData(String file){
 		String line = "";
