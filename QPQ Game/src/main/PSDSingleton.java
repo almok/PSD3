@@ -580,10 +580,11 @@ public class PSDSingleton {
 			this.createHashGameRules();
 		}
 		
-		if (this.gameRulesDataHashMap.containsKey("Round number")){
+		if (this.gameRulesDataHashMap.containsKey("Number of rounds")){
 			try {
-				return Integer.parseInt(gameRulesDataHashMap.get("Round number"));
+				return Integer.parseInt(gameRulesDataHashMap.get("Number of rounds"));
 			} catch (Exception e) {
+				// TODO: handle exception
 			}
 			return 3;
 		}

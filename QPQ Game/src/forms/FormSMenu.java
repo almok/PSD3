@@ -65,22 +65,11 @@ public class FormSMenu implements Initializable {
 	
 	@FXML
 	public void deleteEmployee(){
-		ArrayList<String[]> formSData = PSDSingleton.getInstance().getFormSData();
 		ObservableList<EmployeeList> allEmployees;
 		ObservableList<EmployeeList> selectedEmployees;
 		
 		allEmployees = employeeTable.getItems();
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
-		
-		//Remove from FormSData Singleton
-		int i = 0;
-		for (EmployeeList empl : selectedEmployees){
-			if(formSData.get(i)[0].equals(empl.getNameAsString()) && Integer.parseInt(formSData.get(i)[2]) == roundCount){
-				formSData.remove(i);
-				break;
-			}
-			i++;
-		}
 		
 		//shorthand to remove selected
 		selectedEmployees.forEach(allEmployees::remove);
