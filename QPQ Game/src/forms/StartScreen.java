@@ -24,6 +24,8 @@ import main.GameScreen;
 import main.PSDSingleton;
 import main.RoundCounter;
 import main.Timer;
+import settings.*;
+
 public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
 	@FXML private Button exportButton;

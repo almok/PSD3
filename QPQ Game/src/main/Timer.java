@@ -42,7 +42,7 @@ public class Timer extends Stage implements Initializable  {
 	//@FXML static Button startTimer;
 		//private Label timeLabel = new Label();
 		private Timeline timeline;
-		private static final Integer STARTTIME = 20;
+		private static final Integer STARTTIME = PSDSingleton.getInstance().getRoundTime();
 		private Integer timeSeconds = 0;
 		private Integer timeMin = STARTTIME -1;
 		
@@ -147,7 +147,7 @@ public class Timer extends Stage implements Initializable  {
 			Parent root = FXMLLoader.load(getClass().getResource("Timer.fxml"));
 			//this.setTitle("Timer");
 			//Group root = new Group();
-			Scene scene = new Scene(root, 350, 250);
+			Scene scene = new Scene(root, 450, 400);
 			scene.getStylesheets().add("forms/Styling.css");
 			this.setScene(scene);
 			this.show();
