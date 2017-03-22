@@ -1,14 +1,13 @@
 package forms;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.io.PrintWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,8 +18,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.GameScreen;
@@ -39,6 +40,8 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@FXML private VBox leftVBox;
 	@FXML private Label rightLabel;
 	@FXML private AnchorPane aPane;
+	@FXML private SplitPane sPane;
+	@FXML private Text text;
 
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
@@ -186,6 +189,11 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
+		
+		sPane.setStyle("-fx-background: #363738;");
+		aPane.setStyle("-fx-background: #363738;");
+		text.setStyle("-fx-fill: #ffffff");
+		
 		 assert startButton != null : "fx:id=\"startButton\" was not injected";
 		 assert backButton != null : "fx:id=\"backButton\" was not injected";
 		 assert exportButton != null : "fx:id=\"exportButton\" was not injected";
