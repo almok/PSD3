@@ -2,10 +2,6 @@ package main;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
@@ -14,25 +10,89 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import settings.SettingsScene;
 import forms.*;
 
 public class GameScreen extends Application implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button startButton;
 	@FXML private Button settingsButton;
-	
+
+	 final Label hello = new Label("Please provide password for entry");
+    private Button ok = new Button("ok");
+	private Button cencel = new Button("cancel");
+    private TextField name2 = new TextField();
+    private Popup popup = new Popup();
 	public static void main(String[] args){
 		launch(args);
 	}
 
+	private void callPopUp(){
+		popup.hide();
+		popup = new Popup();
+
+		 VBox popUpVBox = new VBox();
+		 HBox popUpHBox = new HBox();
+		 
+
+		 popUpHBox.getChildren().add(ok);
+		 popUpHBox.getChildren().add(cencel);
+		 popUpHBox.setAlignment(Pos.CENTER);
+		 
+		 popUpVBox.setAlignment(Pos.CENTER);
+		 popUpVBox.getChildren().add(hello);
+		 popUpVBox.getChildren().add(name2);
+		 popUpVBox.getChildren().add(popUpHBox);
+		 
+		 
+		 popup.setAutoFix(false);
+		 popup.setHideOnEscape(true);
+		 popup.getContent().addAll(popUpVBox);
+		 popup.setX(600);
+		 popup.setY(200);
+
+	        ok.setOnAction(new EventHandler<ActionEvent>() {
+
+	            @Override
+	            public void handle(ActionEvent t) {
+            		popup.hide();
+	            	if (name2.getText().equals("PassWord")){
+	            	
+	            	try {
+	        			SettingsScene settingsMenu = new SettingsScene();
+	        			settingsMenu.display(settingsButton);
+	    			} catch (IOException e) {
+	    				e.printStackTrace();
+	    			}
+	            	}
+	            }
+	        });
+
+	        cencel.setOnAction(new EventHandler<ActionEvent>() {
+
+	            @Override
+	            public void handle(ActionEvent t) {
+	                popup.hide();
+	            }
+	        });
+		
+		
+		popup.show((Stage) settingsButton.getScene().getWindow());
+	}
+	
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 		Scene scene = new Scene(parent);
@@ -64,15 +124,9 @@ public class GameScreen extends Application implements Initializable, EventHandl
 			//CountDownTimer countDown = new CountDownTimer();
 			//countdown.display(startButton);
 		} else if (event.getSource() == settingsButton){
-			try {
-				SettingsScene settingsMenu = new SettingsScene();
-				settingsMenu.display(settingsButton);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			//} catch (Exception e){
-			//	System.out.println(e.toString());
-			}
+			this.callPopUp();
+			
+				
 		}
 	}
 
@@ -87,7 +141,7 @@ public class GameScreen extends Application implements Initializable, EventHandl
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) throws Exception {		 
 		Parent root = FXMLLoader.load(getClass().getResource("GameScreen.fxml"));
 
 		Scene scene = new Scene(root, 800, 700);

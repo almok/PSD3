@@ -274,7 +274,73 @@ public class PSDSingleton {
 		return "0";
 	}
 	
+	public void exportData(){
+		
+		PrintWriter pw;
+		
+		File theDir = new File("Export");
+		if (!theDir.exists()) {
+		    try{
+		        theDir.mkdir();
+		    } 
+		    catch(SecurityException se){
+		    }  
+		}
+
+		ArrayList<String[]> formBData = this.getFormBData();
+		try {
+			pw = new PrintWriter(new File("Export/FormBData.csv"));
+			for (int i = 0; i < formBData.size(); i++) {
+				pw.write("" + formBData.get(i)[0] + "," + formBData.get(i)[1]+ "," + formBData.get(i)[2]+ "," + formBData.get(i)[3]+ "," + formBData.get(i)[4]+ "," + formBData.get(i)[5]
+						+ "," + formBData.get(i)[6]+ "," + formBData.get(i)[7]+ "," + formBData.get(i)[8] + "," + formBData.get(i)[9] + "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<String[]> formSData = this.getFormSData();
+		try {
+			pw = new PrintWriter(new File("Export/FormSData.csv"));
+			for (int i = 0; i < formSData.size(); i++) {
+				pw.write("" + formSData.get(i)[0] + "," + formSData.get(i)[1]+ "," + formSData.get(i)[2] + "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<AYNEmployee> formTData = this.getFormTData();
+		try {
+			pw = new PrintWriter(new File("Export/FormTData.csv"));
+			for (int i = 0; i < formTData.size(); i++) {
+				pw.write("" + formTData.get(i).getName() + "," + formTData.get(i).getDepartmentWithoutBreak() + "," + formTData.get(i).getMultiSkilled() + "," + formTData.get(i).getTime1()
+						 + "," + formTData.get(i).getTime2() + "," + formTData.get(i).getTotTime() + "," + formTData.get(i).getWage()+ "," + formTData.get(i).getRoundCount() + "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<Round> formVData = this.getFormVData();
+		try {
+			pw = new PrintWriter(new File("Export/FormVData.csv"));
+			for (int i = 0; i < formVData.size(); i++) {
+				pw.write("" + formVData.get(i).getRoundNum() + "," + formVData.get(i).getTotalRevenue() + "," + formVData.get(i).getEmployeeWage()
+						+ "," + formVData.get(i).getAynPay()
+						 + "," + formVData.get(i).getMaterialsSum() + "," + formVData.get(i).getTotalExpenditure() + "," + formVData.get(i).getProfitLoss()+ "\n");
+			}
+	        pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void importData(){
+		//ArrayList<String[]> formOData = this.getFileData("Export/FormBData.csv");
+		//this.setFormOData(formOData.get(0));
+		
 		ArrayList<String[]> formBData = this.getFileData("Export/FormBData.csv");
 		this.setFormBData(formBData);
 		
@@ -338,7 +404,7 @@ public class PSDSingleton {
 	
 	public void saveFormRData(){
 		PrintWriter pw;
-		ArrayList<String[]> arr = this.getFormCData();
+		ArrayList<String[]> arr = this.getFormRData();
 		try {
 			pw = new PrintWriter(new File(pathFormR));
 			for (int i = 0; i < arr.size(); i++) {
@@ -557,7 +623,7 @@ public class PSDSingleton {
 		
 	public ArrayList<String> getFormOData(){
 		if (this.formOData == null){
-			this.formOData = null;
+			this.formOData = new ArrayList<String>();
 		}
 		return this.formOData;
 	}
