@@ -7,10 +7,12 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.GameScreen;
 public class SettingsScene implements Initializable{
@@ -29,6 +31,14 @@ public class SettingsScene implements Initializable{
 		 assert formDButton != null : "fx:id=\"formDButton\" was not injected";
 		 assert formPButton != null : "fx:id=\"formPButton\" was not injected";
 		 assert formRButton != null : "fx:id=\"formRButton\" was not injected";
+		 
+		 
+		 // invisible until fxml implemented
+		 formDButton.setVisible(false);
+		 
+		 
+		 
+		 
 		 gameRulesButton.setOnAction(e -> {
 			 this.openPage("GameRules.fxml" , e.getSource());
 		 });
@@ -62,6 +72,13 @@ public class SettingsScene implements Initializable{
 			Stage appStage = (Stage) ((Node) source).getScene().getWindow();
 	        appStage.setTitle("Settings");
 	        appStage.setScene(scene);
+	        
+	        Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+			appStage.setX(screen.getMinX());
+			appStage.setY(screen.getMinY());
+			appStage.setWidth(screen.getWidth());
+			appStage.setHeight(screen.getHeight());
+	        
 	        appStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -75,6 +92,12 @@ public class SettingsScene implements Initializable{
 		scene.getStylesheets().add("forms/Styling.css");	
 		stage.setScene(scene);
 		stage.setTitle("QpQ");
+		
+		Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+		stage.setX(screen.getMinX());
+		stage.setY(screen.getMinY());
+		stage.setWidth(screen.getWidth());
+		stage.setHeight(screen.getHeight());
 			
 		}
 }
