@@ -94,7 +94,7 @@ public class EditFormD implements Initializable{
 		ArrayList<String[]> formDData = new ArrayList<>();
 		
 		for (int i = 0; i < this.textFieldsArr.size(); i++) {
-			String[] data = new String[9];
+			String[] data = new String[10];
 			data[0] = this.textFieldsArr.get(i).get(0).getText();
 			data[1] = this.textFieldsArr.get(i).get(1).getText();
 			data[2] = this.textFieldsArr.get(i).get(2).getText();
