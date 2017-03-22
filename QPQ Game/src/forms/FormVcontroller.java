@@ -273,22 +273,38 @@ public class FormVcontroller implements Initializable{
 			saveFields();		
 		}
 		public void displayTotal(){
-			try{
+			//try{
+				double revenue = 0;
 				double totalExpenditure = 0;
-				double revenue = Double.parseDouble(Revenues.getText());
-				double employeeCosts = Double.parseDouble(Employees.getText());
-				double aynCosts = Double.parseDouble(Employment.getText());
-				double materialCosts = Double.parseDouble(Materials.getText());
+				if(Revenues.getText() != "")
+				{
+					revenue = Double.parseDouble(Revenues.getText());
+				}
+				double employeeCosts = 0;
+				if(Employees.getText() != "")
+				{
+					employeeCosts = Double.parseDouble(Employees.getText());
+				}
+				double aynCosts = 0;
+				if(Employment.getText() != "")
+				{
+					aynCosts = Double.parseDouble(Employment.getText());
+				}
+				double materialCosts = 0;
+				if(Materials.getText() != "")
+				{
+					materialCosts = Double.parseDouble(Materials.getText());
+				}
 				
 				totalExpenditure = + employeeCosts + aynCosts + materialCosts;
 				
 				Exp.setText(String.valueOf(totalExpenditure));
 				ProfitLoss.setText(String.valueOf(revenue - totalExpenditure));
-			}catch(Exception e){
+			/*}catch(Exception e){
 				System.out.print(e.toString());
 				Exp.setText("0.00");
 				ProfitLoss.setText("0.00");
-			}
+			}*/
 		
 		}
 	
