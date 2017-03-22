@@ -1,11 +1,8 @@
 package forms;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,13 +15,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.GameScreen;
 import main.PSDSingleton;
-import main.Round;
 import main.RoundCounter;
 import main.Timer;
 public class StartScreen implements Initializable, EventHandler<ActionEvent>{
@@ -34,7 +31,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@FXML private Button reportButton;
 	@FXML private Button timerButton;
 	@FXML private Button backButton;
-	@FXML private VBox leftVBox;
+	@FXML private HBox leftVBox;
 	@FXML private Label rightLabel;
 	@FXML private AnchorPane aPane;
 	@FXML private SplitPane sPane;
@@ -95,12 +92,17 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 			PSDSingleton.getInstance().importData();
 		}
 	}
-	public void addRoundButton(VBox left){
+	public void addRoundButton(HBox left){
+		left.setSpacing(10);
 		Button roundButton;
 		if (roundCounter.getRoundCounter() == 0){
 			roundButton = new Button(" Trial Round ");
+			roundButton.setMinWidth(99);
+			roundButton.setMinHeight(37);
 		} else {
 			roundButton = new Button(" Round " + roundCounter.getRoundCounter() + " ");
+			roundButton.setMinWidth(99);
+			roundButton.setMinHeight(37);
 		}
 		left.getChildren().add(roundButton);
 		roundButton.setOnAction(e -> {
