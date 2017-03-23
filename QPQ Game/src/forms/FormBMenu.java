@@ -66,9 +66,6 @@ public class FormBMenu implements Initializable {
 	private ArrayList<String> fulfilledOrderArray = new ArrayList<String>(Collections.nCopies(numOrders, "False"));
 	
 	private void displayValues(int c) {
-		
-		System.out.println("displaying values for order " + c);
-
 		orderField.setText(orderArrayList.get(c));
 		chassisField.setText(chassisArrayList.get(c));
 		productCodeField.setText(productCodeArrayList.get(c));
@@ -144,12 +141,9 @@ public class FormBMenu implements Initializable {
 
 			// buttons action
 			formButton1.setOnAction(e -> {
-				System.out.println("current form is " + currentForm + " about to be decremented");
 				saveFields(currentForm - 1);
 				String[] orderTextList = formButton1.getText().split(" ");
-				currentForm = Integer.parseInt(orderTextList[orderTextList.length-1]);
-				System.out.println("order number is " + currentForm);
-				
+				currentForm = Integer.parseInt(orderTextList[orderTextList.length-1]);				
 				displayValues(currentForm - 1);
 				
 				if (scheduledDeliveryTimeField.getText() != null && scheduledDeliveryTimeField.getText().length() != 0
@@ -176,7 +170,6 @@ public class FormBMenu implements Initializable {
 				
 			});
 		} else if (formCounter >= 1 && formCounter < PSDSingleton.getInstance().getNumberOfOrders()) {
-			System.out.println("current form is " + currentForm + " about to be decremented");
 			centerVBox.setVisible(true);
 			formCounter++;
 			Button formButton = new Button(" Order " + formCounter + " ");
@@ -189,11 +182,9 @@ public class FormBMenu implements Initializable {
 			left.getChildren().add(formButton);
 			
 			formButton.setOnAction(e -> {
-				System.out.println("clicking on button " + formCounter);
 				saveFields(currentForm - 1);
 				String[] orderTextList = formButton.getText().split(" ");
 				currentForm = Integer.parseInt(orderTextList[orderTextList.length-1]);
-				System.out.println("order number is " + currentForm);
 				
 				displayValues(currentForm - 1);
 				
@@ -289,7 +280,6 @@ public class FormBMenu implements Initializable {
 			order.setScheLeadTime(leadTimeArrayList.get(i));
 			order.setReceiptTime(timeOfReceiptArrayList.get(i));
 			order.setFulfilledOrder(fulfilledOrderArray.get(i));
-			System.out.println("order saved");
 			// adds order to list
 			orders.add(order);
 			
@@ -300,10 +290,7 @@ public class FormBMenu implements Initializable {
 		
 		saveFields();
 		saveOrders(formCounter);
-	
-		//System.out.println("form B data order number:"+formBData.get(j)[0]);
-		System.out.println("order arraylist order number " + orderArrayList.get(currentForm - 1));
-		
+			
 		// remove entries from arrayList
 		orderArrayList.remove(currentForm -1);
 		chassisArrayList.remove(currentForm - 1);
@@ -333,7 +320,6 @@ public class FormBMenu implements Initializable {
 		for (int k = 0; k < orders.size(); k++) {
 			// add buttons
 			counter = k;
-			System.out.println("loop k "+k);
 			Button formButton = new Button(" Order " + (counter + 1) + " ");
 			buttonsBox.getChildren().add(formButton);
 			formButton.setOnAction(e -> {
@@ -402,7 +388,6 @@ public class FormBMenu implements Initializable {
 			
 			try {
 				String ord = orderField.getText();
-				System.out.println("-------------------->" + ord);
 				for (int i = 0; i < formNo - 1; i++){
 					if (ord == orderArrayList.get(i)){
 						errorMessage += "Order numbers needs to be unique\n";
@@ -411,7 +396,7 @@ public class FormBMenu implements Initializable {
 				}
 				
 			} catch (NumberFormatException e) {
-				errorMessage += "No valid Order Number(must be an integer)\n";
+				errorMessage += "Not a valid Order Number\n";
 			}
 		}
 		if (chassisField.getText() == null || chassisField.getText().length() == 0) {
@@ -468,7 +453,6 @@ public class FormBMenu implements Initializable {
 		// if there is data in forms simulate adding new order
 
 		ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
-		System.out.println("orders size" + array.size());
 		for (int i = 0; i < array.size(); i++) {
 
 			if (Integer.parseInt(array.get(i)[8]) == roundCount){
@@ -559,7 +543,7 @@ public class FormBMenu implements Initializable {
 				revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 				revenueField.setText(Integer.toString(revenue));
 			} catch (Exception e) {
-				System.out.println("entered actual delivery time is not a number");
+				System.out.println((e.getMessage() + "entered actual delivery time is not a number");
 			}
 		}
 
@@ -577,7 +561,6 @@ public class FormBMenu implements Initializable {
 			}
 			if (toSave){  //if (isInputValid()) {
 				saveOrders(formCounter);
-				System.out.println(orders);
 
 				//ArrayList<String[]> formBData = new ArrayList<>();
 				ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
@@ -653,7 +636,7 @@ public class FormBMenu implements Initializable {
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				} catch (Exception e) {
-					System.out.println("entered actual delivery time is not a number");
+					System.out.println((e.getMessage() + "entered actual delivery time is not a number");
 				}
 			}
 		});
@@ -841,7 +824,8 @@ public class FormBMenu implements Initializable {
 			}
 
 		} catch (Exception e) {
-			System.out.println("entered time is not a number");
+			
+			System.out.println((e.getMessage() + "entered time is not a number");
 		}
 	}
 }
