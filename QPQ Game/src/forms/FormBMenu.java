@@ -543,7 +543,7 @@ public class FormBMenu implements Initializable {
 				revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 				revenueField.setText(Integer.toString(revenue));
 			} catch (Exception e) {
-				System.out.println((e.getMessage() + "entered actual delivery time is not a number");
+				System.out.println(e.getMessage() + "entered actual delivery time is not a number");
 			}
 		}
 
@@ -636,7 +636,7 @@ public class FormBMenu implements Initializable {
 					revenue = Integer.parseInt(contractPriceField.getText()) - penalty;
 					revenueField.setText(Integer.toString(revenue));
 				} catch (Exception e) {
-					System.out.println((e.getMessage() + "entered actual delivery time is not a number");
+					System.out.println(e.getMessage() + "entered actual delivery time is not a number");
 				}
 			}
 		});
@@ -825,7 +825,7 @@ public class FormBMenu implements Initializable {
 
 		} catch (Exception e) {
 			
-			System.out.println((e.getMessage() + "entered time is not a number");
+			System.out.println(e.getMessage() + "entered time is not a number");
 		}
 	}
 }
