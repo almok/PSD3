@@ -40,7 +40,7 @@ public class FormBMenu implements Initializable {
 		return instance;
 	}
 	
-	int numOrders = PSDSingleton.getInstance().getOrderNum();
+	int numOrders = PSDSingleton.getInstance().getNumberOfOrders();
 	
 	private ArrayList<Integer> formCountList = new ArrayList<Integer>(Collections.nCopies(numOrders, 0));
 	
@@ -175,7 +175,7 @@ public class FormBMenu implements Initializable {
 				
 				
 			});
-		} else if (formCounter >= 1) {
+		} else if (formCounter >= 1 && formCounter < PSDSingleton.getInstance().getNumberOfOrders()) {
 			System.out.println("current form is " + currentForm + " about to be decremented");
 			centerVBox.setVisible(true);
 			formCounter++;
@@ -672,7 +672,7 @@ public class FormBMenu implements Initializable {
 			} else {
 				contractPriceField.setText("0");
 			}
-			if (leadTimeField.getText() != "" && timeOfReceiptField.getText() != ""){
+			if (!leadTimeField.getText().equals("") && !timeOfReceiptField.getText().equals("")){
 				int leadTime = Integer.parseInt(leadTimeField.getText());
 				int timeReceipt = Integer.parseInt(timeOfReceiptField.getText());
 				String scheduledTime = String.valueOf(leadTime + timeReceipt);
@@ -683,7 +683,7 @@ public class FormBMenu implements Initializable {
 		
 		timeOfReceiptField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if (Order.isCodeValid(productCodeField.getText())) {
-				if (leadTimeField.getText() == "") {
+				if (leadTimeField.getText().equals("")) {
 					contractPriceField.setText("0");
 				} else {
 					String carName = getCarName();
@@ -692,7 +692,7 @@ public class FormBMenu implements Initializable {
 			} else {
 				contractPriceField.setText("0");
 			}
-			if (leadTimeField.getText().equals("") && timeOfReceiptField.getText().equals("")){
+			if (!leadTimeField.getText().equals("") && !timeOfReceiptField.getText().equals("")){
 				int leadTime = Integer.parseInt(leadTimeField.getText());
 				int timeReceipt = Integer.parseInt(timeOfReceiptField.getText());
 				String scheduledTime = String.valueOf(leadTime + timeReceipt);

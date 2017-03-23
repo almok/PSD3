@@ -591,7 +591,7 @@ public class PSDSingleton {
 		return 3;
 	}
 	
-	public int getOrderNum(){
+	public int getNumberOfOrders(){
 		if(this.gameRulesDataHashMap == null){
 			this.createHashGameRules();
 		}
@@ -602,9 +602,9 @@ public class PSDSingleton {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			return 22;
+			return 20;
 		}
-		return 22;
+		return 20;
 	}
 	
 	public int getPenalty(){
