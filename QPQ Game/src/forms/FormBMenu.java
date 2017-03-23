@@ -401,11 +401,10 @@ public class FormBMenu implements Initializable {
 			
 			
 			try {
-				int ord = Integer.parseInt(orderField.getText());
-				System.out.println("--------------------->" + ord);
+				String ord = orderField.getText();
+				System.out.println("-------------------->" + ord);
 				for (int i = 0; i < formNo - 1; i++){
-					System.out.println("+++++++++++>>>>>" + Integer.parseInt(orderArrayList.get(i)));
-					if (ord == Integer.parseInt(orderArrayList.get(i))){
+					if (ord == orderArrayList.get(i)){
 						errorMessage += "Order numbers needs to be unique\n";
 						break;
 					}
