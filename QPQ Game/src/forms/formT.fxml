@@ -22,26 +22,6 @@
    	                <TableColumn fx:id="name" minWidth="165.0" prefWidth="165.0" resizable="false" text="Name" />   	                
    	                <TableColumn fx:id="department" minWidth="130.0" prefWidth="130.0" resizable="false" text="Department" />
    	                <TableColumn fx:id="skill" minWidth="65.0" prefWidth="65.0" resizable="false" text="${' Multi\nskilled'}" />
-                    <TableColumn fx:id="button1" minWidth="30.0" prefWidth="26.0" resizable="false" text="1" />
-                    <TableColumn fx:id="button2" minWidth="30.0" prefWidth="26.0" resizable="false" text="2" />
-                    <TableColumn fx:id="button3" minWidth="30.0" prefWidth="26.0" resizable="false" text="3" />
-                    <TableColumn fx:id="button4" minWidth="30.0" prefWidth="26.0" resizable="false" text="4" />
-                    <TableColumn fx:id="button5" minWidth="30.0" prefWidth="26.0" resizable="false" text="5" />
-                    <TableColumn fx:id="button6" minWidth="30.0" prefWidth="26.0" resizable="false" text="6" />
-                    <TableColumn fx:id="button7" minWidth="30.0" prefWidth="26.0" resizable="false" text="7" />
-                    <TableColumn fx:id="button8" minWidth="30.0" prefWidth="26.0" resizable="false" text="8" />
-                    <TableColumn fx:id="button9" minWidth="30.0" prefWidth="26.0" resizable="false" text="9" />
-                    <TableColumn fx:id="button10" minWidth="30.0" prefWidth="26.0" resizable="false" text="10" />
-                    <TableColumn fx:id="button11" minWidth="30.0" prefWidth="26.0" resizable="false" text="11" />
-                    <TableColumn fx:id="button12" minWidth="30.0" prefWidth="26.0" resizable="false" text="12" />
-                    <TableColumn fx:id="button13" minWidth="30.0" prefWidth="26.0" resizable="false" text="13" />
-                    <TableColumn fx:id="button14" minWidth="30.0" prefWidth="26.0" resizable="false" text="14" />
-                    <TableColumn fx:id="button15" minWidth="30.0" prefWidth="26.0" resizable="false" text="15" />
-                    <TableColumn fx:id="button16" minWidth="30.0" prefWidth="26.0" resizable="false" text="16" />
-                    <TableColumn fx:id="button17" minWidth="30.0" prefWidth="26.0" resizable="false" text="17" />
-                    <TableColumn fx:id="button18" minWidth="30.0" prefWidth="26.0" resizable="false" text="18" />
-                    <TableColumn fx:id="button19" minWidth="30.0" prefWidth="26.0" resizable="false" text="19" />
-                    <TableColumn fx:id="button20" minWidth="30.0" prefWidth="26.0" resizable="false" text="20" />
    	              </columns>
    	            </TableView>
    	         </children>
