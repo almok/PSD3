@@ -58,7 +58,7 @@ public class Order {
 			default: return false;
 		}
 		if (prodCode.length() == 6){
-			if (special && (prodCode.charAt(3) == 'B' || prodCode.charAt(3) == 'b') && prodCode.charAt(4) == '0' && (prodCode.charAt(5) == 'y' || prodCode.charAt(5) == 'y')){
+			if (special && (prodCode.charAt(3) == 'B' || prodCode.charAt(3) == 'b') && prodCode.charAt(4) == '0' && (prodCode.charAt(5) == 'Y' || prodCode.charAt(5) == 'y')){
 				return true;
 			}
 			else{

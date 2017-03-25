@@ -258,11 +258,7 @@ public class FormVcontroller implements Initializable{
 			Double kPrice = FormOMenu.getInstance().calcTotalKitPrice();
 			
 			formOData.set(roundCount, String.valueOf(kPrice));
-			
-			for(String s : formOData){ 
-				System.out.println("---------->>>>>>>> " + s);
-			}
-			
+				
 			PSDSingleton.getInstance().setFormOData(formOData);
 			try{
 				Double sum = Double.parseDouble(formOData.get(roundCounter.getRoundCounter()));

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -186,26 +187,18 @@ public class FormTMenu implements Initializable {
 		department.setCellValueFactory(new PropertyValueFactory<>("department"));
 		skill.setCellValueFactory(new PropertyValueFactory<>("skill"));				skill.setStyle("-fx-alignment: CENTER");
 		
-		button1.setCellValueFactory(new PropertyValueFactory<>("button1"));			button1.setStyle("-fx-alignment: CENTER");
-		button2.setCellValueFactory(new PropertyValueFactory<>("button2"));			button2.setStyle("-fx-alignment: CENTER");
-		button3.setCellValueFactory(new PropertyValueFactory<>("button3"));			button3.setStyle("-fx-alignment: CENTER");
-		button4.setCellValueFactory(new PropertyValueFactory<>("button4"));			button4.setStyle("-fx-alignment: CENTER");
-		button5.setCellValueFactory(new PropertyValueFactory<>("button5"));			button5.setStyle("-fx-alignment: CENTER");
-		button6.setCellValueFactory(new PropertyValueFactory<>("button6"));			button6.setStyle("-fx-alignment: CENTER");
-		button7.setCellValueFactory(new PropertyValueFactory<>("button7"));			button7.setStyle("-fx-alignment: CENTER");
-		button8.setCellValueFactory(new PropertyValueFactory<>("button8"));			button8.setStyle("-fx-alignment: CENTER");
-		button9.setCellValueFactory(new PropertyValueFactory<>("button9"));			button9.setStyle("-fx-alignment: CENTER");
-		button10.setCellValueFactory(new PropertyValueFactory<>("button10"));		button10.setStyle("-fx-alignment: CENTER");
-		button11.setCellValueFactory(new PropertyValueFactory<>("button11"));		button11.setStyle("-fx-alignment: CENTER");
-		button12.setCellValueFactory(new PropertyValueFactory<>("button12"));		button12.setStyle("-fx-alignment: CENTER");
-		button13.setCellValueFactory(new PropertyValueFactory<>("button13"));		button13.setStyle("-fx-alignment: CENTER");
-		button14.setCellValueFactory(new PropertyValueFactory<>("button14"));		button14.setStyle("-fx-alignment: CENTER");
-		button15.setCellValueFactory(new PropertyValueFactory<>("button15"));		button15.setStyle("-fx-alignment: CENTER");
-		button16.setCellValueFactory(new PropertyValueFactory<>("button16"));		button16.setStyle("-fx-alignment: CENTER");
-		button17.setCellValueFactory(new PropertyValueFactory<>("button17"));		button17.setStyle("-fx-alignment: CENTER");
-		button18.setCellValueFactory(new PropertyValueFactory<>("button18"));		button18.setStyle("-fx-alignment: CENTER");
-		button19.setCellValueFactory(new PropertyValueFactory<>("button19"));		button19.setStyle("-fx-alignment: CENTER");
-		button20.setCellValueFactory(new PropertyValueFactory<>("button20"));		button20.setStyle("-fx-alignment: CENTER");
+		
+		// add columns dynamically
+		for (int i = 1; i <= PSDSingleton.getInstance().getRoundTime(); i++){
+			final int id = i - 1;
+			TableColumn<AYNEmployeeLine, Button> butCol = new TableColumn<>(Integer.toString(i));
+			butCol.setCellValueFactory(param ->  new ReadOnlyObjectWrapper<>(param.getValue().getButton(id)));
+			
+			butCol.setPrefWidth(30);
+			butCol.setStyle("-fx-alignment: CENTER");
+			
+			employeeTable.getColumns().add(butCol);
+		}
 		
 		employeeTable.setItems(employees);
 	}

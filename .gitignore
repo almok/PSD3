@@ -4,6 +4,7 @@
 *.swp
 */.DS_Store
 /QPQ Game/src/main/.DS_Store
+/QPQ Game/src/forms/.DS_Store
 .bundle
 */.metadata/
 .metadata/
