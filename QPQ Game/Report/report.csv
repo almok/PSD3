@@ -1,18 +1,38 @@
 Form B Data:
+1,PST350Y,380,5,10,150,5,0,1,Yes
+2,PST350Y,380,5,10,150,5,0,1,No
 
 
 
 
 Form S Data:
+Benas,Sales,1
+Patrick,Production Planning,1
+Timothy,Production Planning,1
+Dimitris,Goods Receipt,1
+Hamish,Floor Control,1
+Ewan,Supplier,1
+Justinas,Supplier,1
+Ronaldas,Production,1
+Boris,Production,1
+Tom,Quality Assurance,1
+Andrii,Finance,1
+Almo,Finance,1
+Alistar,Finance,1
 
 
 
 
 Form T Data:
 Worker name,Department,Is multiskilled,Time 1,Time 2,Total time,Wage,Round
+Conor,Sales,false,7,10,3,15.0,1
 
 
 
 
 Form V Data:
 Round,Total revenue,Employees wage,AYN,Materials sum,Total expenditure,Profit/Loss
+0,,,,0.0,0.0,0.0
+1,,1600,,0.0,1600.0,-1600.0
+0,,,,0.0,0.0,0.0
+1,230,1600,220.0,560.0,2380.0,-2150.0
