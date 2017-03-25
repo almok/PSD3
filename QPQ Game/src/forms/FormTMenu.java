@@ -88,13 +88,13 @@ public class FormTMenu implements Initializable {
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
 		
 		//Remove from FormTData Singleton
-		int i = 0;
-		for (AYNEmployeeLine empl : selectedEmployees){
-			if(formTData.get(i).getName().equals(empl.getEmployee().getName()) && formTData.get(i).getRoundCount() == roundCount){
+		System.out.println("Selected: " + selectedEmployees.get(0).getEmployee().getName());
+		for (int i = 0; i <formTData.size(); i++){
+			if (formTData.get(i).getName().equals(selectedEmployees.get(0).getEmployee().getName())
+					&& formTData.get(i).getRoundCount() == selectedEmployees.get(0).getEmployee().getRoundCount()){
 				formTData.remove(i);
 				break;
 			}
-			i++;
 		}
 		
 		//shorthand to remove selected

@@ -73,13 +73,14 @@ public class FormSMenu implements Initializable {
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
 		
 		//Remove from FormSData Singleton
-		int i = 0;
-		for (EmployeeList empl : selectedEmployees){
-			if(formSData.get(i)[0].equals(empl.getNameAsString()) && Integer.parseInt(formSData.get(i)[2]) == roundCount){
+		System.out.println("SelectedEmpl: " + selectedEmployees.get(0).getNameAsString());
+		for (int i = 0; i <formSData.size(); i++){
+			if (formSData.get(i)[0].equals(selectedEmployees.get(0).getNameAsString())
+					&& formSData.get(i)[1].equals(selectedEmployees.get(0).getDepartmentName())
+					&& Integer.parseInt(formSData.get(i)[2]) == roundCount){
 				formSData.remove(i);
 				break;
 			}
-			i++;
 		}
 		
 		//shorthand to remove selected
