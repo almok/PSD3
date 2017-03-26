@@ -12,8 +12,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import main.PSDSingleton;
@@ -131,11 +133,22 @@ public class FormVcontroller implements Initializable{
 			});
 			
 			formTButton.setOnAction(e -> {
-				try{
-					formT.display(formTButton);
-				}catch(IOException e1){
-					e1.printStackTrace();
+				if (roundCounter.getRoundCounter() > 0){
+					try{
+						formT.display(formTButton);
+					}catch(IOException e1){
+						e1.printStackTrace();
+					}
+				} else {
+					String errorMessage = "No AYN Employees in Trial Round";
+					// Show the error message.
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error");
+					alert.setHeaderText("Error, Trial Round");
+					alert.setContentText(errorMessage);
+					alert.showAndWait();
 				}
+
 			});
 			
 			formOButton.setOnAction(e -> {
