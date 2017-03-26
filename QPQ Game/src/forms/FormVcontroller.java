@@ -45,6 +45,7 @@ public class FormVcontroller implements Initializable{
 		return instance;
 	}
 
+	// List to save required data to FormVData Singleton
 	private ArrayList<String> roundNumArrayList = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> totalRevenueArray = new ArrayList<String>(Collections.nCopies(20, ""));
 	private ArrayList<String> employeeWageArray = new ArrayList<String>(Collections.nCopies(20, ""));
@@ -112,10 +113,7 @@ public class FormVcontroller implements Initializable{
 	    
 	    public static void setEmployeeWage(int count)
 		{
-			
-		   // Employees = new Label(); 
 			System.out.println(String.valueOf("count of employees " + count));
-			//Employees.setText(String.valueOf(count));
 		}
 		
 		
@@ -181,12 +179,14 @@ public class FormVcontroller implements Initializable{
 				}
 			});
 			
+			//Below will auto generate values from the data input in each form, if any, and present them.
 	
 			// calculate revenue
 			ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
 			if(array.size() > 0){
 				int totalRevenue = 0;
 				for(int j = 0; j < array.size(); j++ ){
+					// order must be complete to be considered as part of revenue, otherwise it is only a material cost in form O.
 					if (array.get(j)[9].equals("Yes")){
 						if (Integer.parseInt(array.get(j)[8]) == roundCounter.getRoundCounter()){
 							String contractPrice = array.get(j)[2];
@@ -248,7 +248,6 @@ public class FormVcontroller implements Initializable{
 			}
 
 			// Display kit price
-			
 			ArrayList<String[]> orderHistory = PSDSingleton.getInstance().getFormBData();
 			// delete duplicates
 			for (int i = FormOMenu.getInstance().getOrders().size() - 1; i >= 0; i--){

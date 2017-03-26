@@ -73,7 +73,6 @@ public class FormSMenu implements Initializable {
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
 		
 		//Remove from FormSData Singleton
-		System.out.println("SelectedEmpl: " + selectedEmployees.get(0).getNameAsString());
 		for (int i = 0; i <formSData.size(); i++){
 			if (formSData.get(i)[0].equals(selectedEmployees.get(0).getNameAsString())
 					&& formSData.get(i)[1].equals(selectedEmployees.get(0).getDepartmentName())
@@ -100,6 +99,7 @@ public class FormSMenu implements Initializable {
 		return numberEmployees;
 	}
 	
+	// Method to check for duplicates within FormSData.
 	boolean contains(ArrayList<String[]> formSData, String name, String department){
 		for (int i = 0; i < formSData.size(); i++){
 			if (formSData.get(i)[0].equals(name) 
@@ -135,6 +135,7 @@ public class FormSMenu implements Initializable {
 		// simulate creating new employee if there is data in the table
 		ArrayList<String[]> arr = PSDSingleton.getInstance().getFormSData();
 		for (int i = 0; i < arr.size() ; i ++){
+			// only reload data related to current round
 			if(Integer.parseInt(arr.get(i)[2]) == roundCount){
 				EmployeeList emp = new EmployeeList(new Employee() , arr.get(i)[0] , arr.get(i)[1]);
 				employees.add(emp);	
@@ -144,7 +145,6 @@ public class FormSMenu implements Initializable {
 		backButton.setOnAction(e -> {
 			
 			ArrayList<String[]> formSData = PSDSingleton.getInstance().getFormSData();
-			System.out.println("employees size: " + employees.size() + " Form s " + formSData.size());
 			for (int i = 0;i<employees.size();i++){
 				String name = employees.get(i).getNameAsString();
 				String department = employees.get(i).getDepartmentName();

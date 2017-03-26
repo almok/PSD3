@@ -38,6 +38,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 	@FXML private AnchorPane aPane;
 	@FXML private SplitPane sPane;
 	@FXML private Text text;
+	
 	public void display(Button button) throws IOException{
 		Parent parent = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
 		Scene scene = new Scene(parent);
@@ -54,22 +55,22 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 			
 		}
 	
+	// Round count to act as a unique ID for all saved data.
 	RoundCounter roundCounter = RoundCounter.getInstance();
 	
-	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
 	
 	
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == startButton){
+			// Add new round to game
 			addRoundButton(leftVBox);
 			roundCounter.incRoundCounter();
-			//CountDownTimer countDown = new CountDownTimer();
-			//countdown.display(startButton);
 		} else if (event.getSource() == reportButton){
+			// Generate .csv file with headers, further detailed in PSDSingleton
 			PSDSingleton.getInstance().reportData();
 		} else if (event.getSource() == timerButton){
-			//display timer in separate window
+			// Display timer in separate window
 			Timer timer = new Timer();
 			System.out.println("Timer button pressed");
 			try {
@@ -78,6 +79,7 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		 	 	e1.printStackTrace();
 		 	 }
 		} else if (event.getSource() == backButton){
+			// Clear all data before exiting game lobby (StartScreen)
 		 	GameScreen GameScreen = new GameScreen();
 		 	PSDSingleton.clear();
 		 	roundCounter.setRoundCounter(0);
@@ -88,12 +90,15 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		 		e1.printStackTrace();
 		 	}
 		} else if (event.getSource() == exportButton){
+			// Export to 4 .csv files, each dedicated to a different form.
 			PSDSingleton.getInstance().exportData();
 		} else if (event.getSource() == importButton){
-			
+			// Import from .csv files. Must look exactly like file produced from export
 			PSDSingleton.getInstance().importData();
 		}
 	}
+	
+	// Method to add and assign roundcount to button.
 	public void addRoundButton(HBox left){
 		Button roundButton;
 		left.setSpacing(10);
@@ -146,7 +151,8 @@ public class StartScreen implements Initializable, EventHandler<ActionEvent>{
 		importButton.setOnAction(this);
 		reportButton.setOnAction(this);
 		timerButton.setOnAction(this);
-		System.out.println("Printing round count " + roundCounter.getMaxCount());
+
+		// Reload all Round buttons when returning to startscreen
 		if (roundCounter.getMaxCount() >= -1){
 			int i = roundCounter.getMaxCount();
 			roundCounter.setRoundCounter(0);

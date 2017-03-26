@@ -42,6 +42,7 @@ public class FormBMenu implements Initializable {
 	
 	int numOrders = PSDSingleton.getInstance().getNumberOfOrders();
 	
+	// Stores number of orders per round for Form B.
 	private ArrayList<Integer> formCountList = new ArrayList<Integer>(Collections.nCopies(numOrders, 0));
 	
 	private int counter;
@@ -49,8 +50,7 @@ public class FormBMenu implements Initializable {
 	private int currentForm = formCountList.get(roundCount);
 	public Scene scene;
 	
-
-
+	// Stores required data for round. Later saved in FormBData Singleton in PSDSingleton
 	private ArrayList<String> orderArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
 	private ArrayList<String> chassisArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
 	private ArrayList<String> productCodeArrayList = new ArrayList<String>(Collections.nCopies(numOrders, ""));
@@ -309,14 +309,11 @@ public class FormBMenu implements Initializable {
 
 		formCounter--;
 
-		// remove order button //Point of bug
-		//ArrayList<String[]> formBData = new ArrayList<>();
 
 		// saves orders
-
 		saveOrders(formCounter);
 		
-		// iterate orders adding to formB Data
+		
 		for (int k = 0; k < orders.size(); k++) {
 			// add buttons
 			counter = k;
@@ -329,7 +326,7 @@ public class FormBMenu implements Initializable {
 
 		}
 			
-		//ArrayList<String[]> formBData = new ArrayList<>();
+		// iterate over orders to remove latest order for round user is in.
 		ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
 		
 		for (int i = formBData.size() -1 ; i >= 0; i--){
@@ -377,6 +374,8 @@ public class FormBMenu implements Initializable {
 		}
 	}
 	
+	// All data must be valid and present before user can leave Form B
+	// Check for this is done in method below
 	private boolean isInputValid(int formNo) {
 		String errorMessage = "";
 
@@ -435,15 +434,6 @@ public class FormBMenu implements Initializable {
 		}
 
 	}
-	
-	boolean contains(ArrayList<String[]> formBData, String orderNum){
-		for (int i = 0; i < formBData.size(); i++){
-			if (formBData.get(i)[0].equals(orderNum) && Integer.parseInt(formBData.get(i)[8]) == roundCount){
-				return true;
-			}
-		}
-		return false;
-	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -455,6 +445,7 @@ public class FormBMenu implements Initializable {
 		ArrayList<String[]> array = PSDSingleton.getInstance().getFormBData();
 		for (int i = 0; i < array.size(); i++) {
 
+			// Only reload data related to current round
 			if (Integer.parseInt(array.get(i)[8]) == roundCount){
 				if (array.get(i)[0].isEmpty() != true) {
 					orderArrayList.set(formCounter, array.get(i)[0]);
@@ -562,7 +553,6 @@ public class FormBMenu implements Initializable {
 			if (toSave){  //if (isInputValid()) {
 				saveOrders(formCounter);
 
-				//ArrayList<String[]> formBData = new ArrayList<>();
 				ArrayList<String[]> formBData = PSDSingleton.getInstance().getFormBData();
 				
 				// remove potential duplicates

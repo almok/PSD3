@@ -88,7 +88,6 @@ public class FormTMenu implements Initializable {
 		selectedEmployees = employeeTable.getSelectionModel().getSelectedItems();
 		
 		//Remove from FormTData Singleton
-		System.out.println("Selected: " + selectedEmployees.get(0).getEmployee().getName());
 		for (int i = 0; i <formTData.size(); i++){
 			if (formTData.get(i).getName().equals(selectedEmployees.get(0).getEmployee().getName())
 					&& formTData.get(i).getRoundCount() == selectedEmployees.get(0).getEmployee().getRoundCount()){
@@ -102,7 +101,7 @@ public class FormTMenu implements Initializable {
 		
 
 	}
-	
+	// Method to check for duplicates within FormTData.
 	boolean contains(ArrayList<AYNEmployee> formTData, String name){
 		for (int i = 0; i < formTData.size(); i++){
 			if (formTData.get(i).getName().equals(name) && formTData.get(i).getRoundCount() == roundCount){
@@ -124,7 +123,6 @@ public class FormTMenu implements Initializable {
 		PSDSingleton.getInstance().setFormTData(listToSave);
 		
 		emps.setEmployees(listToSave);
-		//emps.toFile("AYN Employee List.csv");
 	}
 	
 	
@@ -161,13 +159,6 @@ public class FormTMenu implements Initializable {
 
 		// load existing employees
 		emps = AYNEmployeeList.getInstance();
-		//emps.getEmployees().add(new AYNEmployee("John Smith", "Sales", true, 4, 15, 11, 10));
-		
-		//emps.loadList("AYN Employee List Default.csv");
-		//for (AYNEmployee emp: emps.getEmployees()){
-		//	employees.add(new AYNEmployeeLine(emp));
-		//}
-		
 	
 		formV = new FormVcontroller();
 		
