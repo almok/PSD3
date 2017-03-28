@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{An Example Project}
+\title{QPQ Game}
 
 \author{Almohannad Albastaki \\
         Ronaldas Gadzimugometovas \\
@@ -159,37 +159,84 @@ As a team we didn’t start peer programming until the first sprint as we had ma
 
 
 \subsection{Team Dynamics}
-The project brought together two Mobile Software Engineering and three Electronics and Software Engineering students. Each participant proved to have specific skills, relevant to the project and preferences, in terms of tasks and the project as a whole. The differences in terms of the study programs did not prove to be a factor. The project dictated the use of Java as the programming language which posed no issues to any of the members as every person in the team had working knowledge of Java. Having said that, none of the members had any experience working with JavaFX, which again did not put any member into a disadvantage in comparison.
-When it comes to organization, team members had equal decision making power. The team chose to avoid hierarchy within as no member had considerably more expertise than the others. On the other hand, individual members would step up when feeling that their contribution was valuable and step down when the others seemed more knowledgeable. Although, there was no manager within the team, organization was rarely lacking; the team held meetings once or twice every week to keep everybody up-to-date. Moreover, each member was considerate and respectful to the others; all of which made working together a positive experience.
-Even though the team was well balanced and had little if any problems working together, there were a few things that hindered the effectiveness of the team. While most of the things, such as different timetables and poor individual time management caused delays in the project above anything else, there was a couple of more integral setbacks caused by individual differences. First, each team member had their own personal goals, preferences, and biases which were given priority over the project at some stage or another. For example, in the beginning of the course the team was more eager to push their own ideas and design goals to the customer than designing in response to customer needs. However, due to continuous progress self evaluation the team noticed the lack of effectiveness and measures were taken to avoid this, namely documenting precise requirements and ticking them off once addressed. Consequently, the strategy yielded good results; it became easier to interact with the customer; the customer required fewer and fewer things to be changed as the work progressed. It became clear that all parties were on the same page while considering where the project was going.
-A similar issue was that each member had different coding experience and coding style. To clarify, the hindrance was not caused by the different level of Java expertise but rather the preferred coding strategies, choice of data types, code readability, the use of methods to encapsulate recurring code vs. copying and reusing blocks of code, and similar coding style differences caused the team to be inefficient. Team coding process included the members working on different parts of the program separately first and then the group would integrate the work. Unfortunately, given the differences mentioned above, large portions of good working code needed to be modified or completely replaced in order to make all integral parts compatible with each other. The choice of data types in particular proved to cause most problems. While each member had their own way of saving data they worked on, poor planning led to a choice of a different data structure to hold all data in one place, which in turn required each individual data saving / loading mechanism to be revised. Such lack of team congruency while coding appeared to be the biggest impeding factor.
-Naturally, the team took time to consider possible ways of minimizing the effect of team differences in further development. One of the strategies included careful allocation of tasks which would minimize integration effort, e.g. members would be asked to design and develop a single form from beginning to the end each as opposed to, for example, one member creating fxml documents for all forms while somebody else would create all controller classes. Furthermore, the team agreed to put additional effort foreseeing potential integration issues (e.g. variable naming) and preparing themselves (e.g. agreeing on the shared variable names in advance).
-Even though some sort of team difficulties occurred until the end of the project, the team agreed that communication and careful planning where integral parts of working together. And while the students had little prior experience working in a professional group software development project, a steep learning was felt within the team throughout the year. Furthermore, reflecting back on the process, working in a group is a skill in itself and while it took time to learn each others’ strengths and weaknesses the team grew together and accomplished more as a team than they could have while working individually.
+The project brought together two Mobile Software Engineering and three Electronics and Software Engineering students. 
+Each participant proved to have specific skills, relevant to the project and preferences, in terms of tasks and the project as a whole. 
+The differences in terms of the study programs did not prove to be a factor.
+ 
+When it comes to organization, team members had equal decision making power. 
+The team chose to avoid hierarchy within as no member had considerably more expertise than the others. 
+On the other hand, individual members would step up when feeling that their contribution was valuable and step down when the others seemed more knowledgeable. 
 
+Even though the team was well balanced and had little if any problems working together, there were a few things that hindered the effectiveness of the team. 
+First, each team member had their own personal goals, preferences, 
+and biases which were given priority over the project at some stage or another. 
+For example, in the beginning of the course the team was more eager to push their own ideas and design goals to the customer than designing in response to customer needs. 
+However, due to continuous progress self evaluation the team noticed the lack of effectiveness and measures were taken to avoid this, 
+namely documenting precise requirements and ticking them off once addressed. 
+
+A similar issue was that each member had different coding experience and coding style. 
+Things like preferred coding strategies, choice of data types, code readability, etc. caused the team to be inefficient. 
+Team coding process involved the members working on different parts of the program separately first and then the group would integrate the work. 
+Unfortunately, given the differences mentioned above, large portions of good working code needed to be modified or completely replaced in order to make 
+all integral parts compatible with each other. 
+
+Naturally, the team took time to consider possible ways of minimizing the effect of team differences in further development. 
+One of the strategies included careful allocation of tasks which would minimize integration effort. Furthermore, the team agreed to put additional effort 
+foreseeing potential integration issues (e.g. variable naming) and preparing themselves (e.g. agreeing on the shared variable names in advance).
 
 \subsection{Testing}
-There were several testing strategies considered for the design. GUI development being an almost exclusive part of the project and data analysis taking only a minimal share, the team rejected test driven development. In other words, the test cases were not developed until later in the course of code development. This decision was grounded as the functionality of the product could only be implemented once the appearance and navigation of the GUI was satisfactory. Nevertheless, testing remained an important part of the development.
-The team ensured sufficient testing by devising the following strategy. First, since code errors of GUI development were clearly visible upon running the software, the team required no specific test cases. On the other hand, each team member was required to run the program and navigate the GUI until certain that implementation was correct before pushing their code to git. Additionally, each team member was required to run the program and make sure that it ran as expected immediately after pulling the updates from git. Such strategy allowed the developers see which code is correct and which parts of GUI still required attention.
-In support to GUI testing method, the team held several code review session, where team members had a chance not only to familiarize with each other’s code but more importantly identify bugs and general code weaknesses. Moreover, the team was able to give suggestions for improvements. The code reviews did not prove to be very effective finding issues in the code as again, given the nature of the project, the GUI would either be working correctly or not working at all. On the other hand, code review proved to be extremely helpful assisting the members who were stuck or generally sought advice.
-The second step in terms of testing was developing JUnit test cases to identify existing functionality bugs. Since the product was characterized by only basic data analysis (adding and subtracting numbers), only several JUnit test cases were created. Nevertheless, regardless of the limited amount of test cases, the test suite helped to identify and eliminate a number of calculation and data retrieval bugs. Therefore, JUnit testing proved itself to be an inseparable part of product development.
-Lastly, it was negotiated with the customer to have a full run-through of the game to test the completed product in action. However, due to time being a precious commodity, the full-scale game simulation coincided with the final demonstration of the product. The real-time product testing proved to be exceptionally valuable. Not only the team was able to see whether the software managed to perform in game tasks but also observe how the application coped when the game turned unexpectedly (i.e. was interrupted, reset, fast-forwarded, etc.). This simulation allowed the team to makes sure that both the program operated correctly and was flexible enough to handle unpredictable playtime issues.
-Even though during the course of the project testing did not always seem to be crucial, the team appreciated the overall outcome. It was indeed difficult at times to find time to test the progress; however, after testing procedures were carried out the team was able not only to fix existing problems but also gain familiarity with the nature of the problems which helped the team to avoid issues in the future. Further, testing provided to be a great learning experience as it showed that first, even the code runs and returns the results, it does not mean that they are valid and second, if errors are not present, it does not mean that time testing is wasted. On the contrary, in the case of peer review, it gives opportunity to familiarize with the team mates’ code, give suggestions for improvement and answer some of the reviewers’ questions, thus making the code better.
+The team ensured sufficient testing by devising the following strategy. First, since code errors of GUI development were clearly visible upon running the 
+software, the team required no specific test cases. On the other hand, each team member was required to run the program and navigate the GUI until certain 
+that implementation was correct before pushing their code to git. Additionally, each team member was required to run the program and make sure that it ran 
+as expected immediately after pulling the updates from git. Such strategy allowed the developers see which code is correct and which parts of GUI still 
+required attention.
 
+In support to GUI testing method, the team held several code review session, where team members had a chance not only to familiarize with each other’s code 
+but more importantly identify bugs and general code weaknesses. Moreover, the team was able to give suggestions for improvements. The code reviews did not 
+prove to be very effective finding issues in the code as again, given the nature of the project, the GUI would either be working correctly or not working 
+at all. On the other hand, code review proved to be extremely helpful assisting the members who were stuck or generally sought advice.
+
+The second step in terms of testing was developing JUnit test cases to identify existing functionality bugs. Since the product was characterized by only 
+basic data analysis (adding and subtracting numbers), only several JUnit test cases were created. Nevertheless, regardless of the limited amount of test 
+cases, the test suite helped to identify and eliminate a number of calculation and data retrieval bugs. Therefore, JUnit testing proved itself to be an 
+inseparable part of product development.
+
+Lastly, it was negotiated with the customer to have a full run-through of the game to test the completed product in action. The real-time product testing 
+proved to be exceptionally valuable. 
+Not only the team was able to see whether the software managed to perform in game tasks but also observe how the application coped when the game turned 
+unexpectedly (i.e. was interrupted, reset, fast-forwarded, etc.). This simulation allowed the team to makes sure that both the program operated correctly 
+and was flexible enough to handle unpredictable playtime issues.
 
 \subsection{Continuous Integration}
-The team used built in Gitlab integration tools. Since the members of the team were inexperienced with continuous integration tools prior to this project, it required some learning before the tools could be fully exploited. Inexperience and unfamiliarity were the sources of reluctance to continuously push the code to Gitlab. What is more, initially, the members preferred to use a messaging application to send their code directly to each other. However, it did not take long for the team to realize that professional software development required a more sophisticated method of code sharing.
-Once the members familiarized themselves with basic git commands, they utilized branches. The code development was distributed to a small number of branches which were then merged to the master branch, once individual development stages were completed. The master branch served as a backup in this project whereas most of the development happened in a ‘development’ branch. Others were used to experiment with additional, low priority functionality.
-In order to make sure that unintentional bugs would not be pushed to a branch the team utilized automatic build testing, i.e. upon pushing, the code was checked to see whether it compiles and only accepted if it did. The team did not use a more elaborate automated testing because as discussed in the Testing section, the nature of the project required different testing methods.
-All in all, continuously sharing and integrating code caused some uncertainty and reluctance in the beginning but once the benefits proved to be more important the value of continuous integration was appreciated.  In addition, the team seemed to have grown in terms of group code development since the beginning of the year and even though having had the skill prior to the start of the project would have been extremely helpful, the learning experience was no less valuable.
+The team used built in Gitlab integration tools. Since the members of the team were inexperienced with continuous integration tools prior to this project, 
+it required some learning before the tools could be fully exploited. Inexperience and unfamiliarity were the sources of reluctance to continuously push the 
+code to Gitlab. What is more, initially, the members preferred to use a messaging application to send their code directly to each other. However, it did not 
+take long for the team to realize that professional software development required a more sophisticated method of code sharing.
 
+Once the members familiarized themselves with basic git commands, they utilized branches. The code development was distributed to a small number of branches 
+which were then merged to the master branch, once individual development stages were completed. The master branch served as a backup in this project whereas 
+most of the development happened in a ‘development’ branch. Others were used to experiment with additional, low priority functionality.
+
+In order to make sure that unintentional bugs would not be pushed to a branch the team utilized automatic build testing, i.e. upon pushing, the code was 
+checked to see whether it compiles and only accepted if it did. The team did not use a more elaborate automated testing because as discussed in the Testing 
+section, the nature of the project required different testing methods.
 
 \subsection{Tracking}
-Gitlab built in tools were used to track team progress and plan future tasks. Gitlab capability of opening issues allowed the team to create a record of the tasks for the project. Each issue could have custom labels attached to indicate a theme and priority. In addition, the tasks could have weights assigned to indicate corresponding estimated time to complete the task. Once the task was completed, the team was able to look back, evaluate the work done, and close the issue.
-Tracking proved not to be a difficulty in the project. The team had a dedicated member to make sure that the issues were opened and maintained as required. However, it did take time to get accustomed to using the full range of the issue attributes (e.g. labeling). At first we incorrectly used weights to indicate how important each issue was and had no labels on each issue. This was due to the lack of experience within the team using Gitlab and issue tracking. At first the issues we opened were vague and had little detail in the comments. For example, “work on Form B”, with often no comment. This made working on and closing issues early on extremely difficult without communicating with the whole team to clarify the details of each issue. As a result, development was held up until the next meeting which could be nearly a week away especially during times of other coursework demands. 
-After feedback from supervisors, we made changes to how we used tracking and set a standard within the team of how each issue must be opened and laid out. Development quickly picked up after these changes as team members were able to close issues in their own time without waiting to discuss any further details. 
-Labels were set up to indicate the priority and subsection of each issue. For example, ‘high priority’ and ‘code development’. We then used weights correctly to indicate how we long expected each issue to take. This was very useful later on in development when allocating tasks to each team member to ensure an even workload throughout the team. Another change we made to issue tracking was referencing the issue that was worked on in each commit. Again this was very useful when tracking which issues had been closed and by which commit, helping to keep the team on track and ensure no code was overwritten by another commit.
+Gitlab built in tools were used to track team progress and plan future tasks. Gitlab capability of opening issues allowed the team to create a record of the 
+tasks for the project. Each issue could have custom labels attached to indicate a theme and priority. In addition, the tasks could have weights assigned to 
+indicate corresponding estimated time to complete the task. Once the task was completed, the team was able to look back, evaluate the work done, and close the 
+issue.
 
-
+Tracking proved not to be a difficulty in the project. The team had a dedicated member to make sure that the issues were opened and maintained as required. 
+However, it did take time to get accustomed to using the full range of the issue attributes (e.g. labeling). At first the team incorrectly used weights to indicate 
+how important each issue was and had no labels on each issue. This was due to the lack of experience within the team using Gitlab and issue tracking. At first 
+the issues the members opened were vague and had little detail in the comments which in some cases caused delays as the assignees might not be fully informed of the scope of the task.
+ 
+Supervisor feedback caused the members to make changes to how the team used tracking and set a standard within the team of how each issue must be opened and laid out. 
+Development quickly picked up after these changes as team members were able to close issues in their own time without waiting to discuss any further details. 
+Labels were set up to indicate the priority and subsection of each issue. For example, ‘high priority’ and ‘code development’. The team then used weights correctly 
+to indicate how we long expected each issue to take. This resulted in team members being allocated equivalent workload. Another change the team made to 
+issue tracking was referencing the commit to their respective issues.
 
 %==============================================================================
 \section{Code Development}
@@ -254,6 +301,7 @@ A notable lesson to take from this study, was the requirement to operate in a  p
 
 From analysing the development process as a whole, we have learnt many practices and improvements after making mistakes and learning from them. One area we would ensure was planned and designed to stricter standards is code structure. Due to each team member having different coding stylings and experience the code quickly moved away from the initial object oriented design which was first suggested. As a team we did not make strict coding rules when designing the application. In hindsight this was naive and caused some code to styled differently. A stricter design pattern, more time spent programming together, and discussion of each element would have prevented this from happening as the code would have been more organised and coherent.
 %==============================================================================
+\pagebreak
 \section{Appendix}
 \label{sec:appendix}
 
