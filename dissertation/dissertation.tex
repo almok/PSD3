@@ -4,7 +4,11 @@
 
 % Modified 
 
+
+
 \documentclass{l3proj}
+\usepackage{subfig}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -112,13 +116,26 @@ Another notable request was for a settings page where game rules may be amended.
 \subsection{Class Diagrams}
 The team made use of several planning strategies during the course of the development process. One of the early techniques was used was creating class diagrams. As the application had many classes that needed to interact with each other and share data, there was a need for a structured plan of what the architecture of the program would be. Class diagrams met this need.
 
-Shown above is one of the rough class diagrams the team drew up in the early stages of development. This diagram and others liked it enabled the team to effectively plan the design of the application.
+\input{figures/class}
+
+Shown in \hyperref[fig:class]{Figure 1} is one of the rough class diagrams the team drew up in the early stages of development. This diagram and others liked it enabled the team to effectively plan the design of the application.
 
 \subsection{Wireframes}
-After the second meeting with the client the team chose to create some simple low fidelity wireframes (shown below) so that we could demonstrate to the customer our idea of what the application would look like and get their feedback on the design. This technique enabled each team member to showcase their ideas and allowed us to take the best ideas from each design and merge them for the wireframe shown to the customer. It was then agreed in a meeting with the customer that a medium to high fidelity wireframe should be drawn up so that both the customer and the team could get a better idea for the desired look and feel of the application.
+After the second meeting with the client the team chose to create some simple low fidelity wireframes (shown below) so that we could demonstrate to the customer our idea of what the application would look like and get their feedback on the design. This technique enabled each team member to showcase their ideas and allowed us to take the best ideas from each design and merge them for the wireframe shown to the customer. It was then agreed in a meeting with the customer that a medium to high fidelity wireframe should be drawn up so that both the customer and the team could get a better idea for the desired look and feel of the application. See \hyperref[fig:wireframes]{Figure 2} for wireframes.
+
+\input{figures/wireframes}
+
 
 \subsection{Development Estimation}
-Estimating the time taken to complete different stages of the development was one of the major challenges the team faced. Quite early on in the project the team decided to use sprints as a development aid. The initial sprints, however, never met all of their objectives. This was mainly due a lack of experience of  both developing this kind of application and of small team development resulting in the team overestimating what could be achieved in a week. At the end of each sprint the team reviewed the sprint and it soon became apparent that the developers needed to better assign tasks. As a result, in later stages of development the team often met most if not all of the objectives set out at the start of each sprint. The use of sprints significantly benefited the project's productivity, it allowed the team to break down the large task of developing an application from scratch into small and manageable tasks, enabling steady incremental progress.
+Estimating the time taken to complete different stages of the development was one of the major challenges the team faced. Quite early on in the project the team decided to use sprints as a development aid. (See \hyperref[fig:estimation]{Figure 3a} for an outline of the team's sprint.) The initial sprints, however, never met all of their objectives. This was mainly due a lack of experience of both developing this kind of application and of small team development resulting in the team overestimating what could be achieved in a week. At the end of each sprint the team reviewed the sprint and it soon became apparent that the developers needed to better assign tasks. As a result, in later stages of development the team often met most if not all of the objectives set out at the start of each sprint. The use of sprints significantly benefited the project's productivity, it allowed the team to break down the large task of developing an application from scratch into small and manageable tasks, enabling steady incremental progress.
+
+The team also used retrospectives to evaluate the status of the progress. (See \hyperref[fig:estimation]{Figure 3b} for one of the team's retrospectives.) The retrospectives allowed the team to identify both effective strategies and the areas of improvement. Furthermore, retrospectives allowed the members to express their needs, likes, and dislikes of anything ranging from meeting times to coding to management of the team.
+
+\input{figures/estimation}
+
+To help with planning a development timeline for the overall project, the team drew up a \hyperref[fig:gantt]{Gantt chart}. The chart allowed us to clearly define the milestones that we wanted to achieve at different points in time. This level of planning was necessary to ensure that the project deliverables were ready on time.
+
+\input{figures/gantt}
 
 \subsection{Peer Programming}
 One practice which all team members engaged with was peer programming. Peer programming involved usually two team members working together on one particular problem, one coding and the other watching and suggesting improvements. This was normally done during team programming sessions, in particular, during sprints to help tackle difficult tasks, catch typing errors and suggesting debugging choices. During these sessions the team was able to solve problems much quicker and make substantial progress adding additional features nearer the end of development. Furthermore, peer programming helped understanding and developing on another team member's code. With different coding styles within the team, peer programming helped by having another opinion on the code that had been written and the code that was being written together. 
@@ -197,7 +214,7 @@ Lastly, it was negotiated with the customer to have a full run-through of the ga
 \label{sec:development}
 \subsection{Front-End Development}
 
-To facilitate the transition from paper forms to a digital application, the team decided to make the different views as similar to the already established forms as possible. This way users could learn how to use the program faster and transfer the data from the paper forms to the application easier. See \hyperref[sec:appendix]{appendix} for application screen shots
+To facilitate the transition from paper forms to a digital application, the team decided to make the different views as similar to the already established forms as possible. This way users could learn how to use the program faster and transfer the data from the paper forms to the application easier. See \hyperref[sec:appendix]{Appendix A} for application screen shots
 
 \subsubsection{Settings}
 After consulting with the client, the team created the settings page so that all the game data (kit prices, game rules, products, product features, product prices and etc.) could be edited. Each of the four forms (C, D, P and R) the game takes data and the game rules from has its own page where it the data can be viewed and edited. The changes are not saved until the user saves them. If the back button is pressed before the changes are saved, the user is asked in an alert view if he/she wishes to save those changes. To ensure the security of the data, a password protection for this section was created, the user has to enter the password every time they wish to enter the settings page.
@@ -269,7 +286,7 @@ From analysing the development process as a whole, the team has learnt many prac
 Even though some sort of team difficulties occurred until the end of the project, the team agreed that communication and careful planning where integral parts of working together. And while the students had little prior experience working in a professional group software development project, a steep learning was felt within the team throughout the year. Furthermore, reflecting back on the process, working in a group is a skill in itself and while it took time to learn each others' strengths and weaknesses the team grew together and accomplished more as a team than they could have while working individually.
 %==============================================================================
 \pagebreak
-\section{Appendix}
+\section{Appendix A}
 \label{sec:appendix}
 
 \subsection{User Documentation}
