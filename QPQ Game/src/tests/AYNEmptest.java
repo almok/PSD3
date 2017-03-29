@@ -19,11 +19,12 @@ public class AYNEmptest {
 
 	@Test
 	public void testCalcWage() {
-		assertEquals((Double) 15.0, (Double) emp.calcWage());
+		double wage = 15.0 + 75 + 100;
+		assertEquals((Double) wage, (Double) emp.calcWage());
 		
-		
+		wage = 25 + 75 + 100;
 		emp.setMultiSkilled(true);
-		assertEquals((Double) 25.0, (Double) emp.calcWage());
+		assertEquals((Double) wage, (Double) emp.calcWage());
 		
 		// what about hiring and firing costs?
 	}
