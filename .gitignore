@@ -19,6 +19,7 @@
 */RemoteSystemsTempFiles/
 */*.class
 */bin/
-*/dissertation.aux
-*/dissertation.out
+*/dissertation_B.aux
+*/dissertation_B.out
+*/dissertation_B.pdf
 
