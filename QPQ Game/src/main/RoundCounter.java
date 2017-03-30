@@ -10,14 +10,15 @@ public class RoundCounter{
 		return roundCounter;
 	}
 	public void setRoundCounter(int roundCounter){
-		System.out.println("setting round counter");
-		this.roundCounter = roundCounter;
+		RoundCounter.roundCounter = roundCounter;
 	}
+	
 	public int getMaxCount(){
 		return maxRoundCount;
 		}
+	
 	public void setMaxCount(int maxRoundCount){
-		this.maxRoundCount = maxRoundCount;
+		RoundCounter.maxRoundCount = maxRoundCount;
 	}
 
 	

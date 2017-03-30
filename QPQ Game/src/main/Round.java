@@ -1,6 +1,6 @@
 package main;
 
-public class Round{
+public class Round {
 
 	private String roundNum;
 	private String totalRevenue;
@@ -9,10 +9,10 @@ public class Round{
 	private String materialsSum;
 	private String totalExpenditure;
 	private String profitLoss;
-	private Round formVData;
-
-	public Round(String roundNum, String totalRevenue, String employeeWage, 
-		String aynPay, String materialsSum, String totalExpenditure, String profitLoss){
+	
+	
+	public Round(String roundNum, String totalRevenue, String employeeWage, String aynPay, String materialsSum,
+			String totalExpenditure, String profitLoss) {
 		this.roundNum = roundNum;
 		this.totalRevenue = totalRevenue;
 		this.employeeWage = employeeWage;
@@ -22,51 +22,63 @@ public class Round{
 		this.profitLoss = profitLoss;
 	}
 
-	public void setRoundData(Round formVData){
-		this.formVData = formVData;
+	public void setRoundData(Round formVData) {
 	}
 
 	// getters and setters
-	public String getRoundNum(){
+	public String getRoundNum() {
 		return roundNum;
 	}
-	public void setRoundNum(String roundNum){
+
+	public void setRoundNum(String roundNum) {
 		this.roundNum = roundNum;
 	}
-	public String getTotalRevenue(){
+
+	public String getTotalRevenue() {
 		return totalRevenue;
 	}
-	public void setTotalRevenue(String totalRevenue){
+
+	public void setTotalRevenue(String totalRevenue) {
 		this.totalRevenue = totalRevenue;
 	}
-	public String getEmployeeWage(){
+
+	public String getEmployeeWage() {
 		return employeeWage;
 	}
-	public void setEmployeeWage(String employeeWage){
+
+	public void setEmployeeWage(String employeeWage) {
 		this.employeeWage = employeeWage;
 	}
-	public String getAynPay(){
+
+	public String getAynPay() {
 		return aynPay;
 	}
-	public void setAynPay(String aynPay){
+
+	public void setAynPay(String aynPay) {
 		this.aynPay = aynPay;
 	}
-	public String getMaterialsSum(){
+
+	public String getMaterialsSum() {
 		return materialsSum;
 	}
-	public void setMaterialsSum(String materialsSum){
+
+	public void setMaterialsSum(String materialsSum) {
 		this.materialsSum = materialsSum;
 	}
-	public String getTotalExpenditure(){
+
+	public String getTotalExpenditure() {
 		return totalExpenditure;
 	}
-	public void setTotalExpenditure(String totalExpenditure){
+
+	public void setTotalExpenditure(String totalExpenditure) {
 		this.totalExpenditure = totalExpenditure;
 	}
-	public String getProfitLoss(){
+
+	public String getProfitLoss() {
 		return profitLoss;
 	}
-	public void setProfitLoss(String profitLoss){
+
+	public void setProfitLoss(String profitLoss) {
 		this.profitLoss = profitLoss;
 	}
 }

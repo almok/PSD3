@@ -13,7 +13,7 @@ public class OrderHistory {
 	public OrderHistory(Order order) {
 		
 		orderNumber = order.getOrderNumber();
-		productCode = order.getProductCode();
+		productCode = order.getProductCode().toUpperCase();
 		kitPrice = calcKitPrice();
 		kitPriceString = ((kitPrice == -1) ? "Invalid Product Code" : Double.toString(kitPrice));
 	}

@@ -26,19 +26,22 @@ import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 public class GameScreen extends Application implements Initializable, EventHandler<ActionEvent>{
-	@FXML private Button startButton;
-	@FXML private Button settingsButton;
-	private float CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
-	private float CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 3;
 	
-	 final Label hello = new Label("Please provide password for entry");
+	@FXML 
+	private Button startButton;
+	@FXML 
+	private Button settingsButton;
+	
+	final Label hello = new Label("Please provide password for entry");
 	    private Button ok = new Button("ok");
 		private Button cencel = new Button("cancel");
 	    private TextField name2 = new TextField();
 	    private Popup popup = new Popup();
 	    
-		@FXML private Text text;
-		@FXML private AnchorPane aPane;
+		@FXML 
+		private Text text;
+		@FXML 
+		private AnchorPane aPane;
 		
 
 		private void callPopUp(Stage stage){
@@ -127,7 +130,6 @@ public class GameScreen extends Application implements Initializable, EventHandl
 			
 		}
 	
-	//Mostly needs fix at timer and need to relate roundbutton to a unique ID.
 	RoundCounter roundCounter = RoundCounter.getInstance();
 	
 	@Override
@@ -139,8 +141,7 @@ public class GameScreen extends Application implements Initializable, EventHandl
 			} catch (IOException e){
 				e.printStackTrace();
 			}
-			//CountDownTimer countDown = new CountDownTimer();
-			//countdown.display(startButton);
+
 		} else if (event.getSource() == settingsButton){
 			this.callPopUp((Stage) settingsButton.getScene().getWindow());
 		}
